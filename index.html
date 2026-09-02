@@ -6,23 +6,25 @@
     <title>來福導，歇會ㄦ！－福科輔導</title>
     <link rel="icon" href="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800" type="image/png">
     
-    <!-- ✨ 新增：社群分享預覽標籤 (OG Tags) -->
+    <!-- ✨ 效能優化：預載隨峰體，避免第一次進站時標題閃爍變形 -->
+    <link rel="preload" href="SuiFeng.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- 社群分享預覽標籤 (OG Tags) -->
     <meta property="og:title" content="來福導，歇會ㄦ！－福科輔導">
     <meta property="og:description" content="在這裡，你的聲音會被聽見。不論是悄悄話、想放鬆，還是尋求資源，我們永遠陪伴你。">
     <meta property="og:image" content="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800">
     <meta property="og:type" content="website">
 
     <style>
-        /* --- ✨ 1. 自訂字體 (隨峰體) 載入優化 --- */
+        /* --- 1. 自訂字體 (隨峰體) --- */
         @font-face {
             font-family: 'SuiFeng';
-            /* 優先讀取體積小的 woff2，沒有才讀 ttf */
             src: url('SuiFeng.woff2') format('woff2'),
                  url('SuiFeng.ttf') format('truetype'); 
             font-display: swap; 
         }
 
-        /* --- ✨ 2. 精緻莫蘭迪色調與高級細節變數 --- */
+        /* --- 2. 精緻莫蘭迪色調與變數 --- */
         :root {
             --primary-color: #5B8476;    
             --secondary-color: #E2877A;  
@@ -53,13 +55,13 @@
         }
 
         h1, h2, h3, .logo, .project-name, .modal-title, .modal-slogan, 
-        .door-indicator, .faq-q, .resource-category h3, .card-title, .filter-label,
-        .sui-feng-text {
+        .door-indicator, .resource-category h3, .card-title, .filter-label,
+        .sui-feng-text, .faq-q {
             font-family: 'SuiFeng', 'PingFang TC', '微軟正黑體', sans-serif !important;
             letter-spacing: normal; 
         }
 
-        /* --- 抽離出的共用樣式 (Clean Code) --- */
+        /* 共用樣式 */
         .text-center { text-align: center; }
         .hero-subtitle-box { margin: 25px 20px 35px 20px; }
         .hero-subtitle { color: #BA8553; font-size: 1.6rem; margin-bottom: 25px; line-height: 1.5; }
@@ -98,12 +100,12 @@
             border-bottom: 1px dashed #FFF2E6;
             margin: 0 8px;
             display: inline-block;
-            transition: opacity 0.2s;
+            transition: all 0.2s;
             font-weight: bold;
         }
-        .emergency-bar a:hover { opacity: 0.85; }
+        .emergency-bar a:hover { opacity: 0.85; transform: translateY(-1px); }
 
-        /* --- 響應式高級導覽列 --- */
+        /* --- 響應式導覽列 --- */
         header {
             background-color: rgba(250, 248, 245, 0.92);
             backdrop-filter: blur(12px); 
@@ -125,15 +127,12 @@
         .logo:hover { transform: scale(1.02); }
 
         nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
-
         nav a {
             text-decoration: none; color: var(--text-color);
             font-weight: 500; font-size: 0.95rem;
             transition: all 0.3s ease; position: relative; padding: 6px 0; cursor: pointer;
         }
-
         nav a:hover, nav a.active-nav { color: var(--primary-color); font-weight: bold; }
-        
         nav a::after {
             content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px;
             background-color: var(--primary-color); transition: all 0.3s ease; transform: translateX(-50%);
@@ -153,11 +152,9 @@
             border: var(--border-warm); padding: 6px 0;
         }
         
-        /* 桌機 Hover 展開 */
         @media (hover: hover) {
             .dropdown:hover .dropdown-content { display: block; animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
         }
-        /* 手機點擊展開用 Class */
         .dropdown.mobile-open .dropdown-content { display: block; }
 
         .dropdown-content a { color: var(--text-color); padding: 12px 22px; font-size: 0.9rem; display: block; }
@@ -260,23 +257,37 @@
         .resource-link { color: var(--secondary-color); text-decoration: none; font-weight: bold; font-size: 0.95rem; display: inline-block; transition: all 0.2s; }
         .resource-link:hover { transform: translateX(3px); color: var(--primary-color); }
 
-        /* FAQ */
+        /* ✨ A11Y 優化：原生 details 手風琴特效 (乾淨俐落) */
         .faq-container { max-width: 850px; margin: 0 auto; padding: 40px 5%; }
         .faq-item { 
-            margin-bottom: 25px; background: white; padding: 30px; border-radius: 20px; 
+            margin-bottom: 25px; background: white; border-radius: 20px; 
             box-shadow: var(--card-shadow); border: var(--border-warm);
             border-left: 5px solid var(--accent-color); transition: all 0.3s;
+            overflow: hidden;
         }
         .faq-item:nth-child(even) { border-left-color: var(--secondary-color); }
         .faq-item:hover { transform: translateX(4px); box-shadow: var(--hover-shadow); }
-        .faq-q { font-size: 1.3rem; font-weight: bold; color: var(--primary-color); margin-bottom: 12px;}
-        .faq-a { font-size: 1rem; color: var(--text-color); line-height: 1.8; }
+        
+        .faq-q { 
+            padding: 25px 30px; font-size: 1.25rem; font-weight: bold; 
+            color: var(--primary-color); cursor: pointer; display: flex; 
+            align-items: center; justify-content: space-between; outline: none;
+        }
+        .faq-q::-webkit-details-marker { display: none; } /* 隱藏預設箭頭 */
+        .faq-q::after { content: '+'; font-size: 1.8rem; color: var(--accent-color); transition: transform 0.3s; font-weight: normal; }
+        .faq-item[open] .faq-q::after { transform: rotate(45deg); color: var(--secondary-color); }
+        
+        .faq-a { 
+            padding: 0 30px 30px 30px; font-size: 1rem; color: var(--text-color); 
+            line-height: 1.8; animation: fadeIn 0.4s ease; border-top: 1px dashed #FAF8F5; 
+            margin-top: 5px; padding-top: 15px; 
+        }
 
         /* 頁尾 */
         footer { background-color: var(--primary-color); color: white; text-align: center; padding: 40px 5%; margin-top: 80px; font-size: 0.9rem; border-top: 4px solid var(--accent-color); }
         footer p { opacity: 0.9; }
 
-        /* 手機 RWD */
+        /* ✨ 手機版 UX 優化：求助專線防呆排版 */
         @media (max-width: 950px) {
             header { top: 79px; padding: 15px 4%; }
             nav ul {
@@ -287,6 +298,11 @@
             nav ul.active { display: flex; }
             .menu-toggle { display: block; }
             .hero h1 { font-size: 2.2rem; }
+            
+            .emergency-bar a {
+                display: block; margin: 8px auto; padding: 10px; width: 90%;
+                background: rgba(255,255,255,0.15); border-radius: 8px; border: none;
+            }
         }
 
         /* YouTube 按鈕 */
@@ -312,33 +328,27 @@
             animation: bounce 1.6s infinite; background: white; padding: 6px 20px;
             border-radius: 30px; border: 2px dashed #C68E57; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
         }
-
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-        /* ✨ A11Y 優化：按鈕化設計 */
         .door-btn {
             display: inline-block; width: 115px; height: 155px; background: #8B5A2B; 
             border: 5px solid #5C3A21; border-radius: 6px 6px 0 0; position: relative;
             cursor: pointer; transition: transform 0.8s ease-in-out, background 0.3s; transform-origin: left;
             box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.25);
-            animation: pulse-glow 2.5s infinite alternate; outline: none; padding: 0; /* 重置 button 樣式 */
+            animation: pulse-glow 2.5s infinite alternate; outline: none; padding: 0; 
         }
         @keyframes pulse-glow {
             from { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 15px rgba(238, 184, 117, 0.4); }
             to { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 35px rgba(238, 184, 117, 0.9); }
         }
-        .door-btn::after {
-            content: ''; position: absolute; top: 50%; right: 12px; width: 14px; height: 14px;
-            background: #D4AF37; border-radius: 50%; box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
-        }
-        .door-btn:hover, .door-btn:focus, .door-btn:active {
-            transform: perspective(600px) rotateY(-40deg); background: #9C6833; animation: none; outline: none;
-        }
+        .door-btn::after { content: ''; position: absolute; top: 50%; right: 12px; width: 14px; height: 14px; background: #D4AF37; border-radius: 50%; box-shadow: 1px 1px 3px rgba(0,0,0,0.4); }
+        .door-btn:hover, .door-btn:focus, .door-btn:active { transform: perspective(600px) rotateY(-40deg); background: #9C6833; animation: none; outline: none; }
 
-        /* 桌寵 YUMA */
-        .yuma-container { position: fixed; bottom: 30px; right: 30px; z-index: 9999; display: flex; flex-direction: column; align-items: center; cursor: pointer; user-select: none; }
+        /* ✨ UX 優化：桌寵 YUMA 滾動時變半透明防擋畫面 */
+        .yuma-container { position: fixed; bottom: 30px; right: 30px; z-index: 9999; display: flex; flex-direction: column; align-items: center; cursor: pointer; user-select: none; transition: all 0.4s ease; }
+        .yuma-container.faded { opacity: 0.3; transform: scale(0.85); pointer-events: none; }
         .yuma-avatar img { width: 85px; height: 85px; object-fit: cover; border-radius: 50%; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15)); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .yuma-container:hover .yuma-avatar img { transform: scale(1.12) rotate(4deg); }
+        .yuma-container:hover:not(.faded) .yuma-avatar img { transform: scale(1.12) rotate(4deg); }
         .yuma-bubble { position: absolute; bottom: 95px; right: 5px; background: white; border: 2px solid var(--primary-color); padding: 14px 20px; border-radius: 18px; font-size: 0.95rem; font-weight: bold; color: var(--text-color); width: 220px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); opacity: 0; pointer-events: none; transition: all 0.3s ease; transform: translateY(10px); }
         .yuma-bubble.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
         .yuma-bubble::after { content: ''; position: absolute; bottom: -10px; right: 35px; border-width: 10px 10px 0; border-style: solid; border-color: white transparent; display: block; width: 0; }
@@ -386,7 +396,6 @@
             
             <div class="door-btn-wrapper">
                 <div class="door-indicator">👉 點擊大門進入網頁 👈</div>
-                <!-- ✨ A11Y 優化：轉換為 button -->
                 <button class="door-btn" onclick="closeModalAndPlayMusic()" aria-label="推開大門進入網站"></button>
             </div>
         </div>
@@ -400,7 +409,6 @@
     </div>
 
     <header>
-        <!-- ✨ SPA 路由優化：使用 href="#home" 代替 onclick -->
         <a href="#home" class="logo">來福導，歇會ㄦ！－福科輔導</a>
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <nav>
@@ -410,7 +418,6 @@
                 <li><a href="https://www.youtube.com/playlist?list=PLkqAD3KmD8OuBvUJvLy2_5vx7RzdFVL8m" target="_blank">福科電台</a></li>
                 <li><a href="#resource" id="nav-resource">資源與支持網絡</a></li>
                 <li><a href="#faq" id="nav-faq">迷思破解 Q&A</a></li>
-                <!-- ✨ 手機下拉選單優化 -->
                 <li class="dropdown" id="about-dropdown" onclick="toggleDropdown(this)">
                     <a style="cursor: pointer;">關於我們 ▾</a>
                     <div class="dropdown-content">
@@ -420,7 +427,6 @@
                         <a href="#about" id="nav-about">關於「福導」</a>
                     </div>
                 </li>
-                <!-- ✨ 綁定 Google 表單 -->
                 <li><a href="https://forms.gle/67p6KbctGtZBPwSx7" target="_blank">使用回饋</a></li>
             </ul>
         </nav>
@@ -760,21 +766,21 @@
     </div>
 
 
-    <!-- FAQ 分頁 -->
+    <!-- ✨ A11Y 優化：用原生的 details 來改寫 FAQ 分頁 -->
     <div id="page-faq" class="page">
         <div class="team-title-section">
             <h2>🔍 輔導室迷思大破解</h2>
             <p>別擔心！走進輔導室一點也不可怕，讓我們為妳解答心中的疑惑。</p>
         </div>
         <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-q">Q1. 去輔導室會被同學當成有問題的怪人嗎？</div>
+            <details class="faq-item" open>
+                <summary class="faq-q">Q1. 去輔導室會被同學當成有問題的怪人嗎？</summary>
                 <div class="faq-a">A：完全不會！福科國中輔導室是一個安全、讓人放鬆的溫暖空間。任何生活不順心、感情受挫，都歡迎妳走進來休息。</div>
-            </div>
-            <div class="faq-item">
-                <div class="faq-q">Q2. 我跟輔導老師說的秘密，會被偷偷告訴導師或爸媽嗎？</div>
+            </details>
+            <details class="faq-item">
+                <summary class="faq-q">Q2. 我跟輔導老師說的秘密，會被偷偷告訴導師或爸媽嗎？</summary>
                 <div class="faq-a">A：輔導老師嚴格遵守法律與專業的「保密原則」。除非內容涉及「傷害自己、傷害他人或重大違規法律事件」，為了守護生命安全，才會啟動保密例外保護妳。</div>
-            </div>
+            </details>
         </div>
     </div>
 
@@ -861,7 +867,6 @@
 
     <script>
         // --- 1. SPA 網址路由機制 (Hash Routing) ---
-        // 這樣別人複製網址就能直接跳到對應的分頁！
         function handleHashChange() {
             let hash = window.location.hash.replace('#', '') || 'home';
             const validPages = ['home', 'resource', 'faq', 'song', 'about'];
@@ -888,7 +893,6 @@
             document.getElementById("nav-menu").classList.toggle("active");
         }
 
-        // 手機版下拉選單點擊展開邏輯
         function toggleDropdown(element) {
             if (window.innerWidth <= 950) {
                 element.classList.toggle('mobile-open');
@@ -947,13 +951,24 @@
             }
         ];
 
-        // --- 3. 重構：資料驅動 (Data-driven) 的渲染與篩選 ---
+        // --- 3. 重構：資料驅動的渲染與篩選 ---
         let currentFilters = { identity: 'all', topic: 'all' };
         let searchQuery = '';
 
         function renderCards(dataToRender) {
             const grid = document.getElementById('card-grid');
             grid.innerHTML = ''; 
+
+            // ✨ UX 優化：找不到資料時的 Empty State 溫暖提示
+            if (dataToRender.length === 0) {
+                grid.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px; background: white; border-radius: 20px; border: 2px dashed #E2877A;">
+                    <div style="font-size: 3.5rem; margin-bottom: 15px;">🥀</div>
+                    <h3 style="color: var(--primary-color); margin-bottom: 12px; font-size: 1.5rem; font-family: 'SuiFeng', sans-serif;">百寶箱裡暫時找不到相關卡片...</h3>
+                    <p style="color: var(--text-muted); font-size: 1.05rem;">但輔導室的門永遠為你開著。<br>如果心裡覺得悶，隨時歡迎推開門，直接來找我們聊聊喔！</p>
+                </div>`;
+                return;
+            }
 
             dataToRender.forEach(post => {
                 let mediaContent = '';
@@ -984,9 +999,14 @@
             });
         }
 
+        // ✨ 效能優化：加入 Debounce 防抖機制 (等 300ms 停止打字才搜尋)
+        let searchTimeout;
         function handleSearch() {
-            searchQuery = document.getElementById('global-search').value.toLowerCase().trim();
-            executeCombinedFilter();
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                searchQuery = document.getElementById('global-search').value.toLowerCase().trim();
+                executeCombinedFilter();
+            }, 300);
         }
 
         function filterData(type, value, buttonElement) {
@@ -999,7 +1019,6 @@
         }
 
         function executeCombinedFilter() {
-            // 從原本操作 DOM 隱藏顯示，改成操作陣列資料 (更有效能的寫法！)
             const filteredData = postsData.filter(post => {
                 const cardIdentities = post.identity.split(' ');
                 const cardTopics = post.topic.split(' ');
@@ -1013,7 +1032,7 @@
             renderCards(filteredData);
         }
 
-        // --- 4. YUMA 互動 ---
+        // --- 4. YUMA 互動與滾動監聽 ---
         const yumaQuotes = [
             "汪！今天過得好嗎？累了或心情不好，都歡迎來輔導室找我摸摸哦！🐾",
             "（搖尾巴）不管今天發生什麼事，YUMA 都會一直在這裡默默陪著你！",
@@ -1040,6 +1059,20 @@
             clearTimeout(yumaTimer);
             yumaTimer = setTimeout(() => { bubble.classList.remove('show'); }, 4500);
         }
+
+        // ✨ UX 優化：滾動時 YUMA 變透明，防擋畫面
+        let yumaScrollTimer = null;
+        window.addEventListener('scroll', () => {
+            const yuma = document.querySelector('.yuma-container');
+            if (!yuma) return;
+            
+            yuma.classList.add('faded');
+            
+            clearTimeout(yumaScrollTimer);
+            yumaScrollTimer = setTimeout(() => {
+                yuma.classList.remove('faded');
+            }, 500);
+        });
 
         // --- 5. 初始載入設定 ---
         window.addEventListener('DOMContentLoaded', () => {
@@ -1129,7 +1162,6 @@
             { time: 173.30, text: "福科輔導室~ 挺你到最後！" }
         ];
 
-        // --- 8. 音樂與黑膠控制函數 ---
         function controlPageMusic(action) {
             const bgMusic = document.getElementById('bgMusic');
             const playBtn = document.getElementById('btn-song-play');
@@ -1157,7 +1189,6 @@
             }
         }
 
-        // --- 9. 初始化生成歌詞 DOM ---
         window.addEventListener('DOMContentLoaded', () => {
             const wrapper = document.getElementById('lyrics-wrapper');
             if (wrapper) {
@@ -1171,7 +1202,6 @@
             }
         });
 
-        // --- 10. 監聽音樂進度，自動高亮與滾動歌詞 ---
         const audioEl = document.getElementById('bgMusic');
         let currentLyricIndex = -1;
 
@@ -1179,6 +1209,15 @@
             audioEl.addEventListener('timeupdate', () => {
                 const time = audioEl.currentTime;
                 let activeIndex = -1;
+
+                // ✨ 效能優化：先檢查是否還在同一句，免除每次跑 for 迴圈
+                if (currentLyricIndex >= 0 && currentLyricIndex < lyricsData.length) {
+                    const currentT = lyricsData[currentLyricIndex].time - 0.3;
+                    const nextT = (currentLyricIndex + 1 < lyricsData.length) ? lyricsData[currentLyricIndex + 1].time - 0.3 : Infinity;
+                    if (time >= currentT && time < nextT) {
+                        return; // 還在同一句範圍內，不耗費效能
+                    }
+                }
 
                 for (let i = 0; i < lyricsData.length; i++) {
                     if (time >= lyricsData[i].time - 0.3) {
@@ -1216,7 +1255,6 @@
             });
         }
         
-        // --- 11. 切換完整歌詞顯示 ---
         function toggleFullLyrics() {
             const lyricsBox = document.getElementById('full-lyrics-box');
             const toggleBtn = document.getElementById('btn-toggle-lyrics');
@@ -1236,7 +1274,6 @@
             }
         }
         
-        // --- 12. 全螢幕模式 ---
         function toggleFullscreen() {
             const wrapper = document.getElementById('lyrics-fullscreen-wrapper');
             const btn = document.getElementById('btn-fullscreen');
