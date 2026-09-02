@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>來福導，歇會ㄦ！－福科輔導</title>
+    <title>福科輔導-來「福導」，歇會ㄦ！</title>
     <link rel="icon" href="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800" type="image/png">
     
     <link rel="preload" href="SuiFeng.woff2" as="font" type="font/woff2" crossorigin>
     
-    <meta property="og:title" content="來福導，歇會ㄦ！－福科輔導">
+    <meta property="og:title" content="福科輔導-來「福導」，歇會ㄦ！">
     <meta property="og:description" content="在這裡，你的聲音會被聽見。不論是悄悄話、想放鬆，還是尋求資源，我們永遠陪伴你。">
     <meta property="og:image" content="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800">
     <meta property="og:type" content="website">
@@ -50,16 +50,15 @@
             font-size: 1.05rem; 
         }
 
-        /* ✨ 視覺優化：強制中文詞彙不被切斷換行 */
         h1, h2, h3, .modal-slogan, .door-indicator, .faq-q, .hero-bullet, .hero-subtitle,
         .logo, .project-name, .modal-title, .resource-category h3, .card-title, .filter-label,
-        .sui-feng-text {
+        .sui-feng-text, .article-title {
             word-break: keep-all;
         }
 
         h1, h2, h3, .logo, .project-name, .modal-title, .modal-slogan, 
         .door-indicator, .resource-category h3, .card-title, .filter-label,
-        .sui-feng-text, .faq-q {
+        .sui-feng-text, .faq-q, .article-title {
             font-family: 'SuiFeng', 'PingFang TC', '微軟正黑體', sans-serif !important;
             letter-spacing: normal; 
         }
@@ -83,7 +82,6 @@
         .chorus-text { font-weight: bold; font-size: 1.1rem; color: var(--text-color); }
         .chorus-accent { font-weight: bold; color: var(--primary-color); font-size: 1.3rem; margin: 5px 0; }
 
-        /* --- ✨ 頂層求助安全網 (漸進式揭露優化) --- */
         .emergency-bar {
             background-color: var(--danger-color);
             text-align: center;
@@ -94,51 +92,30 @@
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(205, 83, 52, 0.2);
         }
-        .emergency-toggle {
-            display: none; /* 桌機預設隱藏 */
-        }
-        .emergency-links {
-            padding: 12px 5%;
-            color: white;
-        }
+        .emergency-toggle { display: none; }
+        .emergency-links { padding: 12px 5%; color: white; }
         .emergency-links a {
-            color: #FFF2E6;
-            text-decoration: none;
-            border-bottom: 1px dashed #FFF2E6;
-            margin: 0 8px;
-            display: inline-block;
-            transition: all 0.2s;
-            font-weight: bold;
+            color: #FFF2E6; text-decoration: none; border-bottom: 1px dashed #FFF2E6;
+            margin: 0 8px; display: inline-block; transition: all 0.2s; font-weight: bold;
         }
         .emergency-links a:hover { opacity: 0.85; transform: translateY(-1px); }
 
-        /* 導覽列 */
         header {
-            background-color: rgba(250, 248, 245, 0.92);
-            backdrop-filter: blur(12px); 
-            padding: 18px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 45px;
-            z-index: 999;
-            border-bottom: var(--border-warm);
-            transition: top 0.3s;
+            background-color: rgba(250, 248, 245, 0.92); backdrop-filter: blur(12px); 
+            padding: 18px 5%; display: flex; justify-content: space-between;
+            align-items: center; position: sticky; top: 45px; z-index: 999;
+            border-bottom: var(--border-warm); transition: top 0.3s;
         }
-
         .logo {
             font-size: 1.4rem; font-weight: bold; color: var(--primary-color);
-            display: flex; align-items: center; gap: 8px;
-            text-decoration: none; transition: transform 0.2s;
+            display: flex; align-items: center; gap: 8px; text-decoration: none; transition: transform 0.2s;
         }
         .logo:hover { transform: scale(1.02); }
 
         nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
         nav a {
-            text-decoration: none; color: var(--text-color);
-            font-weight: 500; font-size: 0.95rem;
-            transition: all 0.3s ease; position: relative; padding: 6px 0; cursor: pointer;
+            text-decoration: none; color: var(--text-color); font-weight: 500; 
+            font-size: 0.95rem; transition: all 0.3s ease; position: relative; padding: 6px 0; cursor: pointer;
         }
         nav a:hover, nav a.active-nav { color: var(--primary-color); font-weight: bold; }
         nav a::after {
@@ -153,15 +130,11 @@
         .dropdown::after { content: ''; position: absolute; width: 100%; height: 15px; bottom: -15px; left: 0; }
         .dropdown-content {
             display: none; position: absolute; background-color: white;
-            min-width: 200px; box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            z-index: 1001; border-radius: 14px; overflow: hidden;
-            top: calc(100% + 10px); left: 50%; transform: translateX(-50%);
-            border: var(--border-warm); padding: 6px 0;
+            min-width: 200px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); z-index: 1001; 
+            border-radius: 14px; overflow: hidden; top: calc(100% + 10px); left: 50%; 
+            transform: translateX(-50%); border: var(--border-warm); padding: 6px 0;
         }
-        
-        @media (hover: hover) {
-            .dropdown:hover .dropdown-content { display: block; animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-        }
+        @media (hover: hover) { .dropdown:hover .dropdown-content { display: block; animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); } }
         .dropdown.mobile-open .dropdown-content { display: block; }
 
         .dropdown-content a { color: var(--text-color); padding: 12px 22px; font-size: 0.9rem; display: block; }
@@ -170,23 +143,15 @@
 
         .page { display: none; animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
         .page.active-page { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #ECF3F0 0%, #FAF2F0 100%);
-            padding: 85px 5% 65px 5%; text-align: center; border-bottom: var(--border-warm);
-        }
+        .hero { background: linear-gradient(135deg, #ECF3F0 0%, #FAF2F0 100%); padding: 85px 5% 65px 5%; text-align: center; border-bottom: var(--border-warm); }
         .hero h1 { font-size: 2.8rem; color: var(--primary-color); margin-bottom: 20px; text-shadow: 1px 1px 0px rgba(255,255,255,0.8); }
 
         .project-showcase { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 15px; }
         .project-card {
             background: white; border-radius: 20px; padding: 18px 28px; display: flex; align-items: center; gap: 18px;
-            text-decoration: none; box-shadow: var(--card-shadow); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            border: var(--border-warm); min-width: 270px;
+            text-decoration: none; box-shadow: var(--card-shadow); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); border: var(--border-warm); min-width: 270px;
         }
         .project-card:hover { transform: translateY(-5px); border-color: var(--primary-color); box-shadow: var(--hover-shadow); }
         .project-logo { width: 58px; height: 58px; border-radius: 50%; object-fit: cover; border: 2px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
@@ -198,8 +163,7 @@
         .search-wrapper { max-width: 550px; margin: 25px auto 15px auto; position: relative; }
         .search-input {
             width: 100%; padding: 14px 25px 14px 52px; border: 2px solid #E6E2D8; border-radius: 50px;
-            font-size: 0.95rem; outline: none; background-color: white; transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.01); color: var(--text-color);
+            font-size: 0.95rem; outline: none; background-color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.01); color: var(--text-color);
         }
         .search-input:focus { border-color: var(--primary-color); box-shadow: 0 6px 20px rgba(91, 132, 118, 0.12); }
         .search-icon { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; color: #A39E93; }
@@ -214,42 +178,34 @@
 
         .container { padding: 0 5% 60px 5%; max-width: 1240px; margin: 0 auto; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 35px; }
-        .card {
-            background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--card-shadow);
-            display: flex; flex-direction: column; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); border: var(--border-warm);
-        }
+        .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--card-shadow); display: flex; flex-direction: column; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); border: var(--border-warm); }
         .card:hover { transform: translateY(-8px); box-shadow: var(--hover-shadow); border-color: rgba(91, 132, 118, 0.3); }
         .card-media { width: 100%; height: 190px; position: relative; background-color: #EFECE4; overflow: hidden; }
         .card-media img { width: 100%; height: 100%; object-fit: cover; }
         .card-body { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
         .card-tags { margin-bottom: 12px; }
-        .badge { font-size: 0.75rem; padding: 4px 12px; border-radius: 30px; color: white; font-weight: bold; margin-right: 6px; letter-spacing: 0.02em; }
+        .badge { display: inline-block; font-size: 0.75rem; padding: 4px 12px; border-radius: 30px; color: white; font-weight: bold; margin-right: 6px; margin-bottom: 6px; letter-spacing: 0.02em; }
         .badge-identity { background-color: var(--secondary-color); }
         .badge-topic { background-color: #A3908F; }
         .card-title { font-size: 1.35rem; font-weight: bold; margin-bottom: 12px; color: #2D2D2D; line-height: 1.4; }
         .card-text { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; flex-grow: 1; line-height: 1.7; }
         .card-link { text-align: right; }
-        .card-link a { color: var(--primary-color); text-decoration: none; font-weight: bold; font-size: 0.95rem; transition: color 0.2s; }
+        .card-link a { color: var(--primary-color); text-decoration: none; font-weight: bold; font-size: 0.95rem; transition: color 0.2s; cursor: pointer; }
         .card-link a:hover { color: var(--secondary-color); }
 
-        .team-title-section {
-            text-align: center; padding: 65px 5% 40px 5%;
-            background: linear-gradient(180deg, #EFECE4 0%, var(--bg-color) 100%); border-bottom: var(--border-warm);
-        }
+        .team-title-section { text-align: center; padding: 65px 5% 40px 5%; background: linear-gradient(180deg, #EFECE4 0%, var(--bg-color) 100%); border-bottom: var(--border-warm); }
         .team-title-section h2 { color: var(--primary-color); font-size: 2.3rem; margin-bottom: 12px; }
         .team-title-section p { color: var(--text-muted); max-width: 700px; margin: 0 auto; font-size: 1.05rem; }
         
-        .info-block {
-            background: white; border-radius: 20px; padding: 40px 30px;
-            box-shadow: var(--card-shadow); border: var(--border-warm); margin-bottom: 35px; transition: transform 0.3s;
-        }
+        .info-block { background: white; border-radius: 20px; padding: 40px 30px; box-shadow: var(--card-shadow); border: var(--border-warm); margin-bottom: 35px; transition: transform 0.3s; }
         .info-block:hover { transform: translateY(-2px); }
 
+        .article-title { color: var(--primary-color); font-size: 2.5rem; margin-bottom: 20px; text-align: center; }
+        .article-meta { text-align: center; margin-bottom: 35px; border-bottom: 2px dashed #EFECE4; padding-bottom: 20px; }
+        .article-content-body { font-size: 1.1rem; line-height: 2; color: #4A4A4A; letter-spacing: 0.05em; padding: 0 15px; }
+
         .resource-list { max-width: 1000px; margin: 0 auto; padding: 30px 5% 60px 5%; }
-        .resource-category {
-            background: white; border-radius: 20px; padding: 35px; margin-bottom: 35px;
-            box-shadow: var(--card-shadow); border: var(--border-warm); border-top: 6px solid var(--primary-color);
-        }
+        .resource-category { background: white; border-radius: 20px; padding: 35px; margin-bottom: 35px; box-shadow: var(--card-shadow); border: var(--border-warm); border-top: 6px solid var(--primary-color); }
         .resource-category h3 { color: var(--primary-color); margin-bottom: 25px; font-size: 1.5rem; border-bottom: 2px dashed #EFECE4; padding-bottom: 12px; display: flex; align-items: center; gap: 10px; }
         .resource-item { margin-bottom: 25px; padding-bottom: 20px; }
         .resource-item:not(:last-child) { border-bottom: 1px solid #FAF8F5; }
@@ -259,45 +215,48 @@
         .resource-link:hover { transform: translateX(3px); color: var(--primary-color); }
 
         .faq-container { max-width: 850px; margin: 0 auto; padding: 40px 5%; }
-        .faq-item { 
-            margin-bottom: 25px; background: white; border-radius: 20px; 
-            box-shadow: var(--card-shadow); border: var(--border-warm);
-            border-left: 5px solid var(--accent-color); transition: all 0.3s;
-            overflow: hidden;
-        }
+        .faq-item { margin-bottom: 25px; background: white; border-radius: 20px; box-shadow: var(--card-shadow); border: var(--border-warm); border-left: 5px solid var(--accent-color); transition: all 0.3s; overflow: hidden; }
         .faq-item:nth-child(even) { border-left-color: var(--secondary-color); }
         .faq-item:hover { transform: translateX(4px); box-shadow: var(--hover-shadow); }
-        
-        .faq-q { 
-            padding: 25px 30px; font-size: 1.25rem; font-weight: bold; 
-            color: var(--primary-color); cursor: pointer; display: flex; 
-            align-items: center; justify-content: space-between; outline: none;
-        }
+        .faq-q { padding: 25px 30px; font-size: 1.25rem; font-weight: bold; color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: space-between; outline: none; }
         .faq-q::-webkit-details-marker { display: none; }
         .faq-q::after { content: '+'; font-size: 1.8rem; color: var(--accent-color); transition: transform 0.3s; font-weight: normal; }
         .faq-item[open] .faq-q::after { transform: rotate(45deg); color: var(--secondary-color); }
-        
-        .faq-a { 
-            padding: 0 30px 30px 30px; font-size: 1rem; color: var(--text-color); 
-            line-height: 1.8; animation: fadeIn 0.4s ease; border-top: 1px dashed #FAF8F5; 
-            margin-top: 5px; padding-top: 15px; 
-        }
+        .faq-a { padding: 0 30px 30px 30px; font-size: 1rem; color: var(--text-color); line-height: 1.8; animation: fadeIn 0.4s ease; border-top: 1px dashed #FAF8F5; margin-top: 5px; padding-top: 15px; }
 
         footer { background-color: var(--primary-color); color: white; text-align: center; padding: 40px 5%; margin-top: 80px; font-size: 0.9rem; border-top: 4px solid var(--accent-color); }
         footer p { opacity: 0.9; }
 
-        /* ✨ 手機版字體微縮與排版優化 */
+        .global-music-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.4rem;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 6px 15px rgba(91, 132, 118, 0.3);
+            border: 2px solid white;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .global-music-btn:hover {
+            transform: scale(1.1);
+            background-color: var(--secondary-color);
+            box-shadow: 0 8px 20px rgba(226, 135, 122, 0.4);
+        }
+
         @media (max-width: 950px) {
             header { top: 38px; padding: 15px 4%; }
-            nav ul {
-                display: none; flex-direction: column; position: absolute;
-                top: 100%; left: 0; width: 100%; background-color: white; padding: 25px;
-                box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-bottom: var(--border-warm); gap: 15px;
-            }
+            nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: white; padding: 25px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-bottom: var(--border-warm); gap: 15px; }
             nav ul.active { display: flex; }
             .menu-toggle { display: block; }
-            
-            /* 防止標題跳行擠壓 */
             .hero h1 { font-size: 2rem; }
             .hero-subtitle { font-size: 1.25rem; }
             .hero-bullet { font-size: 0.95rem; }
@@ -307,22 +266,21 @@
             .team-title-section h2 { font-size: 1.8rem; }
             .faq-q { font-size: 1.1rem; padding: 20px; }
             .faq-a { padding: 0 20px 20px 20px; }
+            .article-title { font-size: 1.8rem; }
             
-            /* 緊急專線變更為點擊展開的按鈕 */
-            .emergency-toggle {
-                display: block; width: 100%; background: none; border: none; color: white;
-                font-size: 0.95rem; font-weight: bold; cursor: pointer; padding: 10px 0;
-            }
-            .emergency-links {
-                display: none; /* 預設收合 */
-                flex-direction: column; padding: 0 5% 15px 5%;
-            }
+            .emergency-toggle { display: block; width: 100%; background: none; border: none; color: white; font-size: 0.95rem; font-weight: bold; cursor: pointer; padding: 10px 0; }
+            .emergency-links { display: none; flex-direction: column; padding: 0 5% 15px 5%; }
             .emergency-links.show { display: flex; }
-            .emergency-links a {
-                margin: 5px auto; padding: 12px; width: 100%; max-width: 300px;
-                background: rgba(255,255,255,0.15); border-radius: 8px; border: none;
-            }
+            .emergency-links a { margin: 5px auto; padding: 12px; width: 100%; max-width: 300px; background: rgba(255,255,255,0.15); border-radius: 8px; border: none; }
             .desktop-alert-text, .desktop-divider { display: none; }
+
+            .global-music-btn {
+                bottom: 20px;
+                left: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
         }
 
         .video-preview-wrapper { width: 100%; height: 100%; position: relative; display: block; overflow: hidden; }
@@ -341,24 +299,11 @@
         .modal-slogan { font-size: 1.4rem; color: #514247; margin: 15px 0; line-height: 1.6; }
         
         .door-btn-wrapper { margin-top: 40px; display: flex; flex-direction: column; align-items: center; }
-        .door-indicator {
-            color: #C68E57; font-size: 1.4rem; font-weight: bold; margin-bottom: 18px;
-            animation: bounce 1.6s infinite; background: white; padding: 6px 20px;
-            border-radius: 30px; border: 2px dashed #C68E57; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-        }
+        .door-indicator { color: #C68E57; font-size: 1.4rem; font-weight: bold; margin-bottom: 18px; animation: bounce 1.6s infinite; background: white; padding: 6px 20px; border-radius: 30px; border: 2px dashed #C68E57; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-        .door-btn {
-            display: inline-block; width: 115px; height: 155px; background: #8B5A2B; 
-            border: 5px solid #5C3A21; border-radius: 6px 6px 0 0; position: relative;
-            cursor: pointer; transition: transform 0.8s ease-in-out, background 0.3s; transform-origin: left;
-            box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.25);
-            animation: pulse-glow 2.5s infinite alternate; outline: none; padding: 0; 
-        }
-        @keyframes pulse-glow {
-            from { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 15px rgba(238, 184, 117, 0.4); }
-            to { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 35px rgba(238, 184, 117, 0.9); }
-        }
+        .door-btn { display: inline-block; width: 115px; height: 155px; background: #8B5A2B; border: 5px solid #5C3A21; border-radius: 6px 6px 0 0; position: relative; cursor: pointer; transition: transform 0.8s ease-in-out, background 0.3s; transform-origin: left; box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.25); animation: pulse-glow 2.5s infinite alternate; outline: none; padding: 0; }
+        @keyframes pulse-glow { from { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 15px rgba(238, 184, 117, 0.4); } to { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 35px rgba(238, 184, 117, 0.9); } }
         .door-btn::after { content: ''; position: absolute; top: 50%; right: 12px; width: 14px; height: 14px; background: #D4AF37; border-radius: 50%; box-shadow: 1px 1px 3px rgba(0,0,0,0.4); }
         .door-btn:hover, .door-btn:focus, .door-btn:active { transform: perspective(600px) rotateY(-40deg); background: #9C6833; animation: none; outline: none; }
 
@@ -372,10 +317,7 @@
         .yuma-bubble::before { content: ''; position: absolute; bottom: -13px; right: 34px; border-width: 11px 11px 0; border-style: solid; border-color: var(--primary-color) transparent; display: block; width: 0; }
         
         .vinyl-wrapper { display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; }
-        .vinyl-record {
-            width: 170px; height: 170px; border-radius: 50%; background: #111; border: 4px solid #2b2b2b; position: relative; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.25), inset 0 0 15px rgba(255,255,255,0.15); margin-bottom: 25px;
-            background-image: radial-gradient(transparent 30%, rgba(255,255,255,0.06) 32%, transparent 34%), radial-gradient(transparent 45%, rgba(255,255,255,0.06) 47%, transparent 49%), radial-gradient(transparent 60%, rgba(255,255,255,0.06) 62%, transparent 64%); transition: transform 0.3s ease;
-        }
+        .vinyl-record { width: 170px; height: 170px; border-radius: 50%; background: #111; border: 4px solid #2b2b2b; position: relative; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.25), inset 0 0 15px rgba(255,255,255,0.15); margin-bottom: 25px; background-image: radial-gradient(transparent 30%, rgba(255,255,255,0.06) 32%, transparent 34%), radial-gradient(transparent 45%, rgba(255,255,255,0.06) 47%, transparent 49%), radial-gradient(transparent 60%, rgba(255,255,255,0.06) 62%, transparent 64%); transition: transform 0.3s ease; }
         .vinyl-record.spinning { animation: spin 3.5s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         .vinyl-label { width: 55px; height: 55px; border-radius: 50%; background: var(--secondary-color); display: flex; justify-content: center; align-items: center; text-align: center; color: white; box-shadow: 0 0 6px rgba(0,0,0,0.6); border: 2px solid #dfdfdf; }
@@ -389,7 +331,6 @@
         #lyrics-fullscreen-wrapper { position: relative; background-color: transparent; border-radius: 20px; }
         #btn-fullscreen { position: absolute; top: 5px; right: 5px; z-index: 10; padding: 8px 16px; font-size: 0.9rem; background: #FAF8F5; border: 1px solid #EFECE4; border-radius: 30px; cursor: pointer; color: var(--primary-color); font-weight: bold; transition: all 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
         #btn-fullscreen:hover { background: var(--primary-color); color: white; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(91, 132, 118, 0.25); }
-
         #lyrics-fullscreen-wrapper:fullscreen, #lyrics-fullscreen-wrapper:-webkit-full-screen { background-color: var(--bg-color); border-radius: 0; display: flex; align-items: center; justify-content: center; }
         #lyrics-fullscreen-wrapper:fullscreen .lyrics-container, #lyrics-fullscreen-wrapper:-webkit-full-screen .lyrics-container { height: 100vh; width: 100vw; padding-top: 50px; }
         #lyrics-fullscreen-wrapper:fullscreen #lyrics-wrapper, #lyrics-fullscreen-wrapper:-webkit-full-screen #lyrics-wrapper { padding: 45vh 0; }
@@ -400,6 +341,10 @@
     <audio id="bgMusic" loop>
         <source src="theme.mp3" type="audio/mpeg">
     </audio>
+
+    <button class="global-music-btn" id="global-music-btn" onclick="toggleGlobalMusic()" aria-label="播放/暫停背景音樂" title="開/關主題曲">
+        ▶️
+    </button>
 
     <div id="welcomeModal" class="welcome-modal">
         <div class="modal-overlay"></div>
@@ -417,45 +362,45 @@
         </div>
     </div>
 
-    <!-- ✨ 調整求助列 HTML 架構，整合桌機與手機的最佳體驗 -->
     <div class="emergency-bar">
         <button class="emergency-toggle" onclick="toggleEmergencyMobile()">🚨 需要協助嗎？點我展開緊急求助專線 ▾</button>
         <div class="emergency-links" id="emergencyLinks">
             <span class="desktop-alert-text">🚨 深夜情緒低落、遭遇危機？福科拉你一把：</span>
-            <a href="tel:1925">安心專線 1925</a> <span class="desktop-divider">|</span>
-            <a href="tel:1995">生命線 1995</a> <span class="desktop-divider">|</span>
-            <a href="tel:1980">張老師 1980</a>
+            <a href="tel:1925" rel="noopener noreferrer">安心專線 1925</a> <span class="desktop-divider">|</span>
+            <a href="tel:1995" rel="noopener noreferrer">生命線 1995</a> <span class="desktop-divider">|</span>
+            <a href="tel:1980" rel="noopener noreferrer">張老師 1980</a>
             <span class="desktop-alert-text">(支援手機直撥)</span>
         </div>
     </div>
 
     <header id="main-header">
-        <a href="#home" class="logo">來福導，歇會ㄦ！－福科輔導</a>
+        <a href="#home" class="logo">福科輔導-來「福導」，歇會ㄦ！</a>
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <nav>
             <ul id="nav-menu">
                 <li><a href="#home" id="nav-home" class="active-nav">首頁</a></li>
-                <li><a href="https://www.youtube.com/playlist?list=PLkqAD3KmD8OuUvpt1f9p9xT8z7C11VcIO" target="_blank">心衛知識加油站</a></li>
-                <li><a href="https://www.youtube.com/playlist?list=PLkqAD3KmD8OuBvUJvLy2_5vx7RzdFVL8m" target="_blank">福科電台</a></li>
+                <li><a href="https://www.youtube.com/playlist?list=PLkqAD3KmD8OuUvpt1f9p9xT8z7C11VcIO" target="_blank" rel="noopener noreferrer">福導心衛知識加油站</a></li>
+                <li><a href="https://www.youtube.com/playlist?list=PLkqAD3KmD8OuBvUJvLy2_5vx7RzdFVL8m" target="_blank" rel="noopener noreferrer">福導電台</a></li>
                 <li><a href="#resource" id="nav-resource">資源與支持網絡</a></li>
                 <li><a href="#faq" id="nav-faq">迷思破解 Q&A</a></li>
                 <li class="dropdown" id="about-dropdown" onclick="toggleDropdown(this)">
                     <a style="cursor: pointer;">關於我們 ▾</a>
                     <div class="dropdown-content">
-                        <a href="https://www.facebook.com/fcjhguidance" target="_blank">FB 粉絲專頁</a>
-                        <a href="https://www.instagram.com/fcjhguidance/" target="_blank">IG 官方帳號</a>
+                        <a href="https://www.facebook.com/fcjhguidance" target="_blank" rel="noopener noreferrer">FB 粉絲專頁</a>
+                        <a href="https://www.instagram.com/fcjhguidance/" target="_blank" rel="noopener noreferrer">IG 官方帳號</a>
                         <a href="#song" id="nav-song">主題曲</a>
                         <a href="#about" id="nav-about">關於「福導」</a>
                     </div>
                 </li>
-                <li><a href="https://forms.gle/67p6KbctGtZBPwSx7" target="_blank">使用回饋</a></li>
+                <!-- ✨ 補回來的表單連結 -->
+                <li><a href="https://forms.gle/67p6KbctGtZBPwSx7" target="_blank" rel="noopener noreferrer">使用回饋</a></li>
             </ul>
         </nav>
     </header>
 
     <div id="page-home" class="page active-page">
         <section class="hero">
-            <h1>來福導，歇會ㄦ！－福科輔導</h1>
+            <h1>福科輔導-來「福導」，歇會ㄦ！</h1>
             <div class="hero-subtitle-box text-center">
                 <h3 class="hero-subtitle">
                     在這裡，你的聲音會被聽見。<br>不論是悄悄話、想放鬆，還是尋求資源，我們永遠陪伴你。
@@ -466,7 +411,7 @@
             </div>
             
             <div class="project-showcase">
-                <a href="https://a1021502.github.io/mood/index.html" target="_blank" class="project-card">
+                <a href="https://a1021502.github.io/mood/index.html" target="_blank" rel="noopener noreferrer" class="project-card">
                     <img src="https://drive.google.com/thumbnail?id=1ZwxTCiUAgBdEKqCt4-xXlUQbeQVQ2l0q&sz=w800" alt="心靈樹洞商標" class="project-logo">
                     <div class="project-text">
                         <span class="project-name">FMTH 福科心靈樹洞</span>
@@ -474,7 +419,7 @@
                     </div>
                 </a>
                 
-                <a href="https://a1021502.github.io/take.care.of.yourself/" target="_blank" class="project-card">
+                <a href="https://a1021502.github.io/take.care.of.yourself/" target="_blank" rel="noopener noreferrer" class="project-card">
                     <img src="https://drive.google.com/thumbnail?id=1G5LOvi3tH4j2vrZHq1FNp7pytaxT5q7B&sz=w800" alt="SAFE SPACE商標" class="project-logo">
                     <div class="project-text">
                         <span class="project-name">SAFE SPACE</span>
@@ -486,7 +431,6 @@
 
         <section class="filter-section">
             <h2 style="color: var(--primary-color); margin-bottom: 5px;">🔍 資源百寶箱</h2>
-            
             <div class="search-wrapper">
                 <span class="search-icon">🔍</span>
                 <input type="text" id="global-search" class="search-input" placeholder="輸入關鍵字搜尋資源卡片... (例如：電台、IG、家長)" oninput="handleSearch()">
@@ -510,7 +454,29 @@
         </section>
 
         <div class="container">
-            <div class="grid" id="card-grid"></div>
+            <div id="loading-spinner" style="text-align: center; color: var(--text-muted); font-size: 1.1rem; padding: 20px;">
+                ⏳ 正在從資料庫魔法提取資源中...
+            </div>
+            <div class="grid" id="card-grid" style="display: none;"></div>
+        </div>
+    </div>
+
+    <div id="page-article" class="page">
+        <div class="team-title-section" style="padding-top: 40px; padding-bottom: 30px;">
+            <button class="filter-btn" onclick="window.history.back()" style="margin-bottom: 25px;">⬅ 返回資源百寶箱</button>
+            <h2 id="article-detail-title" class="article-title">文章標題載入中...</h2>
+            <div class="article-meta">
+                <span id="article-detail-tags"></span>
+            </div>
+        </div>
+        
+        <div class="container" style="max-width: 850px; padding-top: 30px;">
+            <div class="info-block" style="padding: 35px;">
+                <img id="article-detail-image" src="" alt="文章圖片" style="width: 100%; max-height: 450px; object-fit: cover; border-radius: 15px; margin-bottom: 30px; display: none; border: var(--border-warm);">
+                <div id="article-detail-content" class="article-content-body">
+                    內文載入中...
+                </div>
+            </div>
         </div>
     </div>
 
@@ -524,17 +490,11 @@
             <div class="info-block" style="text-align: center; border-left: 6px solid var(--primary-color);">
                 <div class="vinyl-wrapper">
                     <div class="vinyl-record spinning" id="vinyl-record">
-                        <div class="vinyl-label">
-                            <span style="font-size: 0.9rem; font-family: 'SuiFeng', sans-serif; letter-spacing: 2px;">歇會<br>ㄦ！</span>
-                        </div>
+                        <div class="vinyl-label"><span style="font-size: 0.9rem; font-family: 'SuiFeng', sans-serif; letter-spacing: 2px;">歇會<br>ㄦ！</span></div>
                         <div class="vinyl-hole"></div>
                     </div>
-                    
                     <h3 style="color: var(--primary-color); margin-bottom: 12px; font-size: 1.4rem;">🎧 專屬音樂控制台</h3>
-                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">
-                        點擊推開大門時背景音樂已悄悄流淌，跟著下方的歌詞一起唱吧！
-                    </p>
-                    
+                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">點擊推開大門時背景音樂已悄悄流淌，跟著下方的歌詞一起唱吧！</p>
                     <div class="flex-center flex-wrap" style="gap: 15px;">
                         <button class="filter-btn active" id="btn-song-play" onclick="controlPageMusic('play')" style="padding: 10px 25px; font-size: 1rem;">▶️ 播放</button>
                         <button class="filter-btn" id="btn-song-pause" onclick="controlPageMusic('pause')" style="padding: 10px 25px; font-size: 1rem;">⏸️ 暫停</button>
@@ -546,36 +506,27 @@
             <div class="info-block" style="background-color: white; border-radius: 20px; padding: 45px 20px; box-shadow: var(--card-shadow); text-align: center;">
                 <div class="lyrics-header-title sui-feng-text">《輔導室，歇會ㄦ！》</div>
                 <div class="lyrics-header-sub">福科國中輔導室 專屬校園療癒主題曲</div>
-                
                 <div id="lyrics-fullscreen-wrapper">
                     <button id="btn-fullscreen" onclick="toggleFullscreen()">⛶ 沉浸全螢幕</button>
                     <div class="lyrics-container" id="lyrics-container">
                         <div id="lyrics-wrapper" style="padding: 150px 0;"></div>
                     </div>
                 </div>
-
                 <div style="margin-top: 25px;">
-                    <button class="filter-btn" id="btn-toggle-lyrics" onclick="toggleFullLyrics()" style="padding: 8px 25px; font-size: 1rem; border: 1px solid #E6E2D8;">
-                        📄 展開完整歌詞
-                    </button>
+                    <button class="filter-btn" id="btn-toggle-lyrics" onclick="toggleFullLyrics()" style="padding: 8px 25px; font-size: 1rem; border: 1px solid #E6E2D8;">📄 展開完整歌詞</button>
                 </div>
-
                 <div id="full-lyrics-box" style="display: none; margin-top: 30px; text-align: center; border-top: 2px dashed #EFECE4; padding-top: 35px; animation: fadeIn 0.5s;">
                     <div style="line-height: 2.3; font-size: 1.05rem; color: var(--text-color); letter-spacing: 0.05em;">
                         <p>早八的鐘聲 敲醒一堆靈魂</p>
                         <p>昨晚的限動 到底誰看了沒出聲</p>
                         <p>段考的成績 像是一場大災難</p>
-                        <p>大人說的未來 聽起來有夠煩</p>
-                        <br>
+                        <p>大人說的未來 聽起來有夠煩</p><br>
                         <p>是I人還E人 其實都不想當</p>
                         <p>心態快炸裂 隨時準備要破防</p>
                         <p>找不到防空洞 也不想滑手機</p>
-                        <p>輔導室的門沒關 隨時為你開機</p>
-                        <br>
+                        <p>輔導室的門沒關 隨時為你開機</p><br>
                         <p>走進來深呼吸 這裡絕對不打分數</p>
-                        <p>把那些鳥事 放心 全部都吐一吐</p>
-                        <br>
-                        
+                        <p>把那些鳥事 放心 全部都吐一吐</p><br>
                         <div class="chorus-highlight">
                             <p class="chorus-title sui-feng-text">【副歌】</p>
                             <p class="chorus-text">輔導室 歇會兒！ 就算世界都在催</p>
@@ -584,18 +535,13 @@
                             <p class="chorus-accent sui-feng-text">陪你找回 那個閃亮的自我</p>
                             <p class="chorus-text">輔導室 歇會兒！</p>
                             <p class="chorus-text">輔導室 歇會兒！</p>
-                        </div>
-                        <br>
-                        
+                        </div><br>
                         <p>對話框打了又刪 怕被已讀不回</p>
                         <p>人際關係這學分 到底要修幾回</p>
                         <p>有時覺得自己 像個路人NPC</p>
-                        <p style="color: var(--secondary-color); font-weight: bold; font-size: 1.1rem;">但在這裡 你是唯一的主題曲</p>
-                        <br>
+                        <p style="color: var(--secondary-color); font-weight: bold; font-size: 1.1rem;">但在這裡 你是唯一的主題曲</p><br>
                         <p>沒人懂的EMO 沒關係我們全懂</p>
-                        <p>坐上這沙發 卸下沉重的裝甲</p>
-                        <br>
-                        
+                        <p>坐上這沙發 卸下沉重的裝甲</p><br>
                         <div class="chorus-highlight">
                             <p class="chorus-title sui-feng-text">【副歌】</p>
                             <p class="chorus-text">輔導室 歇會兒！ 就算世界都在催</p>
@@ -604,15 +550,11 @@
                             <p class="chorus-accent sui-feng-text">陪你找回 那個閃亮的自我</p>
                             <p class="chorus-text">輔導室 歇會兒！</p>
                             <p class="chorus-text">輔導室 歇會兒！</p>
-                        </div>
-                        <br>
-                        
+                        </div><br>
                         <p>先別急著逞強 先別急著偽裝</p>
                         <p>把今天的委屈 一口氣都講光</p>
                         <p>你不是麻煩 你只是太用力撐</p>
-                        <p>坐在這一刻 慢慢把自己安穩</p>
-                        <br>
-                        
+                        <p>坐在這一刻 慢慢把自己安穩</p><br>
                         <div class="chorus-highlight">
                             <p class="chorus-title sui-feng-text">【副歌】</p>
                             <p class="chorus-text">輔導室 歇會兒！ 就算世界都在催</p>
@@ -621,9 +563,7 @@
                             <p class="chorus-accent sui-feng-text">陪你找回 那個閃亮的自我</p>
                             <p class="chorus-text">輔導室 歇會兒！</p>
                             <p class="chorus-text">輔導室 歇會兒！</p>
-                        </div>
-                        <br>
-                        
+                        </div><br>
                         <p class="sui-feng-text" style="font-size: 1.4rem; color: var(--primary-color); font-weight: bold; letter-spacing: 0.08em; margin-bottom: 8px;">歇會兒！充個電再走！</p>
                         <p class="sui-feng-text" style="font-size: 1.6rem; color: var(--secondary-color); font-weight: bold; letter-spacing: 0.08em;">福科輔導室~ 挺你到最後！</p>
                     </div>
@@ -643,35 +583,23 @@
                 <h3>🤝 一、 跨網絡社會資源 (三級輔導、社政、司法)</h3>
                 <div class="resource-item">
                     <div class="resource-name">臺中市學生輔導諮商中心 (中二區分區)</div>
-                    <div class="resource-info">
-                        <strong>📌 能提供的協助：</strong>受理專輔轉介之三級個案，指派心理師進駐個別/團體諮商；中輟復學、校園危機事件安心減壓。<br>
-                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2358-4979分機9 | 地址：西屯區天助街1號(安和國中)
-                    </div>
-                    <a href="https://scc.tc.edu.tw" target="_blank" class="resource-link">前往網站 ➔</a>
+                    <div class="resource-info"><strong>📌 能提供的協助：</strong>受理專輔轉介之三級個案，指派心理師進駐個別/團體諮商；中輟復學、校園危機事件安心減壓。<br><strong>📞 聯絡資訊與地址：</strong>電話：(04)2358-4979分機9 | 地址：西屯區天助街1號(安和國中)</div>
+                    <a href="https://scc.tc.edu.tw" target="_blank" rel="noopener noreferrer" class="resource-link">前往網站 ➔</a>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">西屯區家庭福利服務中心 (社會局)</div>
-                    <div class="resource-info">
-                        <strong>📌 能提供的協助：</strong>經濟弱勢、高風險家庭評估與物資救助；兒少保護、家暴或性平事件跨網絡通報追蹤。<br>
-                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2251-2939 | 地址：西屯區市政北二路386號6樓
-                    </div>
-                    <a href="https://welfare.taichung.gov.tw" target="_blank" class="resource-link">前往網站 ➔</a>
+                    <div class="resource-info"><strong>📌 能提供的協助：</strong>經濟弱勢、高風險家庭評估與物資救助；兒少保護、家暴或性平事件跨網絡通報追蹤。<br><strong>📞 聯絡資訊與地址：</strong>電話：(04)2251-2939 | 地址：西屯區市政北二路386號6樓</div>
+                    <a href="https://welfare.taichung.gov.tw" target="_blank" rel="noopener noreferrer" class="resource-link">前往網站 ➔</a>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">臺中市衛生局心理衛生中心 (西屯分區)</div>
-                    <div class="resource-info">
-                        <strong>📌 能提供的協助：</strong>提供社區定點免費/減免心理諮商。協助疑似精神疾患個案轉介核心醫療院所鑑定與合作。<br>
-                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2515-5148
-                    </div>
-                    <a href="https://health.taichung.gov.tw" target="_blank" class="resource-link">前往網站 ➔</a>
+                    <div class="resource-info"><strong>📌 能提供的協助：</strong>提供社區定點免費/減免心理諮商。協助疑似精神疾患個案轉介核心醫療院所鑑定與合作。<br><strong>📞 聯絡資訊與地址：</strong>電話：(04)2515-5148</div>
+                    <a href="https://health.taichung.gov.tw" target="_blank" rel="noopener noreferrer" class="resource-link">前往網站 ➔</a>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">臺中市少年警察隊 (少年輔導委員會)</div>
-                    <div class="resource-info">
-                        <strong>📌 能提供的協助：</strong>觸法、曝險、結交不良勢力之高危學生社區訪視與輔導；協助中輟失聯學生協尋。<br>
-                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2328-4941
-                    </div>
-                    <a href="https://police.taichung.gov.tw/youth/" target="_blank" class="resource-link">前往網站 ➔</a>
+                    <div class="resource-info"><strong>📌 能提供的協助：</strong>觸法、曝險、結交不良勢力之高危學生社區訪視與輔導；協助中輟失聯學生協尋。<br><strong>📞 聯絡資訊與地址：</strong>電話：(04)2328-4941</div>
+                    <a href="https://police.taichung.gov.tw/youth/" target="_blank" rel="noopener noreferrer" class="resource-link">前往網站 ➔</a>
                 </div>
             </div>
 
@@ -679,42 +607,27 @@
                 <h3>🏥 二、 醫療系統 (醫院與身心科診所)</h3>
                 <div class="resource-item">
                     <div class="resource-name">臺中榮民總醫院 (精神部/兒童青少年精神科)</div>
-                    <div class="resource-info">
-                        <strong>📌 能提供的協助與特色：</strong>醫療資源最完整，適合重大身心疾病(思覺失調、嚴重憂鬱、自傷危機)、自閉症或過動症之權威鑑定與住院治療。<br>
-                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2359-2525 | 地址：西屯區台灣大道四段1650號
-                    </div>
-                    <a href="https://vghtc.gov.tw" target="_blank" class="resource-link">前往網站 ➔</a>
+                    <div class="resource-info"><strong>📌 能提供的協助與特色：</strong>醫療資源最完整，適合重大身心疾病(思覺失調、嚴重憂鬱、自傷危機)、自閉症或過動症之權威鑑定與住院治療。<br><strong>📞 聯絡資訊與地址：</strong>電話：(04)2359-2525 | 地址：西屯區台灣大道四段1650號</div>
+                    <a href="https://vghtc.gov.tw" target="_blank" rel="noopener noreferrer" class="resource-link">前往網站 ➔</a>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">澄清醫院中港院區 (身心門診)</div>
-                    <div class="resource-info">
-                        <strong>📌 能提供的協助與特色：</strong>大型區域醫院。處理青少年情緒障礙、嚴重焦慮與睡眠障礙，榮外就近選擇。<br>
-                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2463-2000 | 地址：西屯區台灣大道四段966號
-                    </div>
-                    <a href="https://ck.ccgh.com.tw" target="_blank" class="resource-link">前往網站 ➔</a>
+                    <div class="resource-info"><strong>📌 能提供的協助與特色：</strong>大型區域醫院。處理青少年情緒障礙、嚴重焦慮與睡眠障礙，榮外就近選擇。<br><strong>📞 聯絡資訊與地址：</strong>電話：(04)2463-2000 | 地址：西屯區台灣大道四段966號</div>
+                    <a href="https://ck.ccgh.com.tw" target="_blank" rel="noopener noreferrer" class="resource-link">前往網站 ➔</a>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">卓大夫身心科診所</div>
-                    <div class="resource-info">
-                        <strong>📌 能提供的協助與特色：</strong>溫和社區型專科醫療，附設rTMS經顱磁刺激。適合家長對大醫院有標籤抗拒感，處理失眠或輕度憂鬱藥物評估。<br>
-                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2461-3097 | 地址：西屯區台灣大道四段770號
-                    </div>
-                    <a href="https://drchuopsy.com" target="_blank" class="resource-link">前往網站 ➔</a>
+                    <div class="resource-info"><strong>📌 能提供的協助與特色：</strong>溫和社區型專科醫療，附設rTMS經顱磁刺激。適合家長對大醫院有標籤抗拒感，處理失眠或輕度憂鬱藥物評估。<br><strong>📞 聯絡資訊與地址：</strong>電話：(04)2461-3097 | 地址：西屯區台灣大道四段770號</div>
+                    <a href="https://drchuopsy.com" target="_blank" rel="noopener noreferrer" class="resource-link">前往網站 ➔</a>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">忘憂森林身心診所</div>
-                    <div class="resource-info">
-                        <strong>📌 能提供的協助與特色：</strong>環境讓人放鬆(像點心店)，醫師問診溫和注重隱私。適合對醫療環境容易緊張、防衛心較重的學生與家長。<br>
-                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2463-0102 | 地址：西屯區國安一路77號1樓
-                    </div>
+                    <div class="resource-info"><strong>📌 能提供的協助與特色：</strong>環境讓人放鬆(像點心店)，醫師問診溫和注重隱私。適合對醫療環境容易緊張、防衛心較重的學生與家長。<br><strong>📞 聯絡資訊與地址：</strong>電話：(04)2463-0102 | 地址：西屯區國安一路77號1樓</div>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">中科好晴天身心診所</div>
-                    <div class="resource-info">
-                        <strong>📌 能提供的協助與特色：</strong>設有「兒童及青少年身心門診」，對拒學、過動、亞斯伯格有豐富經驗。提供TMS等非藥物治療選項。<br>
-                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2560-2337 | 地址：大雅區中清路四段15號
-                    </div>
-                    <a href="https://sogoodday.com.tw" target="_blank" class="resource-link">前往網站 ➔</a>
+                    <div class="resource-info"><strong>📌 能提供的協助與特色：</strong>設有「兒童及青少年身心門診」，對拒學、過動、亞斯伯格有豐富經驗。提供TMS等非藥物治療選項。<br><strong>📞 聯絡資訊與地址：</strong>電話：(04)2560-2337 | 地址：大雅區中清路四段15號</div>
+                    <a href="https://sogoodday.com.tw" target="_blank" rel="noopener noreferrer" class="resource-link">前往網站 ➔</a>
                 </div>
             </div>
 
@@ -722,27 +635,18 @@
                 <h3>🛋️ 三、 心理諮商系統 (諮商所與治療所)</h3>
                 <div class="resource-item">
                     <div class="resource-name">葵心理諮商所</div>
-                    <div class="resource-info">
-                        <strong>📌 能提供的協助與特色：</strong>距離福科國中極近。提供個別/伴侶/家庭諮商。適合系統失調(父母嚴重衝突)之家庭動力重塑。<br>
-                        <strong>📞 聯絡資訊與地址：</strong>電話：0905-677-538 | 地址：西屯區台灣大道四段1230巷20之6號1樓
-                    </div>
-                    <a href="https://sunflowercc2023.com" target="_blank" class="resource-link">前往網站 ➔</a>
+                    <div class="resource-info"><strong>📌 能提供的協助與特色：</strong>距離福科國中極近。提供個別/伴侶/家庭諮商。適合系統失調(父母嚴重衝突)之家庭動力重塑。<br><strong>📞 聯絡資訊與地址：</strong>電話：0905-677-538 | 地址：西屯區台灣大道四段1230巷20之6號1樓</div>
+                    <a href="https://sunflowercc2023.com" target="_blank" rel="noopener noreferrer" class="resource-link">前往網站 ➔</a>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">心煦心理治療所</div>
-                    <div class="resource-info">
-                        <strong>📌 能提供的協助與特色：</strong>提供學齡前早期療育、兒童專注力與人際團體治療。適合需要教養技巧諮詢的家長。<br>
-                        <strong>📞 聯絡資訊與地址：</strong>電話：0970-002-995 | 地址：西屯區福雅路128巷58號1-3樓
-                    </div>
-                    <a href="https://theharmonymind.com" target="_blank" class="resource-link">前往網站 ➔</a>
+                    <div class="resource-info"><strong>📌 能提供的協助與特色：</strong>提供學齡前早期療育、兒童專注力與人際團體治療。適合需要教養技巧諮詢的家長。<br><strong>📞 聯絡資訊與地址：</strong>電話：0970-002-995 | 地址：西屯區福雅路128巷58號1-3樓</div>
+                    <a href="https://theharmonymind.com" target="_blank" rel="noopener noreferrer" class="resource-link">前往網站 ➔</a>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">蛹之生心理諮商所 (文心館)</div>
-                    <div class="resource-info">
-                        <strong>📌 能提供的協助與特色：</strong>大型制度完善諮商所，心理師陣容龐大。有獲准執行「通訊心理諮商」，對無法出門之個案友善。<br>
-                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2389-6061 | 地址：南屯區文心路一段46之1號
-                    </div>
-                    <a href="https://morph.tw" target="_blank" class="resource-link">前往網站 ➔</a>
+                    <div class="resource-info"><strong>📌 能提供的協助與特色：</strong>大型制度完善諮商所，心理師陣容龐大。有獲准執行「通訊心理諮商」，對無法出門之個案友善。<br><strong>📞 聯絡資訊與地址：</strong>電話：(04)2389-6061 | 地址：南屯區文心路一段46之1號</div>
+                    <a href="https://morph.tw" target="_blank" rel="noopener noreferrer" class="resource-link">前往網站 ➔</a>
                 </div>
             </div>
 
@@ -751,27 +655,27 @@
                 <div class="resource-item">
                     <div class="resource-name">教育部學生輔導資訊網</div>
                     <div class="resource-info"><strong>📌 核心功能與特色：</strong>下載國中輔導工作手冊、性平/生命/人權教育官方指引，適合師長規劃班級輔導。</div>
-                    <a href="https://guide.edu.tw" target="_blank" class="resource-link">網址：guide.edu.tw ➔</a>
+                    <a href="https://guide.edu.tw" target="_blank" rel="noopener noreferrer" class="resource-link">網址：guide.edu.tw ➔</a>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">教育部學生生涯輔導網</div>
                     <div class="resource-info"><strong>📌 核心功能與特色：</strong>提供國中生涯發展教材、家長參與生涯規劃手冊及技藝教育宣導資源。</div>
-                    <a href="https://friendlycampus.k12ea.gov.tw/Career" target="_blank" class="resource-link">網址：friendlycampus.k12ea.gov.tw/Career ➔</a>
+                    <a href="https://friendlycampus.k12ea.gov.tw/Career" target="_blank" rel="noopener noreferrer" class="resource-link">網址：friendlycampus.k12ea.gov.tw/Career ➔</a>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">董氏基金會華文心理健康網</div>
                     <div class="resource-info"><strong>📌 核心功能與特色：</strong>內建線上憂鬱/壓力檢測量表，青少年心理健康專欄及衛教倡導影片。</div>
-                    <a href="https://etmh.org" target="_blank" class="resource-link">網址：etmh.org ➔</a>
+                    <a href="https://etmh.org" target="_blank" rel="noopener noreferrer" class="resource-link">網址：etmh.org ➔</a>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">臺中市家庭教育中心</div>
                     <div class="resource-info"><strong>📌 核心功能與特色：</strong>豐富的親職教養線上資源與電子書，專線可提供家長管教困境諮詢。<strong>📞 專線：</strong>(02)412-8185</div>
-                    <a href="https://family.taichung.gov.tw" target="_blank" class="resource-link">網址：family.taichung.gov.tw ➔</a>
+                    <a href="https://family.taichung.gov.tw" target="_blank" rel="noopener noreferrer" class="resource-link">網址：family.taichung.gov.tw ➔</a>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">張老師基金會 (青少年輔導)</div>
                     <div class="resource-info"><strong>📌 核心功能與特色：</strong>提供電話與網路即時信件/晤談預約，適合不習慣講電話偏好文字的青少年抒發。<strong>📞 專線：</strong>1980</div>
-                    <a href="https://1980.org.tw" target="_blank" class="resource-link">網址：1980.org.tw ➔</a>
+                    <a href="https://1980.org.tw" target="_blank" rel="noopener noreferrer" class="resource-link">網址：1980.org.tw ➔</a>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">衛福部安心專線 (24小時免付費)</div>
@@ -881,10 +785,11 @@
     </footer>
 
     <script>
-        // --- SPA 網址路由機制 ---
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbz4uZma1CfxCKsoQQqgGYTE8Sw4nTDZnfNI2n5aKU80Z6WySup62TFy2j_aA_uYWLZWIw/exec";
+
         function handleHashChange() {
             let hash = window.location.hash.replace('#', '') || 'home';
-            const validPages = ['home', 'resource', 'faq', 'song', 'about'];
+            const validPages = ['home', 'resource', 'faq', 'song', 'about', 'article'];
             if (!validPages.includes(hash)) hash = 'home';
 
             const pages = document.querySelectorAll('.page');
@@ -914,91 +819,161 @@
             }
         }
 
-        // --- ✨ 手機版緊急求助列展開切換 ---
         function toggleEmergencyMobile() {
             const linksContainer = document.getElementById('emergencyLinks');
             linksContainer.classList.toggle('show');
         }
 
-        // --- 卡片資料庫 ---
-        const postsData = [
+        const initialPostsData = [
             {
-                identity: 'student parent teacher',
-                topic: 'emotion social',
+                identity: 'student parent teacher', 
+                topic: 'social', 
                 isYoutube: true,
                 image: 'https://drive.google.com/thumbnail?id=1VMIjCMrF4fnfnmKSwbXNLTdVoS8CDGL9&sz=w800',
                 link: 'https://www.youtube.com/playlist?list=PLkqAD3KmD8OuUvpt1f9p9xT8z7C11VcIO',
-                badgeIdentity: '親師生',
-                badgeTopic: '心衛知識加油站',
-                title: '🎬影音專區：心衛知識加油站',
+                badgesIdentity: ['學生專區', '家長專區', '教師專區'], 
+                badgesTopic: ['社群與影音'],
+                title: '🎬影音專區：福導心衛知識加油站',
                 text: '由福科國中輔導室精心整理、製作的心理健康系列影音。陪伴你認識壓力、調適情緒，隨時為心靈加滿油！',
-                linkText: '前往 YT 頻道 ➔'
+                type: '外部連結'
             },
             {
-                identity: 'student parent',
-                topic: 'relation career social',
+                identity: 'student parent teacher', 
+                topic: 'social', 
                 isYoutube: true,
                 image: 'https://drive.google.com/thumbnail?id=1GmH44JyzetnAHuMt8pEWrkn-WQb1VbfB&sz=w800',
                 link: 'https://www.youtube.com/playlist?list=PLkqAD3KmD8OuBvUJvLy2_5vx7RzdFVL8m',
-                badgeIdentity: '學生/家長',
-                badgeTopic: '福科電台',
-                title: '🎙️ 精彩收聽：福科電台',
+                badgesIdentity: ['學生專區', '家長專區', '教師專區'], 
+                badgesTopic: ['社群與影音'],
+                title: '🎙️ 精彩收聽：福導電台',
                 text: '聆聽福科師生的聲音！這裡有關於校園生活、生涯探索與人際關係的溫馨訪談與分享，用聲音溫暖你的心。',
-                linkText: '前往收聽 ➔'
+                type: '外部連結'
             },
             {
-                identity: 'student parent teacher',
-                topic: 'social',
+                identity: 'student parent teacher', 
+                topic: 'social', 
                 isYoutube: false,
                 image: 'https://drive.google.com/thumbnail?id=1LlQD0tUC8vdhycH3Zkl_mAFVN3AY5njo&sz=w800',
                 link: 'https://www.facebook.com/fcjhguidance',
-                badgeIdentity: '親師生',
-                badgeTopic: '社群追蹤',
+                badgesIdentity: ['學生專區', '家長專區', '教師專區'], 
+                badgesTopic: ['社群與影音'],
                 title: '📱 Facebook 粉絲專頁',
                 text: '最即時的輔導室活動公告、親職教育講座資訊、精美圖文懶人包，歡迎按讚追蹤「福科國中輔導室」！',
-                linkText: '點我前往 FB ➔'
+                type: '外部連結'
             },
             {
-                identity: 'student',
-                topic: 'social',
+                identity: 'student parent teacher', 
+                topic: 'social', 
                 isYoutube: false,
                 image: 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800',
                 link: 'https://www.instagram.com/fcjhguidance/',
-                badgeIdentity: '學生專區',
-                badgeTopic: '社群互動',
+                badgesIdentity: ['學生專區', '家長專區', '教師專區'], 
+                badgesTopic: ['社群與影音'],
                 title: '📸 Instagram 官方帳號',
                 text: '貼近學生的圖文心情點評、限時動態小互動、心理健康週活動花絮。趕快拿起手機追蹤「福科國中輔導室」！',
-                linkText: '點我追蹤 IG ➔'
+                type: '外部連結'
             }
         ];
 
+        let allPostsData = [...initialPostsData]; 
         let currentFilters = { identity: 'all', topic: 'all' };
         let searchQuery = '';
+
+        const identityMap = { '學生專區': 'student', '家長專區': 'parent', '教師專區': 'teacher' };
+        const topicMap = { '人際困擾': 'relation', '生涯發展': 'career', '情緒調適': 'emotion', '社群與影音': 'social' };
+
+        async function fetchGoogleSheetData() {
+            try {
+                const response = await fetch(GAS_URL);
+                const data = await response.json();
+                
+                const formPosts = data.map((row, index) => {
+                    let rawIdentities = row['身分標籤'] ? row['身分標籤'].split(',').map(t => t.trim()).filter(t => t !== '') : [];
+                    let dataIdentities = rawIdentities.map(t => identityMap[t] || '').join(' ');
+                    let badgesId = rawIdentities.length > 0 ? rawIdentities : ['資源推薦'];
+
+                    let rawTopics = row['議題標籤'] ? row['議題標籤'].split(',').map(t => t.trim()).filter(t => t !== '') : [];
+                    let dataTopics = rawTopics.map(t => topicMap[t] || '').join(' ');
+                    let badgesTop = rawTopics.length > 0 ? rawTopics : ['精選文章'];
+
+                    let imgUrl = 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800'; 
+                    if (row['圖片上傳']) {
+                        const match = row['圖片上傳'].match(/id=([a-zA-Z0-9_-]+)/);
+                        if (match) imgUrl = `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800`;
+                    }
+
+                    return {
+                        id: 'form-post-' + index, 
+                        title: row['資源標題'],
+                        text: row['資源簡介'],
+                        image: imgUrl,
+                        identity: dataIdentities,
+                        topic: dataTopics,
+                        badgesIdentity: badgesId, 
+                        badgesTopic: badgesTop,   
+                        type: row['資源類型'],
+                        link: row['外部連結網址'] || '',
+                        articleContent: row['站內文章詳細內容'] || '',
+                        isYoutube: row['外部連結網址'] && row['外部連結網址'].includes('youtube.com')
+                    };
+                });
+
+                allPostsData = [...initialPostsData, ...formPosts];
+                
+                document.getElementById('loading-spinner').style.display = 'none';
+                document.getElementById('card-grid').style.display = 'grid';
+                
+                executeCombinedFilter();
+
+            } catch (error) {
+                console.error('抓取資料失敗：', error);
+                document.getElementById('loading-spinner').textContent = '⚠️ 網路連線出了一點小狀況，目前僅顯示預設資源。';
+                document.getElementById('card-grid').style.display = 'grid';
+                renderCards(allPostsData);
+            }
+        }
 
         function renderCards(dataToRender) {
             const grid = document.getElementById('card-grid');
             grid.innerHTML = ''; 
 
             if (dataToRender.length === 0) {
-                grid.innerHTML = `
+                grid.insertAdjacentHTML('beforeend', `
                 <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px; background: white; border-radius: 20px; border: 2px dashed #E2877A;">
                     <div style="font-size: 3.5rem; margin-bottom: 15px;">🥀</div>
                     <h3 style="color: var(--primary-color); margin-bottom: 12px; font-size: 1.5rem; font-family: 'SuiFeng', sans-serif;">百寶箱裡暫時找不到相關卡片...</h3>
                     <p style="color: var(--text-muted); font-size: 1.05rem;">但輔導室的門永遠為你開著。<br>如果心裡覺得悶，隨時歡迎推開門，直接來找我們聊聊喔！</p>
-                </div>`;
+                </div>`);
                 return;
             }
 
-            dataToRender.forEach(post => {
+            dataToRender.forEach((post, index) => {
                 let mediaContent = '';
+                const altText = post.title ? post.title : '資源圖片';
                 if(post.isYoutube) {
-                    mediaContent = `
-                        <a href="${post.link}" target="_blank" class="video-preview-wrapper">
-                            <div class="play-button"></div>
-                            <img src="${post.image}" alt="${post.title}">
-                        </a>`;
+                    mediaContent = `<a href="${post.link}" target="_blank" rel="noopener noreferrer" class="video-preview-wrapper"><div class="play-button"></div><img src="${post.image}" alt="${altText}"></a>`;
                 } else {
-                    mediaContent = `<img src="${post.image}" alt="${post.title}">`;
+                    mediaContent = `<img src="${post.image}" alt="${altText}">`;
+                }
+
+                let cardLinkHtml = '';
+                if (post.type === '站內文章') {
+                    const originalIndex = allPostsData.findIndex(p => p.title === post.title && p.text === post.text);
+                    cardLinkHtml = `<a onclick="openArticle(${originalIndex})">閱讀文章 ➔</a>`;
+                } else {
+                    cardLinkHtml = `<a href="${post.link}" target="_blank" rel="noopener noreferrer">${post.linkText || '前往連結 ➔'}</a>`;
+                }
+
+                let tagsHtml = '';
+                if (post.badgesIdentity) {
+                    post.badgesIdentity.forEach(tag => {
+                        tagsHtml += `<span class="badge badge-identity">${tag}</span>\n`;
+                    });
+                }
+                if (post.badgesTopic) {
+                    post.badgesTopic.forEach(tag => {
+                        tagsHtml += `<span class="badge badge-topic">${tag}</span>\n`;
+                    });
                 }
 
                 const cardHTML = `
@@ -1006,16 +981,49 @@
                     <div class="card-media">${mediaContent}</div>
                     <div class="card-body">
                         <div class="card-tags">
-                            <span class="badge badge-identity">${post.badgeIdentity}</span>
-                            <span class="badge badge-topic">${post.badgeTopic}</span>
+                            ${tagsHtml}
                         </div>
-                        <div class="card-title">${post.title}</div>
-                        <div class="card-text">${post.text}</div>
-                        <div class="card-link"><a href="${post.link}" target="_blank">${post.linkText}</a></div>
+                        <div class="card-title">${post.title || ''}</div>
+                        <div class="card-text">${post.text || ''}</div>
+                        <div class="card-link">${cardLinkHtml}</div>
                     </div>
                 </div>`;
                 grid.insertAdjacentHTML('beforeend', cardHTML);
             });
+        }
+
+        function openArticle(index) {
+            const post = allPostsData[index];
+            if(!post) return;
+
+            document.getElementById('article-detail-title').textContent = post.title || '無標題';
+            
+            let articleTagsHtml = '';
+            if (post.badgesIdentity) {
+                post.badgesIdentity.forEach(tag => {
+                    articleTagsHtml += `<span class="badge badge-identity" style="font-size: 0.85rem; padding: 6px 16px;">${tag}</span>\n`;
+                });
+            }
+            if (post.badgesTopic) {
+                post.badgesTopic.forEach(tag => {
+                    articleTagsHtml += `<span class="badge badge-topic" style="font-size: 0.85rem; padding: 6px 16px;">${tag}</span>\n`;
+                });
+            }
+            document.getElementById('article-detail-tags').innerHTML = articleTagsHtml;
+
+            const imgEl = document.getElementById('article-detail-image');
+            if (post.image && !post.image.includes('1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo')) { 
+                imgEl.src = post.image;
+                imgEl.alt = post.title || '文章圖片';
+                imgEl.style.display = 'block';
+            } else {
+                imgEl.style.display = 'none';
+            }
+
+            const contentFormatted = post.articleContent ? post.articleContent.replace(/\n/g, '<br>') : '沒有提供詳細內容。';
+            document.getElementById('article-detail-content').innerHTML = contentFormatted;
+
+            window.location.hash = 'article';
         }
 
         let searchTimeout;
@@ -1037,12 +1045,19 @@
         }
 
         function executeCombinedFilter() {
-            const filteredData = postsData.filter(post => {
-                const cardIdentities = post.identity.split(' ');
-                const cardTopics = post.topic.split(' ');
+            const filteredData = allPostsData.filter(post => {
+                const cardIdentities = post.identity ? post.identity.split(/\s+/) : [];
+                const cardTopics = post.topic ? post.topic.split(/\s+/) : [];
+                
                 const matchIdentity = (currentFilters.identity === 'all' || cardIdentities.includes(currentFilters.identity));
                 const matchTopic = (currentFilters.topic === 'all' || cardTopics.includes(currentFilters.topic));
-                const matchSearch = (!searchQuery || post.title.toLowerCase().includes(searchQuery) || post.text.toLowerCase().includes(searchQuery));
+                
+                const searchTarget = [post.title, post.text, post.articleContent]
+                    .filter(Boolean)
+                    .join(' ')
+                    .toLowerCase();
+                    
+                const matchSearch = (!searchQuery || searchTarget.includes(searchQuery));
                 
                 return matchIdentity && matchTopic && matchSearch;
             });
@@ -1091,15 +1106,27 @@
         });
 
         window.addEventListener('DOMContentLoaded', () => {
-            renderCards(postsData); 
             document.getElementById('welcomeModal').style.display = 'flex';
+            fetchGoogleSheetData(); 
         });
+
+        function toggleGlobalMusic() {
+            const bgMusic = document.getElementById('bgMusic');
+            if (!bgMusic) return;
+            
+            if (bgMusic.paused) {
+                controlPageMusic('play');
+            } else {
+                controlPageMusic('pause');
+            }
+        }
 
         function closeModalAndPlayMusic() {
             const bgMusic = document.getElementById('bgMusic');
             const vinyl = document.getElementById('vinyl-record');
             const playBtn = document.getElementById('btn-song-play');
             const pauseBtn = document.getElementById('btn-song-pause');
+            const globalBtn = document.getElementById('global-music-btn');
 
             bgMusic.currentTime = 0; 
             bgMusic.volume = 0;        
@@ -1122,6 +1149,7 @@
                 if(vinyl) vinyl.classList.add('spinning');
                 if(playBtn) playBtn.classList.add('active');
                 if(pauseBtn) pauseBtn.classList.remove('active');
+                if(globalBtn) globalBtn.innerHTML = '⏸️';
 
             }).catch(error => {
                 console.log('瀏覽器自動播放阻擋', error);
@@ -1180,25 +1208,29 @@
             const playBtn = document.getElementById('btn-song-play');
             const pauseBtn = document.getElementById('btn-song-pause');
             const vinyl = document.getElementById('vinyl-record');
+            const globalBtn = document.getElementById('global-music-btn');
             
             if (!bgMusic) return;
 
             if (action === 'play') {
-                bgMusic.play();
+                bgMusic.play().catch(e=>console.log(e));
                 if (playBtn) playBtn.classList.add('active');
                 if (pauseBtn) pauseBtn.classList.remove('active');
                 if (vinyl) vinyl.classList.add('spinning');
+                if (globalBtn) globalBtn.innerHTML = '⏸️';
             } else if (action === 'pause') {
                 bgMusic.pause();
                 if (playBtn) playBtn.classList.remove('active');
                 if (pauseBtn) pauseBtn.classList.add('active');
                 if (vinyl) vinyl.classList.remove('spinning');
+                if (globalBtn) globalBtn.innerHTML = '▶️';
             } else if (action === 'restart') {
                 bgMusic.currentTime = 0;
-                bgMusic.play();
+                bgMusic.play().catch(e=>console.log(e));
                 if (playBtn) playBtn.classList.add('active');
                 if (pauseBtn) pauseBtn.classList.remove('active');
                 if (vinyl) vinyl.classList.add('spinning');
+                if (globalBtn) globalBtn.innerHTML = '⏸️';
             }
         }
 
@@ -1259,9 +1291,11 @@
                 const vinyl = document.getElementById('vinyl-record');
                 const playBtn = document.getElementById('btn-song-play');
                 const pauseBtn = document.getElementById('btn-song-pause');
+                const globalBtn = document.getElementById('global-music-btn');
                 if (vinyl) vinyl.classList.remove('spinning');
                 if (playBtn) playBtn.classList.remove('active');
                 if (pauseBtn) pauseBtn.classList.remove('active');
+                if (globalBtn) globalBtn.innerHTML = '▶️';
             });
         }
         
