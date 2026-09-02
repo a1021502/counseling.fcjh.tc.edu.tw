@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>來福導，歇會ㄦ！－福科輔導</title>
+    <link rel="icon" href="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800" type="image/png">
+    
+    <!-- ✨ 新增：社群分享預覽標籤 (OG Tags) -->
+    <meta property="og:title" content="來福導，歇會ㄦ！－福科輔導">
+    <meta property="og:description" content="在這裡，你的聲音會被聽見。不論是悄悄話、想放鬆，還是尋求資源，我們永遠陪伴你。">
+    <meta property="og:image" content="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800">
+    <meta property="og:type" content="website">
+
+    <style>
+        /* --- ✨ 1. 自訂字體 (隨峰體) 載入優化 --- */
+        @font-face {
+            font-family: 'SuiFeng';
+            /* 優先讀取體積小的 woff2，沒有才讀 ttf */
+            src: url('SuiFeng.woff2') format('woff2'),
+                 url('SuiFeng.ttf') format('truetype'); 
+            font-display: swap; 
+        }
+
+        /* --- ✨ 2. 精緻莫蘭迪色調與高級細節變數 --- */
+        :root {
+            --primary-color: #5B8476;    
+            --secondary-color: #E2877A;  
+            --accent-color: #EEB875;     
+            --bg-color: #FAF8F5;         
+            --text-color: #3D3D3D;       
+            --text-muted: #727272;       
+            --danger-color: #CD5334;     
+            --border-warm: 1px solid rgba(230, 224, 212, 0.7); 
+            --card-shadow: 0 12px 35px rgba(108, 154, 139, 0.04), 0 4px 12px rgba(0, 0, 0, 0.01); 
+            --hover-shadow: 0 22px 45px rgba(91, 132, 118, 0.12); 
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'PingFang TC', 'Noto Sans TC', '微軟正黑體', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8; 
+            letter-spacing: 0.04em; 
+            font-size: 1.05rem; 
+        }
+
+        h1, h2, h3, .logo, .project-name, .modal-title, .modal-slogan, 
+        .door-indicator, .faq-q, .resource-category h3, .card-title, .filter-label,
+        .sui-feng-text {
+            font-family: 'SuiFeng', 'PingFang TC', '微軟正黑體', sans-serif !important;
+            letter-spacing: normal; 
+        }
+
+        /* --- 抽離出的共用樣式 (Clean Code) --- */
+        .text-center { text-align: center; }
+        .hero-subtitle-box { margin: 25px 20px 35px 20px; }
+        .hero-subtitle { color: #BA8553; font-size: 1.6rem; margin-bottom: 25px; line-height: 1.5; }
+        .hero-bullet { font-size: 1.05rem; color: #726D64; margin-bottom: 8px; }
+        .flex-center { display: flex; justify-content: center; align-items: center; }
+        .flex-wrap { flex-wrap: wrap; }
+        
+        .lyrics-header-title { font-size: 2.2rem; color: var(--secondary-color); margin-bottom: 10px; font-weight: bold; }
+        .lyrics-header-sub { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px; border-bottom: 2px dashed #EFECE4; padding-bottom: 25px; }
+        
+        .chorus-highlight {
+            background-color: rgba(238, 184, 117, 0.15); border-radius: 16px; 
+            padding: 25px; margin: 25px auto; max-width: 520px; 
+            border: 1px dashed var(--accent-color);
+        }
+        .chorus-title { font-size: 1.25rem; color: var(--danger-color); font-weight: bold; margin-bottom: 8px; }
+        .chorus-text { font-weight: bold; font-size: 1.1rem; color: var(--text-color); }
+        .chorus-accent { font-weight: bold; color: var(--primary-color); font-size: 1.3rem; margin: 5px 0; }
+
+        /* --- 頂層求助安全網 --- */
+        .emergency-bar {
+            background-color: var(--danger-color);
+            color: white;
+            text-align: center;
+            padding: 12px 5%;
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(205, 83, 52, 0.2);
+        }
+        .emergency-bar a {
+            color: #FFF2E6;
+            text-decoration: none;
+            border-bottom: 1px dashed #FFF2E6;
+            margin: 0 8px;
+            display: inline-block;
+            transition: opacity 0.2s;
+            font-weight: bold;
+        }
+        .emergency-bar a:hover { opacity: 0.85; }
+
+        /* --- 響應式高級導覽列 --- */
+        header {
+            background-color: rgba(250, 248, 245, 0.92);
+            backdrop-filter: blur(12px); 
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 45px;
+            z-index: 999;
+            border-bottom: var(--border-warm);
+        }
+
+        .logo {
+            font-size: 1.4rem; font-weight: bold; color: var(--primary-color);
+            display: flex; align-items: center; gap: 8px;
+            text-decoration: none; transition: transform 0.2s;
+        }
+        .logo:hover { transform: scale(1.02); }
+
+        nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
+
+        nav a {
+            text-decoration: none; color: var(--text-color);
+            font-weight: 500; font-size: 0.95rem;
+            transition: all 0.3s ease; position: relative; padding: 6px 0; cursor: pointer;
+        }
+
+        nav a:hover, nav a.active-nav { color: var(--primary-color); font-weight: bold; }
+        
+        nav a::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px;
+            background-color: var(--primary-color); transition: all 0.3s ease; transform: translateX(-50%);
+        }
+        nav a:hover::after, nav a.active-nav::after { width: 100%; }
+
+        .menu-toggle { display: none; font-size: 1.6rem; cursor: pointer; color: var(--primary-color); }
+
+        /* 下拉式選單 */
+        .dropdown { position: relative; }
+        .dropdown::after { content: ''; position: absolute; width: 100%; height: 15px; bottom: -15px; left: 0; }
+        .dropdown-content {
+            display: none; position: absolute; background-color: white;
+            min-width: 200px; box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            z-index: 1001; border-radius: 14px; overflow: hidden;
+            top: calc(100% + 10px); left: 50%; transform: translateX(-50%);
+            border: var(--border-warm); padding: 6px 0;
+        }
+        
+        /* 桌機 Hover 展開 */
+        @media (hover: hover) {
+            .dropdown:hover .dropdown-content { display: block; animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+        }
+        /* 手機點擊展開用 Class */
+        .dropdown.mobile-open .dropdown-content { display: block; }
+
+        .dropdown-content a { color: var(--text-color); padding: 12px 22px; font-size: 0.9rem; display: block; }
+        .dropdown-content a::after { display: none; }
+        .dropdown-content a:hover { background-color: #FAF8F5; color: var(--primary-color); padding-left: 26px; }
+
+        /* --- 分頁顯示隱藏動畫 --- */
+        .page { display: none; animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .page.active-page { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- 首頁 --- */
+        .hero {
+            background: linear-gradient(135deg, #ECF3F0 0%, #FAF2F0 100%);
+            padding: 85px 5% 65px 5%; text-align: center; border-bottom: var(--border-warm);
+        }
+        .hero h1 { font-size: 2.8rem; color: var(--primary-color); margin-bottom: 20px; text-shadow: 1px 1px 0px rgba(255,255,255,0.8); }
+
+        .project-showcase { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 15px; }
+        .project-card {
+            background: white; border-radius: 20px; padding: 18px 28px; display: flex; align-items: center; gap: 18px;
+            text-decoration: none; box-shadow: var(--card-shadow); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: var(--border-warm); min-width: 270px;
+        }
+        .project-card:hover { transform: translateY(-5px); border-color: var(--primary-color); box-shadow: var(--hover-shadow); }
+        .project-logo { width: 58px; height: 58px; border-radius: 50%; object-fit: cover; border: 2px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .project-text { text-align: left; }
+        .project-name { display: block; font-weight: bold; color: var(--primary-color); font-size: 1.25rem; margin-bottom: 3px; }
+        .project-desc { display: block; font-size: 0.85rem; color: var(--text-muted); }
+
+        /* 搜尋與篩選 */
+        .filter-section { padding: 25px 5% 35px 5%; text-align: center; }
+        .search-wrapper { max-width: 550px; margin: 25px auto 15px auto; position: relative; }
+        .search-input {
+            width: 100%; padding: 14px 25px 14px 52px; border: 2px solid #E6E2D8; border-radius: 50px;
+            font-size: 0.95rem; outline: none; background-color: white; transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.01); color: var(--text-color);
+        }
+        .search-input:focus { border-color: var(--primary-color); box-shadow: 0 6px 20px rgba(91, 132, 118, 0.12); }
+        .search-icon { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; color: #A39E93; }
+        .filter-group { margin: 12px 0; display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .filter-label { font-weight: bold; color: #8C867A; font-size: 1.1rem; margin-right: 4px; }
+        .filter-btn {
+            background: #EFECE4; border: none; padding: 7px 18px; border-radius: 30px; cursor: pointer;
+            font-size: 0.9rem; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text-color); font-weight: 500;
+        }
+        .filter-btn:hover { background: #E5E1D7; }
+        .filter-btn.active { background-color: var(--primary-color); color: white; font-weight: bold; box-shadow: 0 4px 12px rgba(91, 132, 118, 0.25); }
+
+        /* 卡片 */
+        .container { padding: 0 5% 60px 5%; max-width: 1240px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 35px; }
+        .card {
+            background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--card-shadow);
+            display: flex; flex-direction: column; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); border: var(--border-warm);
+        }
+        .card:hover { transform: translateY(-8px); box-shadow: var(--hover-shadow); border-color: rgba(91, 132, 118, 0.3); }
+        .card-media { width: 100%; height: 190px; position: relative; background-color: #EFECE4; overflow: hidden; }
+        .card-media img { width: 100%; height: 100%; object-fit: cover; }
+        .card-body { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-tags { margin-bottom: 12px; }
+        .badge { font-size: 0.75rem; padding: 4px 12px; border-radius: 30px; color: white; font-weight: bold; margin-right: 6px; letter-spacing: 0.02em; }
+        .badge-identity { background-color: var(--secondary-color); }
+        .badge-topic { background-color: #A3908F; }
+        .card-title { font-size: 1.35rem; font-weight: bold; margin-bottom: 12px; color: #2D2D2D; line-height: 1.4; }
+        .card-text { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; flex-grow: 1; line-height: 1.7; }
+        .card-link { text-align: right; }
+        .card-link a { color: var(--primary-color); text-decoration: none; font-weight: bold; font-size: 0.95rem; transition: color 0.2s; }
+        .card-link a:hover { color: var(--secondary-color); }
+
+        /* 標題與簡介區 */
+        .team-title-section {
+            text-align: center; padding: 65px 5% 40px 5%;
+            background: linear-gradient(180deg, #EFECE4 0%, var(--bg-color) 100%); border-bottom: var(--border-warm);
+        }
+        .team-title-section h2 { color: var(--primary-color); font-size: 2.3rem; margin-bottom: 12px; }
+        .team-title-section p { color: var(--text-muted); max-width: 700px; margin: 0 auto; font-size: 1.05rem; }
+        
+        .info-block {
+            background: white; border-radius: 20px; padding: 40px 30px;
+            box-shadow: var(--card-shadow); border: var(--border-warm); margin-bottom: 35px; transition: transform 0.3s;
+        }
+        .info-block:hover { transform: translateY(-2px); }
+
+        /* 資源地圖 */
+        .resource-list { max-width: 1000px; margin: 0 auto; padding: 30px 5% 60px 5%; }
+        .resource-category {
+            background: white; border-radius: 20px; padding: 35px; margin-bottom: 35px;
+            box-shadow: var(--card-shadow); border: var(--border-warm); border-top: 6px solid var(--primary-color);
+        }
+        .resource-category h3 { color: var(--primary-color); margin-bottom: 25px; font-size: 1.5rem; border-bottom: 2px dashed #EFECE4; padding-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .resource-item { margin-bottom: 25px; padding-bottom: 20px; }
+        .resource-item:not(:last-child) { border-bottom: 1px solid #FAF8F5; }
+        .resource-name { font-weight: bold; font-size: 1.2rem; color: #2D2D2D; margin-bottom: 8px;}
+        .resource-info { font-size: 0.95rem; color: var(--text-color); margin-bottom: 12px; line-height: 1.75;}
+        .resource-link { color: var(--secondary-color); text-decoration: none; font-weight: bold; font-size: 0.95rem; display: inline-block; transition: all 0.2s; }
+        .resource-link:hover { transform: translateX(3px); color: var(--primary-color); }
+
+        /* FAQ */
+        .faq-container { max-width: 850px; margin: 0 auto; padding: 40px 5%; }
+        .faq-item { 
+            margin-bottom: 25px; background: white; padding: 30px; border-radius: 20px; 
+            box-shadow: var(--card-shadow); border: var(--border-warm);
+            border-left: 5px solid var(--accent-color); transition: all 0.3s;
+        }
+        .faq-item:nth-child(even) { border-left-color: var(--secondary-color); }
+        .faq-item:hover { transform: translateX(4px); box-shadow: var(--hover-shadow); }
+        .faq-q { font-size: 1.3rem; font-weight: bold; color: var(--primary-color); margin-bottom: 12px;}
+        .faq-a { font-size: 1rem; color: var(--text-color); line-height: 1.8; }
+
+        /* 頁尾 */
+        footer { background-color: var(--primary-color); color: white; text-align: center; padding: 40px 5%; margin-top: 80px; font-size: 0.9rem; border-top: 4px solid var(--accent-color); }
+        footer p { opacity: 0.9; }
+
+        /* 手機 RWD */
+        @media (max-width: 950px) {
+            header { top: 79px; padding: 15px 4%; }
+            nav ul {
+                display: none; flex-direction: column; position: absolute;
+                top: 100%; left: 0; width: 100%; background-color: white; padding: 25px;
+                box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-bottom: var(--border-warm); gap: 15px;
+            }
+            nav ul.active { display: flex; }
+            .menu-toggle { display: block; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+
+        /* YouTube 按鈕 */
+        .video-preview-wrapper { width: 100%; height: 100%; position: relative; display: block; overflow: hidden; }
+        .video-preview-wrapper:hover img { transform: scale(1.04); }
+        .video-preview-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .video-preview-wrapper::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.12); transition: background 0.3s; }
+        .video-preview-wrapper:hover::after { background: rgba(0, 0, 0, 0.25); }
+        .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 65px; height: 45px; background-color: rgba(224, 43, 36, 0.9); border-radius: 14px; z-index: 10; display: flex; justify-content: center; align-items: center; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .play-button::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent #ffffff; margin-left: 4px; }
+        .video-preview-wrapper:hover .play-button { background-color: #ff0000; transform: translate(-50%, -50%) scale(1.08); }
+
+        /* 門扉歡迎視窗 */
+        .welcome-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background-image: url('https://drive.google.com/thumbnail?id=1IqswNZjTqgD7jxzuRTWEqsxgvmABIsYQ&sz=w800'); background-size: cover; background-position: center; justify-content: center; align-items: center; }
+        .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(253, 251, 247, 0.88); backdrop-filter: blur(5px); }
+        .modal-content { position: relative; z-index: 10; text-align: center; padding: 25px; animation: modalPop 0.8s cubic-bezier(0.16, 1, 0.3, 1); max-width: 600px; width: 90%; }
+        .modal-title { color: #724820; font-size: 3rem; margin-bottom: 25px; font-weight: bold; }
+        .modal-slogan { font-size: 1.4rem; color: #514247; margin: 15px 0; line-height: 1.6; }
+        
+        .door-btn-wrapper { margin-top: 40px; display: flex; flex-direction: column; align-items: center; }
+        .door-indicator {
+            color: #C68E57; font-size: 1.4rem; font-weight: bold; margin-bottom: 18px;
+            animation: bounce 1.6s infinite; background: white; padding: 6px 20px;
+            border-radius: 30px; border: 2px dashed #C68E57; box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+        /* ✨ A11Y 優化：按鈕化設計 */
+        .door-btn {
+            display: inline-block; width: 115px; height: 155px; background: #8B5A2B; 
+            border: 5px solid #5C3A21; border-radius: 6px 6px 0 0; position: relative;
+            cursor: pointer; transition: transform 0.8s ease-in-out, background 0.3s; transform-origin: left;
+            box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.25);
+            animation: pulse-glow 2.5s infinite alternate; outline: none; padding: 0; /* 重置 button 樣式 */
+        }
+        @keyframes pulse-glow {
+            from { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 15px rgba(238, 184, 117, 0.4); }
+            to { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 35px rgba(238, 184, 117, 0.9); }
+        }
+        .door-btn::after {
+            content: ''; position: absolute; top: 50%; right: 12px; width: 14px; height: 14px;
+            background: #D4AF37; border-radius: 50%; box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        }
+        .door-btn:hover, .door-btn:focus, .door-btn:active {
+            transform: perspective(600px) rotateY(-40deg); background: #9C6833; animation: none; outline: none;
+        }
+
+        /* 桌寵 YUMA */
+        .yuma-container { position: fixed; bottom: 30px; right: 30px; z-index: 9999; display: flex; flex-direction: column; align-items: center; cursor: pointer; user-select: none; }
+        .yuma-avatar img { width: 85px; height: 85px; object-fit: cover; border-radius: 50%; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15)); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .yuma-container:hover .yuma-avatar img { transform: scale(1.12) rotate(4deg); }
+        .yuma-bubble { position: absolute; bottom: 95px; right: 5px; background: white; border: 2px solid var(--primary-color); padding: 14px 20px; border-radius: 18px; font-size: 0.95rem; font-weight: bold; color: var(--text-color); width: 220px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); opacity: 0; pointer-events: none; transition: all 0.3s ease; transform: translateY(10px); }
+        .yuma-bubble.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        .yuma-bubble::after { content: ''; position: absolute; bottom: -10px; right: 35px; border-width: 10px 10px 0; border-style: solid; border-color: white transparent; display: block; width: 0; }
+        .yuma-bubble::before { content: ''; position: absolute; bottom: -13px; right: 34px; border-width: 11px 11px 0; border-style: solid; border-color: var(--primary-color) transparent; display: block; width: 0; }
+        
+        /* 黑膠唱片與動態歌詞 */
+        .vinyl-wrapper { display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; }
+        .vinyl-record {
+            width: 170px; height: 170px; border-radius: 50%; background: #111; border: 4px solid #2b2b2b; position: relative; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.25), inset 0 0 15px rgba(255,255,255,0.15); margin-bottom: 25px;
+            background-image: radial-gradient(transparent 30%, rgba(255,255,255,0.06) 32%, transparent 34%), radial-gradient(transparent 45%, rgba(255,255,255,0.06) 47%, transparent 49%), radial-gradient(transparent 60%, rgba(255,255,255,0.06) 62%, transparent 64%); transition: transform 0.3s ease;
+        }
+        .vinyl-record.spinning { animation: spin 3.5s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .vinyl-label { width: 55px; height: 55px; border-radius: 50%; background: var(--secondary-color); display: flex; justify-content: center; align-items: center; text-align: center; color: white; box-shadow: 0 0 6px rgba(0,0,0,0.6); border: 2px solid #dfdfdf; }
+        .vinyl-hole { width: 12px; height: 12px; border-radius: 50%; background: #FAF8F5; position: absolute; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5); }
+
+        .lyrics-container { height: 400px; overflow-y: auto; padding: 0 10px; position: relative; mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%); scrollbar-width: none; }
+        .lyrics-container::-webkit-scrollbar { display: none; }
+        .lyric-line { font-family: 'SuiFeng', 'PingFang TC', sans-serif; font-size: 1.35rem; color: var(--text-muted); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); margin-bottom: 20px; opacity: 0.35; transform: scale(0.95); }
+        .lyric-line.active { color: var(--primary-color); font-size: 2.1rem; opacity: 1; transform: scale(1.05); font-weight: bold; text-shadow: 0 4px 15px rgba(91, 132, 118, 0.25); letter-spacing: 0.05em; }
+        
+        #lyrics-fullscreen-wrapper { position: relative; background-color: transparent; border-radius: 20px; }
+        #btn-fullscreen { position: absolute; top: 5px; right: 5px; z-index: 10; padding: 8px 16px; font-size: 0.9rem; background: #FAF8F5; border: 1px solid #EFECE4; border-radius: 30px; cursor: pointer; color: var(--primary-color); font-weight: bold; transition: all 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        #btn-fullscreen:hover { background: var(--primary-color); color: white; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(91, 132, 118, 0.25); }
+
+        #lyrics-fullscreen-wrapper:fullscreen, #lyrics-fullscreen-wrapper:-webkit-full-screen { background-color: var(--bg-color); border-radius: 0; display: flex; align-items: center; justify-content: center; }
+        #lyrics-fullscreen-wrapper:fullscreen .lyrics-container, #lyrics-fullscreen-wrapper:-webkit-full-screen .lyrics-container { height: 100vh; width: 100vw; padding-top: 50px; }
+        #lyrics-fullscreen-wrapper:fullscreen #lyrics-wrapper, #lyrics-fullscreen-wrapper:-webkit-full-screen #lyrics-wrapper { padding: 45vh 0; }
+        #lyrics-fullscreen-wrapper:fullscreen #btn-fullscreen, #lyrics-fullscreen-wrapper:-webkit-full-screen #btn-fullscreen { top: 30px; right: 40px; font-size: 1.1rem; padding: 12px 24px; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px); }
+   </style>
+</head>
+<body>
+    <audio id="bgMusic" loop>
+        <source src="theme.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="welcomeModal" class="welcome-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-title">歡迎來到「福導」</div>
+            <div class="modal-title">－福科輔導 ✨</div>
+            <div class="modal-slogan">🌿 讓輔導走進日常－深耕校園環境陶冶</div>
+            <div class="modal-slogan">🤝 讓專業協力織網－連結社區專業資源</div>
+            <div class="modal-slogan">🛡️ 輔導不止於晤談－全方位建構校園防護網</div>
+            
+            <div class="door-btn-wrapper">
+                <div class="door-indicator">👉 點擊大門進入網頁 👈</div>
+                <!-- ✨ A11Y 優化：轉換為 button -->
+                <button class="door-btn" onclick="closeModalAndPlayMusic()" aria-label="推開大門進入網站"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="emergency-bar">
+        🚨 深夜情緒低落、遭遇危機？福科拉你一把：
+        <a href="tel:1925">安心專線 1925</a> | 
+        <a href="tel:1995">生命線 1995</a> | 
+        <a href="tel:1980">張老師 1980</a> (支援手機直撥)
+    </div>
+
+    <header>
+        <!-- ✨ SPA 路由優化：使用 href="#home" 代替 onclick -->
+        <a href="#home" class="logo">來福導，歇會ㄦ！－福科輔導</a>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="#home" id="nav-home" class="active-nav">首頁</a></li>
+                <li><a href="https://www.youtube.com/playlist?list=PLkqAD3KmD8OuUvpt1f9p9xT8z7C11VcIO" target="_blank">心衛知識加油站</a></li>
+                <li><a href="https://www.youtube.com/playlist?list=PLkqAD3KmD8OuBvUJvLy2_5vx7RzdFVL8m" target="_blank">福科電台</a></li>
+                <li><a href="#resource" id="nav-resource">資源與支持網絡</a></li>
+                <li><a href="#faq" id="nav-faq">迷思破解 Q&A</a></li>
+                <!-- ✨ 手機下拉選單優化 -->
+                <li class="dropdown" id="about-dropdown" onclick="toggleDropdown(this)">
+                    <a style="cursor: pointer;">關於我們 ▾</a>
+                    <div class="dropdown-content">
+                        <a href="https://www.facebook.com/fcjhguidance" target="_blank">FB 粉絲專頁</a>
+                        <a href="https://www.instagram.com/fcjhguidance/" target="_blank">IG 官方帳號</a>
+                        <a href="#song" id="nav-song">主題曲</a>
+                        <a href="#about" id="nav-about">關於「福導」</a>
+                    </div>
+                </li>
+                <!-- ✨ 綁定 Google 表單 -->
+                <li><a href="https://forms.gle/67p6KbctGtZBPwSx7" target="_blank">使用回饋</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="page-home" class="page active-page">
+        <section class="hero">
+            <h1>來福導，歇會ㄦ！－福科輔導</h1>
+            <div class="hero-subtitle-box text-center">
+                <h3 class="hero-subtitle">
+                    在這裡，你的聲音會被聽見。<br>不論是悄悄話、想放鬆，還是尋求資源，我們永遠陪伴你。
+                </h3>
+                <div class="hero-bullet">✨ 讓輔導走進日常－深耕校園環境陶冶</div>
+                <div class="hero-bullet">🤝 讓專業協力織網－連結社區專業資源</div>
+                <div class="hero-bullet" style="margin-bottom: 30px;">🛡️ 輔導不止於晤談－全方位建構校園防護網</div>
+            </div>
+            
+            <div class="project-showcase">
+                <a href="https://a1021502.github.io/mood/index.html" target="_blank" class="project-card">
+                    <img src="https://drive.google.com/thumbnail?id=1ZwxTCiUAgBdEKqCt4-xXlUQbeQVQ2l0q&sz=w800" alt="心靈樹洞商標" class="project-logo">
+                    <div class="project-text">
+                        <span class="project-name">FMTH 福科心靈樹洞</span>
+                        <span class="project-desc">專屬匿名傾訴平台</span>
+                    </div>
+                </a>
+                
+                <a href="https://a1021502.github.io/take.care.of.yourself/" target="_blank" class="project-card">
+                    <img src="https://drive.google.com/thumbnail?id=1G5LOvi3tH4j2vrZHq1FNp7pytaxT5q7B&sz=w800" alt="SAFE SPACE商標" class="project-logo">
+                    <div class="project-text">
+                        <span class="project-name">SAFE SPACE</span>
+                        <span class="project-desc">線上心靈充電站</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section class="filter-section">
+            <h2 style="color: var(--primary-color); margin-bottom: 5px;">🔍 資源百寶箱</h2>
+            
+            <div class="search-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="global-search" class="search-input" placeholder="輸入關鍵字搜尋資源卡片... (例如：電台、IG、家長)" oninput="handleSearch()">
+            </div>
+
+            <div class="filter-group">
+                <span class="filter-label">我是誰：</span>
+                <button class="filter-btn active" onclick="filterData('identity', 'all', this)">全部身分</button>
+                <button class="filter-btn" onclick="filterData('identity', 'student', this)">學生專區</button>
+                <button class="filter-btn" onclick="filterData('identity', 'parent', this)">家長專區</button>
+                <button class="filter-btn" onclick="filterData('identity', 'teacher', this)">教師專區</button>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">我想聊：</span>
+                <button class="filter-btn active" onclick="filterData('topic', 'all', this)">所有議題</button>
+                <button class="filter-btn" onclick="filterData('topic', 'relation', this)">人際困擾</button>
+                <button class="filter-btn" onclick="filterData('topic', 'career', this)">生涯發展</button>
+                <button class="filter-btn" onclick="filterData('topic', 'emotion', this)">情緒調適</button>
+                <button class="filter-btn" onclick="filterData('topic', 'social', this)">社群與影音</button>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="grid" id="card-grid"></div>
+        </div>
+    </div>
+
+    <!-- 主題曲分頁 -->
+    <div id="page-song" class="page">
+        <div class="team-title-section">
+            <h2>🎵 專屬主題曲：《輔導室，歇會ㄦ！》</h2>
+            <p>這是一首為福科國中同學們創作的療癒之歌。當你覺得累了、壓力大到快破防，或是人際關係讓你疲憊，記得來輔導室歇會ㄦ，這裡永遠為你開機、為你充電！</p>
+        </div>
+
+        <div class="container" style="max-width: 800px; margin: 0 auto; padding-top: 25px;">
+            <div class="info-block" style="text-align: center; border-left: 6px solid var(--primary-color);">
+                <div class="vinyl-wrapper">
+                    <div class="vinyl-record spinning" id="vinyl-record">
+                        <div class="vinyl-label">
+                            <span style="font-size: 0.9rem; font-family: 'SuiFeng', sans-serif; letter-spacing: 2px;">歇會<br>ㄦ！</span>
+                        </div>
+                        <div class="vinyl-hole"></div>
+                    </div>
+                    
+                    <h3 style="color: var(--primary-color); margin-bottom: 12px; font-size: 1.4rem;">🎧 專屬音樂控制台</h3>
+                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">
+                        點擊推開大門時背景音樂已悄悄流淌，跟著下方的歌詞一起唱吧！
+                    </p>
+                    
+                    <div class="flex-center flex-wrap" style="gap: 15px;">
+                        <button class="filter-btn active" id="btn-song-play" onclick="controlPageMusic('play')" style="padding: 10px 25px; font-size: 1rem;">▶️ 播放</button>
+                        <button class="filter-btn" id="btn-song-pause" onclick="controlPageMusic('pause')" style="padding: 10px 25px; font-size: 1rem;">⏸️ 暫停</button>
+                        <button class="filter-btn" onclick="controlPageMusic('restart')" style="padding: 10px 25px; font-size: 1rem;">🔄 重播</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-block" style="background-color: white; border-radius: 20px; padding: 45px 20px; box-shadow: var(--card-shadow); text-align: center;">
+                <div class="lyrics-header-title sui-feng-text">《輔導室，歇會ㄦ！》</div>
+                <div class="lyrics-header-sub">福科國中輔導室 專屬校園療癒主題曲</div>
+                
+                <div id="lyrics-fullscreen-wrapper">
+                    <button id="btn-fullscreen" onclick="toggleFullscreen()">⛶ 沉浸全螢幕</button>
+                    <div class="lyrics-container" id="lyrics-container">
+                        <div id="lyrics-wrapper" style="padding: 150px 0;"></div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 25px;">
+                    <button class="filter-btn" id="btn-toggle-lyrics" onclick="toggleFullLyrics()" style="padding: 8px 25px; font-size: 1rem; border: 1px solid #E6E2D8;">
+                        📄 展開完整歌詞
+                    </button>
+                </div>
+
+                <div id="full-lyrics-box" style="display: none; margin-top: 30px; text-align: center; border-top: 2px dashed #EFECE4; padding-top: 35px; animation: fadeIn 0.5s;">
+                    <div style="line-height: 2.3; font-size: 1.05rem; color: var(--text-color); letter-spacing: 0.05em;">
+                        <p>早八的鐘聲 敲醒一堆靈魂</p>
+                        <p>昨晚的限動 到底誰看了沒出聲</p>
+                        <p>段考的成績 像是一場大災難</p>
+                        <p>大人說的未來 聽起來有夠煩</p>
+                        <br>
+                        <p>是I人還E人 其實都不想當</p>
+                        <p>心態快炸裂 隨時準備要破防</p>
+                        <p>找不到防空洞 也不想滑手機</p>
+                        <p>輔導室的門沒關 隨時為你開機</p>
+                        <br>
+                        <p>走進來深呼吸 這裡絕對不打分數</p>
+                        <p>把那些鳥事 放心 全部都吐一吐</p>
+                        <br>
+                        
+                        <div class="chorus-highlight">
+                            <p class="chorus-title sui-feng-text">【副歌】</p>
+                            <p class="chorus-text">輔導室 歇會兒！ 就算世界都在催</p>
+                            <p class="chorus-text">輔導室 歇會兒！ 這裡允許你喊累</p>
+                            <p class="chorus-text">眼淚不用收 心情盡情說</p>
+                            <p class="chorus-accent sui-feng-text">陪你找回 那個閃亮的自我</p>
+                            <p class="chorus-text">輔導室 歇會兒！</p>
+                            <p class="chorus-text">輔導室 歇會兒！</p>
+                        </div>
+                        <br>
+                        
+                        <p>對話框打了又刪 怕被已讀不回</p>
+                        <p>人際關係這學分 到底要修幾回</p>
+                        <p>有時覺得自己 像個路人NPC</p>
+                        <p style="color: var(--secondary-color); font-weight: bold; font-size: 1.1rem;">但在這裡 你是唯一的主題曲</p>
+                        <br>
+                        <p>沒人懂的EMO 沒關係我們全懂</p>
+                        <p>坐上這沙發 卸下沉重的裝甲</p>
+                        <br>
+                        
+                        <div class="chorus-highlight">
+                            <p class="chorus-title sui-feng-text">【副歌】</p>
+                            <p class="chorus-text">輔導室 歇會兒！ 就算世界都在催</p>
+                            <p class="chorus-text">輔導室 歇會兒！ 這裡允許你喊累</p>
+                            <p class="chorus-text">眼淚不用收 心情盡情說</p>
+                            <p class="chorus-accent sui-feng-text">陪你找回 那個閃亮的自我</p>
+                            <p class="chorus-text">輔導室 歇會兒！</p>
+                            <p class="chorus-text">輔導室 歇會兒！</p>
+                        </div>
+                        <br>
+                        
+                        <p>先別急著逞強 先別急著偽裝</p>
+                        <p>把今天的委屈 一口氣都講光</p>
+                        <p>你不是麻煩 你只是太用力撐</p>
+                        <p>坐在這一刻 慢慢把自己安穩</p>
+                        <br>
+                        
+                        <div class="chorus-highlight">
+                            <p class="chorus-title sui-feng-text">【副歌】</p>
+                            <p class="chorus-text">輔導室 歇會兒！ 就算世界都在催</p>
+                            <p class="chorus-text">輔導室 歇會兒！ 這裡允許你喊累</p>
+                            <p class="chorus-text">眼淚不用收 心情盡情說</p>
+                            <p class="chorus-accent sui-feng-text">陪你找回 那個閃亮的自我</p>
+                            <p class="chorus-text">輔導室 歇會兒！</p>
+                            <p class="chorus-text">輔導室 歇會兒！</p>
+                        </div>
+                        <br>
+                        
+                        <p class="sui-feng-text" style="font-size: 1.4rem; color: var(--primary-color); font-weight: bold; letter-spacing: 0.08em; margin-bottom: 8px;">歇會兒！充個電再走！</p>
+                        <p class="sui-feng-text" style="font-size: 1.6rem; color: var(--secondary-color); font-weight: bold; letter-spacing: 0.08em;">福科輔導室~ 挺你到最後！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 資源地圖分頁 -->
+    <div id="page-resource" class="page">
+        <div class="team-title-section">
+            <h2>🌍 資源與三級支持網絡地圖</h2>
+            <p>本文件彙整福科國中週邊社政、醫療、心理諮商及線上支持資源，供師長於二三級輔導與轉介時快速查詢使用。</p>
+        </div>
+        
+        <div class="resource-list">
+            <div class="resource-category">
+                <h3>🤝 一、 跨網絡社會資源 (三級輔導、社政、司法)</h3>
+                <div class="resource-item">
+                    <div class="resource-name">臺中市學生輔導諮商中心 (中二區分區)</div>
+                    <div class="resource-info">
+                        <strong>📌 能提供的協助：</strong>受理專輔轉介之三級個案，指派心理師進駐個別/團體諮商；中輟復學、校園危機事件安心減壓。<br>
+                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2358-4979分機9 | 地址：西屯區天助街1號(安和國中)
+                    </div>
+                    <a href="https://scc.tc.edu.tw" target="_blank" class="resource-link">前往網站 ➔</a>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">西屯區家庭福利服務中心 (社會局)</div>
+                    <div class="resource-info">
+                        <strong>📌 能提供的協助：</strong>經濟弱勢、高風險家庭評估與物資救助；兒少保護、家暴或性平事件跨網絡通報追蹤。<br>
+                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2251-2939 | 地址：西屯區市政北二路386號6樓
+                    </div>
+                    <a href="https://welfare.taichung.gov.tw" target="_blank" class="resource-link">前往網站 ➔</a>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">臺中市衛生局心理衛生中心 (西屯分區)</div>
+                    <div class="resource-info">
+                        <strong>📌 能提供的協助：</strong>提供社區定點免費/減免心理諮商。協助疑似精神疾患個案轉介核心醫療院所鑑定與合作。<br>
+                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2515-5148
+                    </div>
+                    <a href="https://health.taichung.gov.tw" target="_blank" class="resource-link">前往網站 ➔</a>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">臺中市少年警察隊 (少年輔導委員會)</div>
+                    <div class="resource-info">
+                        <strong>📌 能提供的協助：</strong>觸法、曝險、結交不良勢力之高危學生社區訪視與輔導；協助中輟失聯學生協尋。<br>
+                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2328-4941
+                    </div>
+                    <a href="https://police.taichung.gov.tw/youth/" target="_blank" class="resource-link">前往網站 ➔</a>
+                </div>
+            </div>
+
+            <div class="resource-category">
+                <h3>🏥 二、 醫療系統 (醫院與身心科診所)</h3>
+                <div class="resource-item">
+                    <div class="resource-name">臺中榮民總醫院 (精神部/兒童青少年精神科)</div>
+                    <div class="resource-info">
+                        <strong>📌 能提供的協助與特色：</strong>醫療資源最完整，適合重大身心疾病(思覺失調、嚴重憂鬱、自傷危機)、自閉症或過動症之權威鑑定與住院治療。<br>
+                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2359-2525 | 地址：西屯區台灣大道四段1650號
+                    </div>
+                    <a href="https://vghtc.gov.tw" target="_blank" class="resource-link">前往網站 ➔</a>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">澄清醫院中港院區 (身心門診)</div>
+                    <div class="resource-info">
+                        <strong>📌 能提供的協助與特色：</strong>大型區域醫院。處理青少年情緒障礙、嚴重焦慮與睡眠障礙，榮外就近選擇。<br>
+                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2463-2000 | 地址：西屯區台灣大道四段966號
+                    </div>
+                    <a href="https://ck.ccgh.com.tw" target="_blank" class="resource-link">前往網站 ➔</a>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">卓大夫身心科診所</div>
+                    <div class="resource-info">
+                        <strong>📌 能提供的協助與特色：</strong>溫和社區型專科醫療，附設rTMS經顱磁刺激。適合家長對大醫院有標籤抗拒感，處理失眠或輕度憂鬱藥物評估。<br>
+                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2461-3097 | 地址：西屯區台灣大道四段770號
+                    </div>
+                    <a href="https://drchuopsy.com" target="_blank" class="resource-link">前往網站 ➔</a>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">忘憂森林身心診所</div>
+                    <div class="resource-info">
+                        <strong>📌 能提供的協助與特色：</strong>環境讓人放鬆(像點心店)，醫師問診溫和注重隱私。適合對醫療環境容易緊張、防衛心較重的學生與家長。<br>
+                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2463-0102 | 地址：西屯區國安一路77號1樓
+                    </div>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">中科好晴天身心診所</div>
+                    <div class="resource-info">
+                        <strong>📌 能提供的協助與特色：</strong>設有「兒童及青少年身心門診」，對拒學、過動、亞斯伯格有豐富經驗。提供TMS等非藥物治療選項。<br>
+                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2560-2337 | 地址：大雅區中清路四段15號
+                    </div>
+                    <a href="https://sogoodday.com.tw" target="_blank" class="resource-link">前往網站 ➔</a>
+                </div>
+            </div>
+
+            <div class="resource-category">
+                <h3>🛋️ 三、 心理諮商系統 (諮商所與治療所)</h3>
+                <div class="resource-item">
+                    <div class="resource-name">葵心理諮商所</div>
+                    <div class="resource-info">
+                        <strong>📌 能提供的協助與特色：</strong>距離福科國中極近。提供個別/伴侶/家庭諮商。適合系統失調(父母嚴重衝突)之家庭動力重塑。<br>
+                        <strong>📞 聯絡資訊與地址：</strong>電話：0905-677-538 | 地址：西屯區台灣大道四段1230巷20之6號1樓
+                    </div>
+                    <a href="https://sunflowercc2023.com" target="_blank" class="resource-link">前往網站 ➔</a>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">心煦心理治療所</div>
+                    <div class="resource-info">
+                        <strong>📌 能提供的協助與特色：</strong>提供學齡前早期療育、兒童專注力與人際團體治療。適合需要教養技巧諮詢的家長。<br>
+                        <strong>📞 聯絡資訊與地址：</strong>電話：0970-002-995 | 地址：西屯區福雅路128巷58號1-3樓
+                    </div>
+                    <a href="https://theharmonymind.com" target="_blank" class="resource-link">前往網站 ➔</a>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">蛹之生心理諮商所 (文心館)</div>
+                    <div class="resource-info">
+                        <strong>📌 能提供的協助與特色：</strong>大型制度完善諮商所，心理師陣容龐大。有獲准執行「通訊心理諮商」，對無法出門之個案友善。<br>
+                        <strong>📞 聯絡資訊與地址：</strong>電話：(04)2389-6061 | 地址：南屯區文心路一段46之1號
+                    </div>
+                    <a href="https://morph.tw" target="_blank" class="resource-link">前往網站 ➔</a>
+                </div>
+            </div>
+
+            <div class="resource-category">
+                <h3>☎️ 四、 必備線上資源與危機求助專線</h3>
+                <div class="resource-item">
+                    <div class="resource-name">教育部學生輔導資訊網</div>
+                    <div class="resource-info"><strong>📌 核心功能與特色：</strong>下載國中輔導工作手冊、性平/生命/人權教育官方指引，適合師長規劃班級輔導。</div>
+                    <a href="https://guide.edu.tw" target="_blank" class="resource-link">網址：guide.edu.tw ➔</a>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">教育部學生生涯輔導網</div>
+                    <div class="resource-info"><strong>📌 核心功能與特色：</strong>提供國中生涯發展教材、家長參與生涯規劃手冊及技藝教育宣導資源。</div>
+                    <a href="https://friendlycampus.k12ea.gov.tw/Career" target="_blank" class="resource-link">網址：friendlycampus.k12ea.gov.tw/Career ➔</a>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">董氏基金會華文心理健康網</div>
+                    <div class="resource-info"><strong>📌 核心功能與特色：</strong>內建線上憂鬱/壓力檢測量表，青少年心理健康專欄及衛教倡導影片。</div>
+                    <a href="https://etmh.org" target="_blank" class="resource-link">網址：etmh.org ➔</a>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">臺中市家庭教育中心</div>
+                    <div class="resource-info"><strong>📌 核心功能與特色：</strong>豐富的親職教養線上資源與電子書，專線可提供家長管教困境諮詢。<strong>📞 專線：</strong>(02)412-8185</div>
+                    <a href="https://family.taichung.gov.tw" target="_blank" class="resource-link">網址：family.taichung.gov.tw ➔</a>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">張老師基金會 (青少年輔導)</div>
+                    <div class="resource-info"><strong>📌 核心功能與特色：</strong>提供電話與網路即時信件/晤談預約，適合不習慣講電話偏好文字的青少年抒發。<strong>📞 專線：</strong>1980</div>
+                    <a href="https://1980.org.tw" target="_blank" class="resource-link">網址：1980.org.tw ➔</a>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-name">衛福部安心專線 (24小時免付費)</div>
+                    <div class="resource-info"><strong>📌 核心功能與特色：</strong>親師生出現急性心理危機、自殺意念時，隨時可撥打之國家級心理危機干預窗口。<strong>📞 專線：</strong>1925</div>
+                </div>
+            </div>
+            <div style="background-color: #FFF3E5; border-left: 5px solid var(--danger-color); padding: 18px; border-radius: 12px; font-weight: 500; color: #9A3E1C; font-size: 0.95rem;">
+                💡 提醒：轉介三級或外部資源前，請務必確認已完成一二級輔導評估並留存紀錄。如有立即性人身安全危機，請優先啟動校安通報並報警/送醫。
+            </div>
+        </div>
+    </div>
+
+
+    <!-- FAQ 分頁 -->
+    <div id="page-faq" class="page">
+        <div class="team-title-section">
+            <h2>🔍 輔導室迷思大破解</h2>
+            <p>別擔心！走進輔導室一點也不可怕，讓我們為妳解答心中的疑惑。</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-q">Q1. 去輔導室會被同學當成有問題的怪人嗎？</div>
+                <div class="faq-a">A：完全不會！福科國中輔導室是一個安全、讓人放鬆的溫暖空間。任何生活不順心、感情受挫，都歡迎妳走進來休息。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">Q2. 我跟輔導老師說的秘密，會被偷偷告訴導師或爸媽嗎？</div>
+                <div class="faq-a">A：輔導老師嚴格遵守法律與專業的「保密原則」。除非內容涉及「傷害自己、傷害他人或重大違規法律事件」，為了守護生命安全，才會啟動保密例外保護妳。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 關於我們分頁 -->
+    <div id="page-about" class="page">
+        <div class="team-title-section">
+            <h2>🌱 關於網站與設計</h2>
+            <p>了解網站的誕生故事、輔導專屬商標，以及背後的設計者。</p>
+        </div>
+        
+        <div class="container" style="max-width: 900px; padding-top: 20px;">
+            <div class="info-block">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.4rem;">📖 網站設計緣起</h3>
+                <p style="color: var(--text-color); line-height: 1.85; font-size: 1.05rem;">
+                    為了讓福科國中的師生、家長能在遇到困擾時，第一時間找到支持的力量，我們決定打造這個充滿溫度與療癒感的線上網站。透過將實體的輔導資源、心理衛生知識與求助管道數位化，我們期望能打破時空的限制，全方位建構校園心理防護網，讓每一顆受傷或迷惘的心都能在這裡找到出口。
+                </p>
+            </div>
+            
+            <div class="info-block flex-center" style="flex-direction: column; text-align: center;">
+                <h3 style="color: var(--primary-color); margin-bottom: 25px; font-size: 1.5rem;">🌻 輔導專屬商標與設計意義</h3>
+                
+                <img src="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800" style="width: 100%; max-width: 380px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-bottom: 35px; border: var(--border-warm);">
+                
+                <div style="text-align: left; max-width: 800px; width: 100%; color: var(--text-color); line-height: 1.9; font-size: 1.05rem;">
+                    <p style="margin-bottom: 15px; font-size: 1.2rem; color: #2D2D2D; font-weight: bold;">FU等於福科的福和輔導的輔</p>
+                    
+                    <p style="margin-bottom: 10px;">
+                        <strong style="color: var(--primary-color);">F (Feeling )：</strong>代表「感受」。輔導的第一步，是允許每一種真實的情緒在這裡被溫柔地看見與感受。
+                    </p>
+                    <p style="margin-bottom: 25px;">
+                        <strong style="color: var(--primary-color);">U (Understanding )：</strong>代表「理解」。畫面中巨大的「U」型藤蔓，象徵著輔導室是一個充滿理解與涵容的空間。
+                    </p>
+                    
+                    <p style="margin-bottom: 12px; font-size: 1.15rem; color: #2D2D2D; font-weight: bold;">【 視覺符號分析 】</p>
+                    <ul style="padding-left: 0; list-style: none;">
+                        <li style="margin-bottom: 15px; position: relative; padding-left: 22px;">
+                            <span style="position: absolute; left: 0; top: 0; color: var(--secondary-color); font-weight: bold; font-size: 1.2rem;">•</span>
+                            <strong style="color: #2D2D2D;">U型花圈（安全的結界）：</strong>藤蔓交織成一個開口向上的「U」字，就像一個安全的保護罩或心靈的避風港。它沒有封閉，代表著輔導室提供保護，但也隨時歡迎孩子自由進出，給予喘息與成長的空間。
+                        </li>
+                        <li style="margin-bottom: 15px; position: relative; padding-left: 22px;">
+                            <span style="position: absolute; left: 0; top: 0; color: var(--secondary-color); font-weight: bold; font-size: 1.2rem;">•</span>
+                            <strong style="color: #2D2D2D;">溫柔捧起的雙手（接納與陪伴）：</strong>雙手沒有去「拉扯」植物強迫它長大，而是輕輕地捧著底下的土壤。這隱喻著輔導老師的角色——我們不強迫孩子立刻改變，而是提供穩定的土壤（支持系統），穩穩地「接住」每一個受傷或迷惘的心靈，陪伴他們長出自己的力量。
+                        </li>
+                        <li style="margin-bottom: 15px; position: relative; padding-left: 22px;">
+                            <span style="position: absolute; left: 0; top: 0; color: var(--secondary-color); font-weight: bold; font-size: 1.2rem;">•</span>
+                            <strong style="color: #2D2D2D;">破土而出的小芽（內在的生命力）：</strong>小芽代表著每一位來到輔導室的學生，或是他們心中那個需要被照顧的「內在小孩」。即使一開始很脆弱，但在愛與理解的滋養下，終究能綻放出屬於自己的綠葉。
+                        </li>
+                        <li style="margin-bottom: 10px; position: relative; padding-left: 22px;">
+                            <span style="position: absolute; left: 0; top: 0; color: var(--secondary-color); font-weight: bold; font-size: 1.2rem;">•</span>
+                            <strong style="color: #2D2D2D;">點綴的鵝黃色小花（希望的光芒）：</strong>在綠色藤蔓中開出的小花，象徵著在諮商與陪伴的過程中，那些微小卻珍貴的「頓悟」、「喜悅」與「希望」。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="info-block" style="display: flex; gap: 30px; align-items: center; flex-wrap: wrap;">
+                <div style="flex: 0 0 160px; text-align: center; margin: 0 auto;">
+                    <img src="https://drive.google.com/thumbnail?id=1IqswNZjTqgD7jxzuRTWEqsxgvmABIsYQ&sz=w800" style="width: 100%; border-radius: 50%; border: 4px solid var(--bg-color); box-shadow: 0 8px 25px rgba(0,0,0,0.12);">
+                </div>
+                <div style="flex: 1; min-width: 250px;">
+                    <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.3rem;">👨‍💻 網站設計者：杜智平</h3>
+                    <p style="color: var(--text-color); line-height: 1.85; font-size: 1.05rem;">
+                        專任輔導教師杜智平，致力於將輔導專業與資訊科技結合，透過程式開發與溫暖的視覺設計，打造了包含「福科心靈樹洞」與「SAFE SPACE」等多個數位平台。<br><br>褪下教師與開發者的外衣後，他的真實身份其實是一個興趣點滿的超狂斜槓野心家！他熱愛在籃球場上用速度過人、在健身房裡揮灑汗水，並用嚴格的科學營養學打理體態。他的大腦長年處於閱讀與程式創作的高速運轉狀態，而唯一的冷卻機制，就是吃下爆量濃郁的重乳酪蛋糕，以及走遍大街小巷瘋狂尋找各種類型的極品冰品。<br><br>他相信人生就像一杯加了重乳酪與冰淇淋的特調——雖然成分看似衝突，但只要調配得當，就能品嚐出最獨特且豐富的滋味！ (σ`∀´)σ 
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 桌寵 YUMA -->
+    <div class="yuma-container" onclick="interactWithYuma()">
+        <div class="yuma-bubble" id="yuma-bubble">
+            <span id="yuma-text">汪！點擊我可以跟我互動喔🐾</span>
+        </div>
+        <div class="yuma-avatar">
+            <img src="https://drive.google.com/thumbnail?id=1UvZJJr192Zn5F23M1CWVMpHEUIXAPBmk&sz=w80" alt="YUMA">
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 福科國中輔導室 版權所有</p>
+        <p style="font-size: 0.8rem; margin-top: 7px; color: #DFE8E5;">校址：407臺中市西屯區福林里福林路333號 | 聯絡電話：04-24618112</p>
+    </footer>
+
+    <script>
+        // --- 1. SPA 網址路由機制 (Hash Routing) ---
+        // 這樣別人複製網址就能直接跳到對應的分頁！
+        function handleHashChange() {
+            let hash = window.location.hash.replace('#', '') || 'home';
+            const validPages = ['home', 'resource', 'faq', 'song', 'about'];
+            if (!validPages.includes(hash)) hash = 'home';
+
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active-page'));
+            
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => link.classList.remove('active-nav'));
+
+            document.getElementById(`page-${hash}`).classList.add('active-page');
+            const activeNavLink = document.getElementById(`nav-${hash}`);
+            if (activeNavLink) activeNavLink.classList.add('active-nav');
+
+            document.getElementById("nav-menu").classList.remove("active");
+            window.scrollTo(0, 0);
+        }
+
+        window.addEventListener('hashchange', handleHashChange);
+        window.addEventListener('DOMContentLoaded', handleHashChange);
+
+        function toggleMenu() {
+            document.getElementById("nav-menu").classList.toggle("active");
+        }
+
+        // 手機版下拉選單點擊展開邏輯
+        function toggleDropdown(element) {
+            if (window.innerWidth <= 950) {
+                element.classList.toggle('mobile-open');
+            }
+        }
+
+        // --- 2. 卡片資料庫 ---
+        const postsData = [
+            {
+                identity: 'student parent teacher',
+                topic: 'emotion social',
+                isYoutube: true,
+                image: 'https://drive.google.com/thumbnail?id=1VMIjCMrF4fnfnmKSwbXNLTdVoS8CDGL9&sz=w800',
+                link: 'https://www.youtube.com/playlist?list=PLkqAD3KmD8OuUvpt1f9p9xT8z7C11VcIO',
+                badgeIdentity: '親師生',
+                badgeTopic: '心衛知識加油站',
+                title: '🎬影音專區：心衛知識加油站',
+                text: '由福科國中輔導室精心整理、製作的心理健康系列影音。陪伴你認識壓力、調適情緒，隨時為心靈加滿油！',
+                linkText: '前往 YT 頻道 ➔'
+            },
+            {
+                identity: 'student parent',
+                topic: 'relation career social',
+                isYoutube: true,
+                image: 'https://drive.google.com/thumbnail?id=1GmH44JyzetnAHuMt8pEWrkn-WQb1VbfB&sz=w800',
+                link: 'https://www.youtube.com/playlist?list=PLkqAD3KmD8OuBvUJvLy2_5vx7RzdFVL8m',
+                badgeIdentity: '學生/家長',
+                badgeTopic: '福科電台',
+                title: '🎙️ 精彩收聽：福科電台',
+                text: '聆聽福科師生的聲音！這裡有關於校園生活、生涯探索與人際關係的溫馨訪談與分享，用聲音溫暖你的心。',
+                linkText: '前往收聽 ➔'
+            },
+            {
+                identity: 'student parent teacher',
+                topic: 'social',
+                isYoutube: false,
+                image: 'https://drive.google.com/thumbnail?id=1LlQD0tUC8vdhycH3Zkl_mAFVN3AY5njo&sz=w800',
+                link: 'https://www.facebook.com/fcjhguidance',
+                badgeIdentity: '親師生',
+                badgeTopic: '社群追蹤',
+                title: '📱 Facebook 粉絲專頁',
+                text: '最即時的輔導室活動公告、親職教育講座資訊、精美圖文懶人包，歡迎按讚追蹤「福科國中輔導室」！',
+                linkText: '點我前往 FB ➔'
+            },
+            {
+                identity: 'student',
+                topic: 'social',
+                isYoutube: false,
+                image: 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800',
+                link: 'https://www.instagram.com/fcjhguidance/',
+                badgeIdentity: '學生專區',
+                badgeTopic: '社群互動',
+                title: '📸 Instagram 官方帳號',
+                text: '貼近學生的圖文心情點評、限時動態小互動、心理健康週活動花絮。趕快拿起手機追蹤「福科國中輔導室」！',
+                linkText: '點我追蹤 IG ➔'
+            }
+        ];
+
+        // --- 3. 重構：資料驅動 (Data-driven) 的渲染與篩選 ---
+        let currentFilters = { identity: 'all', topic: 'all' };
+        let searchQuery = '';
+
+        function renderCards(dataToRender) {
+            const grid = document.getElementById('card-grid');
+            grid.innerHTML = ''; 
+
+            dataToRender.forEach(post => {
+                let mediaContent = '';
+                if(post.isYoutube) {
+                    mediaContent = `
+                        <a href="${post.link}" target="_blank" class="video-preview-wrapper">
+                            <div class="play-button"></div>
+                            <img src="${post.image}" alt="${post.title}">
+                        </a>`;
+                } else {
+                    mediaContent = `<img src="${post.image}" alt="${post.title}">`;
+                }
+
+                const cardHTML = `
+                <div class="card" data-identity="${post.identity}" data-topic="${post.topic}">
+                    <div class="card-media">${mediaContent}</div>
+                    <div class="card-body">
+                        <div class="card-tags">
+                            <span class="badge badge-identity">${post.badgeIdentity}</span>
+                            <span class="badge badge-topic">${post.badgeTopic}</span>
+                        </div>
+                        <div class="card-title">${post.title}</div>
+                        <div class="card-text">${post.text}</div>
+                        <div class="card-link"><a href="${post.link}" target="_blank">${post.linkText}</a></div>
+                    </div>
+                </div>`;
+                grid.insertAdjacentHTML('beforeend', cardHTML);
+            });
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('global-search').value.toLowerCase().trim();
+            executeCombinedFilter();
+        }
+
+        function filterData(type, value, buttonElement) {
+            const siblings = buttonElement.parentElement.querySelectorAll('.filter-btn');
+            siblings.forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+
+            currentFilters[type] = value;
+            executeCombinedFilter();
+        }
+
+        function executeCombinedFilter() {
+            // 從原本操作 DOM 隱藏顯示，改成操作陣列資料 (更有效能的寫法！)
+            const filteredData = postsData.filter(post => {
+                const cardIdentities = post.identity.split(' ');
+                const cardTopics = post.topic.split(' ');
+                const matchIdentity = (currentFilters.identity === 'all' || cardIdentities.includes(currentFilters.identity));
+                const matchTopic = (currentFilters.topic === 'all' || cardTopics.includes(currentFilters.topic));
+                const matchSearch = (!searchQuery || post.title.toLowerCase().includes(searchQuery) || post.text.toLowerCase().includes(searchQuery));
+                
+                return matchIdentity && matchTopic && matchSearch;
+            });
+            
+            renderCards(filteredData);
+        }
+
+        // --- 4. YUMA 互動 ---
+        const yumaQuotes = [
+            "汪！今天過得好嗎？累了或心情不好，都歡迎來輔導室找我摸摸哦！🐾",
+            "（搖尾巴）不管今天發生什麼事，YUMA 都會一直在這裡默默陪著你！",
+            "汪汪！聞到了沉重壓力的味道，要不要去上方的「心靈樹洞」吐吐苦水呢？",
+            "今天也是非常努力的一天呢！來，蓋一個 YUMA 專屬優秀認證戳章！✨",
+            "智平老師的「掛電話理論」聽聽就好～不開心來摸我才是正解，汪！🐶",
+            "伸個大懶腰～吸一口氣！我們一起對著天空大喊：『今天也會順利的！』🐕",
+            "汪！聽說點擊我可以獲得今日隱藏好運，恭喜你，你已經獲得了！🍀"
+        ];
+
+        let yumaTimer = null;
+        function interactWithYuma() {
+            const bubble = document.getElementById('yuma-bubble');
+            const textElement = document.getElementById('yuma-text');
+            const avatar = document.querySelector('.yuma-avatar img');
+            
+            const randomIndex = Math.floor(Math.random() * yumaQuotes.length);
+            textElement.textContent = yumaQuotes[randomIndex];
+            
+            bubble.classList.add('show');
+            avatar.style.transform = 'scale(0.8) translateY(12px)';
+            setTimeout(() => { avatar.style.transform = ''; }, 150);
+
+            clearTimeout(yumaTimer);
+            yumaTimer = setTimeout(() => { bubble.classList.remove('show'); }, 4500);
+        }
+
+        // --- 5. 初始載入設定 ---
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCards(postsData); 
+            document.getElementById('welcomeModal').style.display = 'flex';
+        });
+
+        // --- 6. 進階音樂控制 ---
+        function closeModalAndPlayMusic() {
+            const bgMusic = document.getElementById('bgMusic');
+            const vinyl = document.getElementById('vinyl-record');
+            const playBtn = document.getElementById('btn-song-play');
+            const pauseBtn = document.getElementById('btn-song-pause');
+
+            bgMusic.currentTime = 0; 
+            bgMusic.volume = 0;        
+
+            bgMusic.play().then(() => {
+                const targetVolume = 0.4;     
+                const fadeDuration = 2000;    
+                const intervalTime = 50;      
+                const step = targetVolume / (fadeDuration / intervalTime);
+                
+                let fadeId = setInterval(() => {
+                    if (bgMusic.volume + step >= targetVolume) {
+                        bgMusic.volume = targetVolume;
+                        clearInterval(fadeId); 
+                    } else {
+                        bgMusic.volume += step;
+                    }
+                }, intervalTime);
+
+                if(vinyl) vinyl.classList.add('spinning');
+                if(playBtn) playBtn.classList.add('active');
+                if(pauseBtn) pauseBtn.classList.remove('active');
+
+            }).catch(error => {
+                console.log('瀏覽器自動播放阻擋', error);
+            });
+            
+            setTimeout(() => {
+                document.getElementById('welcomeModal').style.display = 'none';
+            }, 600);
+        }
+
+        // --- 7. 主題曲動態 KTV 歌詞資料庫 ---
+        const lyricsData = [
+            { time: 9.98, text: "早八的鐘聲 敲醒一堆靈魂" },
+            { time: 15.02, text: "昨晚的限動 到底誰看了沒出聲" },
+            { time: 20.54, text: "段考的成績 像是一場大災難" },
+            { time: 23.62, text: "大人說的未來 聽起來有夠煩" },
+            { time: 26.30, text: "是I人還E人 其實都不想當" },
+            { time: 29.12, text: "心態快炸裂 隨時準備要破防" },
+            { time: 31.58, text: "找不到防空洞 也不想滑手機" },
+            { time: 34.04, text: "輔導室的門沒關 隨時為你開機" },
+            { time: 36.64, text: "走進來深呼吸 這裡絕對不打分數" },
+            { time: 39.00, text: "把那些鳥事 放心 全部都吐一吐" },
+            { time: 41.16, text: "輔導室 歇會兒！ 就算世界都在催" },
+            { time: 46.00, text: "輔導室 歇會兒！ 這裡允許你喊累" },
+            { time: 51.54, text: "眼淚不用收 心情盡情說" },
+            { time: 56.54, text: "陪你找回 那個閃亮的自我" },
+            { time: 62.00, text: "輔導室 歇會兒！" },
+            { time: 66.86, text: "輔導室 歇會兒！" },
+            { time: 73.00, text: "對話框打了又刪 怕被已讀不回" },
+            { time: 75.78, text: "人際關係這學分 到底要修幾回" },
+            { time: 78.40, text: "有時覺得自己 像個路人NPC" },
+            { time: 80.80, text: "但在這裡 你是唯一的主題曲" },
+            { time: 83.62, text: "沒人懂的EMO 沒關係我們全懂" },
+            { time: 86.36, text: "坐上這沙發 卸下沉重的裝甲" },
+            { time: 93.06, text: "輔導室 歇會兒！ 就算世界都在催" },
+            { time: 98.36, text: "輔導室 歇會兒！ 這裡允許你喊累" },
+            { time: 103.58, text: "眼淚不用收 心情盡情說" },
+            { time: 108.84, text: "陪你找回 那個閃亮的自我" },
+            { time: 114.02, text: "輔導室 歇會兒！" },
+            { time: 118.90, text: "輔導室 歇會兒！" },
+            { time: 125.20, text: "先別急著逞強 先別急著偽裝" },
+            { time: 128.28, text: "把今天的委屈 一口氣都講光" },
+            { time: 130.92, text: "你不是麻煩 你只是太用力撐" },
+            { time: 133.14, text: "坐在這一刻 慢慢把自己安穩" },
+            { time: 137.60, text: "輔導室 歇會兒！就算世界都在催" },
+            { time: 142.50, text: "輔導室 歇會兒！ 這裡允許你喊累" },
+            { time: 147.84, text: "眼淚不用收 心情盡情說" },
+            { time: 152.40, text: "陪你找回 那個閃亮的自我" },
+            { time: 158.38, text: "輔導室 歇會兒！" },
+            { time: 163.28, text: "輔導室 歇會兒！" },
+            { time: 169.02, text: "歇會兒！充個電再走！" },
+            { time: 173.30, text: "福科輔導室~ 挺你到最後！" }
+        ];
+
+        // --- 8. 音樂與黑膠控制函數 ---
+        function controlPageMusic(action) {
+            const bgMusic = document.getElementById('bgMusic');
+            const playBtn = document.getElementById('btn-song-play');
+            const pauseBtn = document.getElementById('btn-song-pause');
+            const vinyl = document.getElementById('vinyl-record');
+            
+            if (!bgMusic) return;
+
+            if (action === 'play') {
+                bgMusic.play();
+                if (playBtn) playBtn.classList.add('active');
+                if (pauseBtn) pauseBtn.classList.remove('active');
+                if (vinyl) vinyl.classList.add('spinning');
+            } else if (action === 'pause') {
+                bgMusic.pause();
+                if (playBtn) playBtn.classList.remove('active');
+                if (pauseBtn) pauseBtn.classList.add('active');
+                if (vinyl) vinyl.classList.remove('spinning');
+            } else if (action === 'restart') {
+                bgMusic.currentTime = 0;
+                bgMusic.play();
+                if (playBtn) playBtn.classList.add('active');
+                if (pauseBtn) pauseBtn.classList.remove('active');
+                if (vinyl) vinyl.classList.add('spinning');
+            }
+        }
+
+        // --- 9. 初始化生成歌詞 DOM ---
+        window.addEventListener('DOMContentLoaded', () => {
+            const wrapper = document.getElementById('lyrics-wrapper');
+            if (wrapper) {
+                lyricsData.forEach((lyric, index) => {
+                    const p = document.createElement('p');
+                    p.className = 'lyric-line';
+                    p.id = 'lyric-' + index;
+                    p.textContent = lyric.text;
+                    wrapper.appendChild(p);
+                });
+            }
+        });
+
+        // --- 10. 監聽音樂進度，自動高亮與滾動歌詞 ---
+        const audioEl = document.getElementById('bgMusic');
+        let currentLyricIndex = -1;
+
+        if (audioEl) {
+            audioEl.addEventListener('timeupdate', () => {
+                const time = audioEl.currentTime;
+                let activeIndex = -1;
+
+                for (let i = 0; i < lyricsData.length; i++) {
+                    if (time >= lyricsData[i].time - 0.3) {
+                        activeIndex = i;
+                    } else {
+                        break;
+                    }
+                }
+
+                if (activeIndex !== currentLyricIndex && activeIndex !== -1) {
+                    if (currentLyricIndex !== -1) {
+                        const oldEl = document.getElementById('lyric-' + currentLyricIndex);
+                        if(oldEl) oldEl.classList.remove('active');
+                    }
+                    
+                    const newEl = document.getElementById('lyric-' + activeIndex);
+                    const container = document.getElementById('lyrics-container');
+                    if(newEl && container) {
+                        newEl.classList.add('active');
+                        const containerCenter = container.clientHeight / 2;
+                        const scrollPos = newEl.offsetTop - containerCenter + (newEl.clientHeight / 2);
+                        container.scrollTo({ top: scrollPos, behavior: 'smooth' });
+                    }
+                    currentLyricIndex = activeIndex;
+                }
+            });
+
+            audioEl.addEventListener('ended', () => {
+                const vinyl = document.getElementById('vinyl-record');
+                const playBtn = document.getElementById('btn-song-play');
+                const pauseBtn = document.getElementById('btn-song-pause');
+                if (vinyl) vinyl.classList.remove('spinning');
+                if (playBtn) playBtn.classList.remove('active');
+                if (pauseBtn) pauseBtn.classList.remove('active');
+            });
+        }
+        
+        // --- 11. 切換完整歌詞顯示 ---
+        function toggleFullLyrics() {
+            const lyricsBox = document.getElementById('full-lyrics-box');
+            const toggleBtn = document.getElementById('btn-toggle-lyrics');
+            
+            if (lyricsBox.style.display === 'none') {
+                lyricsBox.style.display = 'block';
+                toggleBtn.innerHTML = '📄 收合完整歌詞';
+                toggleBtn.classList.add('active'); 
+                
+                setTimeout(() => {
+                    toggleBtn.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            } else {
+                lyricsBox.style.display = 'none';
+                toggleBtn.innerHTML = '📄 展開完整歌詞';
+                toggleBtn.classList.remove('active'); 
+            }
+        }
+        
+        // --- 12. 全螢幕模式 ---
+        function toggleFullscreen() {
+            const wrapper = document.getElementById('lyrics-fullscreen-wrapper');
+            const btn = document.getElementById('btn-fullscreen');
+            
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                if (wrapper.requestFullscreen) wrapper.requestFullscreen();
+                else if (wrapper.webkitRequestFullscreen) wrapper.webkitRequestFullscreen();
+                btn.innerHTML = '✖ 退出全螢幕';
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                btn.innerHTML = '⛶ 沉浸全螢幕';
+            }
+        }
+
+        document.addEventListener('fullscreenchange', updateFullscreenButton);
+        document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+
+        function updateFullscreenButton() {
+            const btn = document.getElementById('btn-fullscreen');
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                btn.innerHTML = '⛶ 沉浸全螢幕';
+            } else {
+                btn.innerHTML = '✖ 退出全螢幕';
+            }
+        }
+    </script>
+</body>
+</html>
