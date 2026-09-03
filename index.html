@@ -6,7 +6,7 @@
     <title>福科輔導-來「福導」，歇會ㄦ！</title>
     <link rel="icon" href="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800" type="image/png">
     
-    <link rel="preload" href="SuiFeng.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="NaikaiFont-Regular.woff2" as="font" type="font/woff2" crossorigin>
     
     <meta property="og:title" content="福科輔導-來「福導」，歇會ㄦ！">
     <meta property="og:description" content="在這裡，你的聲音會被聽見。不論是悄悄話、想放鬆，還是尋求資源，我們永遠陪伴你。">
@@ -16,8 +16,7 @@
     <style>
         @font-face {
             font-family: 'NaikaiFont';
-            src: url('NaikaiFont-Regular.woff2') format('woff2'),
-                 url('NaikaiFont-Regular.ttf') format('truetype'); 
+            src: url('NaikaiFont-Regular.woff2') format('woff2'); 
             font-display: swap; 
         }
 
@@ -56,7 +55,6 @@
             word-break: keep-all;
         }
 
-        /* ✨ 內海字體全域設定：強制取消粗體 (font-weight: normal !important) */
         h1, h2, h3, .logo, .project-name, .modal-title, .modal-slogan, 
         .door-indicator, .resource-category h3, .card-title, .filter-label,
         .naikai-text, .faq-q, .article-title {
@@ -64,6 +62,9 @@
             letter-spacing: normal; 
             font-weight: normal !important; 
         }
+
+        /* ✨ 專屬手機版的換行魔法 */
+        .mobile-break { display: none; }
 
         .text-center { text-align: center; }
         .hero-subtitle-box { margin: 25px 20px 35px 20px; }
@@ -179,7 +180,7 @@
                         url('https://drive.google.com/thumbnail?id=1BGNIabOD8poTw3e6qwX1ZCn_Jh_ctdim&sz=w1920') center/cover no-repeat;
             padding: 85px 5% 65px 5%; text-align: center; border-bottom: var(--border-warm); 
         }
-        .hero h1 { font-size: 2.8rem; color: var(--primary-color); margin-bottom: 20px; text-shadow: 1px 1px 0px rgba(255,255,255,0.8); }
+        .hero h1 { font-size: 2.8rem; color: var(--primary-color); margin-bottom: 20px; text-shadow: 1px 1px 0px rgba(255,255,255,0.8); line-height: 1.4; }
 
         .project-showcase { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 15px; }
         .project-card {
@@ -232,13 +233,13 @@
                         url('https://drive.google.com/thumbnail?id=1BGNIabOD8poTw3e6qwX1ZCn_Jh_ctdim&sz=w1920') center/cover no-repeat;
             border-bottom: var(--border-warm); 
         }
-        .team-title-section h2 { color: var(--primary-color); font-size: 2.3rem; margin-bottom: 12px; }
+        .team-title-section h2 { color: var(--primary-color); font-size: 2.3rem; margin-bottom: 12px; line-height: 1.4; }
         .team-title-section p { color: var(--text-muted); max-width: 700px; margin: 0 auto; font-size: 1.05rem; }
         
         .info-block { background: white; border-radius: 20px; padding: 40px 30px; box-shadow: var(--card-shadow); border: var(--border-warm); margin-bottom: 35px; transition: transform 0.3s; }
         .info-block:hover { transform: translateY(-2px); }
 
-        .article-title { color: var(--primary-color); font-size: 2.5rem; margin-bottom: 20px; text-align: center; }
+        .article-title { color: var(--primary-color); font-size: 2.5rem; margin-bottom: 20px; text-align: center; line-height: 1.4; }
         .article-meta { text-align: center; margin-bottom: 35px; border-bottom: 2px dashed #EFECE4; padding-bottom: 20px; }
         .article-content-body { font-size: 1.1rem; line-height: 2; color: #4A4A4A; letter-spacing: 0.05em; padding: 0 15px; }
 
@@ -290,25 +291,36 @@
             box-shadow: 0 8px 20px rgba(226, 135, 122, 0.4);
         }
 
+        /* --- ✨ 手機版專屬微調 (換行、縮放、排版) --- */
         @media (max-width: 950px) {
             header { top: 38px; padding: 15px 4%; }
             nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: white; padding: 25px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-bottom: var(--border-warm); gap: 15px; }
             nav ul.active { display: flex; }
             .menu-toggle { display: block; }
+            
+            /* 開啟手機版專屬換行 */
+            .mobile-break { display: block; }
+
             .hero h1 { font-size: 2rem; }
             .hero-subtitle { font-size: 1.25rem; }
             .hero-bullet { font-size: 0.95rem; }
-            .modal-title { font-size: 2.2rem; }
+            
+            /* ✨ 解決大門標題行距過大被切掉的問題 */
+            .modal-title { font-size: 2rem !important; }
+            
             .modal-slogan { font-size: 1.15rem; }
             .door-indicator { font-size: 1.15rem; padding: 6px 15px; }
             .team-title-section h2 { font-size: 1.8rem; }
+            
+            /* ✨ 縮小歌詞標題確保能在同一行 */
+            .lyrics-header-title { font-size: 1.6rem !important; }
+            
             .faq-q { font-size: 1.1rem; padding: 20px; }
             .faq-a { padding: 0 20px 20px 20px; }
             .article-title { font-size: 1.8rem; }
             
             .emergency-links.show { flex-direction: column; }
             .emergency-links a { width: 100%; max-width: 300px; margin: 5px auto; }
-            .desktop-alert-text, .desktop-divider { display: none; }
 
             .global-music-btn {
                 bottom: 20px;
@@ -328,10 +340,18 @@
         .play-button::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent #ffffff; margin-left: 4px; }
         .video-preview-wrapper:hover .play-button { background-color: #ff0000; transform: translate(-50%, -50%) scale(1.08); }
 
-        .welcome-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background-image: url('https://drive.google.com/thumbnail?id=1BGNIabOD8poTw3e6qwX1ZCn_Jh_ctdim&sz=w800'); background-size: cover; background-position: center; justify-content: center; align-items: center; }
-        .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(253, 251, 247, 0.88); backdrop-filter: blur(5px); }
+        /* ✨ 背景圖換成 FB 圖並調整遮罩清晰度 */
+        .welcome-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; 
+            background-image: url('https://drive.google.com/thumbnail?id=1LlQD0tUC8vdhycH3Zkl_mAFVN3AY5njo&sz=w1920'); 
+            background-size: cover; background-position: center; justify-content: center; align-items: center; }
+        .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(253, 251, 247, 0.65); backdrop-filter: blur(2px); }
+        
         .modal-content { position: relative; z-index: 10; text-align: center; padding: 25px; animation: modalPop 0.8s cubic-bezier(0.16, 1, 0.3, 1); max-width: 600px; width: 90%; }
-        .modal-title { color: #724820; font-size: 3rem; margin-bottom: 25px; }
+        
+        /* 解決原本的標題間距過大 */
+        .modal-title { color: #724820; font-size: 3rem; margin-bottom: 15px; line-height: 1.3; }
+        
         .modal-slogan { font-size: 1.4rem; color: #514247; margin: 15px 0; line-height: 1.6; }
         
         .door-btn-wrapper { margin-top: 40px; display: flex; flex-direction: column; align-items: center; }
@@ -385,14 +405,15 @@
     <div id="welcomeModal" class="welcome-modal">
         <div class="modal-overlay"></div>
         <div class="modal-content">
-            <div class="modal-title">歡迎來到「福導」</div>
-            <div class="modal-title">－福科輔導 ✨</div>
+            <!-- ✨ 合併標題並調整行高，完美解決手機版爆版問題 -->
+            <div class="modal-title naikai-text">歡迎來到「福導」<br>－福科輔導 ✨</div>
+            
             <div class="modal-slogan">🌿 讓輔導走進日常－深耕校園環境陶冶</div>
             <div class="modal-slogan">🤝 讓專業協力織網－連結社區專業資源</div>
             <div class="modal-slogan">🛡️ 輔導不止於晤談－全方位建構校園防護網</div>
             
             <div class="door-btn-wrapper">
-                <div class="door-indicator">👉 點擊大門進入網頁 👈</div>
+                <div class="door-indicator naikai-text">👉 點擊大門進入網頁 👈</div>
                 <button class="door-btn" onclick="closeModalAndPlayMusic()" aria-label="推開大門進入網站"></button>
             </div>
         </div>
@@ -408,10 +429,9 @@
     </div>
 
     <header id="main-header">
-        <!-- ✨ 導覽列商標圖片化 -->
         <a href="#home" class="logo">
-            <img src="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800" alt="福導商標" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover;">
-            福導
+            <img src="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800" alt="福導商標" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <span class="naikai-text">福導</span>
         </a>
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <nav>
@@ -437,9 +457,10 @@
 
     <div id="page-home" class="page active-page">
         <section class="hero">
-            <h1>福科輔導-來「福導」，歇會ㄦ！</h1>
+            <!-- ✨ 使用 mobile-break 確保桌機同一行，手機完美斷句 -->
+            <h1 class="naikai-text">福科輔導<br class="mobile-break">-來「福導」，歇會ㄦ！</h1>
             <div class="hero-subtitle-box text-center">
-                <h3 class="hero-subtitle">
+                <h3 class="hero-subtitle naikai-text">
                     在這裡，你的聲音會被聽見。<br>不論是悄悄話、想放鬆，還是尋求資源，我們永遠陪伴你。
                 </h3>
             </div>
@@ -448,7 +469,7 @@
                 <a href="https://a1021502.github.io/mood/index.html" target="_blank" rel="noopener noreferrer" class="project-card">
                     <img src="https://drive.google.com/thumbnail?id=1ZwxTCiUAgBdEKqCt4-xXlUQbeQVQ2l0q&sz=w800" alt="心靈樹洞商標" class="project-logo">
                     <div class="project-text">
-                        <span class="project-name">FMTH 福科心靈樹洞</span>
+                        <span class="project-name naikai-text">FMTH 福科心靈樹洞</span>
                         <span class="project-desc">專屬匿名傾訴平台</span>
                     </div>
                 </a>
@@ -456,7 +477,7 @@
                 <a href="https://a1021502.github.io/take.care.of.yourself/" target="_blank" rel="noopener noreferrer" class="project-card">
                     <img src="https://drive.google.com/thumbnail?id=1G5LOvi3tH4j2vrZHq1FNp7pytaxT5q7B&sz=w800" alt="SAFE SPACE商標" class="project-logo">
                     <div class="project-text">
-                        <span class="project-name">SAFE SPACE</span>
+                        <span class="project-name naikai-text">SAFE SPACE</span>
                         <span class="project-desc">線上心靈充電站</span>
                     </div>
                 </a>
@@ -464,21 +485,21 @@
         </section>
 
         <section class="filter-section">
-            <h2 style="color: var(--primary-color); margin-bottom: 5px;">🔍 資源百寶箱</h2>
+            <h2 style="color: var(--primary-color); margin-bottom: 5px;" class="naikai-text">🔍 資源百寶箱</h2>
             <div class="search-wrapper">
                 <span class="search-icon">🔍</span>
                 <input type="text" id="global-search" class="search-input" placeholder="輸入關鍵字搜尋資源卡片... (例如：電台、IG、家長)" oninput="handleSearch()">
             </div>
 
             <div class="filter-group">
-                <span class="filter-label">我是誰：</span>
+                <span class="filter-label naikai-text">我是誰：</span>
                 <button class="filter-btn active" onclick="filterData('identity', 'all', this)">全部身分</button>
                 <button class="filter-btn" onclick="filterData('identity', 'student', this)">學生專區</button>
                 <button class="filter-btn" onclick="filterData('identity', 'parent', this)">家長專區</button>
                 <button class="filter-btn" onclick="filterData('identity', 'teacher', this)">教師專區</button>
             </div>
             <div class="filter-group">
-                <span class="filter-label">我想聊：</span>
+                <span class="filter-label naikai-text">我想聊：</span>
                 <button class="filter-btn active" onclick="filterData('topic', 'all', this)">所有議題</button>
                 <button class="filter-btn" onclick="filterData('topic', 'relation', this)">人際</button>
                 <button class="filter-btn" onclick="filterData('topic', 'career', this)">生涯</button>
@@ -500,7 +521,7 @@
     <div id="page-article" class="page">
         <div class="team-title-section" style="padding-top: 40px; padding-bottom: 30px;">
             <button class="filter-btn" onclick="window.history.back()" style="margin-bottom: 25px;">⬅ 返回資源百寶箱</button>
-            <h2 id="article-detail-title" class="article-title">文章標題載入中...</h2>
+            <h2 id="article-detail-title" class="article-title naikai-text">文章標題載入中...</h2>
             <div class="article-meta">
                 <span id="article-detail-tags"></span>
             </div>
@@ -518,7 +539,8 @@
 
     <div id="page-song" class="page">
         <div class="team-title-section">
-            <h2>🎵 專屬主題曲：《輔導室，歇會ㄦ！》</h2>
+            <!-- ✨ 使用 mobile-break 確保手機完美斷句 -->
+            <h2 class="naikai-text">🎵 專屬主題曲：<br class="mobile-break">《輔導室，歇會ㄦ！》</h2>
             <p>這是一首為福科國中同學們創作的療癒之歌。當你覺得累了、壓力大到快破防，或是人際關係讓你疲憊，記得來輔導室歇會ㄦ，這裡永遠為你開機、為你充電！</p>
         </div>
 
@@ -529,7 +551,7 @@
                         <div class="vinyl-label"><span style="font-size: 0.9rem; font-family: 'NaikaiFont', sans-serif; letter-spacing: 2px;">歇會<br>ㄦ！</span></div>
                         <div class="vinyl-hole"></div>
                     </div>
-                    <h3 style="color: var(--primary-color); margin-bottom: 12px; font-size: 1.4rem;">🎧 專屬音樂控制台</h3>
+                    <h3 style="color: var(--primary-color); margin-bottom: 12px; font-size: 1.4rem;" class="naikai-text">🎧 專屬音樂控制台</h3>
                     <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">點擊推開大門時背景音樂已悄悄流淌，跟著下方的歌詞一起唱吧！</p>
                     <div class="flex-center flex-wrap" style="gap: 15px;">
                         <button class="filter-btn active" id="btn-song-play" onclick="controlPageMusic('play')" style="padding: 10px 25px; font-size: 1rem;">▶️ 播放</button>
@@ -610,13 +632,13 @@
 
     <div id="page-resource" class="page">
         <div class="team-title-section">
-            <h2>🌍 資源與三級支持網絡地圖</h2>
+            <h2 class="naikai-text">🌍 資源與三級支持網絡地圖</h2>
             <p>本文件彙整福科國中週邊社政、醫療、心理諮商及線上支持資源，供師長於二三級輔導與轉介時快速查詢使用。</p>
         </div>
         
         <div class="resource-list">
             <div class="resource-category">
-                <h3>🤝 一、 跨網絡社會資源 (三級輔導、社政、司法)</h3>
+                <h3 class="naikai-text">🤝 一、 跨網絡社會資源 (三級輔導、社政、司法)</h3>
                 <div class="resource-item">
                     <div class="resource-name">臺中市學生輔導諮商中心 (中二區分區)</div>
                     <div class="resource-info"><strong>📌 能提供的協助：</strong>受理專輔轉介之三級個案，指派心理師進駐個別/團體諮商；中輟復學、校園危機事件安心減壓。<br><strong>📞 聯絡資訊與地址：</strong>電話：(04)2358-4979分機9 | 地址：西屯區天助街1號(安和國中)</div>
@@ -640,7 +662,7 @@
             </div>
 
             <div class="resource-category">
-                <h3>🏥 二、 醫療系統 (醫院與身心科診所)</h3>
+                <h3 class="naikai-text">🏥 二、 醫療系統 (醫院與身心科診所)</h3>
                 <div class="resource-item">
                     <div class="resource-name">臺中榮民總醫院 (精神部/兒童青少年精神科)</div>
                     <div class="resource-info"><strong>📌 能提供的協助與特色：</strong>醫療資源最完整，適合重大身心疾病(思覺失調、嚴重憂鬱、自傷危機)、自閉症或過動症之權威鑑定與住院治療。<br><strong>📞 聯絡資訊與地址：</strong>電話：(04)2359-2525 | 地址：西屯區台灣大道四段1650號</div>
@@ -668,7 +690,7 @@
             </div>
 
             <div class="resource-category">
-                <h3>🛋️ 三、 心理諮商系統 (諮商所與治療所)</h3>
+                <h3 class="naikai-text">🛋️ 三、 心理諮商系統 (諮商所與治療所)</h3>
                 <div class="resource-item">
                     <div class="resource-name">葵心理諮商所</div>
                     <div class="resource-info"><strong>📌 能提供的協助與特色：</strong>距離福科國中極近。提供個別/伴侶/家庭諮商。適合系統失調(父母嚴重衝突)之家庭動力重塑。<br><strong>📞 聯絡資訊與地址：</strong>電話：0905-677-538 | 地址：西屯區台灣大道四段1230巷20之6號1樓</div>
@@ -687,7 +709,7 @@
             </div>
 
             <div class="resource-category">
-                <h3>☎️ 四、 必備線上資源與危機求助專線</h3>
+                <h3 class="naikai-text">☎️ 四、 必備線上資源與危機求助專線</h3>
                 <div class="resource-item">
                     <div class="resource-name">教育部學生輔導資訊網</div>
                     <div class="resource-info"><strong>📌 核心功能與特色：</strong>下載國中輔導工作手冊、性平/生命/人權教育官方指引，適合師長規劃班級輔導。</div>
@@ -726,16 +748,16 @@
 
     <div id="page-faq" class="page">
         <div class="team-title-section">
-            <h2>🔍 輔導室迷思大破解</h2>
+            <h2 class="naikai-text">🔍 輔導室迷思大破解</h2>
             <p>別擔心！走進輔導室一點也不可怕，讓我們為妳解答心中的疑惑。</p>
         </div>
         <div class="faq-container">
             <details class="faq-item" open>
-                <summary class="faq-q">Q1. 去輔導室會被同學當成有問題的怪人嗎？</summary>
+                <summary class="faq-q naikai-text">Q1. 去輔導室會被同學當成有問題的怪人嗎？</summary>
                 <div class="faq-a">A：完全不會！福科國中輔導室是一個安全、讓人放鬆的溫暖空間。任何生活不順心、感情受挫，都歡迎妳走進來休息。</div>
             </details>
             <details class="faq-item">
-                <summary class="faq-q">Q2. 我跟輔導老師說的秘密，會被偷偷告訴導師或爸媽嗎？</summary>
+                <summary class="faq-q naikai-text">Q2. 我跟輔導老師說的秘密，會被偷偷告訴導師或爸媽嗎？</summary>
                 <div class="faq-a">A：輔導老師嚴格遵守法律與專業的「保密原則」。除非內容涉及「傷害自己、傷害他人或重大違規法律事件」，為了守護生命安全，才會啟動保密例外保護妳。</div>
             </details>
         </div>
@@ -743,20 +765,20 @@
 
     <div id="page-about" class="page">
         <div class="team-title-section">
-            <h2>🌱 關於網站與設計</h2>
+            <h2 class="naikai-text">🌱 關於網站與設計</h2>
             <p>了解網站的誕生故事、輔導專屬商標，以及背後的設計者。</p>
         </div>
         
         <div class="container" style="max-width: 900px; padding-top: 20px;">
             <div class="info-block">
-                <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.4rem;">📖 網站設計緣起</h3>
+                <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.4rem;" class="naikai-text">📖 網站設計緣起</h3>
                 <p style="color: var(--text-color); line-height: 1.85; font-size: 1.05rem;">
                     為了讓福科國中的師生、家長能在遇到困擾時，第一時間找到支持的力量，我們決定打造這個充滿溫度與療癒感的線上網站。透過將實體的輔導資源、心理衛生知識與求助管道數位化，我們期望能打破時空的限制，全方位建構校園心理防護網，讓每一顆受傷或迷惘的心都能在這裡找到出口。
                 </p>
             </div>
             
             <div class="info-block flex-center" style="flex-direction: column; text-align: center;">
-                <h3 style="color: var(--primary-color); margin-bottom: 25px; font-size: 1.5rem;">🌻 輔導專屬商標與設計意義</h3>
+                <h3 style="color: var(--primary-color); margin-bottom: 25px; font-size: 1.5rem;" class="naikai-text">🌻 輔導專屬商標與設計意義</h3>
                 
                 <img src="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800" style="width: 100%; max-width: 380px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-bottom: 35px; border: var(--border-warm);">
                 
@@ -797,7 +819,7 @@
                     <img src="https://drive.google.com/thumbnail?id=1IqswNZjTqgD7jxzuRTWEqsxgvmABIsYQ&sz=w800" style="width: 100%; border-radius: 50%; border: 4px solid var(--bg-color); box-shadow: 0 8px 25px rgba(0,0,0,0.12);">
                 </div>
                 <div style="flex: 1; min-width: 250px;">
-                    <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.3rem;">👨‍💻 網站設計者：杜智平</h3>
+                    <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.3rem;" class="naikai-text">👨‍💻 網站設計者：杜智平</h3>
                     <p style="color: var(--text-color); line-height: 1.85; font-size: 1.05rem;">
                         專任輔導教師杜智平，致力於將輔導專業與資訊科技結合，透過程式開發與溫暖的視覺設計，打造了包含「福科心靈樹洞」與「SAFE SPACE」等多個數位平台。<br><br>褪下教師與開發者的外衣後，他的真實身份其實是一個興趣點滿的超狂斜槓野心家！他熱愛在籃球場上用速度過人、在健身房裡揮灑汗水，並用嚴格的科學營養學打理體態。他的大腦長年處於閱讀與程式創作的高速運轉狀態，而唯一的冷卻機制，就是吃下爆量濃郁的重乳酪蛋糕，以及走遍大街小巷瘋狂尋找各種類型的極品冰品。<br><br>他相信人生就像一杯加了重乳酪與冰淇淋的特調——雖然成分看似衝突，但只要調配得當，就能品嚐出最獨特且豐富的滋味！ (σ`∀´)σ 
                     </p>
