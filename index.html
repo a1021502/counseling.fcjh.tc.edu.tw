@@ -49,13 +49,15 @@
             font-size: 1.05rem; 
         }
 
+        /* 詞彙不被切斷 */
         h1, h2, h3, .modal-slogan, .door-indicator, .faq-q, .hero-bullet, .hero-subtitle,
         .logo, .project-name, .modal-title, .resource-category h3, .card-title, .filter-label,
         .naikai-text, .article-title {
             word-break: keep-all;
         }
 
-        h1, h2, h3, .logo, .project-name, .modal-title, .modal-slogan, 
+        /* ✨ 內海字體全域設定：移除 .modal-slogan 讓它恢復預設字體 */
+        h1, h2, h3, .logo, .project-name, .modal-title, 
         .door-indicator, .resource-category h3, .card-title, .filter-label,
         .naikai-text, .faq-q, .article-title {
             font-family: 'NaikaiFont', 'PingFang TC', '微軟正黑體', sans-serif !important;
@@ -68,7 +70,16 @@
 
         .text-center { text-align: center; }
         .hero-subtitle-box { margin: 25px 20px 35px 20px; }
-        .hero-subtitle { color: #BA8553; font-size: 1.6rem; margin-bottom: 25px; line-height: 1.5; }
+        
+        /* ✨ 強制副標題恢復預設字體 (因為 h3 預設被綁定為內海字體) */
+        .hero-subtitle { 
+            font-family: 'PingFang TC', 'Noto Sans TC', '微軟正黑體', sans-serif !important;
+            color: #BA8553; 
+            font-size: 1.6rem; 
+            margin-bottom: 25px; 
+            line-height: 1.5; 
+        }
+        
         .hero-bullet { font-size: 1.05rem; color: #726D64; margin-bottom: 8px; }
         .flex-center { display: flex; justify-content: center; align-items: center; }
         .flex-wrap { flex-wrap: wrap; }
@@ -291,28 +302,23 @@
             box-shadow: 0 8px 20px rgba(226, 135, 122, 0.4);
         }
 
-        /* --- ✨ 手機版專屬微調 (換行、縮放、排版) --- */
         @media (max-width: 950px) {
             header { top: 38px; padding: 15px 4%; }
             nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: white; padding: 25px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-bottom: var(--border-warm); gap: 15px; }
             nav ul.active { display: flex; }
             .menu-toggle { display: block; }
             
-            /* 開啟手機版專屬換行 */
             .mobile-break { display: block; }
 
             .hero h1 { font-size: 2rem; }
             .hero-subtitle { font-size: 1.25rem; }
             .hero-bullet { font-size: 0.95rem; }
             
-            /* ✨ 解決大門標題行距過大被切掉的問題 */
             .modal-title { font-size: 2rem !important; }
-            
             .modal-slogan { font-size: 1.15rem; }
             .door-indicator { font-size: 1.15rem; padding: 6px 15px; }
             .team-title-section h2 { font-size: 1.8rem; }
             
-            /* ✨ 縮小歌詞標題確保能在同一行 */
             .lyrics-header-title { font-size: 1.6rem !important; }
             
             .faq-q { font-size: 1.1rem; padding: 20px; }
@@ -340,7 +346,6 @@
         .play-button::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent #ffffff; margin-left: 4px; }
         .video-preview-wrapper:hover .play-button { background-color: #ff0000; transform: translate(-50%, -50%) scale(1.08); }
 
-        /* ✨ 背景圖換成 FB 圖並調整遮罩清晰度 */
         .welcome-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; 
             background-image: url('https://drive.google.com/thumbnail?id=1LlQD0tUC8vdhycH3Zkl_mAFVN3AY5njo&sz=w1920'); 
             background-size: cover; background-position: center; justify-content: center; align-items: center; }
@@ -348,10 +353,9 @@
             background: rgba(253, 251, 247, 0.65); backdrop-filter: blur(2px); }
         
         .modal-content { position: relative; z-index: 10; text-align: center; padding: 25px; animation: modalPop 0.8s cubic-bezier(0.16, 1, 0.3, 1); max-width: 600px; width: 90%; }
-        
-        /* 解決原本的標題間距過大 */
         .modal-title { color: #724820; font-size: 3rem; margin-bottom: 15px; line-height: 1.3; }
         
+        /* 恢復預設字體 */
         .modal-slogan { font-size: 1.4rem; color: #514247; margin: 15px 0; line-height: 1.6; }
         
         .door-btn-wrapper { margin-top: 40px; display: flex; flex-direction: column; align-items: center; }
@@ -405,7 +409,6 @@
     <div id="welcomeModal" class="welcome-modal">
         <div class="modal-overlay"></div>
         <div class="modal-content">
-            <!-- ✨ 合併標題並調整行高，完美解決手機版爆版問題 -->
             <div class="modal-title naikai-text">歡迎來到「福導」<br>－福科輔導 ✨</div>
             
             <div class="modal-slogan">🌿 讓輔導走進日常－深耕校園環境陶冶</div>
@@ -457,11 +460,12 @@
 
     <div id="page-home" class="page active-page">
         <section class="hero">
-            <!-- ✨ 使用 mobile-break 確保桌機同一行，手機完美斷句 -->
             <h1 class="naikai-text">福科輔導<br class="mobile-break">-來「福導」，歇會ㄦ！</h1>
             <div class="hero-subtitle-box text-center">
-                <h3 class="hero-subtitle naikai-text">
-                    在這裡，你的聲音會被聽見。<br>不論是悄悄話、想放鬆，還是尋求資源，我們永遠陪伴你。
+                <!-- ✨ 移除了 naikai-text 讓它回歸預設字體 -->
+                <h3 class="hero-subtitle">
+                    在這裡，你的聲音會被聽見。<br>
+                    不論是悄悄話、想放鬆，還是尋求資源，<br class="mobile-break">我們永遠陪伴你。
                 </h3>
             </div>
             
@@ -539,7 +543,6 @@
 
     <div id="page-song" class="page">
         <div class="team-title-section">
-            <!-- ✨ 使用 mobile-break 確保手機完美斷句 -->
             <h2 class="naikai-text">🎵 專屬主題曲：<br class="mobile-break">《輔導室，歇會ㄦ！》</h2>
             <p>這是一首為福科國中同學們創作的療癒之歌。當你覺得累了、壓力大到快破防，或是人際關係讓你疲憊，記得來輔導室歇會ㄦ，這裡永遠為你開機、為你充電！</p>
         </div>
