@@ -15,9 +15,9 @@
 
     <style>
         @font-face {
-            font-family: 'SuiFeng';
-            src: url('SuiFeng.woff2') format('woff2'),
-                 url('SuiFeng.ttf') format('truetype'); 
+            font-family: 'NaikaiFont';
+            src: url('NaikaiFont-Regular.woff2') format('woff2'),
+                 url('NaikaiFont-Regular.ttf') format('truetype'); 
             font-display: swap; 
         }
 
@@ -52,15 +52,17 @@
 
         h1, h2, h3, .modal-slogan, .door-indicator, .faq-q, .hero-bullet, .hero-subtitle,
         .logo, .project-name, .modal-title, .resource-category h3, .card-title, .filter-label,
-        .sui-feng-text, .article-title {
+        .naikai-text, .article-title {
             word-break: keep-all;
         }
 
+        /* ✨ 內海字體全域設定：強制取消粗體 (font-weight: normal !important) */
         h1, h2, h3, .logo, .project-name, .modal-title, .modal-slogan, 
         .door-indicator, .resource-category h3, .card-title, .filter-label,
-        .sui-feng-text, .faq-q, .article-title {
-            font-family: 'SuiFeng', 'PingFang TC', '微軟正黑體', sans-serif !important;
+        .naikai-text, .faq-q, .article-title {
+            font-family: 'NaikaiFont', 'PingFang TC', '微軟正黑體', sans-serif !important;
             letter-spacing: normal; 
+            font-weight: normal !important; 
         }
 
         .text-center { text-align: center; }
@@ -70,7 +72,7 @@
         .flex-center { display: flex; justify-content: center; align-items: center; }
         .flex-wrap { flex-wrap: wrap; }
         
-        .lyrics-header-title { font-size: 2.2rem; color: var(--secondary-color); margin-bottom: 10px; font-weight: bold; }
+        .lyrics-header-title { font-size: 2.2rem; color: var(--secondary-color); margin-bottom: 10px; }
         .lyrics-header-sub { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px; border-bottom: 2px dashed #EFECE4; padding-bottom: 25px; }
         
         .chorus-highlight {
@@ -78,11 +80,10 @@
             padding: 25px; margin: 25px auto; max-width: 520px; 
             border: 1px dashed var(--accent-color);
         }
-        .chorus-title { font-size: 1.25rem; color: var(--danger-color); font-weight: bold; margin-bottom: 8px; }
+        .chorus-title { font-size: 1.25rem; color: var(--danger-color); margin-bottom: 8px; }
         .chorus-text { font-weight: bold; font-size: 1.1rem; color: var(--text-color); }
-        .chorus-accent { font-weight: bold; color: var(--primary-color); font-size: 1.3rem; margin: 5px 0; }
+        .chorus-accent { color: var(--primary-color); font-size: 1.3rem; margin: 5px 0; }
 
-        /* --- ✨ 全域求助區塊 (電腦/手機皆預設收合) --- */
         .emergency-bar {
             background-color: var(--danger-color);
             text-align: center;
@@ -106,13 +107,13 @@
             letter-spacing: 0.05em;
         }
         .emergency-links { 
-            display: none; /* 預設收合 */
+            display: none; 
             padding: 0 5% 15px 5%; 
             color: white; 
         }
         .emergency-links.show { 
             display: flex; 
-            flex-direction: row; /* 電腦版橫列 */
+            flex-direction: row; 
             justify-content: center; 
             align-items: center; 
             flex-wrap: wrap; 
@@ -132,17 +133,16 @@
             border-bottom: var(--border-warm); transition: top 0.3s;
         }
         .logo {
-            font-size: 1.4rem; font-weight: bold; color: var(--primary-color);
-            display: flex; align-items: center; gap: 8px; text-decoration: none; transition: transform 0.2s;
+            font-size: 1.5rem; color: var(--primary-color);
+            display: flex; align-items: center; gap: 10px; text-decoration: none; transition: transform 0.2s;
         }
         .logo:hover { transform: scale(1.02); }
 
-        /* ✨ 導覽列文字顯眼化優化 */
         nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
         nav a {
             text-decoration: none; color: var(--text-color); 
-            font-weight: 600; /* 加粗 */
-            font-size: 1.05rem; /* 放大 */
+            font-weight: 600; 
+            font-size: 1.05rem; 
             letter-spacing: 0.03em;
             transition: all 0.3s ease; position: relative; padding: 6px 0; cursor: pointer;
         }
@@ -174,9 +174,7 @@
         .page.active-page { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- ✨ 新增背景圖設定 (首頁 hero 區塊) --- */
         .hero { 
-            /* 預設放了一張微透明的燕麥白遮罩(rgba)，下面 url 裡面請替換成你的 Google Drive 圖片 ID */
             background: linear-gradient(rgba(250, 248, 245, 0.88), rgba(250, 248, 245, 0.95)), 
                         url('https://drive.google.com/thumbnail?id=1BGNIabOD8poTw3e6qwX1ZCn_Jh_ctdim&sz=w1920') center/cover no-repeat;
             padding: 85px 5% 65px 5%; text-align: center; border-bottom: var(--border-warm); 
@@ -191,7 +189,7 @@
         .project-card:hover { transform: translateY(-5px); border-color: var(--primary-color); box-shadow: var(--hover-shadow); }
         .project-logo { width: 58px; height: 58px; border-radius: 50%; object-fit: cover; border: 2px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
         .project-text { text-align: left; }
-        .project-name { display: block; font-weight: bold; color: var(--primary-color); font-size: 1.25rem; margin-bottom: 3px; }
+        .project-name { display: block; color: var(--primary-color); font-size: 1.25rem; margin-bottom: 3px; }
         .project-desc { display: block; font-size: 0.85rem; color: var(--text-muted); }
 
         .filter-section { padding: 25px 5% 35px 5%; text-align: center; }
@@ -203,13 +201,13 @@
         .search-input:focus { border-color: var(--primary-color); box-shadow: 0 6px 20px rgba(91, 132, 118, 0.12); }
         .search-icon { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; color: #A39E93; }
         .filter-group { margin: 12px 0; display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
-        .filter-label { font-weight: bold; color: #8C867A; font-size: 1.1rem; margin-right: 4px; }
+        .filter-label { color: #8C867A; font-size: 1.1rem; margin-right: 4px; }
         .filter-btn {
             background: #EFECE4; border: none; padding: 7px 18px; border-radius: 30px; cursor: pointer;
             font-size: 0.9rem; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text-color); font-weight: 500;
         }
         .filter-btn:hover { background: #E5E1D7; }
-        .filter-btn.active { background-color: var(--primary-color); color: white; font-weight: bold; box-shadow: 0 4px 12px rgba(91, 132, 118, 0.25); }
+        .filter-btn.active { background-color: var(--primary-color); color: white; box-shadow: 0 4px 12px rgba(91, 132, 118, 0.25); }
 
         .container { padding: 0 5% 60px 5%; max-width: 1240px; margin: 0 auto; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 35px; }
@@ -222,18 +220,16 @@
         .badge { display: inline-block; font-size: 0.75rem; padding: 4px 12px; border-radius: 30px; color: white; font-weight: bold; margin-right: 6px; margin-bottom: 6px; letter-spacing: 0.02em; }
         .badge-identity { background-color: var(--secondary-color); }
         .badge-topic { background-color: #A3908F; }
-        .card-title { font-size: 1.35rem; font-weight: bold; margin-bottom: 12px; color: #2D2D2D; line-height: 1.4; }
+        .card-title { font-size: 1.35rem; margin-bottom: 12px; color: #2D2D2D; line-height: 1.4; }
         .card-text { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; flex-grow: 1; line-height: 1.7; }
         .card-link { text-align: right; }
         .card-link a { color: var(--primary-color); text-decoration: none; font-weight: bold; font-size: 0.95rem; transition: color 0.2s; cursor: pointer; }
         .card-link a:hover { color: var(--secondary-color); }
 
-        /* --- ✨ 新增背景圖設定 (其他頁面頂部區塊) --- */
         .team-title-section { 
             text-align: center; padding: 65px 5% 40px 5%; 
-            /* 同樣的遮罩與背景圖 */
             background: linear-gradient(rgba(250, 248, 245, 0.88), rgba(250, 248, 245, 0.95)), 
-                        url('https://drive.google.com/thumbnail?id=1IqswNZjTqgD7jxzuRTWEqsxgvmABIsYQ&sz=w1920') center/cover no-repeat;
+                        url('https://drive.google.com/thumbnail?id=1BGNIabOD8poTw3e6qwX1ZCn_Jh_ctdim&sz=w1920') center/cover no-repeat;
             border-bottom: var(--border-warm); 
         }
         .team-title-section h2 { color: var(--primary-color); font-size: 2.3rem; margin-bottom: 12px; }
@@ -260,7 +256,7 @@
         .faq-item { margin-bottom: 25px; background: white; border-radius: 20px; box-shadow: var(--card-shadow); border: var(--border-warm); border-left: 5px solid var(--accent-color); transition: all 0.3s; overflow: hidden; }
         .faq-item:nth-child(even) { border-left-color: var(--secondary-color); }
         .faq-item:hover { transform: translateX(4px); box-shadow: var(--hover-shadow); }
-        .faq-q { padding: 25px 30px; font-size: 1.25rem; font-weight: bold; color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: space-between; outline: none; }
+        .faq-q { padding: 25px 30px; font-size: 1.25rem; color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: space-between; outline: none; }
         .faq-q::-webkit-details-marker { display: none; }
         .faq-q::after { content: '+'; font-size: 1.8rem; color: var(--accent-color); transition: transform 0.3s; font-weight: normal; }
         .faq-item[open] .faq-q::after { transform: rotate(45deg); color: var(--secondary-color); }
@@ -310,7 +306,6 @@
             .faq-a { padding: 0 20px 20px 20px; }
             .article-title { font-size: 1.8rem; }
             
-            /* 手機版展開選單也是直列 */
             .emergency-links.show { flex-direction: column; }
             .emergency-links a { width: 100%; max-width: 300px; margin: 5px auto; }
             .desktop-alert-text, .desktop-divider { display: none; }
@@ -333,14 +328,14 @@
         .play-button::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent #ffffff; margin-left: 4px; }
         .video-preview-wrapper:hover .play-button { background-color: #ff0000; transform: translate(-50%, -50%) scale(1.08); }
 
-        .welcome-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background-image: url('https://drive.google.com/thumbnail?id=1IqswNZjTqgD7jxzuRTWEqsxgvmABIsYQ&sz=w800'); background-size: cover; background-position: center; justify-content: center; align-items: center; }
+        .welcome-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background-image: url('https://drive.google.com/thumbnail?id=1BGNIabOD8poTw3e6qwX1ZCn_Jh_ctdim&sz=w800'); background-size: cover; background-position: center; justify-content: center; align-items: center; }
         .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(253, 251, 247, 0.88); backdrop-filter: blur(5px); }
         .modal-content { position: relative; z-index: 10; text-align: center; padding: 25px; animation: modalPop 0.8s cubic-bezier(0.16, 1, 0.3, 1); max-width: 600px; width: 90%; }
-        .modal-title { color: #724820; font-size: 3rem; margin-bottom: 25px; font-weight: bold; }
+        .modal-title { color: #724820; font-size: 3rem; margin-bottom: 25px; }
         .modal-slogan { font-size: 1.4rem; color: #514247; margin: 15px 0; line-height: 1.6; }
         
         .door-btn-wrapper { margin-top: 40px; display: flex; flex-direction: column; align-items: center; }
-        .door-indicator { color: #C68E57; font-size: 1.4rem; font-weight: bold; margin-bottom: 18px; animation: bounce 1.6s infinite; background: white; padding: 6px 20px; border-radius: 30px; border: 2px dashed #C68E57; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        .door-indicator { color: #C68E57; font-size: 1.4rem; margin-bottom: 18px; animation: bounce 1.6s infinite; background: white; padding: 6px 20px; border-radius: 30px; border: 2px dashed #C68E57; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
         .door-btn { display: inline-block; width: 115px; height: 155px; background: #8B5A2B; border: 5px solid #5C3A21; border-radius: 6px 6px 0 0; position: relative; cursor: pointer; transition: transform 0.8s ease-in-out, background 0.3s; transform-origin: left; box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.25); animation: pulse-glow 2.5s infinite alternate; outline: none; padding: 0; }
@@ -366,8 +361,8 @@
 
         .lyrics-container { height: 400px; overflow-y: auto; padding: 0 10px; position: relative; mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%); scrollbar-width: none; }
         .lyrics-container::-webkit-scrollbar { display: none; }
-        .lyric-line { font-family: 'SuiFeng', 'PingFang TC', sans-serif; font-size: 1.35rem; color: var(--text-muted); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); margin-bottom: 20px; opacity: 0.35; transform: scale(0.95); }
-        .lyric-line.active { color: var(--primary-color); font-size: 2.1rem; opacity: 1; transform: scale(1.05); font-weight: bold; text-shadow: 0 4px 15px rgba(91, 132, 118, 0.25); letter-spacing: 0.05em; }
+        .lyric-line { font-family: 'NaikaiFont', 'PingFang TC', sans-serif; font-size: 1.35rem; color: var(--text-muted); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); margin-bottom: 20px; opacity: 0.35; transform: scale(0.95); }
+        .lyric-line.active { color: var(--primary-color); font-size: 2.1rem; opacity: 1; transform: scale(1.05); text-shadow: 0 4px 15px rgba(91, 132, 118, 0.25); letter-spacing: 0.05em; }
         
         #lyrics-fullscreen-wrapper { position: relative; background-color: transparent; border-radius: 20px; }
         #btn-fullscreen { position: absolute; top: 5px; right: 5px; z-index: 10; padding: 8px 16px; font-size: 0.9rem; background: #FAF8F5; border: 1px solid #EFECE4; border-radius: 30px; cursor: pointer; color: var(--primary-color); font-weight: bold; transition: all 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
@@ -383,7 +378,6 @@
         <source src="theme.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- ✨ 喇叭圖示的全域音樂控制按鈕 -->
     <button class="global-music-btn" id="global-music-btn" onclick="toggleGlobalMusic()" aria-label="播放/暫停背景音樂" title="開/關主題曲">
         🔇
     </button>
@@ -404,7 +398,6 @@
         </div>
     </div>
 
-    <!-- ✨ 全域求助區塊 (電腦與手機皆預設收合) -->
     <div class="emergency-bar">
         <button class="emergency-toggle" onclick="toggleEmergencyMobile()">🚨 我想求助 ▾</button>
         <div class="emergency-links" id="emergencyLinks">
@@ -415,7 +408,11 @@
     </div>
 
     <header id="main-header">
-        <a href="#home" class="logo">福科輔導-來「福導」，歇會ㄦ！</a>
+        <!-- ✨ 導覽列商標圖片化 -->
+        <a href="#home" class="logo">
+            <img src="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800" alt="福導商標" style="width: 42px; height: 42px; border-radius: 50%; object-fit: cover;">
+            福導
+        </a>
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <nav>
             <ul id="nav-menu">
@@ -445,9 +442,6 @@
                 <h3 class="hero-subtitle">
                     在這裡，你的聲音會被聽見。<br>不論是悄悄話、想放鬆，還是尋求資源，我們永遠陪伴你。
                 </h3>
-                <div class="hero-bullet">✨ 讓輔導走進日常－深耕校園環境陶冶</div>
-                <div class="hero-bullet">🤝 讓專業協力織網－連結社區專業資源</div>
-                <div class="hero-bullet" style="margin-bottom: 30px;">🛡️ 輔導不止於晤談－全方位建構校園防護網</div>
             </div>
             
             <div class="project-showcase">
@@ -483,7 +477,6 @@
                 <button class="filter-btn" onclick="filterData('identity', 'parent', this)">家長專區</button>
                 <button class="filter-btn" onclick="filterData('identity', 'teacher', this)">教師專區</button>
             </div>
-            <!-- ✨ 更新後的議題標籤 -->
             <div class="filter-group">
                 <span class="filter-label">我想聊：</span>
                 <button class="filter-btn active" onclick="filterData('topic', 'all', this)">所有議題</button>
@@ -533,7 +526,7 @@
             <div class="info-block" style="text-align: center; border-left: 6px solid var(--primary-color);">
                 <div class="vinyl-wrapper">
                     <div class="vinyl-record spinning" id="vinyl-record">
-                        <div class="vinyl-label"><span style="font-size: 0.9rem; font-family: 'SuiFeng', sans-serif; letter-spacing: 2px;">歇會<br>ㄦ！</span></div>
+                        <div class="vinyl-label"><span style="font-size: 0.9rem; font-family: 'NaikaiFont', sans-serif; letter-spacing: 2px;">歇會<br>ㄦ！</span></div>
                         <div class="vinyl-hole"></div>
                     </div>
                     <h3 style="color: var(--primary-color); margin-bottom: 12px; font-size: 1.4rem;">🎧 專屬音樂控制台</h3>
@@ -547,7 +540,7 @@
             </div>
 
             <div class="info-block" style="background-color: white; border-radius: 20px; padding: 45px 20px; box-shadow: var(--card-shadow); text-align: center;">
-                <div class="lyrics-header-title sui-feng-text">《輔導室，歇會ㄦ！》</div>
+                <div class="lyrics-header-title naikai-text">《輔導室，歇會ㄦ！》</div>
                 <div class="lyrics-header-sub">福科國中輔導室 專屬校園療癒主題曲</div>
                 <div id="lyrics-fullscreen-wrapper">
                     <button id="btn-fullscreen" onclick="toggleFullscreen()">⛶ 沉浸全螢幕</button>
@@ -571,11 +564,11 @@
                         <p>走進來深呼吸 這裡絕對不打分數</p>
                         <p>把那些鳥事 放心 全部都吐一吐</p><br>
                         <div class="chorus-highlight">
-                            <p class="chorus-title sui-feng-text">【副歌】</p>
+                            <p class="chorus-title naikai-text">【副歌】</p>
                             <p class="chorus-text">輔導室 歇會兒！ 就算世界都在催</p>
                             <p class="chorus-text">輔導室 歇會兒！ 這裡允許你喊累</p>
                             <p class="chorus-text">眼淚不用收 心情盡情說</p>
-                            <p class="chorus-accent sui-feng-text">陪你找回 那個閃亮的自我</p>
+                            <p class="chorus-accent naikai-text">陪你找回 那個閃亮的自我</p>
                             <p class="chorus-text">輔導室 歇會兒！</p>
                             <p class="chorus-text">輔導室 歇會兒！</p>
                         </div><br>
@@ -586,11 +579,11 @@
                         <p>沒人懂的EMO 沒關係我們全懂</p>
                         <p>坐上這沙發 卸下沉重的裝甲</p><br>
                         <div class="chorus-highlight">
-                            <p class="chorus-title sui-feng-text">【副歌】</p>
+                            <p class="chorus-title naikai-text">【副歌】</p>
                             <p class="chorus-text">輔導室 歇會兒！ 就算世界都在催</p>
                             <p class="chorus-text">輔導室 歇會兒！ 這裡允許你喊累</p>
                             <p class="chorus-text">眼淚不用收 心情盡情說</p>
-                            <p class="chorus-accent sui-feng-text">陪你找回 那個閃亮的自我</p>
+                            <p class="chorus-accent naikai-text">陪你找回 那個閃亮的自我</p>
                             <p class="chorus-text">輔導室 歇會兒！</p>
                             <p class="chorus-text">輔導室 歇會兒！</p>
                         </div><br>
@@ -599,16 +592,16 @@
                         <p>你不是麻煩 你只是太用力撐</p>
                         <p>坐在這一刻 慢慢把自己安穩</p><br>
                         <div class="chorus-highlight">
-                            <p class="chorus-title sui-feng-text">【副歌】</p>
+                            <p class="chorus-title naikai-text">【副歌】</p>
                             <p class="chorus-text">輔導室 歇會兒！ 就算世界都在催</p>
                             <p class="chorus-text">輔導室 歇會兒！ 這裡允許你喊累</p>
                             <p class="chorus-text">眼淚不用收 心情盡情說</p>
-                            <p class="chorus-accent sui-feng-text">陪你找回 那個閃亮的自我</p>
+                            <p class="chorus-accent naikai-text">陪你找回 那個閃亮的自我</p>
                             <p class="chorus-text">輔導室 歇會兒！</p>
                             <p class="chorus-text">輔導室 歇會兒！</p>
                         </div><br>
-                        <p class="sui-feng-text" style="font-size: 1.4rem; color: var(--primary-color); font-weight: bold; letter-spacing: 0.08em; margin-bottom: 8px;">歇會兒！充個電再走！</p>
-                        <p class="sui-feng-text" style="font-size: 1.6rem; color: var(--secondary-color); font-weight: bold; letter-spacing: 0.08em;">福科輔導室~ 挺你到最後！</p>
+                        <p class="naikai-text" style="font-size: 1.4rem; color: var(--primary-color); letter-spacing: 0.08em; margin-bottom: 8px;">歇會兒！充個電再走！</p>
+                        <p class="naikai-text" style="font-size: 1.6rem; color: var(--secondary-color); letter-spacing: 0.08em;">福科輔導室~ 挺你到最後！</p>
                     </div>
                 </div>
             </div>
@@ -984,7 +977,7 @@
                 grid.insertAdjacentHTML('beforeend', `
                 <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px; background: white; border-radius: 20px; border: 2px dashed #E2877A;">
                     <div style="font-size: 3.5rem; margin-bottom: 15px;">🥀</div>
-                    <h3 style="color: var(--primary-color); margin-bottom: 12px; font-size: 1.5rem; font-family: 'SuiFeng', sans-serif;">百寶箱裡暫時找不到相關卡片...</h3>
+                    <h3 style="color: var(--primary-color); margin-bottom: 12px; font-size: 1.5rem; font-family: 'NaikaiFont', sans-serif;">百寶箱裡暫時找不到相關卡片...</h3>
                     <p style="color: var(--text-muted); font-size: 1.05rem;">但輔導室的門永遠為你開著。<br>如果心裡覺得悶，隨時歡迎推開門，直接來找我們聊聊喔！</p>
                 </div>`);
                 return;
