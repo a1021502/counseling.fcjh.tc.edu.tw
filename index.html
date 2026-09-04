@@ -47,7 +47,6 @@
             line-height: 1.8; 
             letter-spacing: 0.04em; 
             font-size: 1.05rem; 
-            /* ✨ 修復 iOS 文字凸出問題，回歸標準換行 */
             overflow-wrap: break-word;
             word-wrap: break-word;
         }
@@ -60,12 +59,10 @@
             font-weight: normal !important; 
         }
 
-        /* ✨ 強制指定特定文字回歸網站預設字體 (微軟正黑體) */
         .hero-subtitle, .hero-bullet, .modal-slogan {
             font-family: 'PingFang TC', 'Noto Sans TC', '微軟正黑體', sans-serif !important;
         }
 
-        /* ✨ 手機版精準斷句魔法 */
         .mobile-break { display: none; }
 
         .text-center { text-align: center; }
@@ -132,7 +129,7 @@
         header {
             background-color: rgba(250, 248, 245, 0.92); 
             backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px); /* ✨ 修復 iOS 破圖 */
+            -webkit-backdrop-filter: blur(12px);
             padding: 18px 5%; display: flex; justify-content: space-between;
             align-items: center; position: sticky; top: 45px; z-index: 999;
             border-bottom: var(--border-warm); transition: top 0.3s;
@@ -179,7 +176,6 @@
         .page.active-page { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ✨ 背景圖結構強化防 iOS 破圖 */
         .hero { 
             background-color: #FAF8F5;
             background-image: linear-gradient(rgba(250, 248, 245, 0.88), rgba(250, 248, 245, 0.95)), 
@@ -310,7 +306,6 @@
             nav ul.active { display: flex; }
             .menu-toggle { display: block; }
             
-            /* 開啟手機版專屬換行 */
             .mobile-break { display: block; }
 
             .hero h1 { font-size: 2rem; }
@@ -357,7 +352,7 @@
         .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
             background: rgba(253, 251, 247, 0.65); 
             backdrop-filter: blur(2px); 
-            -webkit-backdrop-filter: blur(2px); /* ✨ 修復 iOS 破圖 */
+            -webkit-backdrop-filter: blur(2px);
         }
         
         .modal-content { position: relative; z-index: 10; text-align: center; padding: 25px; animation: modalPop 0.8s cubic-bezier(0.16, 1, 0.3, 1); max-width: 600px; width: 90%; }
@@ -416,7 +411,6 @@
     <div id="welcomeModal" class="welcome-modal">
         <div class="modal-overlay"></div>
         <div class="modal-content">
-            <!-- ✨ 合併標題並修正斷行，完美貼合所有螢幕 -->
             <div class="modal-title naikai-text">歡迎來到「福導」<br>－福科輔導 ✨</div>
             
             <div class="modal-slogan">🌿 讓輔導走進日常<br class="mobile-break">－深耕校園環境陶冶</div>
@@ -475,9 +469,6 @@
                     不論是悄悄話、想放鬆，還是尋求資源，<br class="mobile-break">
                     我們永遠陪伴你。
                 </h3>
-                <div class="hero-bullet">✨ 讓輔導走進日常<br class="mobile-break">－深耕校園環境陶冶</div>
-                <div class="hero-bullet">🤝 讓專業協力織網<br class="mobile-break">－連結社區專業資源</div>
-                <div class="hero-bullet" style="margin-bottom: 30px;">🛡️ 輔導不止於晤談<br class="mobile-break">－全方位建構校園防護網</div>
             </div>
             
             <div class="project-showcase">
@@ -960,33 +951,44 @@
                 const data = await response.json();
                 
                 const formPosts = data.map((row, index) => {
-                    let rawIdentities = row['身分標籤'] ? row['身分標籤'].split(',').map(t => t.trim()).filter(t => t !== '') : [];
+                    const getVal = (keyword) => {
+                        if (row[keyword] !== undefined && row[keyword] !== null) return String(row[keyword]).trim();
+                        const key = Object.keys(row).find(k => k.includes(keyword));
+                        return key && row[key] !== null && row[key] !== undefined ? String(row[key]).trim() : '';
+                    };
+
+                    let rawIdentitiesStr = getVal('身分');
+                    let rawIdentities = rawIdentitiesStr ? rawIdentitiesStr.split(',').map(t => t.trim()).filter(t => t !== '') : [];
                     let dataIdentities = rawIdentities.map(t => identityMap[t] || '').join(' ');
                     let badgesId = rawIdentities.length > 0 ? rawIdentities : ['資源推薦'];
 
-                    let rawTopics = row['議題標籤'] ? row['議題標籤'].split(',').map(t => t.trim()).filter(t => t !== '') : [];
+                    let rawTopicsStr = getVal('議題');
+                    let rawTopics = rawTopicsStr ? rawTopicsStr.split(',').map(t => t.trim()).filter(t => t !== '') : [];
                     let dataTopics = rawTopics.map(t => topicMap[t] || '').join(' ');
                     let badgesTop = rawTopics.length > 0 ? rawTopics : ['精選文章'];
 
                     let imgUrl = 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800'; 
-                    if (row['圖片上傳']) {
-                        const match = row['圖片上傳'].match(/id=([a-zA-Z0-9_-]+)/);
+                    let imgRaw = getVal('圖片');
+                    if (imgRaw) {
+                        const match = imgRaw.match(/id=([a-zA-Z0-9_-]+)/);
                         if (match) imgUrl = `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800`;
                     }
+                    
+                    let linkRaw = getVal('連結');
 
                     return {
                         id: 'form-post-' + index, 
-                        title: row['資源標題'],
-                        text: row['資源簡介'],
+                        title: getVal('標題'),
+                        text: getVal('簡介'),
                         image: imgUrl,
                         identity: dataIdentities,
                         topic: dataTopics,
                         badgesIdentity: badgesId, 
                         badgesTopic: badgesTop,   
-                        type: row['資源類型'],
-                        link: row['外部連結網址'] || '',
-                        articleContent: row['站內文章詳細內容'] || '',
-                        isYoutube: row['外部連結網址'] && row['外部連結網址'].includes('youtube.com')
+                        type: getVal('類型'),
+                        link: linkRaw,
+                        articleContent: getVal('內容'),
+                        isYoutube: linkRaw && linkRaw.includes('youtube.com')
                     };
                 });
 
@@ -1019,7 +1021,7 @@
                 return;
             }
 
-            dataToRender.forEach((post, index) => {
+            dataToRender.forEach((post) => {
                 let mediaContent = '';
                 const altText = post.title ? post.title : '資源圖片';
                 if(post.isYoutube) {
@@ -1030,7 +1032,7 @@
 
                 let cardLinkHtml = '';
                 if (post.type === '站內文章') {
-                    const originalIndex = allPostsData.findIndex(p => p.title === post.title && p.text === post.text);
+                    const originalIndex = allPostsData.indexOf(post);
                     cardLinkHtml = `<a onclick="openArticle(${originalIndex})">閱讀文章 ➔</a>`;
                 } else {
                     cardLinkHtml = `<a href="${post.link}" target="_blank" rel="noopener noreferrer">${post.linkText || '前往連結 ➔'}</a>`;
@@ -1047,6 +1049,8 @@
                         tagsHtml += `<span class="badge badge-topic">${tag}</span>\n`;
                     });
                 }
+                
+                const descText = post.text ? post.text.replace(/\n/g, '<br>') : '';
 
                 const cardHTML = `
                 <div class="card" data-identity="${post.identity}" data-topic="${post.topic}">
@@ -1056,7 +1060,7 @@
                             ${tagsHtml}
                         </div>
                         <div class="card-title">${post.title || ''}</div>
-                        <div class="card-text">${post.text || ''}</div>
+                        <div class="card-text">${descText}</div>
                         <div class="card-link">${cardLinkHtml}</div>
                     </div>
                 </div>`;
