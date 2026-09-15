@@ -668,7 +668,8 @@
                 <div class="resource-item">
                     <div class="resource-name">臺中市衛生局心理衛生中心 (西屯分區)</div>
                     <div class="resource-info"><strong>📌 能提供的協助：</strong>提供社區定點免費/減免心理諮商。協助疑似精神疾患個案轉介核心醫療院所鑑定與合作。<br><strong>📞 聯絡資訊與地址：</strong>電話：(04)2515-5148</div>
-                    <a href="https://www.facebook.com/HealthTaichung" target="_blank" rel="noopener noreferrer" class="resource-link">前往 FB 專頁 ➔</a>
+                    <!-- ✨ 更新為獨立心理衛生中心網址 -->
+                    <a href="https://dph.taichung.gov.tw/scc/" target="_blank" rel="noopener noreferrer" class="resource-link">前往網站 ➔</a>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">臺中市少年警察隊 (少年輔導委員會)</div>
@@ -697,7 +698,8 @@
                 <div class="resource-item">
                     <div class="resource-name">忘憂森林身心診所</div>
                     <div class="resource-info"><strong>📌 能提供的協助與特色：</strong>環境讓人放鬆(像點心店)，醫師問診溫和注重隱私。適合對醫療環境容易緊張、防衛心較重的學生與家長。<br><strong>📞 聯絡資訊與地址：</strong>電話：(04)2463-0102 | 地址：<a href="https://www.google.com/maps/search/?api=1&query=忘憂森林身心診所" target="_blank" rel="noopener noreferrer" class="map-link">西屯區國安一路77號1樓</a></div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=忘憂森林身心診所" target="_blank" rel="noopener noreferrer" class="resource-link">前往地圖 ➔</a>
+                    <!-- ✨ 補上原本漏掉的 FB 連結 -->
+                    <a href="https://www.facebook.com/forgottenforestclinic/" target="_blank" rel="noopener noreferrer" class="resource-link">前往 FB 專頁 ➔</a>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">中科好晴天身心診所</div>
@@ -735,7 +737,8 @@
                 <div class="resource-item">
                     <div class="resource-name">教育部學生生涯輔導網</div>
                     <div class="resource-info"><strong>📌 核心功能與特色：</strong>提供國中生涯發展教材、家長參與生涯規劃手冊及技藝教育宣導資源。</div>
-                    <a href="https://friendlycampus.k12ea.gov.tw/Career" target="_blank" rel="noopener noreferrer" class="resource-link">網址：friendlycampus.k12ea.gov.tw/Career ➔</a>
+                    <!-- ✨ 更新為最新的暨南大學雲端版網址 -->
+                    <a href="https://career.cloud.ncnu.edu.tw/" target="_blank" rel="noopener noreferrer" class="resource-link">網址：career.cloud.ncnu.edu.tw ➔</a>
                 </div>
                 <div class="resource-item">
                     <div class="resource-name">董氏基金會華文心理健康網</div>
@@ -1004,7 +1007,7 @@
                     };
                 });
 
-                allPostsData = [...initialPostsData, ...formPosts];
+                allPostsData = [...initialPostsData, ...formPosts.reverse()];
                 
                 document.getElementById('loading-spinner').style.display = 'none';
                 document.getElementById('card-grid').style.display = 'grid';
