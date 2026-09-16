@@ -166,7 +166,18 @@
         }
         nav a:hover::after, nav a.active-nav::after { width: 100%; }
 
-        .menu-toggle { display: none; font-size: 1.6rem; cursor: pointer; color: var(--primary-color); }
+        /* ✨ 選單按鈕 UI 優化：增加背景與圓角，提升可點擊感 */
+        .menu-toggle { 
+            display: none; 
+            cursor: pointer; 
+            color: var(--primary-color); 
+            background: rgba(91, 132, 118, 0.08);
+            padding: 5px 14px;
+            border-radius: 30px;
+            border: 1px solid rgba(91, 132, 118, 0.2);
+            transition: all 0.3s;
+        }
+        .menu-toggle:active { background: rgba(91, 132, 118, 0.15); }
 
         .dropdown { position: relative; }
         .dropdown::after { content: ''; position: absolute; width: 100%; height: 15px; bottom: -15px; left: 0; }
@@ -188,15 +199,46 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
         .hero { 
+            position: relative; /* 為了讓滑動提示定位 */
             background-color: #FAF8F5;
             background-image: linear-gradient(rgba(250, 248, 245, 0.88), rgba(250, 248, 245, 0.95)), 
                               url('https://drive.google.com/thumbnail?id=1BGNIabOD8poTw3e6qwX1ZCn_Jh_ctdim&sz=w1920');
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;
-            padding: 85px 5% 65px 5%; text-align: center; border-bottom: var(--border-warm); 
+            padding: 85px 5% 85px 5%; /* 下方加厚給予提示空間 */
+            text-align: center; border-bottom: var(--border-warm); 
         }
         .hero h1 { font-size: 2.8rem; color: var(--primary-color); margin-bottom: 20px; text-shadow: 1px 1px 0px rgba(255,255,255,0.8); line-height: 1.4; }
+
+        /* ✨ 首頁向下滾動提示樣式 */
+        .scroll-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0.7;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            color: var(--primary-color);
+        }
+        .scroll-hint.hide { opacity: 0; }
+        .scroll-hint span { font-size: 0.85rem; font-weight: bold; margin-bottom: 4px; letter-spacing: 0.05em; }
+        .scroll-arrow {
+            width: 12px; height: 12px;
+            border-right: 3px solid var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            transform: rotate(45deg);
+            animation: bounce-arrow 1.6s infinite;
+        }
+        @keyframes bounce-arrow {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
+            40% { transform: translateY(-8px) rotate(45deg); }
+            60% { transform: translateY(-4px) rotate(45deg); }
+        }
 
         .project-showcase { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; margin-top: 15px; }
         .project-card {
@@ -314,11 +356,12 @@
         @media (max-width: 950px) {
             header { top: 38px; padding: 15px 4%; }
             nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: white; padding: 25px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-bottom: var(--border-warm); gap: 15px; }
-nav ul.active { display: flex; }
+            nav ul.active { display: flex; }
             
-            /* ✨ 加上絕對定位，完美貼齊右側 4% 邊距，並垂直置中 */
+            /* ✨ 讓手機板選單按鈕強制靠右，且圖文並排垂直居中 */
             .menu-toggle { 
-                display: block; 
+                display: flex; 
+                align-items: center;
                 position: absolute; 
                 right: 4%; 
                 top: 50%; 
@@ -453,11 +496,14 @@ nav ul.active { display: flex; }
     </div>
 
     <header id="main-header">
-<a href="#home" class="logo">
-            <!-- 替換新圖片 ID，並修改樣式確保完整顯示不裁切 -->
+        <a href="#home" class="logo">
             <img src="https://drive.google.com/thumbnail?id=1RAwhwlKJ8azK4cg6PH852pjUkrNO1O4Q&sz=w800" alt="福科輔導商標" style="height: 46px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));">
         </a>
-        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <!-- ✨ 改良版的選單按鈕 -->
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span class="naikai-text" style="font-size: 0.95rem; margin-right: 5px; font-weight: bold;">選單</span>
+            <span style="font-size: 1.4rem; line-height: 1;">☰</span>
+        </div>
         <nav>
             <ul id="nav-menu">
                 <li><a href="#home" id="nav-home" class="active-nav">首頁</a></li>
@@ -488,6 +534,12 @@ nav ul.active { display: flex; }
                     不論是悄悄話、想放鬆，還是尋求資源，<br class="mobile-break">
                     我們永遠陪伴你。
                 </h3>
+            </div>
+            
+            <!-- ✨ 滾動提示箭頭 -->
+            <div class="scroll-hint naikai-text" id="scroll-hint">
+                <span>往下滑動探索資源</span>
+                <div class="scroll-arrow"></div>
             </div>
             
             <div class="project-showcase">
@@ -676,7 +728,6 @@ nav ul.active { display: flex; }
                 <div class="resource-item">
                     <div class="resource-name">臺中市衛生局心理衛生中心 (西屯分區)</div>
                     <div class="resource-info"><strong>📌 能提供的協助：</strong>提供社區定點免費/減免心理諮商。協助疑似精神疾患個案轉介核心醫療院所鑑定與合作。<br><strong>📞 聯絡資訊與地址：</strong>電話：(04)2515-5148</div>
-                    <!-- ✨ 更新為獨立心理衛生中心網址 -->
                     <a href="https://dph.taichung.gov.tw/scc/" target="_blank" rel="noopener noreferrer" class="resource-link">前往網站 ➔</a>
                 </div>
                 <div class="resource-item">
@@ -706,7 +757,6 @@ nav ul.active { display: flex; }
                 <div class="resource-item">
                     <div class="resource-name">忘憂森林身心診所</div>
                     <div class="resource-info"><strong>📌 能提供的協助與特色：</strong>環境讓人放鬆(像點心店)，醫師問診溫和注重隱私。適合對醫療環境容易緊張、防衛心較重的學生與家長。<br><strong>📞 聯絡資訊與地址：</strong>電話：(04)2463-0102 | 地址：<a href="https://www.google.com/maps/search/?api=1&query=忘憂森林身心診所" target="_blank" rel="noopener noreferrer" class="map-link">西屯區國安一路77號1樓</a></div>
-                    <!-- ✨ 補上原本漏掉的 FB 連結 -->
                     <a href="https://www.facebook.com/forgottenforestclinic/" target="_blank" rel="noopener noreferrer" class="resource-link">前往 FB 專頁 ➔</a>
                 </div>
                 <div class="resource-item">
@@ -745,7 +795,6 @@ nav ul.active { display: flex; }
                 <div class="resource-item">
                     <div class="resource-name">教育部學生生涯輔導網</div>
                     <div class="resource-info"><strong>📌 核心功能與特色：</strong>提供國中生涯發展教材、家長參與生涯規劃手冊及技藝教育宣導資源。</div>
-                    <!-- ✨ 更新為最新的暨南大學雲端版網址 -->
                     <a href="https://career.cloud.ncnu.edu.tw/" target="_blank" rel="noopener noreferrer" class="resource-link">網址：career.cloud.ncnu.edu.tw ➔</a>
                 </div>
                 <div class="resource-item">
@@ -1194,14 +1243,23 @@ nav ul.active { display: flex; }
         let yumaScrollTimer = null;
         window.addEventListener('scroll', () => {
             const yuma = document.querySelector('.yuma-container');
-            if (!yuma) return;
+            if (yuma) {
+                yuma.classList.add('faded');
+                clearTimeout(yumaScrollTimer);
+                yumaScrollTimer = setTimeout(() => {
+                    yuma.classList.remove('faded');
+                }, 500);
+            }
             
-            yuma.classList.add('faded');
-            
-            clearTimeout(yumaScrollTimer);
-            yumaScrollTimer = setTimeout(() => {
-                yuma.classList.remove('faded');
-            }, 500);
+            // ✨ 監聽滾動距離，動態淡出首頁的提示箭頭
+            const hint = document.getElementById('scroll-hint');
+            if (hint) {
+                if (window.scrollY > 30) {
+                    hint.classList.add('hide');
+                } else {
+                    hint.classList.remove('hide');
+                }
+            }
         });
 
         window.addEventListener('DOMContentLoaded', () => {
