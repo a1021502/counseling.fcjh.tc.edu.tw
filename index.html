@@ -470,13 +470,6 @@
             min-height: 1.8em;
         }
 
-        .data-sync-note {
-            max-width: 900px;
-            margin: 0 auto;
-            color: var(--text-soft);
-            font-size: 0.82rem;
-            line-height: 1.6;
-        }
 
         .view-toggle-container { display: none; text-align: right; margin: 10px 5% 0; }
         .container { width: 100%; max-width: var(--content-max); margin: 0 auto; padding: 0 5% 60px; }
@@ -711,7 +704,6 @@
         .welcome-modal { display: none; position: fixed; inset: 0; z-index: 9999; align-items: center; justify-content: center; padding: 24px; background: var(--bg-color); background-image: url('https://drive.google.com/thumbnail?id=1LlQD0tUC8vdhycH3Zkl_mAFVN3AY5njo&sz=w1920'); background-size: cover; background-position: center; background-repeat: no-repeat; }
         .modal-overlay { position: absolute; inset: 0; background: rgba(253, 251, 247, 0.7); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
         .modal-content { position: relative; z-index: 10; width: min(600px, 100%); max-height: 90vh; overflow-y: auto; padding: 25px; text-align: center; outline: none; }
-        .modal-close-btn { position: absolute; top: 12px; right: 12px; min-width: 44px; min-height: 44px; padding: 6px 12px; border: 1px solid var(--border-solid); border-radius: 50%; background: rgba(255,255,255,0.92); color: var(--text-color); cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.06); }
         .modal-title { margin-bottom: 15px; color: #724820; font-size: 3rem; line-height: 1.3; }
         .modal-slogan { margin: 15px 0; color: #514247; font-size: 1.4rem; line-height: 1.6; }
         .door-btn-wrapper { display: flex; flex-direction: column; align-items: center; margin-top: 40px; }
@@ -720,12 +712,6 @@
         .door-btn::after { content: ''; position: absolute; top: 50%; right: 12px; width: 14px; height: 14px; background: #D4AF37; border-radius: 50%; box-shadow: 1px 1px 3px rgba(0,0,0,0.4); }
         .door-btn:hover { background: #9C6833; }
         .door-btn.is-opening { transform: perspective(600px) rotateY(-40deg); background: #9C6833; animation: none; }
-        .modal-actions { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
-        .modal-secondary-btn { padding: 10px 18px; background: rgba(255,255,255,0.92); border: 1px solid var(--border-solid); color: var(--primary-color); }
-        .modal-help { margin-top: 20px; padding: 14px 16px; text-align: left; background: rgba(255,255,255,0.88); border: 1px solid rgba(205,83,52,0.2); border-radius: 14px; }
-        .modal-help-title { margin-bottom: 6px; color: var(--danger-dark); font-weight: bold; }
-        .modal-help-links { display: flex; flex-wrap: wrap; gap: 10px; }
-        .modal-help-links a { color: var(--danger-dark); font-weight: bold; }
         .welcome-modal.is-opening { pointer-events: none; }
         .welcome-modal.is-opening .modal-content { animation: modalExit 0.75s ease-in forwards; }
         @keyframes modalExit { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.98); } }
@@ -854,9 +840,6 @@
             .modal-content { padding: 36px 18px 22px; }
             .modal-title { font-size: 1.75rem; }
             .modal-slogan { font-size: 1.05rem; }
-            .modal-actions { flex-direction: column; }
-            .modal-actions .filter-btn { width: 100%; max-width: 300px; }
-            .modal-help-links { flex-direction: column; }
             .resource-category { padding: 25px 20px; }
             .resource-category h3 { font-size: 1.3rem; }
             .faq-container { padding-right: 4%; padding-left: 4%; }
@@ -891,7 +874,6 @@
     <div id="welcomeModal" class="welcome-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="welcomeModalTitle">
         <div class="modal-overlay"></div>
         <div class="modal-content" tabindex="-1">
-            <button class="modal-close-btn" type="button" data-action="close-welcome" aria-label="關閉歡迎視窗">×</button>
             <div id="welcomeModalTitle" class="modal-title naikai-text">歡迎來到「福導」<br>－福科輔導 ✨</div>
             
             <div class="modal-slogan">🌿 讓輔導走進日常<br class="mobile-break">－深耕校園環境陶冶</div>
@@ -901,18 +883,6 @@
             <div class="door-btn-wrapper">
                 <div class="door-indicator naikai-text">👉 點擊大門進入網頁 👈</div>
                 <button class="door-btn" id="door-entry-btn" data-action="enter-site" aria-label="推開大門進入網站"></button>
-            </div>
-            <div class="modal-actions" aria-label="快速進入選項">
-                <button class="filter-btn modal-secondary-btn" type="button" data-action="skip-welcome">直接進入網站</button>
-                <button class="filter-btn modal-secondary-btn" type="button" data-action="close-welcome">先看看首頁，不播放音樂</button>
-            </div>
-            <div class="modal-help">
-                <div class="modal-help-title">🚨 如果你現在很需要幫助</div>
-                <div class="modal-help-links">
-                    <a href="tel:1925" rel="noopener noreferrer">安心專線 1925</a>
-                    <a href="tel:1995" rel="noopener noreferrer">生命線 1995</a>
-                    <a href="tel:1980" rel="noopener noreferrer">張老師 1980</a>
-                </div>
             </div>
         </div>
     </div>
@@ -1037,8 +1007,6 @@
             </div>
             
             <div id="resource-result-status" class="resource-status" role="status" aria-live="polite">正在準備資源資料……</div>
-            <div id="resource-sync-note" class="data-sync-note" role="status" aria-live="polite"></div>
-
             <div class="view-toggle-container">
                 <button id="view-toggle-btn" class="filter-btn naikai-text" data-action="toggle-view" aria-pressed="false">
                     ⊞ 切換多欄顯示
@@ -1385,7 +1353,6 @@
     <footer>
         <p>© 2026 福科國中輔導室 版權所有</p>
         <p class="footer-contact contact-text">校址：407臺中市西屯區福林里福林路333號 <span class="footer-divider">|</span><br class="footer-break"> 聯絡電話：04-24618112</p>
-        <p class="contact-text">本站外部資源資訊可能調整，請以各單位官方資訊為準。</p>
     </footer>
 
     <script>
@@ -1400,8 +1367,6 @@
             DATA_RETRY_LIMIT: 2,
             DEFAULT_IMAGE: 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800',
             MUSIC_STORAGE_KEY: 'fudaoguide.musicEnabled',
-            WELCOME_SEEN_STORAGE_KEY: 'fudaoguide.welcomeSeen',
-            RESOURCE_SYNC_STORAGE_KEY: 'fudaoguide.resourceLastSync',
         });
 
         const identityMap = { '學生專區': 'student', '家長專區': 'parent', '教師專區': 'teacher' };
@@ -1509,7 +1474,6 @@
                 allPosts: [...initialPostsData],
                 filtered: [...initialPostsData],
                 retryCount: 0,
-                lastSyncAt: null,
             },
             ui: {
                 filters: { identity: 'all', topic: 'all' },
@@ -1609,14 +1573,6 @@
                 return [post.title, post.text, post.articleContent, post.identity, post.topic, ...(post.badgesIdentity || []), ...(post.badgesTopic || []), post.type, post.link, post.linkText]
                     .filter(Boolean).join(' ').toLowerCase();
             },
-            formatSyncTime(value) {
-                if (!value) return '';
-                try {
-                    const date = new Date(value);
-                    if (Number.isNaN(date.getTime())) return '';
-                    return new Intl.DateTimeFormat('zh-TW', { dateStyle: 'medium', timeStyle: 'short' }).format(date);
-                } catch (_) { return ''; }
-            },
             setText(id, text) {
                 const el = document.getElementById(id);
                 if (el) el.textContent = text;
@@ -1693,23 +1649,6 @@
                 });
                 return posts;
             },
-            setSyncStatus(timestamp, fallback = false) {
-                AppState.data.lastSyncAt = timestamp || null;
-                if (timestamp) {
-                    try { localStorage.setItem(AppConfig.RESOURCE_SYNC_STORAGE_KEY, String(timestamp)); } catch (_) {}
-                }
-                const note = Dom.get('resource-sync-note');
-                if (!note) return;
-                const formatted = Utils.formatSyncTime(timestamp);
-                note.textContent = formatted
-                    ? `${fallback ? '目前顯示內建基本資源；最後一次成功同步：' : '資源資料最後成功同步：'}${formatted}`
-                    : (fallback ? '目前顯示網站內建基本資源；請稍後重新取得最新資料。' : '');
-            },
-            loadStoredSyncStatus() {
-                let stored = null;
-                try { stored = localStorage.getItem(AppConfig.RESOURCE_SYNC_STORAGE_KEY); } catch (_) {}
-                if (stored) this.setSyncStatus(stored);
-            },
             async load(options = {}) {
                 const spinner = Dom.get('loading-spinner');
                 const errorNote = Dom.get('data-error-note');
@@ -1722,8 +1661,6 @@
                     const formPosts = this.normalizeRows(data);
                     AppState.data.allPosts = [...initialPostsData, ...formPosts.reverse()];
                     AppState.data.retryCount = 0;
-                    const now = new Date().toISOString();
-                    this.setSyncStatus(now, false);
                     spinner && (spinner.style.display = 'none');
                     grid && (grid.style.display = 'grid');
                     errorNote?.classList.remove('show');
@@ -1740,8 +1677,6 @@
                         setTimeout(() => this.load({ retry: true }), 700 * AppState.data.retryCount);
                         return;
                     }
-                    this.loadStoredSyncStatus();
-                    this.setSyncStatus(AppState.data.lastSyncAt, true);
                     if (errorNote) {
                         errorNote.innerHTML = `目前無法連線到最新資源資料，先顯示網站內建的基本資源。<br><button class="filter-btn data-retry-btn" type="button" data-action="retry-data">↻ 重新取得最新資源</button>`;
                         errorNote.classList.add('show');
@@ -1935,15 +1870,17 @@
             },
             closeWelcome(playMusic = false) {
                 const modal = Dom.get('welcomeModal');
+                const door = Dom.get('door-entry-btn');
                 if (!modal || AppState.ui.modalClosing) return;
                 if (playMusic) Music.playFromWelcome();
-                this.markWelcomeSeen();
+                door?.classList.add('is-opening');
                 modal.classList.add('is-opening');
                 AppState.ui.modalClosing = true;
                 document.body.classList.remove('modal-open');
                 setTimeout(() => {
                     modal.setAttribute('aria-hidden', 'true');
                     modal.style.display = 'none';
+                    door?.classList.remove('is-opening');
                     modal.classList.remove('is-opening');
                     AppState.ui.modalClosing = false;
                     this.restoreLastFocus();
@@ -1956,16 +1893,9 @@
                 if (el && typeof el.focus === 'function') requestAnimationFrame(() => el.focus());
                 window.__lastModalFocus = null;
             },
-            hasSeenWelcome() {
-                try { return sessionStorage.getItem(AppConfig.WELCOME_SEEN_STORAGE_KEY) === '1'; } catch (_) { return false; }
-            },
-            markWelcomeSeen() {
-                try { sessionStorage.setItem(AppConfig.WELCOME_SEEN_STORAGE_KEY, '1'); } catch (_) {}
-            },
             openWelcome() {
                 const modal = Dom.get('welcomeModal');
-                const route = Router.parse();
-                if (!modal || route.page !== 'home' || this.hasSeenWelcome()) return;
+                if (!modal) return;
                 window.__lastModalFocus = document.activeElement;
                 modal.style.display = 'flex';
                 modal.setAttribute('aria-hidden', 'false');
@@ -2047,8 +1977,8 @@
             },
             setPreference(enabled) { try { localStorage.setItem(AppConfig.MUSIC_STORAGE_KEY, enabled ? '1' : '0'); } catch (_) {} },
             getPreference() {
-                try { const stored = localStorage.getItem(AppConfig.MUSIC_STORAGE_KEY); return stored === null ? false : stored === '1'; }
-                catch (_) { return false; }
+                try { const stored = localStorage.getItem(AppConfig.MUSIC_STORAGE_KEY); return stored === null ? true : stored === '1'; }
+                catch (_) { return true; }
             },
             toggleFullLyrics() {
                 const box = Dom.get('full-lyrics-box');
@@ -2118,8 +2048,6 @@
                 if (target.matches('[data-filter-type]')) return SiteUI.setFilter(target.dataset.filterType, target.dataset.value, target);
                 const action = target.dataset.action;
                 if (action === 'enter-site') return SiteUI.closeWelcome(true);
-                if (action === 'skip-welcome') return SiteUI.closeWelcome(false);
-                if (action === 'close-welcome') return SiteUI.closeWelcome(false);
                 if (action === 'toggle-music') return Music.toggleGlobal();
                 if (action === 'toggle-emergency') return SiteUI.toggleEmergency();
                 if (action === 'toggle-menu') return SiteUI.toggleMenu();
@@ -2151,14 +2079,14 @@
                 const modal = Dom.get('welcomeModal');
                 const modalOpen = modal && modal.getAttribute('aria-hidden') === 'false' && !AppState.ui.modalClosing;
                 if (modalOpen) {
-                    if (event.key === 'Escape') { event.preventDefault(); return SiteUI.closeWelcome(false); }
+                    const door = Dom.get('door-entry-btn');
+                    if ((event.key === 'Enter' || event.key === ' ') && document.activeElement === door) {
+                        event.preventDefault();
+                        SiteUI.closeWelcome(true);
+                    }
                     if (event.key === 'Tab') {
-                        const focusable = Dom.qsa('button, a[href], input, [tabindex]:not([tabindex="-1"])', modal);
-                        if (!focusable.length) return;
-                        const first = focusable[0];
-                        const last = focusable[focusable.length - 1];
-                        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-                        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+                        event.preventDefault();
+                        door?.focus();
                     }
                     return;
                 }
@@ -2180,7 +2108,6 @@
             bindEvents();
             SiteUI.syncMobileFilterLabels();
             ResourceView.updateResultStatus();
-            ResourceData.loadStoredSyncStatus();
             Router.handle({ skipScroll: true });
             ResourceData.load();
             setTimeout(() => SiteUI.checkScrollPrompt(), 800);
