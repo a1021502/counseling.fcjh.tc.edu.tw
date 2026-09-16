@@ -314,8 +314,16 @@
         @media (max-width: 950px) {
             header { top: 38px; padding: 15px 4%; }
             nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: white; padding: 25px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-bottom: var(--border-warm); gap: 15px; }
-            nav ul.active { display: flex; }
-            .menu-toggle { display: block; }
+nav ul.active { display: flex; }
+            
+            /* ✨ 加上絕對定位，完美貼齊右側 4% 邊距，並垂直置中 */
+            .menu-toggle { 
+                display: block; 
+                position: absolute; 
+                right: 4%; 
+                top: 50%; 
+                transform: translateY(-50%); 
+            }
             
             .mobile-break { display: block; }
 
