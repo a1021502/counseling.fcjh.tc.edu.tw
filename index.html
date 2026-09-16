@@ -14,6 +14,11 @@
     <meta property="og:description" content="在這裡，你的聲音會被聽見。不論是悄悄話、想放鬆，還是尋求資源，我們永遠陪伴你。">
     <meta property="og:image" content="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800">
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="福科國中輔導室「福導」">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="福科輔導-來「福導」，歇會ㄦ！">
+    <meta name="twitter:description" content="在這裡，你的聲音會被聽見。不論是悄悄話、想放鬆，還是尋求資源，我們永遠陪伴你。">
+    <meta name="twitter:image" content="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800">
 
     <style>
         @font-face {
@@ -149,6 +154,7 @@
         }
         @media (hover: hover) { .dropdown:hover .dropdown-content { display: block; animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); } }
         .dropdown.mobile-open .dropdown-content { display: block; }
+        .dropdown.mobile-open .dropdown-trigger { color: var(--primary-color); }
         .dropdown-content a { color: var(--text-color); padding: 12px 22px; font-size: 0.95rem; display: block; font-weight: 500;}
         .dropdown-content a::after { display: none; }
         .dropdown-content a:hover { background-color: #FAF8F5; color: var(--primary-color); padding-left: 26px; }
@@ -386,7 +392,7 @@
         body.modal-open { overflow:hidden; }
         button, input, summary { font:inherit; }
         button { -webkit-tap-highlight-color:transparent; }
-        button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visible { outline:3px solid rgba(91,132,118,.42); outline-offset:3px; }
+        button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visible { outline:3px solid var(--focus-ring); outline-offset:3px; }
         .site-chrome { position:sticky; top:0; z-index:1100; box-shadow:var(--chrome-shadow); }
         .emergency-bar { position:relative; top:auto; }
         header { position:relative; top:auto; z-index:1; box-shadow:none; }
@@ -487,10 +493,10 @@
         <source src="theme.mp3" type="audio/mpeg">
     </audio>
 
-    <div id="welcomeModal" class="welcome-modal">
+    <div id="welcomeModal" class="welcome-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="welcomeModalTitle">
         <div class="modal-overlay"></div>
-        <div class="modal-content">
-            <div class="modal-title naikai-text">歡迎來到「福導」<br>－福科輔導 ✨</div>
+        <div class="modal-content" tabindex="-1">
+            <div id="welcomeModalTitle" class="modal-title naikai-text">歡迎來到「福導」<br>－福科輔導 ✨</div>
             
             <div class="modal-slogan">🌿 讓輔導走進日常<br class="mobile-break">－深耕校園環境陶冶</div>
             <div class="modal-slogan">🤝 讓專業協力織網<br class="mobile-break">－連結社區專業資源</div>
@@ -498,7 +504,8 @@
             
             <div class="door-btn-wrapper">
                 <div class="door-indicator naikai-text">👉 點擊大門進入網頁 👈</div>
-                <button class="door-btn" onclick="closeModalAndPlayMusic()" aria-label="推開大門進入網站"></button>
+                <button class="door-btn" id="door-entry-btn" onclick="closeModalAndPlayMusic()" aria-label="推開大門進入網站"></button>
+                <p class="modal-status">按 Enter 或空白鍵也可以推開大門。</p>
             </div>
         </div>
     </div>
@@ -586,7 +593,8 @@
             <p class="section-helper">想自己找也可以：用關鍵字、身分或議題來縮小範圍。</p>
             <div class="search-wrapper">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="global-search" class="search-input" placeholder="輸入關鍵字搜尋資源卡片...（可搜尋標題、內容、身分與議題）" oninput="handleSearch()">
+                <label class="visually-hidden" for="global-search">搜尋資源</label>
+                <input type="search" id="global-search" class="search-input" autocomplete="off" enterkeyhint="search" aria-describedby="resource-result-status" placeholder="輸入關鍵字搜尋資源卡片...（可搜尋標題、內容、身分與議題）" oninput="handleSearch()">
             </div>
 
             <div class="filter-group" data-filter-group="identity">
@@ -621,8 +629,10 @@
                 </div>
             </div>
             
+            <div id="resource-result-status" class="resource-status" role="status" aria-live="polite">正在準備資源資料……</div>
+
             <div class="view-toggle-container">
-                <button id="view-toggle-btn" class="filter-btn naikai-text" onclick="toggleViewMode()" style="background: transparent; border: 1.5px solid var(--primary-color); color: var(--primary-color); font-weight: bold; padding: 6px 14px;">
+                <button id="view-toggle-btn" class="filter-btn naikai-text" onclick="toggleViewMode()" aria-pressed="false" style="background: transparent; border: 1.5px solid var(--primary-color); color: var(--primary-color); font-weight: bold; padding: 6px 14px;">
                     ⊞ 切換多欄顯示
                 </button>
             </div>
@@ -906,7 +916,7 @@
             <div class="info-block flex-center" style="flex-direction: column; text-align: center;">
                 <h3 style="color: var(--primary-color); margin-bottom: 25px; font-size: 1.5rem;" class="naikai-text">🌻 輔導專屬商標與設計意義</h3>
                 
-                <img src="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800" style="width: 100%; max-width: 380px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-bottom: 35px; border: var(--border-warm);">
+                <img src="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800" alt="福科國中輔導室專屬商標" loading="lazy" decoding="async" style="width: 100%; max-width: 380px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-bottom: 35px; border: var(--border-warm);">
                 
                 <div style="text-align: left; max-width: 800px; width: 100%; color: var(--text-color); line-height: 1.9; font-size: 1.05rem;">
                     <p style="margin-bottom: 15px; font-size: 1.2rem; color: #2D2D2D; font-weight: bold;">FU等於福科的福和輔導的輔</p>
@@ -942,7 +952,7 @@
 
             <div class="info-block" style="display: flex; gap: 30px; align-items: center; flex-wrap: wrap;">
                 <div style="flex: 0 0 160px; text-align: center; margin: 0 auto;">
-                    <img src="https://drive.google.com/thumbnail?id=1IqswNZjTqgD7jxzuRTWEqsxgvmABIsYQ&sz=w800" style="width: 100%; border-radius: 50%; border: 4px solid var(--bg-color); box-shadow: 0 8px 25px rgba(0,0,0,0.12);">
+                    <img src="https://drive.google.com/thumbnail?id=1IqswNZjTqgD7jxzuRTWEqsxgvmABIsYQ&sz=w800" alt="福科國中輔導教師網站設計者照片" loading="lazy" decoding="async" style="width: 100%; border-radius: 50%; border: 4px solid var(--bg-color); box-shadow: 0 8px 25px rgba(0,0,0,0.12);">
                 </div>
                 <div style="flex: 1; min-width: 250px;">
                     <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.3rem;" class="naikai-text">👨‍💻 網站設計者：杜智平</h3>
@@ -965,7 +975,7 @@
 
     <footer>
         <p>© 2026 福科國中輔導室 版權所有</p>
-        <p style="font-size: 0.8rem; margin-top: 7px; color: #DFE8E5;">校址：407臺中市西屯區福林里福林路333號 <span class="footer-divider">|</span><br class="footer-break"> 聯絡電話：04-24618112</p>
+        <p class="footer-contact" style="font-size: 0.8rem; margin-top: 7px; color: #DFE8E5;">校址：407臺中市西屯區福林里福林路333號 <span class="footer-divider">|</span><br class="footer-break"> 聯絡電話：04-24618112</p>
     </footer>
 
     <script>
@@ -977,6 +987,7 @@
 
         const initialPostsData = [
             {
+                id: 'FG-VIDEO-MH',
                 identity: 'student parent teacher', 
                 topic: 'other', 
                 isYoutube: true,
@@ -989,6 +1000,7 @@
                 type: '外部連結'
             },
             {
+                id: 'FG-RADIO',
                 identity: 'student parent teacher', 
                 topic: 'other', 
                 isYoutube: true,
@@ -1001,6 +1013,7 @@
                 type: '外部連結'
             },
             {
+                id: 'FG-FACEBOOK',
                 identity: 'student parent teacher', 
                 topic: 'other', 
                 isYoutube: false,
@@ -1013,6 +1026,7 @@
                 type: '外部連結'
             },
             {
+                id: 'FG-INSTAGRAM',
                 identity: 'student parent teacher', 
                 topic: 'other', 
                 isYoutube: false,
@@ -1028,17 +1042,78 @@
 
         let allPostsData = [...initialPostsData];
         let filteredCache = [...allPostsData];
-        let currentFilters = { identity: 'all', topic: 'all' };
-        let searchQuery = '';
-        let currentLimit = getDefaultLimit();
+        const appState = {
+            filters: { identity: 'all', topic: 'all' },
+            searchQuery: '',
+            currentLimit: 0,
+            currentView: 'full',
+            dataSync: { status: 'initializing', syncedAt: null }
+        };
         let yumaTimer = null;
         let yumaScrollTimer = null;
         let searchTimeout = null;
+        let resizeTimer = null;
         let currentLyricIndex = -1;
-        let lastModalTrigger = null;
+
+        const DEFAULT_IMAGE = 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800';
+        const MUSIC_STORAGE_KEY = 'fudaoguide.musicEnabled';
+        const DATA_RETRY_LIMIT = 2;
+        let dataRetryCount = 0;
+        appState.currentLimit = getDefaultLimit();
 
         function getDefaultLimit() {
             return window.innerWidth <= 950 ? 8 : 9;
+        }
+
+        function makeStableId(value) {
+            const source = String(value ?? '').trim();
+            let hash = 2166136261;
+            for (let i = 0; i < source.length; i++) {
+                hash ^= source.charCodeAt(i);
+                hash = Math.imul(hash, 16777619);
+            }
+            return (hash >>> 0).toString(36);
+        }
+
+        function slugifyResourceId(value) {
+            const slug = String(value ?? '')
+                .trim()
+                .toLowerCase()
+                .replace(/[^\p{L}\p{N}]+/gu, '-')
+                .replace(/^-+|-+$/g, '')
+                .slice(0, 50);
+            return slug || 'resource';
+        }
+
+        function getResourceId(row, index) {
+            const explicit = String(row['ID'] ?? row['id'] ?? row['唯一ID'] ?? '').trim();
+            if (explicit) return explicit;
+            const title = String(row['標題'] ?? '').trim();
+            const link = String(row['連結'] ?? '').trim();
+            return `res-${slugifyResourceId(title)}-${makeStableId(title + '|' + link)}`;
+        }
+
+        function formatSyncTime(date = new Date()) {
+            return new Intl.DateTimeFormat('zh-TW', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(date);
+        }
+
+        function updateResourceStatus(extra = '') {
+            const el = document.getElementById('resource-result-status');
+            if (!el) return;
+            const total = filteredCache.length;
+            const query = appState.searchQuery ? `，搜尋「${escapeHTML(appState.searchQuery)}」` : '';
+            const filters = [];
+            if (appState.filters.identity !== 'all') filters.push(filterDisplayNames.identity[appState.filters.identity]);
+            if (appState.filters.topic !== 'all') filters.push(filterDisplayNames.topic[appState.filters.topic]);
+            const filterText = filters.length ? `，篩選：${filters.join('＋')}` : '';
+            const syncText = appState.dataSync.syncedAt ? `｜本次同步 ${formatSyncTime(appState.dataSync.syncedAt)}` : '';
+            el.innerHTML = `<strong>${total}</strong> 筆符合目前條件的資源${query}${filterText}${syncText}${extra ? `｜${escapeHTML(extra)}` : ''}`;
+        }
+
+        function setDataSyncStatus(status, syncedAt = null, extra = '') {
+            appState.dataSync.status = status;
+            appState.dataSync.syncedAt = syncedAt;
+            updateResourceStatus(extra);
         }
 
         function escapeHTML(value) {
@@ -1068,7 +1143,8 @@
 
         function parseRoute() {
             const rawHash = window.location.hash.replace(/^#/, '');
-            const decoded = rawHash ? decodeURIComponent(rawHash) : 'home';
+            let decoded = 'home';
+            try { decoded = rawHash ? decodeURIComponent(rawHash) : 'home'; } catch (_) { decoded = rawHash || 'home'; }
             const parts = decoded.split('/');
             return { page: parts[0] || 'home', id: parts.slice(1).join('/') || null };
         }
@@ -1086,6 +1162,7 @@
 
             const activeNavLink = document.getElementById(`nav-${page}`);
             if (activeNavLink) activeNavLink.classList.add('active-nav');
+            if (page === 'about' || page === 'song') document.querySelector('.dropdown-trigger')?.classList.add('active-nav');
 
             closeMenu();
             closeDropdown();
@@ -1139,10 +1216,8 @@
             if (!element) return;
             const trigger = element.querySelector('.dropdown-trigger');
             const open = !element.classList.contains('mobile-open');
-            if (window.innerWidth <= 950) {
-                element.classList.toggle('mobile-open', open);
-                if (trigger) trigger.setAttribute('aria-expanded', String(open));
-            }
+            element.classList.toggle('mobile-open', open);
+            if (trigger) trigger.setAttribute('aria-expanded', String(open));
         }
 
         function toggleEmergencyMobile() {
@@ -1172,7 +1247,7 @@
         function syncMobileFilterLabels() {
             Object.entries(filterDisplayNames).forEach(([type, names]) => {
                 const current = document.getElementById(`${type}-filter-current`);
-                if (current) current.textContent = names[currentFilters[type]] || names.all;
+                if (current) current.textContent = names[appState.filters[type]] || names.all;
             });
         }
 
@@ -1183,8 +1258,8 @@
 
         function syncFilterButtons() {
             document.querySelectorAll('.filter-btn[data-value]').forEach(btn => btn.classList.remove('active'));
-            const identityButton = document.querySelector(`.filter-group[data-filter-group="identity"] .filter-btn[data-value="${currentFilters.identity}"]`);
-            const topicButton = document.querySelector(`.filter-group[data-filter-group="topic"] .filter-btn[data-value="${currentFilters.topic}"]`);
+            const identityButton = document.querySelector(`.filter-group[data-filter-group="identity"] .filter-btn[data-value="${appState.filters.identity}"]`);
+            const topicButton = document.querySelector(`.filter-group[data-filter-group="topic"] .filter-btn[data-value="${appState.filters.topic}"]`);
             if (identityButton) identityButton.classList.add('active');
             if (topicButton) topicButton.classList.add('active');
             syncMobileFilterLabels();
@@ -1200,15 +1275,19 @@
             }
         }
 
-        async function fetchGoogleSheetData() {
+        async function fetchGoogleSheetData(options = {}) {
             const spinner = document.getElementById('loading-spinner');
             const errorNote = document.getElementById('data-error-note');
+            const cardGrid = document.getElementById('card-grid');
+            const retry = Boolean(options.retry);
+
             try {
                 const response = await fetchWithTimeout(GAS_URL);
                 if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const data = await response.json();
                 if (!Array.isArray(data)) throw new Error('資料格式不是陣列');
 
+                const usedIds = new Set(initialPostsData.map(post => String(post.id)));
                 const formPosts = data.map((row, index) => {
                     const getVal = keyword => {
                         if (row[keyword] !== undefined && row[keyword] !== null) return String(row[keyword]).trim();
@@ -1220,46 +1299,70 @@
                     const rawTopics = getVal('議題').split(',').map(t => t.trim()).filter(Boolean);
                     const dataIdentities = rawIdentities.map(t => identityMap[t] || '').filter(Boolean).join(' ');
                     const dataTopics = rawTopics.map(t => topicMap[t] || '').filter(Boolean).join(' ');
-
-                    const defaultImage = 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800';
-                    let imgUrl = defaultImage;
                     const imgRaw = getVal('圖片');
                     const match = imgRaw.match(/id=([a-zA-Z0-9_-]+)/);
-                    if (match) imgUrl = `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800`;
-
+                    const imgUrl = match ? `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800` : DEFAULT_IMAGE;
                     const linkRaw = getVal('連結');
+
+                    let id = getResourceId(row, index);
+                    const baseId = id;
+                    let serial = 2;
+                    while (usedIds.has(id)) id = `${baseId}-${serial++}`;
+                    usedIds.add(id);
+
                     return {
-                        id: 'form-post-' + index,
-                        title: getVal('標題'),
-                        text: getVal('簡介'),
-                        image: imgUrl,
+                        id,
                         identity: dataIdentities,
                         topic: dataTopics,
+                        isYoutube: /(^|\.)youtube\.com|youtu\.be/i.test(linkRaw),
+                        image: imgUrl,
+                        link: linkRaw,
                         badgesIdentity: rawIdentities.length ? rawIdentities : ['資源推薦'],
                         badgesTopic: rawTopics.length ? rawTopics : ['精選文章'],
+                        title: getVal('標題'),
+                        text: getVal('簡介'),
                         type: getVal('類型'),
-                        link: linkRaw,
-                        articleContent: getVal('內容'),
-                        isYoutube: /(^|\.)youtube\.com|youtu\.be/i.test(linkRaw)
+                        linkText: getVal('連結文字') || getVal('按鈕文字'),
+                        articleContent: getVal('內容')
                     };
                 });
 
+                formPosts.forEach(post => {
+                    post.searchText = [post.title, post.text, post.articleContent, post.identity, post.topic, ...(post.badgesIdentity || []), ...(post.badgesTopic || []), post.type, post.link, post.linkText].filter(Boolean).join(' ').toLowerCase();
+                });
+
                 allPostsData = [...initialPostsData, ...formPosts.reverse()];
+                dataRetryCount = 0;
                 if (spinner) spinner.style.display = 'none';
-                document.getElementById('card-grid').style.display = 'grid';
+                if (cardGrid) cardGrid.style.display = 'grid';
                 if (errorNote) errorNote.classList.remove('show');
+                setDataSyncStatus('ready', new Date());
                 executeCombinedFilter();
 
-                // If a user opened an article deep-link before the sheet finished loading.
                 const route = parseRoute();
                 if (route.page === 'article' && route.id) renderArticleById(route.id);
             } catch (error) {
                 console.error('抓取資料失敗：', error);
                 if (spinner) spinner.style.display = 'none';
-                document.getElementById('card-grid').style.display = 'grid';
+                if (cardGrid) cardGrid.style.display = 'grid';
+                dataRetryCount += 1;
+
+                if (dataRetryCount <= DATA_RETRY_LIMIT && !retry) {
+                    setTimeout(() => fetchGoogleSheetData({ retry: true }), 700 * dataRetryCount);
+                    setDataSyncStatus('retrying', null, `連線重試中（第 ${dataRetryCount}/${DATA_RETRY_LIMIT} 次）`);
+                    return;
+                }
+
+                setDataSyncStatus('fallback', null, '目前使用網站內建基本資源');
                 if (errorNote) {
-                    errorNote.textContent = '目前無法連線到最新資源資料，先顯示網站內建的基本資源。稍後再重新整理頁面即可再次嘗試。';
+                    errorNote.innerHTML = `目前無法連線到最新資源資料，先顯示網站內建的基本資源。<br><button class="filter-btn data-retry-btn" type="button" id="retry-data-btn">↻ 重新取得最新資源</button>`;
                     errorNote.classList.add('show');
+                    document.getElementById('retry-data-btn')?.addEventListener('click', () => {
+                        dataRetryCount = 0;
+                        errorNote.classList.remove('show');
+                        if (spinner) spinner.style.display = 'block';
+                        fetchGoogleSheetData({ retry: true });
+                    }, { once: true });
                 }
                 renderCards(allPostsData);
             }
@@ -1275,20 +1378,21 @@
             if (!filteredCache.length) {
                 if (loadMoreBtn) loadMoreBtn.style.display = 'none';
                 grid.insertAdjacentHTML('beforeend', `
-                    <div style="grid-column:1/-1;text-align:center;padding:50px 20px;background:#fff;border-radius:20px;border:2px dashed #E2877A;">
-                        <div style="font-size:3.5rem;margin-bottom:15px;">🥀</div>
-                        <h3 style="color:var(--primary-color);margin-bottom:12px;font-size:1.5rem;font-family:'NaikaiFont',sans-serif;">目前找不到完全符合的資源</h3>
-                        <p style="color:var(--text-muted);font-size:1.05rem;">可以換個關鍵字、取消一個篩選條件，或直接來輔導室找我們聊聊。</p>
+                    <div class="resource-empty">
+                        <div class="resource-empty-icon">🥀</div>
+                        <h3 class="resource-empty-title naikai-text">目前找不到完全符合的資源</h3>
+                        <p class="resource-empty-text">可以換個關鍵字、取消一個篩選條件，或直接來輔導室找我們聊聊。</p>
                     </div>`);
+                updateResourceStatus();
                 return;
             }
 
-            const isMore = filteredCache.length > currentLimit;
-            filteredCache.slice(0, currentLimit).forEach(post => {
+            const isMore = filteredCache.length > appState.currentLimit;
+            filteredCache.slice(0, appState.currentLimit).forEach(post => {
                 const title = escapeHTML(post.title || '');
                 const description = escapeHTML(post.text || '');
                 const safeLink = safeURL(post.link, '#');
-                const imageUrl = safeImageURL(post.image, 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800');
+                const imageUrl = safeImageURL(post.image, DEFAULT_IMAGE);
                 const tagsHtml = [
                     ...(post.badgesIdentity || []).map(tag => `<span class="badge badge-identity">${escapeHTML(tag)}</span>`),
                     ...(post.badgesTopic || []).map(tag => `<span class="badge badge-topic">${escapeHTML(tag)}</span>`)
@@ -1300,7 +1404,7 @@
                 }
 
                 const cardAction = post.type === '站內文章'
-                    ? `<button class="card-action" type="button" onclick="openArticle('${escapeHTML(post.id)}')">閱讀文章 ➔</button>`
+                    ? `<button class="card-action" type="button" data-card-action="article" data-id="${escapeHTML(post.id)}">閱讀文章 ➔</button>`
                     : safeLink !== '#'
                         ? `<a href="${escapeHTML(safeLink)}" target="_blank" rel="noopener noreferrer">${escapeHTML(post.linkText || '前往連結 ➔')}</a>`
                         : `<span style="color:var(--text-muted);font-size:.92rem;">連結尚未提供</span>`;
@@ -1320,22 +1424,25 @@
 
             if (isMore) {
                 loadMoreBtn.style.display = 'block';
-                loadMoreBtn.innerHTML = `<button class="filter-btn active naikai-text" type="button" onclick="loadMoreCards()" style="padding:10px 30px;font-size:1.1rem;box-shadow:0 4px 15px rgba(91,132,118,0.3);">✨ 展開更多資源 ▾</button>`;
+                loadMoreBtn.innerHTML = `<button class="filter-btn active naikai-text" type="button" id="load-more-action">✨ 展開更多資源 ▾</button>`;
+                document.getElementById('load-more-action')?.addEventListener('click', loadMoreCards, { once: true });
             } else if (filteredCache.length > getDefaultLimit()) {
                 loadMoreBtn.style.display = 'block';
-                loadMoreBtn.innerHTML = `<button class="filter-btn naikai-text" type="button" onclick="collapseCards()" style="padding:10px 30px;font-size:1.1rem;border:1.5px solid var(--primary-color);color:var(--primary-color);background:transparent;">✨ 收合資源 ▴</button>`;
+                loadMoreBtn.innerHTML = `<button class="filter-btn naikai-text" type="button" id="collapse-action" style="border:1.5px solid var(--primary-color);color:var(--primary-color);background:transparent;">✨ 收合資源 ▴</button>`;
+                document.getElementById('collapse-action')?.addEventListener('click', collapseCards, { once: true });
             } else {
                 loadMoreBtn.style.display = 'none';
             }
+            updateResourceStatus();
         }
 
         function loadMoreCards() {
-            currentLimit += window.innerWidth <= 950 ? 8 : 9;
+            appState.currentLimit += window.innerWidth <= 950 ? 8 : 9;
             renderCards(filteredCache);
         }
 
         function collapseCards() {
-            currentLimit = getDefaultLimit();
+            appState.currentLimit = getDefaultLimit();
             renderCards(filteredCache);
             document.querySelector('.filter-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -1345,6 +1452,8 @@
             const btn = document.getElementById('view-toggle-btn');
             if (!grid || !btn) return;
             const compact = grid.classList.toggle('compact-view');
+            appState.currentView = compact ? 'compact' : 'full';
+            btn.setAttribute('aria-pressed', String(compact));
             btn.textContent = compact ? '⊟ 切換完整顯示' : '⊞ 切換多欄顯示';
         }
 
@@ -1396,13 +1505,13 @@
         }
 
         function executeCombinedFilter() {
-            currentLimit = getDefaultLimit();
+            appState.currentLimit = getDefaultLimit();
             const filteredData = allPostsData.filter(post => {
                 const cardIdentities = post.identity ? post.identity.split(/\s+/) : [];
                 const cardTopics = post.topic ? post.topic.split(/\s+/) : [];
-                const matchIdentity = currentFilters.identity === 'all' || cardIdentities.includes(currentFilters.identity);
-                const matchTopic = currentFilters.topic === 'all' || cardTopics.includes(currentFilters.topic);
-                const searchTarget = [
+                const matchIdentity = appState.filters.identity === 'all' || cardIdentities.includes(appState.filters.identity);
+                const matchTopic = appState.filters.topic === 'all' || cardTopics.includes(appState.filters.topic);
+                const searchTarget = post.searchText || [
                     post.title,
                     post.text,
                     post.articleContent,
@@ -1413,8 +1522,13 @@
                     post.type,
                     post.link
                 ].filter(Boolean).join(' ').toLowerCase();
-                const matchSearch = !searchQuery || searchTarget.includes(searchQuery);
+                const matchSearch = !appState.searchQuery || searchTarget.includes(appState.searchQuery);
                 return matchIdentity && matchTopic && matchSearch;
+            });
+            filteredData.forEach(post => {
+                if (!post.searchText) {
+                    post.searchText = [post.title, post.text, post.articleContent, post.identity, post.topic, ...(post.badgesIdentity || []), ...(post.badgesTopic || []), post.type, post.link].filter(Boolean).join(' ').toLowerCase();
+                }
             });
             renderCards(filteredData);
         }
@@ -1423,7 +1537,7 @@
             if (type !== 'identity' && type !== 'topic') return;
             buttonElement?.parentElement.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             buttonElement?.classList.add('active');
-            currentFilters[type] = value;
+            appState.filters[type] = value;
             syncMobileFilterLabels();
             executeCombinedFilter();
         }
@@ -1431,10 +1545,14 @@
         function handleSearch() {
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout(() => {
-                searchQuery = document.getElementById('global-search')?.value.toLowerCase().trim() || '';
+                appState.searchQuery = document.getElementById('global-search')?.value.toLowerCase().trim() || '';
                 executeCombinedFilter();
             }, 250);
         }
+
+        allPostsData.forEach(post => {
+            post.searchText = [post.title, post.text, post.articleContent, post.identity, post.topic, ...(post.badgesIdentity || []), ...(post.badgesTopic || []), post.type, post.link].filter(Boolean).join(' ').toLowerCase();
+        });
 
         const yumaQuotes = [
             "汪！今天過得好嗎？累了或心情不好，都歡迎來輔導室找我摸摸哦！🐾",
@@ -1529,16 +1647,20 @@
             const welcomeModal = document.getElementById('welcomeModal');
 
             if (!welcomeModal) return;
-
-            if (bgMusic) {
+            if (bgMusic && getMusicPreference()) {
                 bgMusic.currentTime = 0;
                 bgMusic.volume = 0;
                 bgMusic.play().then(() => {
+                    setMusicPreference(true);
                     const targetVolume = 0.4;
                     const fadeDuration = 2000;
                     const intervalTime = 50;
                     const step = targetVolume / (fadeDuration / intervalTime);
                     let fadeId = setInterval(() => {
+                        if (bgMusic.paused) {
+                            clearInterval(fadeId);
+                            return;
+                        }
                         if (bgMusic.volume + step >= targetVolume) {
                             bgMusic.volume = targetVolume;
                             clearInterval(fadeId);
@@ -1551,13 +1673,24 @@
                     playBtn?.classList.add('active');
                     pauseBtn?.classList.remove('active');
                     if (globalBtn) globalBtn.textContent = '🔊';
-                }).catch(() => {});
+                    if (globalBtn) globalBtn.setAttribute('aria-label', '暫停背景音樂');
+                }).catch(() => {
+                    if (globalBtn) globalBtn.textContent = '🔇';
+                });
+            } else {
+                bgMusic?.pause();
+                vinyl?.classList.remove('spinning');
+                playBtn?.classList.remove('active');
+                pauseBtn?.classList.add('active');
+                if (globalBtn) globalBtn.textContent = '🔇';
+                if (globalBtn) globalBtn.setAttribute('aria-label', '播放背景音樂');
             }
 
             welcomeModal.setAttribute('aria-hidden', 'true');
             document.body.classList.remove('modal-open');
             setTimeout(() => {
                 welcomeModal.style.display = 'none';
+                restoreLastFocus();
                 checkScrollPrompt();
             }, 600);
         }
@@ -1572,17 +1705,24 @@
 
             if (action === 'play') {
                 bgMusic.play().then(() => {
+                    setMusicPreference(true);
                     playBtn?.classList.add('active'); pauseBtn?.classList.remove('active'); vinyl?.classList.add('spinning');
                     if (globalBtn) globalBtn.textContent = '🔊';
+                    globalBtn?.setAttribute('aria-label', '暫停背景音樂');
                 }).catch(() => {});
             } else if (action === 'pause') {
-                bgMusic.pause(); playBtn?.classList.remove('active'); pauseBtn?.classList.add('active'); vinyl?.classList.remove('spinning');
+                bgMusic.pause();
+                setMusicPreference(false);
+                playBtn?.classList.remove('active'); pauseBtn?.classList.add('active'); vinyl?.classList.remove('spinning');
                 if (globalBtn) globalBtn.textContent = '🔇';
+                globalBtn?.setAttribute('aria-label', '播放背景音樂');
             } else if (action === 'restart') {
                 bgMusic.currentTime = 0;
                 bgMusic.play().then(() => {
+                    setMusicPreference(true);
                     playBtn?.classList.add('active'); pauseBtn?.classList.remove('active'); vinyl?.classList.add('spinning');
                     if (globalBtn) globalBtn.textContent = '🔊';
+                    globalBtn?.setAttribute('aria-label', '暫停背景音樂');
                 }).catch(() => {});
             }
         }
@@ -1618,6 +1758,31 @@
             btn.textContent = (!document.fullscreenElement && !document.webkitFullscreenElement) ? '⛶ 沉浸全螢幕' : '✖ 退出全螢幕';
         }
 
+        function setMusicPreference(enabled) {
+            try { localStorage.setItem(MUSIC_STORAGE_KEY, enabled ? '1' : '0'); } catch (_) {}
+        }
+
+        function getMusicPreference() {
+            try {
+                const stored = localStorage.getItem(MUSIC_STORAGE_KEY);
+                return stored === null ? true : stored === '1';
+            } catch (_) {
+                return true;
+            }
+        }
+
+        function focusFirstModalControl() {
+            document.getElementById('door-entry-btn')?.focus();
+        }
+
+        function restoreLastFocus() {
+            const el = window.__lastModalFocus;
+            if (el && typeof el.focus === 'function') {
+                requestAnimationFrame(() => el.focus());
+            }
+            window.__lastModalFocus = null;
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const wrapper = document.getElementById('lyrics-wrapper');
             lyricsData.forEach((lyric, index) => {
@@ -1628,9 +1793,37 @@
                 wrapper?.appendChild(p);
             });
 
-            document.querySelector('.dropdown-trigger')?.addEventListener('click', event => toggleDropdown(event.currentTarget.closest('.dropdown')));
+            const dropdownTrigger = document.querySelector('.dropdown-trigger');
+            dropdownTrigger?.addEventListener('click', event => toggleDropdown(event.currentTarget.closest('.dropdown')));
             document.querySelectorAll('#nav-menu a').forEach(link => link.addEventListener('click', closeMenu));
+
+            const grid = document.getElementById('card-grid');
+            grid?.addEventListener('click', event => {
+                const action = event.target.closest('[data-card-action="article"]');
+                if (!action) return;
+                openArticle(action.dataset.id);
+            });
+
+            document.addEventListener('click', event => {
+                const dropdown = document.getElementById('about-dropdown');
+                if (dropdown && !dropdown.contains(event.target)) closeDropdown();
+            });
+
             document.addEventListener('keydown', event => {
+                const modal = document.getElementById('welcomeModal');
+                const modalOpen = modal && modal.getAttribute('aria-hidden') === 'false';
+                if (modalOpen) {
+                    const door = document.getElementById('door-entry-btn');
+                    if ((event.key === 'Enter' || event.key === ' ') && document.activeElement === door) {
+                        event.preventDefault();
+                        closeModalAndPlayMusic();
+                    }
+                    if (event.key === 'Tab') {
+                        event.preventDefault();
+                        door?.focus();
+                    }
+                    return;
+                }
                 if (event.key === 'Escape') {
                     closeMenu(); closeDropdown();
                 }
@@ -1638,19 +1831,31 @@
 
             const welcomeModal = document.getElementById('welcomeModal');
             if (welcomeModal) {
+                window.__lastModalFocus = document.activeElement;
                 welcomeModal.style.display = 'flex';
                 welcomeModal.setAttribute('aria-hidden', 'false');
                 document.body.classList.add('modal-open');
+                requestAnimationFrame(focusFirstModalControl);
             }
 
+            const viewToggleBtn = document.getElementById('view-toggle-btn');
+            viewToggleBtn?.setAttribute('aria-pressed', 'false');
+
             syncMobileFilterLabels();
+            updateResourceStatus();
             handleHashChange({ skipScroll: true });
             fetchGoogleSheetData();
             setTimeout(checkScrollPrompt, 800);
         });
 
         window.addEventListener('hashchange', () => handleHashChange());
-        window.addEventListener('resize', () => { currentLimit = getDefaultLimit(); if (filteredCache.length) renderCards(filteredCache); });
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                appState.currentLimit = getDefaultLimit();
+                if (filteredCache.length) renderCards(filteredCache);
+            }, 120);
+        });
         window.addEventListener('scroll', () => {
             const yuma = document.querySelector('.yuma-container');
             if (yuma) {
