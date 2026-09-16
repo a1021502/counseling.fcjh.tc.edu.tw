@@ -51,13 +51,12 @@
             word-wrap: break-word;
         }
 
-        h1, h2, h3, .project-name, .modal-title, .modal-slogan, 
+        h1, h2, h3, .logo, .project-name, .modal-title, .modal-slogan, 
         .door-indicator, .resource-category h3, .card-title, .filter-label,
         .naikai-text, .faq-q, .article-title {
             font-family: 'NaikaiFont', 'PingFang TC', '微軟正黑體', sans-serif !important;
             letter-spacing: normal; 
             font-weight: normal !important; 
-            word-break: keep-all;
         }
 
         .hero-subtitle, .hero-bullet, .modal-slogan {
@@ -75,9 +74,9 @@
             color: var(--primary-color);
         }
 
+        /* 斷行魔法器 */
         .mobile-break { display: none; }
-        .desktop-divider { display: inline; }
-        .footer-divider { display: inline; }
+        .desktop-space { display: inline; }
 
         .text-center { text-align: center; }
         .hero-subtitle-box { margin: 25px 20px 35px 20px; }
@@ -99,67 +98,34 @@
         .chorus-accent { color: var(--primary-color); font-size: 1.3rem; margin: 5px 0; }
 
         .emergency-bar {
-            background-color: var(--danger-color);
-            text-align: center;
-            font-weight: 500;
-            font-size: 0.95rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(205, 83, 52, 0.2);
+            background-color: var(--danger-color); text-align: center;
+            font-weight: 500; font-size: 0.95rem; position: sticky;
+            top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(205, 83, 52, 0.2);
         }
         .emergency-toggle { 
-            display: block; 
-            width: 100%; 
-            background: none; 
-            border: none; 
-            color: white; 
-            font-size: 0.95rem; 
-            font-weight: bold; 
-            cursor: pointer; 
-            padding: 12px 0; 
-            letter-spacing: 0.05em;
+            display: block; width: 100%; background: none; border: none; color: white; 
+            font-size: 0.95rem; font-weight: bold; cursor: pointer; padding: 12px 0; letter-spacing: 0.05em;
         }
-        .emergency-links { 
-            display: none; 
-            padding: 0 5% 15px 5%; 
-            color: white; 
-        }
-        .emergency-links.show { 
-            display: flex; 
-            flex-direction: row; 
-            justify-content: center; 
-            align-items: center; 
-            flex-wrap: wrap; 
-            gap: 15px;
-        }
+        .emergency-links { display: none; padding: 0 5% 15px 5%; color: white; }
+        .emergency-links.show { display: flex; flex-direction: row; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px; }
         .emergency-links a {
             color: #FFF2E6; text-decoration: none; border: 1px dashed rgba(255,255,255,0.4);
-            padding: 8px 20px; border-radius: 8px; display: inline-block; transition: all 0.2s; font-weight: bold;
-            background: rgba(255,255,255,0.1);
+            padding: 8px 20px; border-radius: 8px; display: inline-block; transition: all 0.2s; font-weight: bold; background: rgba(255,255,255,0.1);
         }
         .emergency-links a:hover { opacity: 0.9; transform: translateY(-2px); background: rgba(255,255,255,0.2); }
 
         header {
-            background-color: rgba(250, 248, 245, 0.92); 
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px);
+            background-color: rgba(250, 248, 245, 0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             padding: 18px 5%; display: flex; justify-content: space-between;
-            align-items: center; position: sticky; top: 45px; z-index: 999;
-            border-bottom: var(--border-warm); transition: top 0.3s;
+            align-items: center; position: sticky; top: 45px; z-index: 999; border-bottom: var(--border-warm); transition: top 0.3s;
         }
-        .logo {
-            display: flex; align-items: center; text-decoration: none; transition: transform 0.2s;
-        }
+        .logo { font-size: 1.5rem; color: var(--primary-color); display: flex; align-items: center; gap: 10px; text-decoration: none; transition: transform 0.2s; }
         .logo:hover { transform: scale(1.02); }
 
         nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
         nav a {
-            text-decoration: none; color: var(--text-color); 
-            font-weight: 600; 
-            font-size: 1.05rem; 
-            letter-spacing: 0.03em;
-            transition: all 0.3s ease; position: relative; padding: 6px 0; cursor: pointer;
+            text-decoration: none; color: var(--text-color); font-weight: 600; 
+            font-size: 1.05rem; letter-spacing: 0.03em; transition: all 0.3s ease; position: relative; padding: 6px 0; cursor: pointer;
         }
         nav a:hover, nav a.active-nav { color: var(--primary-color); }
         nav a::after {
@@ -168,22 +134,8 @@
         }
         nav a:hover::after, nav a.active-nav::after { width: 100%; }
 
-        /* ✨ 升級膠囊感選單按鈕 */
-        .menu-toggle { 
-            display: none; 
-            background: var(--primary-color);
-            color: white;
-            padding: 6px 18px;
-            border-radius: 30px;
-            box-shadow: 0 4px 10px rgba(91, 132, 118, 0.2);
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        .menu-toggle:active { transform: scale(0.95); }
-        .menu-toggle-text { font-family: 'NaikaiFont', sans-serif; font-size: 1rem; padding-top: 2px;}
-        .menu-toggle-icon { font-size: 1.3rem; }
+        /* ✨ 膠囊選單按鈕 */
+        .menu-toggle { display: none; }
 
         .dropdown { position: relative; }
         .dropdown::after { content: ''; position: absolute; width: 100%; height: 15px; bottom: -15px; left: 0; }
@@ -195,7 +147,6 @@
         }
         @media (hover: hover) { .dropdown:hover .dropdown-content { display: block; animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); } }
         .dropdown.mobile-open .dropdown-content { display: block; }
-
         .dropdown-content a { color: var(--text-color); padding: 12px 22px; font-size: 0.95rem; display: block; font-weight: 500;}
         .dropdown-content a::after { display: none; }
         .dropdown-content a:hover { background-color: #FAF8F5; color: var(--primary-color); padding-left: 26px; }
@@ -206,60 +157,39 @@
 
         .hero { 
             background-color: #FAF8F5;
-            background-image: linear-gradient(rgba(250, 248, 245, 0.88), rgba(250, 248, 245, 0.95)), 
-                              url('https://drive.google.com/thumbnail?id=1BGNIabOD8poTw3e6qwX1ZCn_Jh_ctdim&sz=w1920');
+            background-image: linear-gradient(rgba(250, 248, 245, 0.88), rgba(250, 248, 245, 0.95)), url('https://drive.google.com/thumbnail?id=1BGNIabOD8poTw3e6qwX1ZCn_Jh_ctdim&sz=w1920');
             background-position: center; background-size: cover; background-repeat: no-repeat;
             padding: 85px 5% 65px 5%; text-align: center; border-bottom: var(--border-warm); 
         }
         .hero h1 { font-size: 2.8rem; color: var(--primary-color); margin-bottom: 20px; text-shadow: 1px 1px 0px rgba(255,255,255,0.8); line-height: 1.4; }
 
-        /* ✨ 優化：卡片等比例與置中設計 */
-        .project-showcase { display: flex; justify-content: center; align-items: stretch; gap: 25px; flex-wrap: wrap; margin-top: 15px; }
+        /* ✨ 齊頭並進的精緻專案按鈕 */
+        .project-showcase { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 15px; }
         .project-card {
-            flex: 1; min-width: 280px; max-width: 380px;
-            background: white; border-radius: 20px; padding: 22px 25px; display: flex; justify-content: center; align-items: center; gap: 15px;
-            text-decoration: none; box-shadow: var(--card-shadow); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); border: var(--border-warm);
+            background: white; border-radius: 20px; padding: 18px 20px; display: flex; align-items: center; justify-content: center; gap: 15px;
+            text-decoration: none; box-shadow: var(--card-shadow); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); border: var(--border-warm); 
+            width: 320px; max-width: 100%;
         }
         .project-card:hover { transform: translateY(-5px); border-color: var(--primary-color); box-shadow: var(--hover-shadow); }
-        .project-logo { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.08); flex-shrink: 0;}
+        .project-logo { width: 58px; height: 58px; border-radius: 50%; object-fit: cover; border: 2px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
         .project-text { text-align: left; }
-        .project-name { display: block; color: var(--primary-color); font-size: 1.25rem; margin-bottom: 2px; }
+        .project-name { display: block; color: var(--primary-color); font-size: 1.25rem; margin-bottom: 3px; }
         .project-desc { display: block; font-size: 0.85rem; color: var(--text-muted); }
 
-        .filter-section { padding: 25px 5% 35px 5%; text-align: center; position: relative;}
+        .filter-section { padding: 25px 5% 15px 5%; text-align: center; }
         .search-wrapper { max-width: 550px; margin: 25px auto 15px auto; position: relative; }
-        .search-input {
-            width: 100%; padding: 14px 25px 14px 52px; border: 2px solid #E6E2D8; border-radius: 50px;
-            font-size: 0.95rem; outline: none; background-color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.01); color: var(--text-color);
-        }
+        .search-input { width: 100%; padding: 14px 25px 14px 52px; border: 2px solid #E6E2D8; border-radius: 50px; font-size: 0.95rem; outline: none; background-color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.01); color: var(--text-color); }
         .search-input:focus { border-color: var(--primary-color); box-shadow: 0 6px 20px rgba(91, 132, 118, 0.12); }
         .search-icon { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; color: #A39E93; }
         .filter-group { margin: 12px 0; display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
         .filter-label { color: #8C867A; font-size: 1.1rem; margin-right: 4px; }
-        .filter-btn {
-            background: #EFECE4; border: none; padding: 7px 18px; border-radius: 30px; cursor: pointer;
-            font-size: 0.9rem; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text-color); font-weight: 500;
-        }
+        .filter-btn { background: #EFECE4; border: none; padding: 7px 18px; border-radius: 30px; cursor: pointer; font-size: 0.9rem; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text-color); font-weight: 500; }
         .filter-btn:hover { background: #E5E1D7; }
         .filter-btn.active { background-color: var(--primary-color); color: white; box-shadow: 0 4px 12px rgba(91, 132, 118, 0.25); }
-        
-        /* ✨ 手機版專屬視圖切換按鈕 */
-        .view-toggle-wrapper { display: none; margin-top: 15px; }
 
         .container { padding: 0 5% 60px 5%; max-width: 1240px; margin: 0 auto; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 35px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 35px; transition: all 0.4s ease;}
         
-        /* ✨ 緊湊列表模式樣式 (手機專用) */
-        .grid.compact-view { display: flex; flex-direction: column; gap: 15px; }
-        .grid.compact-view .card { flex-direction: row; height: auto; min-height: 110px; border-radius: 12px; align-items: stretch;}
-        .grid.compact-view .card-media { width: 110px; height: auto; flex-shrink: 0; border-radius: 12px 0 0 12px;}
-        .grid.compact-view .card-body { padding: 12px 15px; justify-content: center; flex-grow: 1; }
-        .grid.compact-view .card-title { font-size: 1.1rem; margin-bottom: 5px; line-height: 1.3;}
-        .grid.compact-view .card-text { display: none; }
-        .grid.compact-view .card-tags { margin-bottom: 6px; }
-        .grid.compact-view .badge { font-size: 0.65rem; padding: 2px 8px; margin-bottom: 0; }
-        .grid.compact-view .card-link { margin-top: auto; font-size: 0.85rem;}
-
         .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--card-shadow); display: flex; flex-direction: column; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); border: var(--border-warm); }
         .card:hover { transform: translateY(-8px); box-shadow: var(--hover-shadow); border-color: rgba(91, 132, 118, 0.3); }
         .card-media { width: 100%; height: 190px; position: relative; background-color: #EFECE4; overflow: hidden; }
@@ -271,27 +201,14 @@
         .badge-topic { background-color: #A3908F; }
         .card-title { font-size: 1.35rem; margin-bottom: 12px; color: #2D2D2D; line-height: 1.4; }
         .card-text { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; flex-grow: 1; line-height: 1.7; }
-        .card-link { text-align: right; }
+        .card-link { text-align: right; margin-top: auto;}
         .card-link a { color: var(--primary-color); text-decoration: none; font-weight: bold; font-size: 0.95rem; transition: color 0.2s; cursor: pointer; }
         .card-link a:hover { color: var(--secondary-color); }
 
-        /* ✨ 載入更多按鈕區塊 */
-        .load-more-container { text-align: center; margin-top: 35px; width: 100%; }
-        .btn-load-more {
-            background-color: white; border: 2px solid var(--primary-color);
-            color: var(--primary-color); padding: 10px 30px; border-radius: 30px;
-            font-size: 1.05rem; font-weight: bold; cursor: pointer; transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(91, 132, 118, 0.1);
-        }
-        .btn-load-more:hover { background-color: var(--primary-color); color: white; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(91, 132, 118, 0.2); }
-
         .team-title-section { 
-            text-align: center; padding: 65px 5% 40px 5%; 
-            background-color: #FAF8F5;
-            background-image: linear-gradient(rgba(250, 248, 245, 0.88), rgba(250, 248, 245, 0.95)), 
-                              url('https://drive.google.com/thumbnail?id=1BGNIabOD8poTw3e6qwX1ZCn_Jh_ctdim&sz=w1920');
-            background-position: center; background-size: cover; background-repeat: no-repeat;
-            border-bottom: var(--border-warm); 
+            text-align: center; padding: 65px 5% 40px 5%; background-color: #FAF8F5;
+            background-image: linear-gradient(rgba(250, 248, 245, 0.88), rgba(250, 248, 245, 0.95)), url('https://drive.google.com/thumbnail?id=1BGNIabOD8poTw3e6qwX1ZCn_Jh_ctdim&sz=w1920');
+            background-position: center; background-size: cover; background-repeat: no-repeat; border-bottom: var(--border-warm); 
         }
         .team-title-section h2 { color: var(--primary-color); font-size: 2.3rem; margin-bottom: 12px; line-height: 1.4; }
         .team-title-section p { color: var(--text-muted); max-width: 700px; margin: 0 auto; font-size: 1.05rem; }
@@ -328,31 +245,31 @@
 
         .global-music-btn {
             position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; border-radius: 50%;
-            background-color: var(--primary-color); color: white; display: flex; justify-content: center; align-items: center;
-            font-size: 1.4rem; cursor: pointer; z-index: 9999; box-shadow: 0 6px 15px rgba(91, 132, 118, 0.3); border: 2px solid white; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background-color: var(--primary-color); color: white; display: flex; justify-content: center;
+            align-items: center; font-size: 1.4rem; cursor: pointer; z-index: 9999;
+            box-shadow: 0 6px 15px rgba(91, 132, 118, 0.3); border: 2px solid white; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .global-music-btn:hover { transform: scale(1.1); background-color: var(--secondary-color); box-shadow: 0 8px 20px rgba(226, 135, 122, 0.4); }
 
-        /* ✨ 全域下滑提示動畫樣式 */
-        .scroll-prompt {
+        /* ✨ 隱藏元素與響應式顯示 */
+        .view-toggle-container { display: none; }
+        .footer-break { display: none; }
+        .footer-divider { display: inline; }
+
+        /* ✨ 智慧滾動提示箭頭 */
+        #scroll-prompt-fixed {
             position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
-            display: flex; flex-direction: column; align-items: center; gap: 8px;
-            opacity: 0.85; z-index: 900; transition: opacity 0.5s ease; pointer-events: none;
+            display: flex; flex-direction: column; align-items: center;
+            opacity: 0.8; transition: opacity 0.4s ease; z-index: 900; pointer-events: none;
         }
-        .scroll-prompt.hidden { opacity: 0; }
-        .scroll-text { 
-            font-size: 0.85rem; color: var(--primary-color); font-weight: bold; letter-spacing: 0.05em; 
-            background: rgba(250,248,245,0.9); padding: 4px 14px; border-radius: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            border: 1px solid rgba(91, 132, 118, 0.2);
+        .scroll-prompt-text { font-size: 0.8rem; color: var(--primary-color); font-weight: bold; margin-bottom: 5px; letter-spacing: 0.05em;}
+        .scroll-arrow-icon {
+            width: 12px; height: 12px; border-right: 3px solid var(--primary-color); border-bottom: 3px solid var(--primary-color);
+            transform: rotate(45deg); animation: bounceUpDown 2s infinite;
         }
-        .scroll-arrow {
-            width: 14px; height: 14px; border-right: 3px solid var(--primary-color); border-bottom: 3px solid var(--primary-color);
-            transform: rotate(45deg); animation: bounce-scroll 2s infinite; margin-top: -2px;
-        }
-        @keyframes bounce-scroll {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
-            40% { transform: translateY(-8px) rotate(45deg); }
-            60% { transform: translateY(-4px) rotate(45deg); }
+        @keyframes bounceUpDown {
+            0%, 100% { transform: translate(0, 0) rotate(45deg); }
+            50% { transform: translate(0, 8px) rotate(45deg); }
         }
 
         @media (max-width: 950px) {
@@ -360,30 +277,25 @@
             nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: white; padding: 25px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-bottom: var(--border-warm); gap: 15px; }
             nav ul.active { display: flex; }
             
-            /* ✨ 選單按鈕絕對定位靠右 */
+            /* ✨ 升級版膠囊選單按鈕 */
             .menu-toggle { 
-                display: flex; 
-                position: absolute; 
-                right: 4%; 
-                top: 50%; 
-                transform: translateY(-50%); 
+                display: flex; align-items: center; gap: 8px; position: absolute; right: 4%; top: 50%; transform: translateY(-50%); 
+                background-color: var(--primary-color); color: white; padding: 6px 16px; border-radius: 30px; font-size: 1rem;
+                box-shadow: 0 4px 10px rgba(91, 132, 118, 0.2); transition: all 0.3s;
             }
+            .menu-toggle:hover { background-color: var(--secondary-color); }
             
             .mobile-break { display: block; }
-            .desktop-divider { display: none; }
-            .footer-divider { display: none; } /* 隱藏 footer 直線 */
+            .desktop-space { display: none; }
 
             .hero h1 { font-size: 2rem; }
             .hero-subtitle { font-size: 1.25rem; }
             .hero-bullet { font-size: 0.95rem; }
-            
             .modal-title { font-size: 2rem !important; }
             .modal-slogan { font-size: 1.15rem; }
             .door-indicator { font-size: 1.15rem; padding: 6px 15px; }
             .team-title-section h2 { font-size: 1.8rem; }
-            
             .lyrics-header-title { font-size: 1.6rem !important; }
-            
             .faq-q { font-size: 1.1rem; padding: 20px; }
             .faq-a { padding: 0 20px 20px 20px; }
             .article-title { font-size: 1.8rem; }
@@ -392,9 +304,22 @@
             .emergency-links a { width: 100%; max-width: 300px; margin: 5px auto; }
 
             .global-music-btn { bottom: 20px; left: 20px; width: 45px; height: 45px; font-size: 1.2rem; }
-            
-            /* 顯示切換按鈕 */
-            .view-toggle-wrapper { display: block; }
+
+            /* 手機版頁尾斷行 */
+            .footer-break { display: block; }
+            .footer-divider { display: none; }
+
+            /* ✨ 切換精簡模式按鈕 */
+            .view-toggle-container { display: block; text-align: right; margin: 10px 5% 0 5%; }
+
+            /* ✨ 精簡模式下的網格樣式 */
+            .grid.compact-view { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .grid.compact-view .card-media { height: 110px; }
+            .grid.compact-view .card-body { padding: 12px; }
+            .grid.compact-view .card-title { font-size: 1.05rem; margin-bottom: 6px; line-height: 1.3; }
+            .grid.compact-view .card-text { display: none; }
+            .grid.compact-view .badge { font-size: 0.65rem; padding: 2px 8px; margin-right: 3px; margin-bottom: 3px;}
+            .grid.compact-view .card-link a { font-size: 0.85rem; }
         }
 
         .video-preview-wrapper { width: 100%; height: 100%; position: relative; display: block; overflow: hidden; }
@@ -407,21 +332,12 @@
         .video-preview-wrapper:hover .play-button { background-color: #ff0000; transform: translate(-50%, -50%) scale(1.08); }
 
         .welcome-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; 
-            background-color: #FAF8F5;
-            background-image: url('https://drive.google.com/thumbnail?id=1LlQD0tUC8vdhycH3Zkl_mAFVN3AY5njo&sz=w1920'); 
+            background-color: #FAF8F5; background-image: url('https://drive.google.com/thumbnail?id=1LlQD0tUC8vdhycH3Zkl_mAFVN3AY5njo&sz=w1920'); 
             background-size: cover; background-position: center; background-repeat: no-repeat; justify-content: center; align-items: center; }
-        
-        .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(253, 251, 247, 0.65); 
-            backdrop-filter: blur(2px); 
-            -webkit-backdrop-filter: blur(2px);
-        }
-        
+        .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(253, 251, 247, 0.65); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
         .modal-content { position: relative; z-index: 10; text-align: center; padding: 25px; animation: modalPop 0.8s cubic-bezier(0.16, 1, 0.3, 1); max-width: 600px; width: 90%; }
-        
         .modal-title { color: #724820; font-size: 3rem; margin-bottom: 15px; line-height: 1.3; }
         .modal-slogan { font-size: 1.4rem; color: #514247; margin: 15px 0; line-height: 1.6; }
-        
         .door-btn-wrapper { margin-top: 40px; display: flex; flex-direction: column; align-items: center; }
         .door-indicator { color: #C68E57; font-size: 1.4rem; margin-bottom: 18px; animation: bounce 1.6s infinite; background: white; padding: 6px 20px; border-radius: 30px; border: 2px dashed #C68E57; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
@@ -470,12 +386,6 @@
         🔇
     </button>
 
-    <!-- ✨ 全域滾動提示 -->
-    <div class="scroll-prompt" id="scrollPrompt">
-        <div class="scroll-text">下滑探索</div>
-        <div class="scroll-arrow"></div>
-    </div>
-
     <div id="welcomeModal" class="welcome-modal">
         <div class="modal-overlay"></div>
         <div class="modal-content">
@@ -492,6 +402,12 @@
         </div>
     </div>
 
+    <!-- ✨ 智慧滾動提示 -->
+    <div id="scroll-prompt-fixed">
+        <span class="scroll-prompt-text naikai-text">往下探索更多</span>
+        <div class="scroll-arrow-icon"></div>
+    </div>
+
     <div class="emergency-bar">
         <button class="emergency-toggle" onclick="toggleEmergencyMobile()">🚨 我想求助 ▾</button>
         <div class="emergency-links" id="emergencyLinks">
@@ -505,13 +421,10 @@
         <a href="#home" class="logo">
             <img src="https://drive.google.com/thumbnail?id=1RAwhwlKJ8azK4cg6PH852pjUkrNO1O4Q&sz=w800" alt="福科輔導商標" style="height: 46px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));">
         </a>
-        
         <!-- ✨ 膠囊感選單按鈕 -->
-        <div class="menu-toggle" onclick="toggleMenu()">
-            <span class="menu-toggle-text">選單</span>
-            <span class="menu-toggle-icon">☰</span>
+        <div class="menu-toggle naikai-text" onclick="toggleMenu()">
+            <span>選單</span> <span style="font-size: 1.2rem; font-family: sans-serif;">☰</span>
         </div>
-        
         <nav>
             <ul id="nav-menu">
                 <li><a href="#home" id="nav-home" class="active-nav">首頁</a></li>
@@ -537,11 +450,9 @@
         <section class="hero">
             <h1 class="naikai-text">福科輔導<br class="mobile-break">-來「福導」，歇會ㄦ！</h1>
             <div class="hero-subtitle-box text-center">
-                <!-- ✨ 手機版精確斷句調整 -->
                 <h3 class="hero-subtitle">
-                    在這裡，你的聲音會被聽見。<br class="mobile-break">
-                    不論是悄悄話、想放鬆，<br class="mobile-break">
-                    還是尋求資源，我們永遠陪伴你。
+                    在這裡，你的聲音會被聽見。<br>
+                    不論是悄悄話、想放鬆，<br class="mobile-break"><span class="desktop-space"></span>還是尋求資源，我們永遠陪伴你。
                 </h3>
             </div>
             
@@ -589,21 +500,25 @@
                 <button class="filter-btn" onclick="filterData('topic', 'other', this)">其他</button>
             </div>
             
-            <!-- ✨ 手機版切換視圖按鈕 -->
-            <div class="view-toggle-wrapper">
-                <button class="filter-btn" id="view-toggle-btn" onclick="toggleCardView()">🗂️ 切換為緊湊列表模式</button>
+            <!-- ✨ 切換顯示模式按鈕 (僅手機版出現) -->
+            <div class="view-toggle-container">
+                <button id="view-toggle-btn" class="filter-btn naikai-text" onclick="toggleViewMode()" style="background: transparent; border: 1.5px solid var(--primary-color); color: var(--primary-color); font-weight: bold; padding: 6px 14px;">
+                    ⊞ 切換多欄顯示
+                </button>
             </div>
         </section>
 
-        <div class="container">
+        <div class="container" style="padding-bottom: 20px;">
             <div id="loading-spinner" style="text-align: center; color: var(--text-muted); font-size: 1.1rem; padding: 20px;">
                 ⏳ 正在從資料庫魔法提取資源中...
             </div>
             <div class="grid" id="card-grid" style="display: none;"></div>
             
-            <!-- ✨ 展開更多按鈕 -->
-            <div class="load-more-container">
-                <button class="btn-load-more" id="load-more-btn" style="display: none;" onclick="loadMoreCards()">展開更多資源 ▾</button>
+            <!-- ✨ 載入更多按鈕 -->
+            <div id="load-more-btn-container" style="display: none; text-align: center; margin-top: 35px; padding-bottom: 40px;">
+                <button class="filter-btn active naikai-text" onclick="loadMoreCards()" style="padding: 10px 30px; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(91,132,118,0.3);">
+                    ✨ 展開更多資源 ▾
+                </button>
             </div>
         </div>
     </div>
@@ -929,10 +844,7 @@
 
     <footer>
         <p>© 2026 福科國中輔導室 版權所有</p>
-        <p style="font-size: 0.8rem; margin-top: 7px; color: #DFE8E5;">
-            校址：407臺中市西屯區福林里福林路333號 <span class="footer-divider">|</span><br class="mobile-break">
-            聯絡電話：04-24618112
-        </p>
+        <p style="font-size: 0.8rem; margin-top: 7px; color: #DFE8E5;">校址：407臺中市西屯區福林里福林路333號 <span class="footer-divider">|</span><br class="footer-break"> 聯絡電話：04-24618112</p>
     </footer>
 
     <script>
@@ -955,16 +867,9 @@
 
             document.getElementById("nav-menu").classList.remove("active");
             window.scrollTo(0, 0);
-
-            // 控制首頁滑動提示的顯示與隱藏
-            const prompt = document.getElementById('scrollPrompt');
-            if (prompt) {
-                if (hash === 'home' && window.scrollY < 50) {
-                    prompt.classList.remove('hidden');
-                } else {
-                    prompt.classList.add('hidden');
-                }
-            }
+            
+            // 切換頁面時重新判斷滾動提示
+            checkScrollPrompt();
         }
 
         window.addEventListener('hashchange', handleHashChange);
@@ -1037,13 +942,13 @@
         ];
 
         let allPostsData = [...initialPostsData]; 
-        let currentFilteredData = [];
+        let filteredCache = [...allPostsData];
         let currentFilters = { identity: 'all', topic: 'all' };
         let searchQuery = '';
         
-        // ✨ 分頁系統參數
-        let itemsPerPage = window.innerWidth <= 950 ? 8 : 9;
-        let currentDisplayCount = itemsPerPage;
+        // ✨ 動態計算預設顯示卡片數量 (電腦 9 張，手機 8 張)
+        let defaultLimit = window.innerWidth <= 950 ? 8 : 9;
+        let currentLimit = defaultLimit;
 
         const identityMap = { '學生專區': 'student', '家長專區': 'parent', '教師專區': 'teacher' };
         const topicMap = { '人際': 'relation', '生涯': 'career', '情緒': 'emotion', '家庭': 'family', '情感': 'affection', '其他': 'other' };
@@ -1098,41 +1003,27 @@
                 allPostsData = [...initialPostsData, ...formPosts.reverse()];
                 
                 document.getElementById('loading-spinner').style.display = 'none';
-                document.getElementById('card-grid').style.display = window.innerWidth <= 950 && document.getElementById('card-grid').classList.contains('compact-view') ? 'flex' : 'grid';
+                document.getElementById('card-grid').style.display = 'grid';
                 
                 executeCombinedFilter();
 
             } catch (error) {
                 console.error('抓取資料失敗：', error);
                 document.getElementById('loading-spinner').textContent = '⚠️ 網路連線出了一點小狀況，目前僅顯示預設資源。';
-                document.getElementById('card-grid').style.display = window.innerWidth <= 950 && document.getElementById('card-grid').classList.contains('compact-view') ? 'flex' : 'grid';
-                executeCombinedFilter();
+                document.getElementById('card-grid').style.display = 'grid';
+                renderCards(allPostsData);
             }
         }
 
-        // ✨ 渲染資料子集 (供分頁使用)
-        function renderCardsSubset() {
-            const dataToRender = currentFilteredData.slice(0, currentDisplayCount);
-            renderCards(dataToRender);
-
-            const loadMoreBtn = document.getElementById('load-more-btn');
-            if (currentFilteredData.length > currentDisplayCount) {
-                loadMoreBtn.style.display = 'inline-block';
-            } else {
-                loadMoreBtn.style.display = 'none';
-            }
-        }
-
-        function loadMoreCards() {
-            currentDisplayCount += itemsPerPage;
-            renderCardsSubset();
-        }
-
+        // ✨ 附帶 Load More 機制的渲染函數
         function renderCards(dataToRender) {
+            filteredCache = dataToRender;
             const grid = document.getElementById('card-grid');
+            const loadMoreBtn = document.getElementById('load-more-btn-container');
             grid.innerHTML = ''; 
 
-            if (dataToRender.length === 0 && currentFilteredData.length === 0) {
+            if (dataToRender.length === 0) {
+                if(loadMoreBtn) loadMoreBtn.style.display = 'none';
                 grid.insertAdjacentHTML('beforeend', `
                 <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px; background: white; border-radius: 20px; border: 2px dashed #E2877A;">
                     <div style="font-size: 3.5rem; margin-bottom: 15px;">🥀</div>
@@ -1142,7 +1033,10 @@
                 return;
             }
 
-            dataToRender.forEach((post) => {
+            const isMore = dataToRender.length > currentLimit;
+            const dataToLoop = dataToRender.slice(0, currentLimit);
+
+            dataToLoop.forEach((post) => {
                 let mediaContent = '';
                 const altText = post.title ? post.title : '資源圖片';
                 if(post.isYoutube) {
@@ -1187,21 +1081,30 @@
                 </div>`;
                 grid.insertAdjacentHTML('beforeend', cardHTML);
             });
+
+            // 判斷是否顯示載入更多按鈕
+            if (isMore) {
+                if(loadMoreBtn) loadMoreBtn.style.display = 'block';
+            } else {
+                if(loadMoreBtn) loadMoreBtn.style.display = 'none';
+            }
         }
 
-        // ✨ 手機版切換視圖模式
-        function toggleCardView() {
+        // ✨ 展開更多卡片
+        function loadMoreCards() {
+            currentLimit += (window.innerWidth <= 950 ? 8 : 9);
+            renderCards(filteredCache);
+        }
+
+        // ✨ 手機版切換精簡網格模式
+        function toggleViewMode() {
             const grid = document.getElementById('card-grid');
-            const toggleBtn = document.getElementById('view-toggle-btn');
-            
+            const btn = document.getElementById('view-toggle-btn');
             grid.classList.toggle('compact-view');
-            
-            if (grid.classList.contains('compact-view')) {
-                toggleBtn.innerHTML = '🗂️ 切換為大圖卡片模式';
-                grid.style.display = 'flex';
+            if(grid.classList.contains('compact-view')) {
+                btn.innerHTML = '⊟ 切換單欄顯示';
             } else {
-                toggleBtn.innerHTML = '🗂️ 切換為緊湊列表模式';
-                grid.style.display = 'grid';
+                btn.innerHTML = '⊞ 切換多欄顯示';
             }
         }
 
@@ -1258,7 +1161,10 @@
         }
 
         function executeCombinedFilter() {
-            currentFilteredData = allPostsData.filter(post => {
+            // 切換篩選時，重置顯示數量
+            currentLimit = window.innerWidth <= 950 ? 8 : 9;
+
+            const filteredData = allPostsData.filter(post => {
                 const cardIdentities = post.identity ? post.identity.split(/\s+/) : [];
                 const cardTopics = post.topic ? post.topic.split(/\s+/) : [];
                 
@@ -1275,11 +1181,7 @@
                 return matchIdentity && matchTopic && matchSearch;
             });
             
-            // 重設分頁顯示數量
-            itemsPerPage = window.innerWidth <= 950 ? 8 : 9;
-            currentDisplayCount = itemsPerPage;
-            
-            renderCardsSubset();
+            renderCards(filteredData);
         }
 
         const yumaQuotes = [
@@ -1309,33 +1211,47 @@
             yumaTimer = setTimeout(() => { bubble.classList.remove('show'); }, 4500);
         }
 
-        // 監聽滾動以隱藏 YUMA 與下滑提示
-        let scrollTimer = null;
+        // ✨ 綜合滾動監聽：控制 YUMA 透明度與底部滾動提示
+        let yumaScrollTimer = null;
+        function checkScrollPrompt() {
+            const prompt = document.getElementById('scroll-prompt-fixed');
+            if (!prompt) return;
+            
+            // 只有在首頁才顯示提示
+            if (!document.getElementById('page-home').classList.contains('active-page')) {
+                prompt.style.opacity = '0';
+                return;
+            }
+
+            // 判斷是否滑到底部附近
+            const scrollPos = window.innerHeight + window.scrollY;
+            const threshold = document.body.offsetHeight - 150;
+            if (scrollPos > threshold) {
+                prompt.style.opacity = '0';
+            } else {
+                prompt.style.opacity = '0.8';
+            }
+        }
+
         window.addEventListener('scroll', () => {
-            // YUMA 半透明防擋
+            // YUMA 防擋處理
             const yuma = document.querySelector('.yuma-container');
             if (yuma) {
                 yuma.classList.add('faded');
-                clearTimeout(scrollTimer);
-                scrollTimer = setTimeout(() => {
+                clearTimeout(yumaScrollTimer);
+                yumaScrollTimer = setTimeout(() => {
                     yuma.classList.remove('faded');
                 }, 500);
             }
-            
-            // 下滑提示自動隱藏
-            const prompt = document.getElementById('scrollPrompt');
-            if (prompt) {
-                if (window.scrollY > 50) {
-                    prompt.classList.add('hidden');
-                } else if (window.location.hash === '' || window.location.hash === '#home') {
-                    prompt.classList.remove('hidden');
-                }
-            }
+            // 檢查滾動提示是否該隱藏
+            checkScrollPrompt();
         });
 
         window.addEventListener('DOMContentLoaded', () => {
             document.getElementById('welcomeModal').style.display = 'flex';
             fetchGoogleSheetData(); 
+            // 初始化檢查滾動提示
+            setTimeout(checkScrollPrompt, 1000); 
         });
 
         function toggleGlobalMusic() {
@@ -1385,10 +1301,7 @@
             
             setTimeout(() => {
                 document.getElementById('welcomeModal').style.display = 'none';
-                // 檢查是否在首頁顯示提示
-                if (window.location.hash === '' || window.location.hash === '#home') {
-                    document.getElementById('scrollPrompt').classList.remove('hidden');
-                }
+                checkScrollPrompt(); // 大門關閉後再次檢查
             }, 600);
         }
 
