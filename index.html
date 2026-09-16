@@ -14,11 +14,6 @@
     <meta property="og:description" content="在這裡，你的聲音會被聽見。不論是悄悄話、想放鬆，還是尋求資源，我們永遠陪伴你。">
     <meta property="og:image" content="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800">
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="福科國中輔導室｜福導">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="福科輔導-來「福導」，歇會ㄦ！">
-    <meta name="twitter:description" content="學生、家長與教師都能使用的校園支持與資源入口。">
-    <meta name="color-scheme" content="light">
 
     <style>
         @font-face {
@@ -485,172 +480,6 @@
             html { scroll-behavior:auto; }
             *,*::before,*::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
         }
-
-
-/* =========================
-   V3 maintainability + accessibility layer
-   ========================= */
-:root {
-    --surface: #ffffff;
-    --surface-soft: #FFFDF9;
-    --primary-text: #38695A;
-    --secondary-text: #8D4F48;
-    --focus-color: #2F6D5A;
-    --chrome-shadow-strong: 0 8px 28px rgba(62,65,58,.10);
-    --z-content: 1;
-    --z-chrome: 1100;
-    --z-floating: 9000;
-    --z-modal: 20000;
-}
-
-body.modal-open {
-    overflow: hidden;
-}
-
-.welcome-modal {
-    z-index: var(--z-modal);
-    overscroll-behavior: contain;
-}
-
-.welcome-modal[aria-hidden="true"] {
-    visibility: hidden;
-}
-
-.welcome-modal[aria-hidden="false"] {
-    visibility: visible;
-}
-
-.modal-skip-btn {
-    margin-top: 18px;
-    border: 0;
-    background: rgba(255,255,255,.82);
-    color: var(--secondary-text);
-    font-size: .92rem;
-    font-weight: 700;
-    padding: 9px 16px;
-    border-radius: 999px;
-    cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-}
-
-.modal-skip-btn:hover,
-.modal-skip-btn:focus-visible {
-    background: white;
-    color: var(--primary-text);
-}
-
-.global-music-btn,
-.yuma-container {
-    z-index: var(--z-floating);
-}
-
-body.modal-open .global-music-btn,
-body.modal-open .yuma-container,
-body.modal-open #scroll-prompt-fixed {
-    visibility: hidden;
-    pointer-events: none;
-}
-
-.emergency-bar,
-.site-chrome {
-    box-shadow: var(--chrome-shadow-strong);
-}
-
-.search-wrapper {
-    display: flex;
-    align-items: center;
-}
-
-.search-input {
-    padding-right: 58px;
-}
-
-.search-clear-btn {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 34px;
-    height: 34px;
-    border: 0;
-    border-radius: 50%;
-    background: #EFECE4;
-    color: #5F5A52;
-    font-size: 1.35rem;
-    line-height: 1;
-    cursor: pointer;
-}
-
-.search-clear-btn:hover,
-.search-clear-btn:focus-visible {
-    background: #E5E1D7;
-}
-
-.search-result-status {
-    min-height: 1.5em;
-    margin: 3px auto 0;
-    color: var(--text-muted);
-    font-size: .92rem;
-}
-
-.resource-maintenance-note {
-    max-width: 1000px;
-    margin: 0 auto 24px;
-    padding: 14px 16px;
-    border-left: 5px solid var(--accent-color);
-    border-radius: 12px;
-    background: #FFF9ED;
-    color: #5E564B;
-    font-size: .92rem;
-    line-height: 1.75;
-}
-
-.filter-btn:focus-visible,
-.menu-toggle:focus-visible,
-.emergency-toggle:focus-visible,
-.dropdown-trigger:focus-visible,
-.modal-skip-btn:focus-visible,
-.door-btn:focus-visible,
-.search-clear-btn:focus-visible,
-.card-action:focus-visible {
-    outline: 3px solid rgba(47,109,90,.42);
-    outline-offset: 3px;
-}
-
-.card-action,
-.card-link a {
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-}
-
-.card-action {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-}
-
-@media (max-width: 580px) {
-    .search-clear-btn {
-        right: 9px;
-    }
-    .resource-maintenance-note {
-        font-size: .9rem;
-    }
-    .modal-skip-btn {
-        font-size: .88rem;
-    }
-}
-
-@media (forced-colors: active) {
-    .filter-btn.active,
-    .emergency-bar,
-    footer,
-    .door-btn {
-        forced-color-adjust: auto;
-    }
-}
-
 </style>
 </head>
 <body>
@@ -658,24 +487,23 @@ body.modal-open #scroll-prompt-fixed {
         <source src="theme.mp3" type="audio/mpeg">
     </audio>
 
-    <div id="welcomeModal" class="welcome-modal" role="dialog" aria-modal="true" aria-labelledby="welcome-title" aria-describedby="welcome-description" aria-hidden="true">
+    <div id="welcomeModal" class="welcome-modal">
         <div class="modal-overlay"></div>
         <div class="modal-content">
-            <div id="welcome-title" class="modal-title naikai-text">歡迎來到「福導」<br>－福科輔導 ✨</div>
+            <div class="modal-title naikai-text">歡迎來到「福導」<br>－福科輔導 ✨</div>
             
-            <div id="welcome-description" class="modal-slogan">🌿 讓輔導走進日常<br class="mobile-break">－深耕校園環境陶冶</div>
+            <div class="modal-slogan">🌿 讓輔導走進日常<br class="mobile-break">－深耕校園環境陶冶</div>
             <div class="modal-slogan">🤝 讓專業協力織網<br class="mobile-break">－連結社區專業資源</div>
             <div class="modal-slogan">🛡️ 輔導不止於晤談<br class="mobile-break">－全方位建構校園防護網</div>
             
             <div class="door-btn-wrapper">
                 <div class="door-indicator naikai-text">👉 點擊大門進入網頁 👈</div>
-                <button class="door-btn" id="door-enter-btn" type="button" aria-label="推開大門進入網站"></button>
-                <button class="modal-skip-btn" id="modal-skip-btn" type="button">直接進入網站，不播放音樂 →</button>
+                <button class="door-btn" onclick="closeModalAndPlayMusic()" aria-label="推開大門進入網站"></button>
             </div>
         </div>
     </div>
 
-    <button class="global-music-btn" id="global-music-btn" aria-label="播放/暫停背景音樂" title="開/關主題曲">
+    <button class="global-music-btn" id="global-music-btn" onclick="toggleGlobalMusic()" aria-label="播放/暫停背景音樂" title="開/關主題曲">
         🔇
     </button>
 
@@ -687,7 +515,7 @@ body.modal-open #scroll-prompt-fixed {
 
     <div class="site-chrome">
         <div class="emergency-bar">
-            <button class="emergency-toggle" id="emergency-toggle" type="button" aria-expanded="false" aria-controls="emergencyLinks">🚨 我想求助 ▾</button>
+            <button class="emergency-toggle" id="emergency-toggle" type="button" onclick="toggleEmergencyMobile()" aria-expanded="false" aria-controls="emergencyLinks">🚨 我想求助 ▾</button>
             <div class="emergency-links" id="emergencyLinks">
                 <a class="emergency-link-primary" href="tel:1925" rel="noopener noreferrer">安心專線 1925</a>
                 <a href="tel:1995" rel="noopener noreferrer">生命線 1995</a>
@@ -699,7 +527,7 @@ body.modal-open #scroll-prompt-fixed {
         <a href="#home" class="logo">
             <img src="https://drive.google.com/thumbnail?id=1RAwhwlKJ8azK4cg6PH852pjUkrNO1O4Q&sz=w800" alt="福科輔導商標" style="height: 46px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));">
         </a>
-        <button class="menu-toggle naikai-text" id="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+        <button class="menu-toggle naikai-text" id="menu-toggle" type="button" onclick="toggleMenu()" aria-expanded="false" aria-controls="nav-menu">
             <span>選單</span> <span style="font-size: 1.2rem; font-family: sans-serif;">☰</span>
         </button>
         <nav>
@@ -758,45 +586,43 @@ body.modal-open #scroll-prompt-fixed {
             <p class="section-helper">想自己找也可以：用關鍵字、身分或議題來縮小範圍。</p>
             <div class="search-wrapper">
                 <span class="search-icon">🔍</span>
-                <input type="search" id="global-search" class="search-input" placeholder="輸入關鍵字搜尋資源卡片...（可搜尋標題、內容、身分與議題）" autocomplete="off" aria-label="搜尋資源卡片">
-                <button type="button" class="search-clear-btn" id="search-clear-btn" aria-label="清除搜尋" hidden>×</button>
+                <input type="text" id="global-search" class="search-input" placeholder="輸入關鍵字搜尋資源卡片...（可搜尋標題、內容、身分與議題）" oninput="handleSearch()">
             </div>
-            <div id="search-result-status" class="search-result-status" role="status" aria-live="polite"></div>
 
             <div class="filter-group" data-filter-group="identity">
-                <button class="mobile-filter-toggle" type="button" aria-expanded="false" aria-controls="identity-filter-options">
+                <button class="mobile-filter-toggle" type="button" aria-expanded="false" aria-controls="identity-filter-options" onclick="toggleMobileFilter('identity')">
                     <span class="toggle-title">我是誰</span>
                     <span class="toggle-current" id="identity-filter-current">全部身分</span>
                     <span class="toggle-icon" aria-hidden="true">▾</span>
                 </button>
                 <span class="filter-label naikai-text">我是誰：</span>
                 <div class="filter-options" id="identity-filter-options">
-                    <button class="filter-btn active" data-value="all">全部身分</button>
-                    <button class="filter-btn" data-value="student">學生專區</button>
-                    <button class="filter-btn" data-value="parent">家長專區</button>
-                    <button class="filter-btn" data-value="teacher">教師專區</button>
+                    <button class="filter-btn active" data-value="all" onclick="filterData('identity', 'all', this)">全部身分</button>
+                    <button class="filter-btn" data-value="student" onclick="filterData('identity', 'student', this)">學生專區</button>
+                    <button class="filter-btn" data-value="parent" onclick="filterData('identity', 'parent', this)">家長專區</button>
+                    <button class="filter-btn" data-value="teacher" onclick="filterData('identity', 'teacher', this)">教師專區</button>
                 </div>
             </div>
             <div class="filter-group" data-filter-group="topic">
-                <button class="mobile-filter-toggle" type="button" aria-expanded="false" aria-controls="topic-filter-options">
+                <button class="mobile-filter-toggle" type="button" aria-expanded="false" aria-controls="topic-filter-options" onclick="toggleMobileFilter('topic')">
                     <span class="toggle-title">我想聊</span>
                     <span class="toggle-current" id="topic-filter-current">所有議題</span>
                     <span class="toggle-icon" aria-hidden="true">▾</span>
                 </button>
                 <span class="filter-label naikai-text">我想聊：</span>
                 <div class="filter-options" id="topic-filter-options">
-                    <button class="filter-btn active" data-value="all">所有議題</button>
-                    <button class="filter-btn" data-value="relation">人際</button>
-                    <button class="filter-btn" data-value="career">生涯</button>
-                    <button class="filter-btn" data-value="emotion">情緒</button>
-                    <button class="filter-btn" data-value="family">家庭</button>
-                    <button class="filter-btn" data-value="affection">情感</button>
-                    <button class="filter-btn" data-value="other">其他</button>
+                    <button class="filter-btn active" data-value="all" onclick="filterData('topic', 'all', this)">所有議題</button>
+                    <button class="filter-btn" data-value="relation" onclick="filterData('topic', 'relation', this)">人際</button>
+                    <button class="filter-btn" data-value="career" onclick="filterData('topic', 'career', this)">生涯</button>
+                    <button class="filter-btn" data-value="emotion" onclick="filterData('topic', 'emotion', this)">情緒</button>
+                    <button class="filter-btn" data-value="family" onclick="filterData('topic', 'family', this)">家庭</button>
+                    <button class="filter-btn" data-value="affection" onclick="filterData('topic', 'affection', this)">情感</button>
+                    <button class="filter-btn" data-value="other" onclick="filterData('topic', 'other', this)">其他</button>
                 </div>
             </div>
             
             <div class="view-toggle-container">
-                <button id="view-toggle-btn" class="filter-btn naikai-text" style="background: transparent; border: 1.5px solid var(--primary-color); color: var(--primary-color); font-weight: bold; padding: 6px 14px;">
+                <button id="view-toggle-btn" class="filter-btn naikai-text" onclick="toggleViewMode()" style="background: transparent; border: 1.5px solid var(--primary-color); color: var(--primary-color); font-weight: bold; padding: 6px 14px;">
                     ⊞ 切換多欄顯示
                 </button>
             </div>
@@ -807,14 +633,11 @@ body.modal-open #scroll-prompt-fixed {
                 ⏳ 正在整理資源，馬上就好……
             </div>
             <div id="data-error-note" class="error-note" role="status" aria-live="polite"></div>
-            <div style="text-align:center;margin:0 0 16px;">
-                <button id="retry-data-btn" class="filter-btn" type="button" hidden>重新取得最新資源</button>
-            </div>
             <div class="grid" id="card-grid" style="display: none;"></div>
             
             <!-- ✨ 載入與收合卡片按鈕 -->
             <div id="load-more-btn-container" style="display: none; text-align: center; margin-top: 35px; padding-bottom: 40px;">
-                <button class="filter-btn active naikai-text"  style="padding: 10px 30px; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(91,132,118,0.3);">
+                <button class="filter-btn active naikai-text" onclick="loadMoreCards()" style="padding: 10px 30px; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(91,132,118,0.3);">
                     ✨ 展開更多資源 ▾
                 </button>
             </div>
@@ -823,7 +646,7 @@ body.modal-open #scroll-prompt-fixed {
 
     <div id="page-article" class="page">
         <div class="team-title-section" style="padding-top: 40px; padding-bottom: 30px;">
-            <button class="filter-btn" id="back-to-resource-btn" type="button" style="margin-bottom: 25px;">⬅ 返回資源百寶箱</button>
+            <button class="filter-btn" type="button" onclick="backToResourceBox()" style="margin-bottom: 25px;">⬅ 返回資源百寶箱</button>
             <h2 id="article-detail-title" class="article-title naikai-text">文章標題載入中...</h2>
             <div class="article-meta">
                 <span id="article-detail-tags"></span>
@@ -856,9 +679,9 @@ body.modal-open #scroll-prompt-fixed {
                     <h3 style="color: var(--primary-color); margin-bottom: 12px; font-size: 1.4rem;" class="naikai-text">🎧 專屬音樂控制台</h3>
                     <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">點擊推開大門時背景音樂已悄悄流淌，跟著下方的歌詞一起唱吧！</p>
                     <div class="flex-center flex-wrap" style="gap: 15px;">
-                        <button class="filter-btn active" id="btn-song-play"  style="padding: 10px 25px; font-size: 1rem;">▶️ 播放</button>
-                        <button class="filter-btn" id="btn-song-pause"  style="padding: 10px 25px; font-size: 1rem;">⏸️ 暫停</button>
-                        <button class="filter-btn" id="btn-song-restart" type="button" style="padding: 10px 25px; font-size: 1rem;">🔄 重播</button>
+                        <button class="filter-btn active" id="btn-song-play" onclick="controlPageMusic('play')" style="padding: 10px 25px; font-size: 1rem;">▶️ 播放</button>
+                        <button class="filter-btn" id="btn-song-pause" onclick="controlPageMusic('pause')" style="padding: 10px 25px; font-size: 1rem;">⏸️ 暫停</button>
+                        <button class="filter-btn" onclick="controlPageMusic('restart')" style="padding: 10px 25px; font-size: 1rem;">🔄 重播</button>
                     </div>
                 </div>
             </div>
@@ -867,13 +690,13 @@ body.modal-open #scroll-prompt-fixed {
                 <div class="lyrics-header-title naikai-text">《輔導室，歇會ㄦ！》</div>
                 <div class="lyrics-header-sub">福科國中輔導室 專屬校園療癒主題曲</div>
                 <div id="lyrics-fullscreen-wrapper">
-                    <button id="btn-fullscreen">⛶ 沉浸全螢幕</button>
+                    <button id="btn-fullscreen" onclick="toggleFullscreen()">⛶ 沉浸全螢幕</button>
                     <div class="lyrics-container" id="lyrics-container">
                         <div id="lyrics-wrapper" style="padding: 150px 0;"></div>
                     </div>
                 </div>
                 <div style="margin-top: 25px;">
-                    <button class="filter-btn" id="btn-toggle-lyrics" style="padding: 8px 25px; font-size: 1rem; border: 1px solid #E6E2D8;">📄 展開完整歌詞</button>
+                    <button class="filter-btn" id="btn-toggle-lyrics" onclick="toggleFullLyrics()" style="padding: 8px 25px; font-size: 1rem; border: 1px solid #E6E2D8;">📄 展開完整歌詞</button>
                 </div>
                 <div id="full-lyrics-box" style="display: none; margin-top: 30px; text-align: center; border-top: 2px dashed #EFECE4; padding-top: 35px; animation: fadeIn 0.5s;">
                     <div style="line-height: 2.3; font-size: 1.05rem; color: var(--text-color); letter-spacing: 0.05em;">
@@ -939,9 +762,6 @@ body.modal-open #scroll-prompt-fixed {
         </div>
         
         <div class="resource-list">
-            <div class="resource-maintenance-note" role="note">
-                <strong>🔎 資源使用提醒</strong>：外部機構的電話、地址、服務時段與網站可能調整；需要轉介或正式使用前，請以該機構最新官方資訊為準。
-            </div>
             <div class="resource-category">
                 <h3 class="naikai-text">🤝 一、 跨網絡社會資源 (三級輔導、社政、司法)</h3>
                 <div class="resource-item">
@@ -1086,7 +906,7 @@ body.modal-open #scroll-prompt-fixed {
             <div class="info-block flex-center" style="flex-direction: column; text-align: center;">
                 <h3 style="color: var(--primary-color); margin-bottom: 25px; font-size: 1.5rem;" class="naikai-text">🌻 輔導專屬商標與設計意義</h3>
                 
-                <img src="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800" alt="福科輔導專屬商標" style="width: 100%; max-width: 380px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-bottom: 35px; border: var(--border-warm);">
+                <img src="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800" style="width: 100%; max-width: 380px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-bottom: 35px; border: var(--border-warm);">
                 
                 <div style="text-align: left; max-width: 800px; width: 100%; color: var(--text-color); line-height: 1.9; font-size: 1.05rem;">
                     <p style="margin-bottom: 15px; font-size: 1.2rem; color: #2D2D2D; font-weight: bold;">FU等於福科的福和輔導的輔</p>
@@ -1122,7 +942,7 @@ body.modal-open #scroll-prompt-fixed {
 
             <div class="info-block" style="display: flex; gap: 30px; align-items: center; flex-wrap: wrap;">
                 <div style="flex: 0 0 160px; text-align: center; margin: 0 auto;">
-                    <img src="https://drive.google.com/thumbnail?id=1IqswNZjTqgD7jxzuRTWEqsxgvmABIsYQ&sz=w800" alt="福科國中輔導教師照片" style="width: 100%; border-radius: 50%; border: 4px solid var(--bg-color); box-shadow: 0 8px 25px rgba(0,0,0,0.12);">
+                    <img src="https://drive.google.com/thumbnail?id=1IqswNZjTqgD7jxzuRTWEqsxgvmABIsYQ&sz=w800" style="width: 100%; border-radius: 50%; border: 4px solid var(--bg-color); box-shadow: 0 8px 25px rgba(0,0,0,0.12);">
                 </div>
                 <div style="flex: 1; min-width: 250px;">
                     <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.3rem;" class="naikai-text">👨‍💻 網站設計者：杜智平</h3>
@@ -1134,7 +954,7 @@ body.modal-open #scroll-prompt-fixed {
         </div>
     </div>
 
-    <button class="yuma-container" id="yuma-button-anchor" type="button" aria-label="和 YUMA 互動">
+    <button class="yuma-container" type="button" onclick="interactWithYuma()" aria-label="和 YUMA 互動">
         <span class="yuma-bubble" id="yuma-bubble" aria-live="polite">
             <span id="yuma-text">汪！點擊我可以跟我互動喔🐾</span>
         </span>
@@ -1151,60 +971,54 @@ body.modal-open #scroll-prompt-fixed {
     <script>
         const GAS_URL = "https://script.google.com/macros/s/AKfycbz4uZma1CfxCKsoQQqgGYTE8Sw4nTDZnfNI2n5aKU80Z6WySup62TFy2j_aA_uYWLZWIw/exec";
         const DATA_TIMEOUT_MS = 8000;
-        const MUSIC_STORAGE_KEY = 'fudaoh-music-enabled';
-        const DEFAULT_IMAGE = 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800';
 
         const identityMap = { '學生專區': 'student', '家長專區': 'parent', '教師專區': 'teacher' };
         const topicMap = { '人際': 'relation', '生涯': 'career', '情緒': 'emotion', '家庭': 'family', '情感': 'affection', '其他': 'other' };
 
         const initialPostsData = [
             {
-                id: 'FG-SYS-001',
-                identity: 'student parent teacher',
-                topic: 'other',
+                identity: 'student parent teacher', 
+                topic: 'other', 
                 isYoutube: true,
                 image: 'https://drive.google.com/thumbnail?id=1VMIjCMrF4fnfnmKSwbXNLTdVoS8CDGL9&sz=w800',
                 link: 'https://www.youtube.com/playlist?list=PLkqAD3KmD8OuUvpt1f9p9xT8z7C11VcIO',
-                badgesIdentity: ['學生專區', '家長專區', '教師專區'],
+                badgesIdentity: ['學生專區', '家長專區', '教師專區'], 
                 badgesTopic: ['其他'],
                 title: '🎬影音專區：福導心衛知識加油站',
                 text: '由福科國中輔導室精心整理、製作的心理健康系列影音。陪伴你認識壓力、調適情緒，隨時為心靈加滿油！',
                 type: '外部連結'
             },
             {
-                id: 'FG-SYS-002',
-                identity: 'student parent teacher',
-                topic: 'other',
+                identity: 'student parent teacher', 
+                topic: 'other', 
                 isYoutube: true,
                 image: 'https://drive.google.com/thumbnail?id=1GmH44JyzetnAHuMt8pEWrkn-WQb1VbfB&sz=w800',
                 link: 'https://www.youtube.com/playlist?list=PLkqAD3KmD8OuBvUJvLy2_5vx7RzdFVL8m',
-                badgesIdentity: ['學生專區', '家長專區', '教師專區'],
+                badgesIdentity: ['學生專區', '家長專區', '教師專區'], 
                 badgesTopic: ['其他'],
                 title: '🎙️ 精彩收聽：福導電台',
                 text: '聆聽福科師生的聲音！這裡有關於校園生活、生涯探索與人際關係的溫馨訪談與分享，用聲音溫暖你的心。',
                 type: '外部連結'
             },
             {
-                id: 'FG-SYS-003',
-                identity: 'student parent teacher',
-                topic: 'other',
+                identity: 'student parent teacher', 
+                topic: 'other', 
                 isYoutube: false,
                 image: 'https://drive.google.com/thumbnail?id=1LlQD0tUC8vdhycH3Zkl_mAFVN3AY5njo&sz=w800',
                 link: 'https://www.facebook.com/fcjhguidance',
-                badgesIdentity: ['學生專區', '家長專區', '教師專區'],
+                badgesIdentity: ['學生專區', '家長專區', '教師專區'], 
                 badgesTopic: ['其他'],
                 title: '📱 Facebook 粉絲專頁',
                 text: '最即時的輔導室活動公告、親職教育講座資訊、精美圖文懶人包，歡迎按讚追蹤「福科國中輔導室」！',
                 type: '外部連結'
             },
             {
-                id: 'FG-SYS-004',
-                identity: 'student parent teacher',
-                topic: 'other',
+                identity: 'student parent teacher', 
+                topic: 'other', 
                 isYoutube: false,
-                image: DEFAULT_IMAGE,
+                image: 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800',
                 link: 'https://www.instagram.com/fcjhguidance/',
-                badgesIdentity: ['學生專區', '家長專區', '教師專區'],
+                badgesIdentity: ['學生專區', '家長專區', '教師專區'], 
                 badgesTopic: ['其他'],
                 title: '📸 Instagram 官方帳號',
                 text: '貼近學生的圖文心情點評、限時動態小互動、心理健康週活動花絮。趕快拿起手機追蹤「福科國中輔導室」！',
@@ -1212,20 +1026,456 @@ body.modal-open #scroll-prompt-fixed {
             }
         ];
 
-        const appState = {
-            posts: [...initialPostsData],
-            filtered: [...initialPostsData],
-            filters: { identity: 'all', topic: 'all' },
-            search: '',
-            limit: getDefaultLimit(),
-            compactView: false,
-            yumaTimer: null,
-            yumaScrollTimer: null,
-            searchTimer: null,
-            lastFocusedBeforeModal: null,
-            currentLyricIndex: -1,
-            fetchTime: null
+        let allPostsData = [...initialPostsData];
+        let filteredCache = [...allPostsData];
+        let currentFilters = { identity: 'all', topic: 'all' };
+        let searchQuery = '';
+        let currentLimit = getDefaultLimit();
+        let yumaTimer = null;
+        let yumaScrollTimer = null;
+        let searchTimeout = null;
+        let currentLyricIndex = -1;
+        let lastModalTrigger = null;
+
+        function getDefaultLimit() {
+            return window.innerWidth <= 950 ? 8 : 9;
+        }
+
+        function escapeHTML(value) {
+            return String(value ?? '').replace(/[&<>'"]/g, char => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            })[char]);
+        }
+
+        function safeURL(value, fallback = '#') {
+            const raw = String(value ?? '').trim();
+            if (!raw) return fallback;
+            try {
+                const parsed = new URL(raw, window.location.href);
+                if (['http:', 'https:', 'tel:', 'mailto:'].includes(parsed.protocol)) return parsed.href;
+            } catch (_) {}
+            return fallback;
+        }
+
+        function safeImageURL(value, fallback) {
+            const url = safeURL(value, '');
+            return url.startsWith('http://') || url.startsWith('https://') ? url : fallback;
+        }
+
+        function parseRoute() {
+            const rawHash = window.location.hash.replace(/^#/, '');
+            const decoded = rawHash ? decodeURIComponent(rawHash) : 'home';
+            const parts = decoded.split('/');
+            return { page: parts[0] || 'home', id: parts.slice(1).join('/') || null };
+        }
+
+        function handleHashChange(options = {}) {
+            const { page: rawPage, id } = parseRoute();
+            const validPages = ['home', 'resource', 'faq', 'song', 'about', 'article'];
+            const page = validPages.includes(rawPage) ? rawPage : 'home';
+
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+            document.querySelectorAll('nav a, .dropdown-trigger').forEach(link => link.classList.remove('active-nav'));
+
+            const pageElement = document.getElementById(`page-${page}`);
+            if (pageElement) pageElement.classList.add('active-page');
+
+            const activeNavLink = document.getElementById(`nav-${page}`);
+            if (activeNavLink) activeNavLink.classList.add('active-nav');
+
+            closeMenu();
+            closeDropdown();
+            if (!options.skipScroll) window.scrollTo({ top: 0, behavior: 'auto' });
+
+            if (page === 'article') {
+                if (id) renderArticleById(id);
+                else renderArticleMissing();
+            }
+
+            checkScrollPrompt();
+        }
+
+        function setHash(route) {
+            window.location.hash = route;
+        }
+
+        function backToResourceBox() {
+            setHash('home');
+            requestAnimationFrame(() => {
+                const target = document.querySelector('.filter-section');
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('nav-menu');
+            const toggle = document.getElementById('menu-toggle');
+            if (menu) menu.classList.remove('active');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            const toggle = document.getElementById('menu-toggle');
+            if (!menu || !toggle) return;
+            const open = !menu.classList.contains('active');
+            menu.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', String(open));
+            if (open) closeDropdown();
+        }
+
+        function closeDropdown() {
+            const dropdown = document.getElementById('about-dropdown');
+            const trigger = document.querySelector('.dropdown-trigger');
+            if (dropdown) dropdown.classList.remove('mobile-open');
+            if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        }
+
+        function toggleDropdown(element) {
+            if (!element) return;
+            const trigger = element.querySelector('.dropdown-trigger');
+            const open = !element.classList.contains('mobile-open');
+            if (window.innerWidth <= 950) {
+                element.classList.toggle('mobile-open', open);
+                if (trigger) trigger.setAttribute('aria-expanded', String(open));
+            }
+        }
+
+        function toggleEmergencyMobile() {
+            const linksContainer = document.getElementById('emergencyLinks');
+            const trigger = document.getElementById('emergency-toggle');
+            if (!linksContainer || !trigger) return;
+            const open = !linksContainer.classList.contains('show');
+            linksContainer.classList.toggle('show', open);
+            trigger.setAttribute('aria-expanded', String(open));
+            trigger.textContent = open ? '🚨 我想求助 ▴' : '🚨 我想求助 ▾';
+        }
+
+        function toggleMobileFilter(type) {
+            const group = document.querySelector(`.filter-group[data-filter-group="${type}"]`);
+            const toggle = group?.querySelector('.mobile-filter-toggle');
+            if (!group || !toggle) return;
+            const open = !group.classList.contains('is-open');
+            group.classList.toggle('is-open', open);
+            toggle.setAttribute('aria-expanded', String(open));
+        }
+
+        const filterDisplayNames = {
+            identity: { all: '全部身分', student: '學生專區', parent: '家長專區', teacher: '教師專區' },
+            topic: { all: '所有議題', relation: '人際', career: '生涯', emotion: '情緒', family: '家庭', affection: '情感', other: '其他' }
         };
+
+        function syncMobileFilterLabels() {
+            Object.entries(filterDisplayNames).forEach(([type, names]) => {
+                const current = document.getElementById(`${type}-filter-current`);
+                if (current) current.textContent = names[currentFilters[type]] || names.all;
+            });
+        }
+
+        function renderFilteredAndScroll() {
+            executeCombinedFilter();
+            requestAnimationFrame(() => document.getElementById('card-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+        }
+
+        function syncFilterButtons() {
+            document.querySelectorAll('.filter-btn[data-value]').forEach(btn => btn.classList.remove('active'));
+            const identityButton = document.querySelector(`.filter-group[data-filter-group="identity"] .filter-btn[data-value="${currentFilters.identity}"]`);
+            const topicButton = document.querySelector(`.filter-group[data-filter-group="topic"] .filter-btn[data-value="${currentFilters.topic}"]`);
+            if (identityButton) identityButton.classList.add('active');
+            if (topicButton) topicButton.classList.add('active');
+            syncMobileFilterLabels();
+        }
+
+        async function fetchWithTimeout(url, timeout = DATA_TIMEOUT_MS) {
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), timeout);
+            try {
+                return await fetch(url, { signal: controller.signal, cache: 'no-store' });
+            } finally {
+                clearTimeout(timer);
+            }
+        }
+
+        async function fetchGoogleSheetData() {
+            const spinner = document.getElementById('loading-spinner');
+            const errorNote = document.getElementById('data-error-note');
+            try {
+                const response = await fetchWithTimeout(GAS_URL);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const data = await response.json();
+                if (!Array.isArray(data)) throw new Error('資料格式不是陣列');
+
+                const formPosts = data.map((row, index) => {
+                    const getVal = keyword => {
+                        if (row[keyword] !== undefined && row[keyword] !== null) return String(row[keyword]).trim();
+                        const key = Object.keys(row).find(k => k.includes(keyword));
+                        return key && row[key] !== null && row[key] !== undefined ? String(row[key]).trim() : '';
+                    };
+
+                    const rawIdentities = getVal('身分').split(',').map(t => t.trim()).filter(Boolean);
+                    const rawTopics = getVal('議題').split(',').map(t => t.trim()).filter(Boolean);
+                    const dataIdentities = rawIdentities.map(t => identityMap[t] || '').filter(Boolean).join(' ');
+                    const dataTopics = rawTopics.map(t => topicMap[t] || '').filter(Boolean).join(' ');
+
+                    const defaultImage = 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800';
+                    let imgUrl = defaultImage;
+                    const imgRaw = getVal('圖片');
+                    const match = imgRaw.match(/id=([a-zA-Z0-9_-]+)/);
+                    if (match) imgUrl = `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800`;
+
+                    const linkRaw = getVal('連結');
+                    return {
+                        id: 'form-post-' + index,
+                        title: getVal('標題'),
+                        text: getVal('簡介'),
+                        image: imgUrl,
+                        identity: dataIdentities,
+                        topic: dataTopics,
+                        badgesIdentity: rawIdentities.length ? rawIdentities : ['資源推薦'],
+                        badgesTopic: rawTopics.length ? rawTopics : ['精選文章'],
+                        type: getVal('類型'),
+                        link: linkRaw,
+                        articleContent: getVal('內容'),
+                        isYoutube: /(^|\.)youtube\.com|youtu\.be/i.test(linkRaw)
+                    };
+                });
+
+                allPostsData = [...initialPostsData, ...formPosts.reverse()];
+                if (spinner) spinner.style.display = 'none';
+                document.getElementById('card-grid').style.display = 'grid';
+                if (errorNote) errorNote.classList.remove('show');
+                executeCombinedFilter();
+
+                // If a user opened an article deep-link before the sheet finished loading.
+                const route = parseRoute();
+                if (route.page === 'article' && route.id) renderArticleById(route.id);
+            } catch (error) {
+                console.error('抓取資料失敗：', error);
+                if (spinner) spinner.style.display = 'none';
+                document.getElementById('card-grid').style.display = 'grid';
+                if (errorNote) {
+                    errorNote.textContent = '目前無法連線到最新資源資料，先顯示網站內建的基本資源。稍後再重新整理頁面即可再次嘗試。';
+                    errorNote.classList.add('show');
+                }
+                renderCards(allPostsData);
+            }
+        }
+
+        function renderCards(dataToRender) {
+            filteredCache = Array.isArray(dataToRender) ? dataToRender : [];
+            const grid = document.getElementById('card-grid');
+            const loadMoreBtn = document.getElementById('load-more-btn-container');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            if (!filteredCache.length) {
+                if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+                grid.insertAdjacentHTML('beforeend', `
+                    <div style="grid-column:1/-1;text-align:center;padding:50px 20px;background:#fff;border-radius:20px;border:2px dashed #E2877A;">
+                        <div style="font-size:3.5rem;margin-bottom:15px;">🥀</div>
+                        <h3 style="color:var(--primary-color);margin-bottom:12px;font-size:1.5rem;font-family:'NaikaiFont',sans-serif;">目前找不到完全符合的資源</h3>
+                        <p style="color:var(--text-muted);font-size:1.05rem;">可以換個關鍵字、取消一個篩選條件，或直接來輔導室找我們聊聊。</p>
+                    </div>`);
+                return;
+            }
+
+            const isMore = filteredCache.length > currentLimit;
+            filteredCache.slice(0, currentLimit).forEach(post => {
+                const title = escapeHTML(post.title || '');
+                const description = escapeHTML(post.text || '');
+                const safeLink = safeURL(post.link, '#');
+                const imageUrl = safeImageURL(post.image, 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800');
+                const tagsHtml = [
+                    ...(post.badgesIdentity || []).map(tag => `<span class="badge badge-identity">${escapeHTML(tag)}</span>`),
+                    ...(post.badgesTopic || []).map(tag => `<span class="badge badge-topic">${escapeHTML(tag)}</span>`)
+                ].join('');
+
+                let mediaContent = `<img src="${escapeHTML(imageUrl)}" alt="${title || '資源圖片'}" loading="lazy" decoding="async">`;
+                if (post.isYoutube && safeLink !== '#') {
+                    mediaContent = `<a href="${escapeHTML(safeLink)}" target="_blank" rel="noopener noreferrer" class="video-preview-wrapper" aria-label="開啟：${title}"><div class="play-button" aria-hidden="true"></div><img src="${escapeHTML(imageUrl)}" alt="${title || '影音資源圖片'}" loading="lazy" decoding="async"></a>`;
+                }
+
+                const cardAction = post.type === '站內文章'
+                    ? `<button class="card-action" type="button" onclick="openArticle('${escapeHTML(post.id)}')">閱讀文章 ➔</button>`
+                    : safeLink !== '#'
+                        ? `<a href="${escapeHTML(safeLink)}" target="_blank" rel="noopener noreferrer">${escapeHTML(post.linkText || '前往連結 ➔')}</a>`
+                        : `<span style="color:var(--text-muted);font-size:.92rem;">連結尚未提供</span>`;
+
+                const cardHTML = `
+                    <article class="card" data-identity="${escapeHTML(post.identity)}" data-topic="${escapeHTML(post.topic)}">
+                        <div class="card-media">${mediaContent}</div>
+                        <div class="card-body">
+                            <div class="card-tags">${tagsHtml}</div>
+                            <h3 class="card-title">${title}</h3>
+                            <div class="card-text">${description}</div>
+                            <div class="card-link">${cardAction}</div>
+                        </div>
+                    </article>`;
+                grid.insertAdjacentHTML('beforeend', cardHTML);
+            });
+
+            if (isMore) {
+                loadMoreBtn.style.display = 'block';
+                loadMoreBtn.innerHTML = `<button class="filter-btn active naikai-text" type="button" onclick="loadMoreCards()" style="padding:10px 30px;font-size:1.1rem;box-shadow:0 4px 15px rgba(91,132,118,0.3);">✨ 展開更多資源 ▾</button>`;
+            } else if (filteredCache.length > getDefaultLimit()) {
+                loadMoreBtn.style.display = 'block';
+                loadMoreBtn.innerHTML = `<button class="filter-btn naikai-text" type="button" onclick="collapseCards()" style="padding:10px 30px;font-size:1.1rem;border:1.5px solid var(--primary-color);color:var(--primary-color);background:transparent;">✨ 收合資源 ▴</button>`;
+            } else {
+                loadMoreBtn.style.display = 'none';
+            }
+        }
+
+        function loadMoreCards() {
+            currentLimit += window.innerWidth <= 950 ? 8 : 9;
+            renderCards(filteredCache);
+        }
+
+        function collapseCards() {
+            currentLimit = getDefaultLimit();
+            renderCards(filteredCache);
+            document.querySelector('.filter-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function toggleViewMode() {
+            const grid = document.getElementById('card-grid');
+            const btn = document.getElementById('view-toggle-btn');
+            if (!grid || !btn) return;
+            const compact = grid.classList.toggle('compact-view');
+            btn.textContent = compact ? '⊟ 切換完整顯示' : '⊞ 切換多欄顯示';
+        }
+
+        function renderArticleById(id) {
+            const post = allPostsData.find(item => String(item.id) === String(id));
+            if (!post) {
+                renderArticleMissing();
+                return;
+            }
+            document.getElementById('article-detail-title').textContent = post.title || '無標題';
+            const tagHost = document.getElementById('article-detail-tags');
+            tagHost.innerHTML = '';
+            [...(post.badgesIdentity || []), ...(post.badgesTopic || [])].forEach((tag, index) => {
+                const span = document.createElement('span');
+                span.className = `badge ${index < (post.badgesIdentity || []).length ? 'badge-identity' : 'badge-topic'}`;
+                span.style.fontSize = '.85rem';
+                span.style.padding = '6px 16px';
+                span.textContent = tag;
+                tagHost.appendChild(span);
+            });
+
+            const imgEl = document.getElementById('article-detail-image');
+            const defaultImageMarker = '1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo';
+            if (post.image && !String(post.image).includes(defaultImageMarker)) {
+                imgEl.src = safeImageURL(post.image, '');
+                imgEl.alt = post.title || '文章圖片';
+                imgEl.style.display = imgEl.src ? 'block' : 'none';
+            } else {
+                imgEl.removeAttribute('src');
+                imgEl.style.display = 'none';
+            }
+
+            const contentHost = document.getElementById('article-detail-content');
+            contentHost.textContent = post.articleContent || '沒有提供詳細內容。';
+            contentHost.classList.remove('article-empty');
+        }
+
+        function renderArticleMissing() {
+            document.getElementById('article-detail-title').textContent = '找不到這篇文章';
+            document.getElementById('article-detail-tags').innerHTML = '';
+            const imgEl = document.getElementById('article-detail-image');
+            imgEl.style.display = 'none';
+            document.getElementById('article-detail-content').textContent = '這篇內容可能已經移除，或網址裡沒有帶上文章識別碼。請回到資源百寶箱重新選擇。';
+        }
+
+        function openArticle(id) {
+            if (!id) return;
+            setHash(`article/${encodeURIComponent(id)}`);
+        }
+
+        function executeCombinedFilter() {
+            currentLimit = getDefaultLimit();
+            const filteredData = allPostsData.filter(post => {
+                const cardIdentities = post.identity ? post.identity.split(/\s+/) : [];
+                const cardTopics = post.topic ? post.topic.split(/\s+/) : [];
+                const matchIdentity = currentFilters.identity === 'all' || cardIdentities.includes(currentFilters.identity);
+                const matchTopic = currentFilters.topic === 'all' || cardTopics.includes(currentFilters.topic);
+                const searchTarget = [
+                    post.title,
+                    post.text,
+                    post.articleContent,
+                    post.identity,
+                    post.topic,
+                    ...(post.badgesIdentity || []),
+                    ...(post.badgesTopic || []),
+                    post.type,
+                    post.link
+                ].filter(Boolean).join(' ').toLowerCase();
+                const matchSearch = !searchQuery || searchTarget.includes(searchQuery);
+                return matchIdentity && matchTopic && matchSearch;
+            });
+            renderCards(filteredData);
+        }
+
+        function filterData(type, value, buttonElement) {
+            if (type !== 'identity' && type !== 'topic') return;
+            buttonElement?.parentElement.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            buttonElement?.classList.add('active');
+            currentFilters[type] = value;
+            syncMobileFilterLabels();
+            executeCombinedFilter();
+        }
+
+        function handleSearch() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                searchQuery = document.getElementById('global-search')?.value.toLowerCase().trim() || '';
+                executeCombinedFilter();
+            }, 250);
+        }
+
+        const yumaQuotes = [
+            "汪！今天過得好嗎？累了或心情不好，都歡迎來輔導室找我摸摸哦！🐾",
+            "（搖尾巴）不管今天發生什麼事，YUMA 都會一直在這裡默默陪著你！",
+            "汪汪！聞到了沉重壓力的味道，要不要去上方的「心靈樹洞」吐吐苦水呢？",
+            "今天也是非常努力的一天呢！來，蓋一個 YUMA 專屬優秀認證戳章！✨",
+            "智平老師的「掛電話理論」聽聽就好～不開心來摸我才是正解，汪！🐶",
+            "伸個大懶腰～吸一口氣！我們一起對著天空大喊：『今天也會順利的！』🐕",
+            "汪！聽說點擊我可以獲得今日隱藏好運，恭喜你，你已經獲得了！🍀"
+        ];
+
+        function interactWithYuma() {
+            const bubble = document.getElementById('yuma-bubble');
+            const textElement = document.getElementById('yuma-text');
+            const avatar = document.querySelector('.yuma-avatar img');
+            if (!bubble || !textElement) return;
+            const randomIndex = Math.floor(Math.random() * yumaQuotes.length);
+            textElement.textContent = yumaQuotes[randomIndex];
+            bubble.classList.add('show');
+            if (avatar) {
+                avatar.style.transform = 'scale(0.8) translateY(12px)';
+                setTimeout(() => avatar.style.transform = '', 150);
+            }
+            clearTimeout(yumaTimer);
+            yumaTimer = setTimeout(() => bubble.classList.remove('show'), 4500);
+        }
+
+        function checkScrollPrompt() {
+            const prompt = document.getElementById('scroll-prompt-fixed');
+            const home = document.getElementById('page-home');
+            if (!prompt || !home) return;
+            if (!home.classList.contains('active-page')) { prompt.style.opacity = '0'; return; }
+            const atBottom = window.innerHeight + window.scrollY > document.body.offsetHeight - 180;
+            prompt.style.opacity = atBottom ? '0' : '0.8';
+        }
+
+        function toggleGlobalMusic() {
+            const bgMusic = document.getElementById('bgMusic');
+            if (!bgMusic) return;
+            controlPageMusic(bgMusic.paused ? 'play' : 'pause');
+        }
 
         const lyricsData = [
             { time: 9.98, text: "早八的鐘聲 敲醒一堆靈魂" },
@@ -1270,574 +1520,71 @@ body.modal-open #scroll-prompt-fixed {
             { time: 173.30, text: "福科輔導室~ 挺你到最後！" }
         ];
 
-        const yumaQuotes = [
-            "汪！今天過得好嗎？累了或心情不好，都歡迎來輔導室找我摸摸哦！🐾",
-            "（搖尾巴）不管今天發生什麼事，YUMA 都會一直在這裡默默陪著你！",
-            "汪汪！聞到了沉重壓力的味道，要不要去上方的「心靈樹洞」吐吐苦水呢？",
-            "今天也是非常努力的一天呢！來，蓋一個 YUMA 專屬優秀認證戳章！✨",
-            "智平老師的「掛電話理論」聽聽就好～不開心來摸我才是正解，汪！🐶",
-            "伸個大懶腰～吸一口氣！我們一起對著天空大喊：『今天也會順利的！』🐕",
-            "汪！聽說點擊我可以獲得今日隱藏好運，恭喜你，你已經獲得了！🍀"
-        ];
-
-        const filterDisplayNames = {
-            identity: { all: '全部身分', student: '學生專區', parent: '家長專區', teacher: '教師專區' },
-            topic: { all: '所有議題', relation: '人際', career: '生涯', emotion: '情緒', family: '家庭', affection: '情感', other: '其他' }
-        };
-
-        function getDefaultLimit() {
-            return window.innerWidth <= 950 ? 8 : 9;
-        }
-
-        function escapeHTML(value) {
-            return String(value ?? '').replace(/[&<>'"]/g, char => ({
-                '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
-            })[char]);
-        }
-
-        function safeURL(value, fallback = '#') {
-            const raw = String(value ?? '').trim();
-            if (!raw) return fallback;
-            try {
-                const parsed = new URL(raw, window.location.href);
-                if (['http:', 'https:', 'tel:', 'mailto:'].includes(parsed.protocol)) return parsed.href;
-            } catch (_) {}
-            return fallback;
-        }
-
-        function safeImageURL(value) {
-            const url = safeURL(value, '');
-            return url.startsWith('http://') || url.startsWith('https://') ? url : DEFAULT_IMAGE;
-        }
-
-        function stableHash(value) {
-            let hash = 2166136261;
-            for (let i = 0; i < value.length; i++) {
-                hash ^= value.charCodeAt(i);
-                hash = Math.imul(hash, 16777619);
-            }
-            return (hash >>> 0).toString(36);
-        }
-
-        function slugifyStable(title, link, index) {
-            const raw = `${title || ''}|${link || ''}`.trim();
-            return `FG-AUTO-${stableHash(raw || `row-${index}`)}`;
-        }
-
-        function parseRoute() {
-            const rawHash = window.location.hash.replace(/^#/, '');
-            let decoded = 'home';
-            try {
-                decoded = rawHash ? decodeURIComponent(rawHash) : 'home';
-            } catch (_) {
-                decoded = 'home';
-            }
-            const parts = decoded.split('/');
-            return { page: parts[0] || 'home', id: parts.slice(1).join('/') || null };
-        }
-
-        function setHash(route) {
-            window.location.hash = route;
-        }
-
-        function handleHashChange(options = {}) {
-            const { page: rawPage, id } = parseRoute();
-            const validPages = ['home', 'resource', 'faq', 'song', 'about', 'article'];
-            const page = validPages.includes(rawPage) ? rawPage : 'home';
-
-            document.querySelectorAll('.page').forEach(p => p.classList.toggle('active-page', p.id === `page-${page}`));
-            document.querySelectorAll('nav a, .dropdown-trigger').forEach(link => link.classList.remove('active-nav'));
-            document.getElementById(`nav-${page}`)?.classList.add('active-nav');
-
-            closeMenu();
-            closeDropdown();
-            if (!options.skipScroll) window.scrollTo({ top: 0, behavior: 'auto' });
-
-            if (page === 'article') {
-                if (id) renderArticleById(id);
-                else renderArticleMissing();
-            }
-            checkScrollPrompt();
-        }
-
-        function closeMenu() {
-            document.getElementById('nav-menu')?.classList.remove('active');
-            document.getElementById('menu-toggle')?.setAttribute('aria-expanded', 'false');
-        }
-
-        function toggleMenu() {
-            const menu = document.getElementById('nav-menu');
-            const toggle = document.getElementById('menu-toggle');
-            if (!menu || !toggle) return;
-            const open = !menu.classList.contains('active');
-            menu.classList.toggle('active', open);
-            toggle.setAttribute('aria-expanded', String(open));
-            if (open) closeDropdown();
-        }
-
-        function closeDropdown() {
-            const dropdown = document.getElementById('about-dropdown');
-            const trigger = dropdown?.querySelector('.dropdown-trigger');
-            dropdown?.classList.remove('mobile-open');
-            trigger?.setAttribute('aria-expanded', 'false');
-        }
-
-        function toggleDropdown(element) {
-            if (!element) return;
-            const trigger = element.querySelector('.dropdown-trigger');
-            if (window.innerWidth <= 950) {
-                const open = !element.classList.contains('mobile-open');
-                element.classList.toggle('mobile-open', open);
-                trigger?.setAttribute('aria-expanded', String(open));
-            }
-        }
-
-        function toggleEmergencyMobile() {
-            const linksContainer = document.getElementById('emergencyLinks');
-            const trigger = document.getElementById('emergency-toggle');
-            if (!linksContainer || !trigger) return;
-            const open = !linksContainer.classList.contains('show');
-            linksContainer.classList.toggle('show', open);
-            trigger.setAttribute('aria-expanded', String(open));
-            trigger.textContent = open ? '🚨 我想求助 ▴' : '🚨 我想求助 ▾';
-        }
-
-        function toggleMobileFilter(type) {
-            const group = document.querySelector(`.filter-group[data-filter-group="${type}"]`);
-            const toggle = group?.querySelector('.mobile-filter-toggle');
-            if (!group || !toggle) return;
-            const open = !group.classList.contains('is-open');
-            group.classList.toggle('is-open', open);
-            toggle.setAttribute('aria-expanded', String(open));
-        }
-
-        function syncMobileFilterLabels() {
-            Object.entries(filterDisplayNames).forEach(([type, names]) => {
-                const current = document.getElementById(`${type}-filter-current`);
-                if (current) current.textContent = names[appState.filters[type]] || names.all;
-            });
-        }
-
-        function syncFilterButtons() {
-            document.querySelectorAll('.filter-btn[data-value]').forEach(btn => btn.classList.remove('active'));
-            document.querySelector(`.filter-group[data-filter-group="identity"] .filter-btn[data-value="${appState.filters.identity}"]`)?.classList.add('active');
-            document.querySelector(`.filter-group[data-filter-group="topic"] .filter-btn[data-value="${appState.filters.topic}"]`)?.classList.add('active');
-            syncMobileFilterLabels();
-        }
-
-        async function fetchWithTimeout(url, timeout = DATA_TIMEOUT_MS) {
-            const controller = new AbortController();
-            const timer = setTimeout(() => controller.abort(), timeout);
-            try {
-                return await fetch(url, { signal: controller.signal, cache: 'no-store' });
-            } finally {
-                clearTimeout(timer);
-            }
-        }
-
-        function parseSheetRow(row, index) {
-            const getVal = keyword => {
-                if (row[keyword] !== undefined && row[keyword] !== null) return String(row[keyword]).trim();
-                const key = Object.keys(row).find(k => k.includes(keyword));
-                return key && row[key] !== null && row[key] !== undefined ? String(row[key]).trim() : '';
-            };
-
-            const title = getVal('標題');
-            const linkRaw = getVal('連結');
-            const explicitId = getVal('ID') || getVal('識別碼');
-            const rawIdentities = getVal('身分').split(',').map(t => t.trim()).filter(Boolean);
-            const rawTopics = getVal('議題').split(',').map(t => t.trim()).filter(Boolean);
-            const imgRaw = getVal('圖片');
-            const match = imgRaw.match(/id=([a-zA-Z0-9_-]+)/);
-            const imgUrl = match ? `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800` : DEFAULT_IMAGE;
-
-            return {
-                id: explicitId || slugifyStable(title, linkRaw, index),
-                identity: rawIdentities.map(t => identityMap[t] || '').filter(Boolean).join(' '),
-                topic: rawTopics.map(t => topicMap[t] || '').filter(Boolean).join(' '),
-                badgesIdentity: rawIdentities.length ? rawIdentities : ['資源推薦'],
-                badgesTopic: rawTopics.length ? rawTopics : ['精選文章'],
-                title,
-                text: getVal('簡介'),
-                image: imgUrl,
-                type: getVal('類型'),
-                link: linkRaw,
-                linkText: getVal('連結文字') || getVal('連結顯示文字'),
-                articleContent: getVal('內容'),
-                isYoutube: /(^|\.)youtube\.com|youtu\.be/i.test(linkRaw),
-                updatedAt: getVal('更新日期') || getVal('最後更新') || ''
-            };
-        }
-
-        async function fetchGoogleSheetData() {
-            const spinner = document.getElementById('loading-spinner');
-            const errorNote = document.getElementById('data-error-note');
-            const retry = document.getElementById('retry-data-btn');
-            try {
-                const response = await fetchWithTimeout(GAS_URL);
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                const data = await response.json();
-                if (!Array.isArray(data)) throw new Error('資料格式不是陣列');
-
-                const formPosts = data.map(parseSheetRow).filter(post => post.title || post.link || post.articleContent);
-                const ids = new Set(initialPostsData.map(p => p.id));
-                const normalizedPosts = [];
-                formPosts.forEach((post, i) => {
-                    let id = post.id || `FG-AUTO-${i}`;
-                    if (ids.has(id)) id = `${id}-${i + 1}`;
-                    ids.add(id);
-                    normalizedPosts.push({ ...post, id });
-                });
-
-                appState.posts = [...initialPostsData, ...normalizedPosts.reverse()];
-                appState.fetchTime = new Date();
-                spinner && (spinner.style.display = 'none');
-                document.getElementById('card-grid').style.display = 'grid';
-                errorNote?.classList.remove('show');
-                retry?.setAttribute('hidden', '');
-                executeCombinedFilter();
-                updateSearchStatus();
-
-                const route = parseRoute();
-                if (route.page === 'article' && route.id) renderArticleById(route.id);
-            } catch (error) {
-                console.error('抓取資料失敗：', error);
-                spinner && (spinner.style.display = 'none');
-                document.getElementById('card-grid').style.display = 'grid';
-                if (errorNote) {
-                    errorNote.textContent = '目前無法連線到最新資源資料，先顯示網站內建的基本資源。稍後可再次嘗試更新。';
-                    errorNote.classList.add('show');
-                }
-                if (retry) retry.removeAttribute('hidden');
-                executeCombinedFilter();
-                updateSearchStatus();
-            }
-        }
-
-        function updateSearchStatus() {
-            const status = document.getElementById('search-result-status');
-            const clear = document.getElementById('search-clear-btn');
-            const query = appState.search;
-            const count = appState.filtered.length;
-            if (clear) clear.hidden = !query;
-            if (!status) return;
-            let message = `${count} 筆資源`;
-            if (query) message = `搜尋「${query}」：${count} 筆資源`;
-            if (appState.fetchTime) {
-                const t = appState.fetchTime.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
-                message += `｜本次更新 ${t}`;
-            }
-            status.textContent = message;
-        }
-
-        function renderCards(dataToRender) {
-            appState.filtered = Array.isArray(dataToRender) ? dataToRender : [];
-            const grid = document.getElementById('card-grid');
-            const loadMoreBtn = document.getElementById('load-more-btn-container');
-            if (!grid) return;
-            grid.classList.toggle('compact-view', appState.compactView);
-            grid.innerHTML = '';
-
-            if (!appState.filtered.length) {
-                loadMoreBtn && (loadMoreBtn.style.display = 'none');
-                grid.insertAdjacentHTML('beforeend', `
-                    <div style="grid-column:1/-1;text-align:center;padding:50px 20px;background:#fff;border-radius:20px;border:2px dashed #E2877A;">
-                        <div style="font-size:3.5rem;margin-bottom:15px;">🥀</div>
-                        <h3 style="color:var(--primary-color);margin-bottom:12px;font-size:1.5rem;font-family:'NaikaiFont',sans-serif;">目前找不到完全符合的資源</h3>
-                        <p style="color:var(--text-muted);font-size:1.05rem;">可以換個關鍵字、取消一個篩選條件，或直接來輔導室找我們聊聊。</p>
-                    </div>`);
-                updateSearchStatus();
-                return;
-            }
-
-            const visible = appState.filtered.slice(0, appState.limit);
-            visible.forEach(post => {
-                const title = escapeHTML(post.title || '');
-                const description = escapeHTML(post.text || '');
-                const safeLink = safeURL(post.link, '#');
-                const imageUrl = safeImageURL(post.image);
-                const tagsHtml = [
-                    ...(post.badgesIdentity || []).map(tag => `<span class="badge badge-identity">${escapeHTML(tag)}</span>`),
-                    ...(post.badgesTopic || []).map(tag => `<span class="badge badge-topic">${escapeHTML(tag)}</span>`)
-                ].join('');
-
-                let mediaContent = `<img src="${escapeHTML(imageUrl)}" alt="${title || '資源圖片'}" loading="lazy" decoding="async">`;
-                if (post.isYoutube && safeLink !== '#') {
-                    mediaContent = `<a href="${escapeHTML(safeLink)}" target="_blank" rel="noopener noreferrer" class="video-preview-wrapper" aria-label="開啟：${title}"><div class="play-button" aria-hidden="true"></div><img src="${escapeHTML(imageUrl)}" alt="${title || '影音資源圖片'}" loading="lazy" decoding="async"></a>`;
-                }
-
-                let cardAction = `<span style="color:var(--text-muted);font-size:.92rem;">連結尚未提供</span>`;
-                if (post.type === '站內文章') {
-                    cardAction = `<button class="card-action" type="button" data-article-id="${escapeHTML(post.id)}">閱讀文章 ➔</button>`;
-                } else if (safeLink !== '#') {
-                    cardAction = `<a href="${escapeHTML(safeLink)}" target="_blank" rel="noopener noreferrer">${escapeHTML(post.linkText || '前往連結 ➔')}</a>`;
-                }
-
-                const cardHTML = `
-                    <article class="card" data-identity="${escapeHTML(post.identity)}" data-topic="${escapeHTML(post.topic)}">
-                        <div class="card-media">${mediaContent}</div>
-                        <div class="card-body">
-                            <div class="card-tags">${tagsHtml}</div>
-                            <h3 class="card-title">${title}</h3>
-                            <div class="card-text">${description}</div>
-                            <div class="card-link">${cardAction}</div>
-                        </div>
-                    </article>`;
-                grid.insertAdjacentHTML('beforeend', cardHTML);
-            });
-
-            if (appState.filtered.length > appState.limit) {
-                loadMoreBtn.style.display = 'block';
-                loadMoreBtn.innerHTML = `<button class="filter-btn active naikai-text" id="load-more-action" type="button" style="padding:10px 30px;font-size:1.1rem;box-shadow:0 4px 15px rgba(91,132,118,0.3);">✨ 展開更多資源 ▾</button>`;
-            } else if (appState.filtered.length > getDefaultLimit()) {
-                loadMoreBtn.style.display = 'block';
-                loadMoreBtn.innerHTML = `<button class="filter-btn naikai-text" id="collapse-action" type="button" style="padding:10px 30px;font-size:1.1rem;border:1.5px solid var(--primary-color);color:var(--primary-color);background:transparent;">✨ 收合資源 ▴</button>`;
-            } else {
-                loadMoreBtn.style.display = 'none';
-            }
-            updateSearchStatus();
-        }
-
-        function loadMoreCards() {
-            appState.limit += window.innerWidth <= 950 ? 8 : 9;
-            renderCards(appState.filtered);
-        }
-
-        function collapseCards() {
-            appState.limit = getDefaultLimit();
-            renderCards(appState.filtered);
-            document.querySelector('.filter-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        function toggleViewMode() {
-            appState.compactView = !appState.compactView;
-            const grid = document.getElementById('card-grid');
-            const btn = document.getElementById('view-toggle-btn');
-            grid?.classList.toggle('compact-view', appState.compactView);
-            if (btn) btn.textContent = appState.compactView ? '⊟ 切換完整顯示' : '⊞ 切換多欄顯示';
-        }
-
-        function renderArticleById(id) {
-            const post = appState.posts.find(item => String(item.id) === String(id));
-            if (!post) {
-                renderArticleMissing();
-                return;
-            }
-            document.getElementById('article-detail-title').textContent = post.title || '無標題';
-            const tagHost = document.getElementById('article-detail-tags');
-            tagHost.innerHTML = '';
-            const identityLength = (post.badgesIdentity || []).length;
-            [...(post.badgesIdentity || []), ...(post.badgesTopic || [])].forEach((tag, index) => {
-                const span = document.createElement('span');
-                span.className = `badge ${index < identityLength ? 'badge-identity' : 'badge-topic'}`;
-                span.style.fontSize = '.85rem';
-                span.style.padding = '6px 16px';
-                span.textContent = tag;
-                tagHost.appendChild(span);
-            });
-
-            const imgEl = document.getElementById('article-detail-image');
-            if (post.image && !String(post.image).includes('1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo')) {
-                imgEl.src = safeImageURL(post.image);
-                imgEl.alt = post.title || '文章圖片';
-                imgEl.style.display = 'block';
-            } else {
-                imgEl.removeAttribute('src');
-                imgEl.style.display = 'none';
-            }
-            document.getElementById('article-detail-content').textContent = post.articleContent || '沒有提供詳細內容。';
-        }
-
-        function renderArticleMissing() {
-            document.getElementById('article-detail-title').textContent = '找不到這篇文章';
-            document.getElementById('article-detail-tags').innerHTML = '';
-            const imgEl = document.getElementById('article-detail-image');
-            imgEl.style.display = 'none';
-            imgEl.removeAttribute('src');
-            document.getElementById('article-detail-content').textContent = '這篇內容可能已經移除，或網址裡沒有帶上文章識別碼。請回到資源百寶箱重新選擇。';
-        }
-
-        function openArticle(id) {
-            if (!id) return;
-            setHash(`article/${encodeURIComponent(id)}`);
-        }
-
-        function executeCombinedFilter() {
-            appState.limit = getDefaultLimit();
-            const filteredData = appState.posts.filter(post => {
-                const cardIdentities = post.identity ? post.identity.split(/\s+/) : [];
-                const cardTopics = post.topic ? post.topic.split(/\s+/) : [];
-                const matchIdentity = appState.filters.identity === 'all' || cardIdentities.includes(appState.filters.identity);
-                const matchTopic = appState.filters.topic === 'all' || cardTopics.includes(appState.filters.topic);
-                const searchTarget = [
-                    post.title, post.text, post.articleContent, post.identity, post.topic,
-                    ...(post.badgesIdentity || []), ...(post.badgesTopic || []), post.type, post.link
-                ].filter(Boolean).join(' ').toLowerCase();
-                const matchSearch = !appState.search || searchTarget.includes(appState.search);
-                return matchIdentity && matchTopic && matchSearch;
-            });
-            renderCards(filteredData);
-            syncFilterButtons();
-        }
-
-        function filterData(type, value) {
-            if (type !== 'identity' && type !== 'topic') return;
-            appState.filters[type] = value;
-            executeCombinedFilter();
-        }
-
-        function handleSearch() {
-            clearTimeout(appState.searchTimer);
-            appState.searchTimer = setTimeout(() => {
-                appState.search = document.getElementById('global-search')?.value.toLowerCase().trim() || '';
-                executeCombinedFilter();
-            }, 180);
-        }
-
-        function clearSearch() {
-            const input = document.getElementById('global-search');
-            if (!input) return;
-            input.value = '';
-            appState.search = '';
-            executeCombinedFilter();
-            input.focus();
-        }
-
-        function interactWithYuma() {
-            const bubble = document.getElementById('yuma-bubble');
-            const textElement = document.getElementById('yuma-text');
-            const avatar = document.querySelector('.yuma-avatar img');
-            if (!bubble || !textElement) return;
-            textElement.textContent = yumaQuotes[Math.floor(Math.random() * yumaQuotes.length)];
-            bubble.classList.add('show');
-            if (avatar) {
-                avatar.style.transform = 'scale(0.8) translateY(12px)';
-                setTimeout(() => avatar.style.transform = '', 150);
-            }
-            clearTimeout(appState.yumaTimer);
-            appState.yumaTimer = setTimeout(() => bubble.classList.remove('show'), 4500);
-        }
-
-        function checkScrollPrompt() {
-            const prompt = document.getElementById('scroll-prompt-fixed');
-            const home = document.getElementById('page-home');
-            if (!prompt || !home) return;
-            if (!home.classList.contains('active-page') || document.body.classList.contains('modal-open')) {
-                prompt.style.opacity = '0';
-                return;
-            }
-            const atBottom = window.innerHeight + window.scrollY > document.body.offsetHeight - 180;
-            prompt.style.opacity = atBottom ? '0' : '0.8';
-        }
-
-        function getMusicPreference() {
-            try {
-                return localStorage.getItem(MUSIC_STORAGE_KEY) !== 'false';
-            } catch (_) {
-                return true;
-            }
-        }
-
-        function setMusicPreference(enabled) {
-            try { localStorage.setItem(MUSIC_STORAGE_KEY, String(enabled)); } catch (_) {}
-        }
-
-        function syncMusicUI() {
+        function closeModalAndPlayMusic() {
             const bgMusic = document.getElementById('bgMusic');
             const vinyl = document.getElementById('vinyl-record');
             const playBtn = document.getElementById('btn-song-play');
             const pauseBtn = document.getElementById('btn-song-pause');
             const globalBtn = document.getElementById('global-music-btn');
-            const playing = Boolean(bgMusic && !bgMusic.paused && !bgMusic.ended);
-            vinyl?.classList.toggle('spinning', playing);
-            playBtn?.classList.toggle('active', playing);
-            pauseBtn?.classList.toggle('active', !playing);
-            if (globalBtn) globalBtn.textContent = playing ? '🔊' : '🔇';
-            globalBtn?.setAttribute('aria-label', playing ? '暫停背景音樂' : '播放背景音樂');
-            globalBtn?.setAttribute('title', playing ? '關閉主題曲' : '開啟主題曲');
-        }
+            const welcomeModal = document.getElementById('welcomeModal');
 
-        function playMusic({ restart = false, respectPreference = true } = {}) {
-            const bgMusic = document.getElementById('bgMusic');
-            if (!bgMusic) return Promise.resolve(false);
-            if (respectPreference && !getMusicPreference()) {
-                syncMusicUI();
-                return Promise.resolve(false);
+            if (!welcomeModal) return;
+
+            if (bgMusic) {
+                bgMusic.currentTime = 0;
+                bgMusic.volume = 0;
+                bgMusic.play().then(() => {
+                    const targetVolume = 0.4;
+                    const fadeDuration = 2000;
+                    const intervalTime = 50;
+                    const step = targetVolume / (fadeDuration / intervalTime);
+                    let fadeId = setInterval(() => {
+                        if (bgMusic.volume + step >= targetVolume) {
+                            bgMusic.volume = targetVolume;
+                            clearInterval(fadeId);
+                        } else {
+                            bgMusic.volume += step;
+                        }
+                    }, intervalTime);
+
+                    vinyl?.classList.add('spinning');
+                    playBtn?.classList.add('active');
+                    pauseBtn?.classList.remove('active');
+                    if (globalBtn) globalBtn.textContent = '🔊';
+                }).catch(() => {});
             }
-            if (restart) bgMusic.currentTime = 0;
-            return bgMusic.play().then(() => {
-                setMusicPreference(true);
-                syncMusicUI();
-                return true;
-            }).catch(() => false);
-        }
 
-        function pauseMusic() {
-            const bgMusic = document.getElementById('bgMusic');
-            if (!bgMusic) return;
-            bgMusic.pause();
-            setMusicPreference(false);
-            syncMusicUI();
-        }
-
-        function toggleGlobalMusic() {
-            const bgMusic = document.getElementById('bgMusic');
-            if (!bgMusic) return;
-            if (bgMusic.paused) playMusic({ respectPreference: false });
-            else pauseMusic();
-        }
-
-        function closeModal({ play = false } = {}) {
-            const modal = document.getElementById('welcomeModal');
-            if (!modal) return;
-            if (play) {
-                const bgMusic = document.getElementById('bgMusic');
-                if (bgMusic) {
-                    bgMusic.currentTime = 0;
-                    bgMusic.volume = 0;
-                    playMusic({ respectPreference: false }).then(ok => {
-                        if (!ok) return;
-                        const targetVolume = 0.4;
-                        const steps = 40;
-                        let step = 0;
-                        const fadeId = setInterval(() => {
-                            step += 1;
-                            bgMusic.volume = Math.min(targetVolume, targetVolume * (step / steps));
-                            if (step >= steps) clearInterval(fadeId);
-                        }, 50);
-                    });
-                }
-            }
-            modal.setAttribute('aria-hidden', 'true');
+            welcomeModal.setAttribute('aria-hidden', 'true');
             document.body.classList.remove('modal-open');
             setTimeout(() => {
-                modal.style.display = 'none';
+                welcomeModal.style.display = 'none';
                 checkScrollPrompt();
-            }, 250);
-            const restore = appState.lastFocusedBeforeModal;
-            setTimeout(() => restore?.focus?.(), 280);
+            }, 600);
         }
 
-        function closeModalAndPlayMusic() {
-            closeModal({ play: true });
-        }
+        function controlPageMusic(action) {
+            const bgMusic = document.getElementById('bgMusic');
+            const playBtn = document.getElementById('btn-song-play');
+            const pauseBtn = document.getElementById('btn-song-pause');
+            const vinyl = document.getElementById('vinyl-record');
+            const globalBtn = document.getElementById('global-music-btn');
+            if (!bgMusic) return;
 
-        function getFocusableInModal() {
-            const modal = document.getElementById('welcomeModal');
-            if (!modal) return [];
-            return [...modal.querySelectorAll('button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])')]
-                .filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
-        }
-
-        function openWelcomeModal() {
-            const modal = document.getElementById('welcomeModal');
-            const door = document.getElementById('door-enter-btn');
-            if (!modal) return;
-            appState.lastFocusedBeforeModal = document.activeElement;
-            modal.style.display = 'flex';
-            modal.setAttribute('aria-hidden', 'false');
-            document.body.classList.add('modal-open');
-            requestAnimationFrame(() => door?.focus());
+            if (action === 'play') {
+                bgMusic.play().then(() => {
+                    playBtn?.classList.add('active'); pauseBtn?.classList.remove('active'); vinyl?.classList.add('spinning');
+                    if (globalBtn) globalBtn.textContent = '🔊';
+                }).catch(() => {});
+            } else if (action === 'pause') {
+                bgMusic.pause(); playBtn?.classList.remove('active'); pauseBtn?.classList.add('active'); vinyl?.classList.remove('spinning');
+                if (globalBtn) globalBtn.textContent = '🔇';
+            } else if (action === 'restart') {
+                bgMusic.currentTime = 0;
+                bgMusic.play().then(() => {
+                    playBtn?.classList.add('active'); pauseBtn?.classList.remove('active'); vinyl?.classList.add('spinning');
+                    if (globalBtn) globalBtn.textContent = '🔊';
+                }).catch(() => {});
+            }
         }
 
         function toggleFullLyrics() {
@@ -1857,10 +1604,9 @@ body.modal-open #scroll-prompt-fixed {
                 if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                     if (wrapper.requestFullscreen) await wrapper.requestFullscreen();
                     else if (wrapper.webkitRequestFullscreen) await wrapper.webkitRequestFullscreen();
-                } else if (document.exitFullscreen) {
-                    await document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) {
-                    await document.webkitExitFullscreen();
+                } else {
+                    if (document.exitFullscreen) await document.exitFullscreen();
+                    else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
                 }
             } catch (_) {}
             updateFullscreenButton();
@@ -1872,163 +1618,85 @@ body.modal-open #scroll-prompt-fixed {
             btn.textContent = (!document.fullscreenElement && !document.webkitFullscreenElement) ? '⛶ 沉浸全螢幕' : '✖ 退出全螢幕';
         }
 
-        function bindEvents() {
-            const navToggle = document.getElementById('menu-toggle');
-            navToggle?.addEventListener('click', toggleMenu);
-
-            document.querySelectorAll('#nav-menu a').forEach(link => link.addEventListener('click', closeMenu));
-
-            const dropdown = document.getElementById('about-dropdown');
-            const dropdownTrigger = dropdown?.querySelector('.dropdown-trigger');
-            dropdownTrigger?.addEventListener('click', () => toggleDropdown(dropdown));
-
-            document.getElementById('emergency-toggle')?.addEventListener('click', toggleEmergencyMobile);
-            document.getElementById('door-enter-btn')?.addEventListener('click', closeModalAndPlayMusic);
-            document.getElementById('modal-skip-btn')?.addEventListener('click', () => closeModal({ play: false }));
-
-            const search = document.getElementById('global-search');
-            search?.addEventListener('input', handleSearch);
-            document.getElementById('search-clear-btn')?.addEventListener('click', clearSearch);
-            document.getElementById('view-toggle-btn')?.addEventListener('click', toggleViewMode);
-            document.getElementById('global-music-btn')?.addEventListener('click', toggleGlobalMusic);
-            document.getElementById('btn-toggle-lyrics')?.addEventListener('click', toggleFullLyrics);
-            document.getElementById('btn-fullscreen')?.addEventListener('click', toggleFullscreen);
-            document.getElementById('btn-song-play')?.addEventListener('click', () => playMusic({ respectPreference: false }));
-            document.getElementById('btn-song-pause')?.addEventListener('click', pauseMusic);
-            document.getElementById('btn-song-restart')?.addEventListener('click', () => playMusic({ restart: true, respectPreference: false }));
-            document.getElementById('back-to-resource-btn')?.addEventListener('click', backToResourceBox);
-            document.getElementById('yuma-button-anchor')?.addEventListener('click', interactWithYuma);
-
-            document.querySelectorAll('.mobile-filter-toggle').forEach(button => {
-                button.addEventListener('click', () => toggleMobileFilter(button.closest('.filter-group')?.dataset.filterGroup));
-            });
-            document.querySelectorAll('.filter-btn[data-value]').forEach(btn => {
-                btn.addEventListener('click', () => filterData(btn.closest('.filter-group')?.dataset.filterGroup, btn.dataset.value));
-            });
-
-            document.getElementById('card-grid')?.addEventListener('click', event => {
-                const action = event.target.closest('[data-article-id]');
-                if (action) openArticle(action.dataset.articleId);
-            });
-            document.getElementById('load-more-btn-container')?.addEventListener('click', event => {
-                if (event.target.closest('#load-more-action')) loadMoreCards();
-                if (event.target.closest('#collapse-action')) collapseCards();
-            });
-
-            document.getElementById('retry-data-btn')?.addEventListener('click', fetchGoogleSheetData);
-
-            document.addEventListener('keydown', event => {
-                if (event.key === 'Escape') {
-                    if (document.body.classList.contains('modal-open')) {
-                        closeModal({ play: false });
-                        event.preventDefault();
-                        return;
-                    }
-                    closeMenu();
-                    closeDropdown();
-                }
-                if (event.key === 'Tab' && document.body.classList.contains('modal-open')) {
-                    const focusable = getFocusableInModal();
-                    if (!focusable.length) return;
-                    const first = focusable[0];
-                    const last = focusable[focusable.length - 1];
-                    if (event.shiftKey && document.activeElement === first) {
-                        last.focus();
-                        event.preventDefault();
-                    } else if (!event.shiftKey && document.activeElement === last) {
-                        first.focus();
-                        event.preventDefault();
-                    }
-                }
-            });
-        }
-
-        function initLyrics() {
+        document.addEventListener('DOMContentLoaded', () => {
             const wrapper = document.getElementById('lyrics-wrapper');
-            if (!wrapper) return;
-            wrapper.replaceChildren();
             lyricsData.forEach((lyric, index) => {
                 const p = document.createElement('p');
                 p.className = 'lyric-line';
                 p.id = 'lyric-' + index;
                 p.textContent = lyric.text;
-                wrapper.appendChild(p);
+                wrapper?.appendChild(p);
             });
-        }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            bindEvents();
-            initLyrics();
+            document.querySelector('.dropdown-trigger')?.addEventListener('click', event => toggleDropdown(event.currentTarget.closest('.dropdown')));
+            document.querySelectorAll('#nav-menu a').forEach(link => link.addEventListener('click', closeMenu));
+            document.addEventListener('keydown', event => {
+                if (event.key === 'Escape') {
+                    closeMenu(); closeDropdown();
+                }
+            });
+
+            const welcomeModal = document.getElementById('welcomeModal');
+            if (welcomeModal) {
+                welcomeModal.style.display = 'flex';
+                welcomeModal.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('modal-open');
+            }
+
             syncMobileFilterLabels();
             handleHashChange({ skipScroll: true });
-
-            const audioEl = document.getElementById('bgMusic');
-            if (audioEl) {
-                audioEl.addEventListener('timeupdate', () => {
-                    const time = audioEl.currentTime;
-                    let activeIndex = -1;
-                    for (let i = 0; i < lyricsData.length; i++) {
-                        if (time >= lyricsData[i].time - 0.3) activeIndex = i;
-                        else break;
-                    }
-                    if (activeIndex !== appState.currentLyricIndex && activeIndex !== -1) {
-                        if (appState.currentLyricIndex !== -1) document.getElementById('lyric-' + appState.currentLyricIndex)?.classList.remove('active');
-                        const newEl = document.getElementById('lyric-' + activeIndex);
-                        const container = document.getElementById('lyrics-container');
-                        if (newEl && container) {
-                            newEl.classList.add('active');
-                            const scrollPos = newEl.offsetTop - (container.clientHeight / 2) + (newEl.clientHeight / 2);
-                            container.scrollTo({ top: scrollPos, behavior: 'smooth' });
-                        }
-                        appState.currentLyricIndex = activeIndex;
-                    }
-                });
-                audioEl.addEventListener('play', syncMusicUI);
-                audioEl.addEventListener('pause', syncMusicUI);
-                audioEl.addEventListener('ended', syncMusicUI);
-                if (getMusicPreference() === false) audioEl.pause();
-            }
-
-            const welcome = document.getElementById('welcomeModal');
-            const hasSeenModal = (() => {
-                try { return sessionStorage.getItem('fudaoh-welcome-seen') === 'true'; } catch (_) { return false; }
-            })();
-            if (welcome && !hasSeenModal) {
-                openWelcomeModal();
-            } else if (welcome) {
-                welcome.style.display = 'none';
-                welcome.setAttribute('aria-hidden', 'true');
-            }
-
-            document.getElementById('door-enter-btn')?.addEventListener('click', () => {
-                try { sessionStorage.setItem('fudaoh-welcome-seen', 'true'); } catch (_) {}
-            }, { once: true });
-            document.getElementById('modal-skip-btn')?.addEventListener('click', () => {
-                try { sessionStorage.setItem('fudaoh-welcome-seen', 'true'); } catch (_) {}
-            }, { once: true });
-
             fetchGoogleSheetData();
             setTimeout(checkScrollPrompt, 800);
-            syncMusicUI();
         });
 
         window.addEventListener('hashchange', () => handleHashChange());
-        window.addEventListener('resize', () => {
-            appState.limit = getDefaultLimit();
-            if (appState.filtered.length) renderCards(appState.filtered);
-        });
+        window.addEventListener('resize', () => { currentLimit = getDefaultLimit(); if (filteredCache.length) renderCards(filteredCache); });
         window.addEventListener('scroll', () => {
             const yuma = document.querySelector('.yuma-container');
             if (yuma) {
                 yuma.classList.add('faded');
-                clearTimeout(appState.yumaScrollTimer);
-                appState.yumaScrollTimer = setTimeout(() => yuma.classList.remove('faded'), 500);
+                clearTimeout(yumaScrollTimer);
+                yumaScrollTimer = setTimeout(() => yuma.classList.remove('faded'), 500);
             }
             checkScrollPrompt();
         }, { passive: true });
 
+        const audioEl = document.getElementById('bgMusic');
+        if (audioEl) {
+            audioEl.addEventListener('timeupdate', () => {
+                const time = audioEl.currentTime;
+                let activeIndex = -1;
+                if (currentLyricIndex >= 0 && currentLyricIndex < lyricsData.length) {
+                    const currentT = lyricsData[currentLyricIndex].time - 0.3;
+                    const nextT = (currentLyricIndex + 1 < lyricsData.length) ? lyricsData[currentLyricIndex + 1].time - 0.3 : Infinity;
+                    if (time >= currentT && time < nextT) return;
+                }
+                for (let i = 0; i < lyricsData.length; i++) {
+                    if (time >= lyricsData[i].time - 0.3) activeIndex = i;
+                    else break;
+                }
+                if (activeIndex !== currentLyricIndex && activeIndex !== -1) {
+                    if (currentLyricIndex !== -1) document.getElementById('lyric-' + currentLyricIndex)?.classList.remove('active');
+                    const newEl = document.getElementById('lyric-' + activeIndex);
+                    const container = document.getElementById('lyrics-container');
+                    if (newEl && container) {
+                        newEl.classList.add('active');
+                        const scrollPos = newEl.offsetTop - (container.clientHeight / 2) + (newEl.clientHeight / 2);
+                        container.scrollTo({ top: scrollPos, behavior: 'smooth' });
+                    }
+                    currentLyricIndex = activeIndex;
+                }
+            });
+            audioEl.addEventListener('ended', () => {
+                document.getElementById('vinyl-record')?.classList.remove('spinning');
+                document.getElementById('btn-song-play')?.classList.remove('active');
+                document.getElementById('btn-song-pause')?.classList.remove('active');
+                const btn = document.getElementById('global-music-btn'); if (btn) btn.textContent = '🔇';
+            });
+        }
+
         document.addEventListener('fullscreenchange', updateFullscreenButton);
         document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
-</script>
+    </script>
 </body>
 </html>
