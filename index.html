@@ -43,6 +43,8 @@
             --text-soft: #8C867A;
             --danger-color: #CD5334;
             --danger-dark: #9A3E1C;
+            --emergency-color: #A8615A;
+            --emergency-color-soft: #B8746C;
             --border-color: rgba(230, 224, 212, 0.7);
             --border-solid: #E6E2D8;
             --border-soft: #EFECE4;
@@ -138,7 +140,7 @@
         }
 
         .emergency-bar {
-            background: var(--danger-color);
+            background: var(--emergency-color);
             text-align: center;
             font-size: 0.95rem;
             font-weight: 500;
@@ -496,8 +498,24 @@
         }
 
         .card:hover { transform: translateY(-8px); box-shadow: var(--hover-shadow); border-color: rgba(91, 132, 118, 0.3); }
-        .card-media { width: 100%; height: 190px; position: relative; overflow: hidden; background: #EFECE4; }
-        .card-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .card-media {
+            width: 100%;
+            height: 210px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F3EFE8;
+        }
+        .card-media img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+            padding: 8px;
+        }
         .card-body { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
         .card-tags { margin-bottom: 12px; }
 
@@ -520,13 +538,56 @@
         .card-text { flex-grow: 1; margin-bottom: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; white-space: pre-line; }
         .card-link { margin-top: auto; text-align: right; }
         .video-preview-wrapper { width: 100%; height: 100%; position: relative; display: block; overflow: hidden; }
-        .video-preview-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+        .video-preview-wrapper img { width: 100%; height: 100%; object-fit: contain; object-position: center; padding: 8px; transition: transform .4s ease; }
         .video-preview-wrapper::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,.12); transition: background .3s; }
         .video-preview-wrapper:hover img { transform: scale(1.04); }
         .video-preview-wrapper:hover::after { background: rgba(0,0,0,.25); }
         .play-button { position: absolute; top: 50%; left: 50%; z-index: 2; width: 65px; height: 45px; display: flex; align-items: center; justify-content: center; background: rgba(224,43,36,.9); border-radius: 14px; transform: translate(-50%,-50%); box-shadow: 0 4px 15px rgba(0,0,0,.2); transition: all .3s; }
         .play-button::after { content: ''; width: 0; height: 0; display: block; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent #fff; margin-left: 4px; }
         .video-preview-wrapper:hover .play-button { background: #F00000; transform: translate(-50%,-50%) scale(1.08); }
+
+        .social-preview-wrapper {
+            position: relative;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .social-preview-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(250, 248, 245, 0.12);
+            pointer-events: none;
+        }
+        .social-preview-wrapper img {
+            transition: transform .4s ease;
+        }
+        .social-preview-wrapper:hover img { transform: scale(1.025); }
+        .social-logo-badge {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 3;
+            width: 68px;
+            height: 68px;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,.92);
+            border: 3px solid rgba(255,255,255,.9);
+            box-shadow: 0 6px 18px rgba(0,0,0,.18);
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+        }
+        .social-logo-badge svg { width: 38px; height: 38px; display: block; }
+        .social-logo-facebook svg { fill: #1877F2; }
+        .social-logo-instagram svg { fill: none; stroke: #C45A78; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+        .social-logo-instagram .instagram-dot { fill: #C45A78; stroke: none; }
 
         .card-link a, .card-link button.card-action { color: var(--primary-color); text-decoration: none; font-size: 0.95rem; font-weight: bold; transition: color 0.2s; }
         .card-link a:hover, .card-link button.card-action:hover { color: var(--secondary-color); }
@@ -849,7 +910,10 @@
             .footer-divider { display: none; }
             .view-toggle-container { display: block; margin: 10px 0 0; }
             .grid.compact-view { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .grid.compact-view .card-media { height: 110px; }
+            .grid.compact-view .card-media { height: 130px; }
+            .grid.compact-view .card-media img { padding: 6px; }
+            .grid.compact-view .social-logo-badge { width: 50px; height: 50px; }
+            .grid.compact-view .social-logo-badge svg { width: 28px; height: 28px; }
             .grid.compact-view .card-body { padding: 12px; }
             .grid.compact-view .card-title { margin-bottom: 6px; font-size: 1.05rem; line-height: 1.3; }
             .grid.compact-view .card-text { display: none; }
@@ -1448,7 +1512,8 @@
                 badgesTopic: ['其他'],
                 title: '📱 Facebook 粉絲專頁',
                 text: '最即時的輔導室活動公告、親職教育講座資訊、精美圖文懶人包，歡迎按讚追蹤「福科國中輔導室」！',
-                type: '外部連結'
+                type: '外部連結',
+                socialPlatform: 'facebook'
             },
             {
                 id: 'FG-INSTAGRAM',
@@ -1461,7 +1526,8 @@
                 badgesTopic: ['其他'],
                 title: '📸 Instagram 官方帳號',
                 text: '貼近學生的圖文心情點評、限時動態小互動、心理健康週活動花絮。趕快拿起手機追蹤「福科國中輔導室」！',
-                type: '外部連結'
+                type: '外部連結',
+                socialPlatform: 'instagram'
             }
         ];
         const lyricsData = [
@@ -1756,7 +1822,16 @@
                     const imageUrl = Utils.safeImageURL(post.image);
                     const tagsHtml = [...(post.badgesIdentity || []).map(tag => `<span class="badge badge-identity">${Utils.escapeHTML(tag)}</span>`), ...(post.badgesTopic || []).map(tag => `<span class="badge badge-topic">${Utils.escapeHTML(tag)}</span>`)].join('');
                     let mediaContent = `<img src="${Utils.escapeHTML(imageUrl)}" alt="${title || '資源圖片'}" loading="lazy" decoding="async">`;
-                    if (post.isYoutube && safeLink !== '#') mediaContent = `<a href="${Utils.escapeHTML(safeLink)}" target="_blank" rel="noopener noreferrer" class="video-preview-wrapper" aria-label="開啟：${title}"><div class="play-button" aria-hidden="true"></div><img src="${Utils.escapeHTML(imageUrl)}" alt="${title || '影音資源圖片'}" loading="lazy" decoding="async"></a>`;
+                    if (post.isYoutube && safeLink !== '#') {
+                        mediaContent = `<a href="${Utils.escapeHTML(safeLink)}" target="_blank" rel="noopener noreferrer" class="video-preview-wrapper" aria-label="開啟：${title}"><div class="play-button" aria-hidden="true"></div><img src="${Utils.escapeHTML(imageUrl)}" alt="${title || '影音資源圖片'}" loading="lazy" decoding="async"></a>`;
+                    } else if (post.socialPlatform && safeLink !== '#') {
+                        const socialPlatform = post.socialPlatform === 'instagram' ? 'instagram' : 'facebook';
+                        const socialLabel = socialPlatform === 'instagram' ? 'Instagram' : 'Facebook';
+                        const socialSvg = socialPlatform === 'instagram'
+                            ? `<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7.5" y="7.5" width="33" height="33" rx="9"></rect><circle cx="24" cy="24" r="8.2"></circle><circle class="instagram-dot" cx="34.3" cy="13.7" r="2.2"></circle></svg>`
+                            : `<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M28.6 8.5h6V2.1c-1-.1-4.1-.4-7.7-.4-7.6 0-12.8 4.7-12.8 13.3v7.4H6v7.1h8.1v18h7.9v-18h7.8l1.2-7.1H22V15.8c0-2.1.6-3.6 3.9-3.6h2.7V8.5z"></path></svg>`;
+                        mediaContent = `<a href="${Utils.escapeHTML(safeLink)}" target="_blank" rel="noopener noreferrer" class="social-preview-wrapper social-${socialPlatform}" aria-label="開啟：${socialLabel}：${title}"><img src="${Utils.escapeHTML(imageUrl)}" alt="${title || '社群資源圖片'}" loading="lazy" decoding="async"><span class="social-logo-badge social-logo-${socialPlatform}" aria-hidden="true">${socialSvg}</span></a>`;
+                    }
                     const cardAction = post.type === '站內文章'
                         ? `<button class="card-action" type="button" data-card-action="article" data-id="${Utils.escapeHTML(post.id)}">閱讀文章 ➔</button>`
                         : safeLink !== '#'
