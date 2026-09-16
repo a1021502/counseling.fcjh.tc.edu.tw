@@ -505,7 +505,6 @@
             <div class="door-btn-wrapper">
                 <div class="door-indicator naikai-text">👉 點擊大門進入網頁 👈</div>
                 <button class="door-btn" id="door-entry-btn" onclick="closeModalAndPlayMusic()" aria-label="推開大門進入網站"></button>
-                <p class="modal-status">按 Enter 或空白鍵也可以推開大門。</p>
             </div>
         </div>
     </div>
@@ -1047,7 +1046,6 @@
             searchQuery: '',
             currentLimit: 0,
             currentView: 'full',
-            dataSync: { status: 'initializing', syncedAt: null }
         };
         let yumaTimer = null;
         let yumaScrollTimer = null;
@@ -1085,16 +1083,53 @@
             return slug || 'resource';
         }
 
-        function getResourceId(row, index) {
-            const explicit = String(row['ID'] ?? row['id'] ?? row['唯一ID'] ?? '').trim();
-            if (explicit) return explicit;
-            const title = String(row['標題'] ?? '').trim();
-            const link = String(row['連結'] ?? '').trim();
-            return `res-${slugifyResourceId(title)}-${makeStableId(title + '|' + link)}`;
+        function getRowValue(row, aliases = []) {
+            for (const alias of aliases) {
+                if (row[alias] !== undefined && row[alias] !== null) {
+                    const value = String(row[alias]).trim();
+                    if (value) return value;
+                }
+            }
+            const keys = Object.keys(row);
+            for (const alias of aliases) {
+                const matchedKey = keys.find(key => key.includes(alias));
+                if (matchedKey && row[matchedKey] !== undefined && row[matchedKey] !== null) {
+                    const value = String(row[matchedKey]).trim();
+                    if (value) return value;
+                }
+            }
+            return '';
         }
 
-        function formatSyncTime(date = new Date()) {
-            return new Intl.DateTimeFormat('zh-TW', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(date);
+        function getFormTimestamp(row) {
+            return getRowValue(row, ['Timestamp', '時間戳記', '時間戳', '提交時間', '回覆時間', '時間']);
+        }
+
+        function normalizeTimestampId(timestamp) {
+            const raw = String(timestamp ?? '').trim();
+            if (!raw) return '';
+            const parsed = new Date(raw);
+            if (!Number.isNaN(parsed.getTime())) {
+                const pad = value => String(value).padStart(2, '0');
+                return `${parsed.getFullYear()}${pad(parsed.getMonth() + 1)}${pad(parsed.getDate())}-${pad(parsed.getHours())}${pad(parsed.getMinutes())}${pad(parsed.getSeconds())}${String(parsed.getMilliseconds()).padStart(3, '0')}`;
+            }
+            return raw.replace(/[^0-9A-Za-z]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+        }
+
+        function getResourceId(row, index) {
+            const explicit = getRowValue(row, ['ID', 'id', '唯一ID']);
+            if (explicit) return explicit;
+
+            // Google Forms-linked Sheets automatically record a submission timestamp.
+            // We use that timestamp as the primary resource identifier for form-created rows.
+            const timestamp = getFormTimestamp(row);
+            const timestampId = normalizeTimestampId(timestamp);
+            if (timestampId) return `res-ts-${timestampId}`;
+
+            // Legacy/manual rows without a timestamp still receive a stable deterministic ID.
+            const title = String(row['標題'] ?? '').trim();
+            const link = String(row['連結'] ?? '').trim();
+            return `res-${slugifyResourceId(title)}-${makeStableId((title + '|' + link) || String(index))}`;
         }
 
         function updateResourceStatus(extra = '') {
@@ -1106,14 +1141,7 @@
             if (appState.filters.identity !== 'all') filters.push(filterDisplayNames.identity[appState.filters.identity]);
             if (appState.filters.topic !== 'all') filters.push(filterDisplayNames.topic[appState.filters.topic]);
             const filterText = filters.length ? `，篩選：${filters.join('＋')}` : '';
-            const syncText = appState.dataSync.syncedAt ? `｜本次同步 ${formatSyncTime(appState.dataSync.syncedAt)}` : '';
-            el.innerHTML = `<strong>${total}</strong> 筆符合目前條件的資源${query}${filterText}${syncText}${extra ? `｜${escapeHTML(extra)}` : ''}`;
-        }
-
-        function setDataSyncStatus(status, syncedAt = null, extra = '') {
-            appState.dataSync.status = status;
-            appState.dataSync.syncedAt = syncedAt;
-            updateResourceStatus(extra);
+            el.innerHTML = `<strong>${total}</strong> 筆符合目前條件的資源${query}${filterText}${extra ? `｜${escapeHTML(extra)}` : ''}`;
         }
 
         function escapeHTML(value) {
@@ -1310,8 +1338,11 @@
                     while (usedIds.has(id)) id = `${baseId}-${serial++}`;
                     usedIds.add(id);
 
+                    const timestamp = getFormTimestamp(row);
+
                     return {
                         id,
+                        submittedAt: timestamp,
                         identity: dataIdentities,
                         topic: dataTopics,
                         isYoutube: /(^|\.)youtube\.com|youtu\.be/i.test(linkRaw),
@@ -1336,7 +1367,7 @@
                 if (spinner) spinner.style.display = 'none';
                 if (cardGrid) cardGrid.style.display = 'grid';
                 if (errorNote) errorNote.classList.remove('show');
-                setDataSyncStatus('ready', new Date());
+                updateResourceStatus();
                 executeCombinedFilter();
 
                 const route = parseRoute();
@@ -1349,11 +1380,11 @@
 
                 if (dataRetryCount <= DATA_RETRY_LIMIT && !retry) {
                     setTimeout(() => fetchGoogleSheetData({ retry: true }), 700 * dataRetryCount);
-                    setDataSyncStatus('retrying', null, `連線重試中（第 ${dataRetryCount}/${DATA_RETRY_LIMIT} 次）`);
+                    updateResourceStatus(`連線重試中（第 ${dataRetryCount}/${DATA_RETRY_LIMIT} 次）`);
                     return;
                 }
 
-                setDataSyncStatus('fallback', null, '目前使用網站內建基本資源');
+                updateResourceStatus('目前使用網站內建基本資源');
                 if (errorNote) {
                     errorNote.innerHTML = `目前無法連線到最新資源資料，先顯示網站內建的基本資源。<br><button class="filter-btn data-retry-btn" type="button" id="retry-data-btn">↻ 重新取得最新資源</button>`;
                     errorNote.classList.add('show');
