@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="福科國中輔導室「福導」：提供學生、家長與教師心理健康資訊、校園支持資源與求助管道。">
+    <meta name="theme-color" content="#5B8476">
     <title>福科輔導-來「福導」，歇會ㄦ！</title>
     <link rel="icon" href="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800" type="image/png">
     
@@ -136,6 +138,8 @@
         .menu-toggle { display: none; }
 
         .dropdown { position: relative; }
+        .dropdown-trigger { color: var(--text-color); background: transparent; border: 0; padding: 6px 0; font-weight: 600; font-size: 1.05rem; letter-spacing: .03em; cursor: pointer; }
+        .dropdown-trigger:hover { color: var(--primary-color); }
         .dropdown::after { content: ''; position: absolute; width: 100%; height: 15px; bottom: -15px; left: 0; }
         .dropdown-content {
             display: none; position: absolute; background-color: white;
@@ -274,6 +278,10 @@
             header { top: 38px; padding: 15px 4%; }
             nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: white; padding: 25px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-bottom: var(--border-warm); gap: 15px; }
             nav ul.active { display: flex; }
+            .dropdown-trigger { width: 100%; text-align: center; font-size: 1.05rem; }
+            .dropdown.mobile-open .dropdown-content { position: static; transform: none; box-shadow: none; border: 0; min-width: 0; padding-top: 4px; }
+            .dropdown-content a { text-align: center; }
+
             
             /* ✨ 解決卡住的黏滯感，使用 active 狀態提供按壓回饋 */
             .menu-toggle { 
@@ -325,22 +333,10 @@
         .play-button::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent #ffffff; margin-left: 4px; }
         .video-preview-wrapper:hover .play-button { background-color: #ff0000; transform: translate(-50%, -50%) scale(1.08); }
 
-        .welcome-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background-color: #FAF8F5; background-image: url('https://drive.google.com/thumbnail?id=1LlQD0tUC8vdhycH3Zkl_mAFVN3AY5njo&sz=w1920'); background-size: cover; background-position: center; background-repeat: no-repeat; justify-content: center; align-items: center; }
-        .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(253, 251, 247, 0.65); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
-        .modal-content { position: relative; z-index: 10; text-align: center; padding: 25px; animation: modalPop 0.8s cubic-bezier(0.16, 1, 0.3, 1); max-width: 600px; width: 90%; }
-        .modal-title { color: #724820; font-size: 3rem; margin-bottom: 15px; line-height: 1.3; }
-        .modal-slogan { font-size: 1.4rem; color: #514247; margin: 15px 0; line-height: 1.6; }
-        .door-btn-wrapper { margin-top: 40px; display: flex; flex-direction: column; align-items: center; }
-        .door-indicator { color: #C68E57; font-size: 1.4rem; margin-bottom: 18px; animation: bounce 1.6s infinite; background: white; padding: 6px 20px; border-radius: 30px; border: 2px dashed #C68E57; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-
-        .door-btn { display: inline-block; width: 115px; height: 155px; background: #8B5A2B; border: 5px solid #5C3A21; border-radius: 6px 6px 0 0; position: relative; cursor: pointer; transition: transform 0.8s ease-in-out, background 0.3s; transform-origin: left; box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.25); animation: pulse-glow 2.5s infinite alternate; outline: none; padding: 0; }
-        @keyframes pulse-glow { from { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 15px rgba(238, 184, 117, 0.4); } to { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 35px rgba(238, 184, 117, 0.9); } }
-        .door-btn::after { content: ''; position: absolute; top: 50%; right: 12px; width: 14px; height: 14px; background: #D4AF37; border-radius: 50%; box-shadow: 1px 1px 3px rgba(0,0,0,0.4); }
-        .door-btn:hover, .door-btn:focus, .door-btn:active { transform: perspective(600px) rotateY(-40deg); background: #9C6833; animation: none; outline: none; }
 
         .yuma-container { position: fixed; bottom: 30px; right: 30px; z-index: 9999; display: flex; flex-direction: column; align-items: center; cursor: pointer; user-select: none; transition: all 0.4s ease; }
         .yuma-container.faded { opacity: 0.3; transform: scale(0.85); pointer-events: none; }
+        .yuma-avatar { display:block; }
         .yuma-avatar img { width: 85px; height: 85px; object-fit: cover; border-radius: 50%; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15)); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .yuma-container:hover:not(.faded) .yuma-avatar img { transform: scale(1.12) rotate(4deg); }
         .yuma-bubble { position: absolute; bottom: 95px; right: 5px; background: white; border: 2px solid var(--primary-color); padding: 14px 20px; border-radius: 18px; font-size: 0.95rem; font-weight: bold; color: var(--text-color); width: 220px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); opacity: 0; pointer-events: none; transition: all 0.3s ease; transform: translateY(10px); }
@@ -367,16 +363,64 @@
         #lyrics-fullscreen-wrapper:fullscreen .lyrics-container, #lyrics-fullscreen-wrapper:-webkit-full-screen .lyrics-container { height: 100vh; width: 100vw; padding-top: 50px; }
         #lyrics-fullscreen-wrapper:fullscreen #lyrics-wrapper, #lyrics-fullscreen-wrapper:-webkit-full-screen #lyrics-wrapper { padding: 45vh 0; }
         #lyrics-fullscreen-wrapper:fullscreen #btn-fullscreen, #lyrics-fullscreen-wrapper:-webkit-full-screen #btn-fullscreen { top: 30px; right: 40px; font-size: 1.1rem; padding: 12px 24px; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
-   </style>
+   
+        .welcome-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background-color: #FAF8F5; background-image: url('https://drive.google.com/thumbnail?id=1LlQD0tUC8vdhycH3Zkl_mAFVN3AY5njo&sz=w1920'); background-size: cover; background-position: center; background-repeat: no-repeat; justify-content: center; align-items: center; }
+        .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(253, 251, 247, 0.65); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
+        .modal-content { position: relative; z-index: 10; text-align: center; padding: 25px; animation: modalPop 0.8s cubic-bezier(0.16, 1, 0.3, 1); max-width: 600px; width: 90%; }
+        .modal-title { color: #724820; font-size: 3rem; margin-bottom: 15px; line-height: 1.3; }
+        .modal-slogan { font-size: 1.4rem; color: #514247; margin: 15px 0; line-height: 1.6; }
+        .door-btn-wrapper { margin-top: 40px; display: flex; flex-direction: column; align-items: center; }
+        .door-indicator { color: #C68E57; font-size: 1.4rem; margin-bottom: 18px; animation: bounce 1.6s infinite; background: white; padding: 6px 20px; border-radius: 30px; border: 2px dashed #C68E57; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+        @keyframes modalPop { from { opacity: 0; transform: scale(0.96) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+        .door-btn { display: inline-block; width: 115px; height: 155px; background: #8B5A2B; border: 5px solid #5C3A21; border-radius: 6px 6px 0 0; position: relative; cursor: pointer; transition: transform 0.8s ease-in-out, background 0.3s; transform-origin: left; box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.25); animation: pulse-glow 2.5s infinite alternate; outline: none; padding: 0; }
+        @keyframes pulse-glow { from { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 15px rgba(238, 184, 117, 0.4); } to { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 35px rgba(238, 184, 117, 0.9); } }
+        .door-btn::after { content: ''; position: absolute; top: 50%; right: 12px; width: 14px; height: 14px; background: #D4AF37; border-radius: 50%; box-shadow: 1px 1px 3px rgba(0,0,0,0.4); }
+        .door-btn:hover, .door-btn:focus, .door-btn:active { transform: perspective(600px) rotateY(-40deg); background: #9C6833; animation: none; outline: none; }
+
+        /* V2 interaction + accessibility layer */
+        :root { --chrome-shadow: 0 6px 24px rgba(62,65,58,.06); }
+        html { scroll-behavior:smooth; }
+        body.modal-open { overflow:hidden; }
+        button, input, summary { font:inherit; }
+        button { -webkit-tap-highlight-color:transparent; }
+        button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visible { outline:3px solid rgba(91,132,118,.42); outline-offset:3px; }
+        .site-chrome { position:sticky; top:0; z-index:1100; box-shadow:var(--chrome-shadow); }
+        .emergency-bar { position:relative; top:auto; }
+        header { position:relative; top:auto; z-index:1; box-shadow:none; }
+        .emergency-toggle[aria-expanded="true"] { background:rgba(255,255,255,.06); }
+        .emergency-link-primary { background:rgba(255,255,255,.18) !important; }
+        .dropdown-trigger { color:var(--text-color); background:transparent; border:0; padding:6px 0; font-weight:600; font-size:1.05rem; letter-spacing:.03em; cursor:pointer; }
+        .dropdown-trigger:hover { color:var(--primary-color); }
+        .section-helper { max-width:900px; margin:0 auto 18px; text-align:center; color:var(--text-muted); font-size:.95rem; }
+        .loading-status { text-align:center; color:var(--text-muted); font-size:1rem; padding:22px 20px; }
+        .error-note { display:none; max-width:760px; margin:0 auto 20px; background:#FFF3E5; border-left:5px solid var(--danger-color); border-radius:12px; padding:14px 16px; color:#7D4026; font-size:.92rem; }
+        .error-note.show { display:block; }
+        .card-text,.article-content-body { white-space:pre-line; }
+        .article-content-body a,.resource-info a,.resource-link { overflow-wrap:anywhere; }
+        .card-link button.card-action { appearance:none; border:0; background:transparent; color:var(--primary-color); font-weight:bold; font-size:.95rem; padding:0; cursor:pointer; }
+        .card-link button.card-action:hover { color:var(--secondary-color); }
+        .yuma-container { appearance:none; border:none; background:transparent; padding:0; }
+        @media (max-width:950px) {
+            .site-chrome { box-shadow:0 4px 18px rgba(62,65,58,.08); }
+            .dropdown-trigger { width:100%; text-align:center; font-size:1.05rem; }
+            .dropdown.mobile-open .dropdown-content { position:static; transform:none; box-shadow:none; border:0; min-width:0; padding-top:4px; }
+            .dropdown-content a { text-align:center; }
+        }
+        @media (max-width:580px) {
+        }
+        @media (prefers-reduced-motion:reduce) {
+            html { scroll-behavior:auto; }
+            *,*::before,*::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+        }
+</style>
 </head>
 <body>
     <audio id="bgMusic" loop>
         <source src="theme.mp3" type="audio/mpeg">
     </audio>
-
-    <button class="global-music-btn" id="global-music-btn" onclick="toggleGlobalMusic()" aria-label="播放/暫停背景音樂" title="開/關主題曲">
-        🔇
-    </button>
 
     <div id="welcomeModal" class="welcome-modal">
         <div class="modal-overlay"></div>
@@ -394,28 +438,33 @@
         </div>
     </div>
 
-    <!-- ✨ 智慧滾動提示 -->
+    <button class="global-music-btn" id="global-music-btn" onclick="toggleGlobalMusic()" aria-label="播放/暫停背景音樂" title="開/關主題曲">
+        🔇
+    </button>
+
+    <!-- 智慧滾動提示 -->
     <div id="scroll-prompt-fixed">
         <span class="scroll-prompt-text naikai-text">往下探索更多</span>
         <div class="scroll-arrow-icon"></div>
     </div>
 
-    <div class="emergency-bar">
-        <button class="emergency-toggle" onclick="toggleEmergencyMobile()">🚨 我想求助 ▾</button>
-        <div class="emergency-links" id="emergencyLinks">
-            <a href="tel:1925" rel="noopener noreferrer">安心專線 1925</a>
-            <a href="tel:1995" rel="noopener noreferrer">生命線 1995</a>
-            <a href="tel:1980" rel="noopener noreferrer">張老師 1980</a>
+    <div class="site-chrome">
+        <div class="emergency-bar">
+            <button class="emergency-toggle" id="emergency-toggle" type="button" onclick="toggleEmergencyMobile()" aria-expanded="false" aria-controls="emergencyLinks">🚨 我想求助 ▾</button>
+            <div class="emergency-links" id="emergencyLinks">
+                <a class="emergency-link-primary" href="tel:1925" rel="noopener noreferrer">安心專線 1925</a>
+                <a href="tel:1995" rel="noopener noreferrer">生命線 1995</a>
+                <a href="tel:1980" rel="noopener noreferrer">張老師 1980</a>
+            </div>
         </div>
-    </div>
 
-    <header id="main-header">
+        <header id="main-header">
         <a href="#home" class="logo">
             <img src="https://drive.google.com/thumbnail?id=1RAwhwlKJ8azK4cg6PH852pjUkrNO1O4Q&sz=w800" alt="福科輔導商標" style="height: 46px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));">
         </a>
-        <div class="menu-toggle naikai-text" onclick="toggleMenu()">
+        <button class="menu-toggle naikai-text" id="menu-toggle" type="button" onclick="toggleMenu()" aria-expanded="false" aria-controls="nav-menu">
             <span>選單</span> <span style="font-size: 1.2rem; font-family: sans-serif;">☰</span>
-        </div>
+        </button>
         <nav>
             <ul id="nav-menu">
                 <li><a href="#home" id="nav-home" class="active-nav">首頁</a></li>
@@ -423,9 +472,9 @@
                 <li><a href="https://www.youtube.com/playlist?list=PLkqAD3KmD8OuBvUJvLy2_5vx7RzdFVL8m" target="_blank" rel="noopener noreferrer">福導電台</a></li>
                 <li><a href="#resource" id="nav-resource">資源與支持網絡</a></li>
                 <li><a href="#faq" id="nav-faq">迷思破解 Q&A</a></li>
-                <li class="dropdown" id="about-dropdown" onclick="toggleDropdown(this)">
-                    <a style="cursor: pointer;">關於我們 ▾</a>
-                    <div class="dropdown-content">
+                <li class="dropdown" id="about-dropdown">
+                    <button class="dropdown-trigger" type="button" aria-expanded="false" aria-controls="about-dropdown-menu">關於我們 ▾</button>
+                    <div class="dropdown-content" id="about-dropdown-menu">
                         <a href="https://www.facebook.com/fcjhguidance" target="_blank" rel="noopener noreferrer">FB 粉絲專頁</a>
                         <a href="https://www.instagram.com/fcjhguidance/" target="_blank" rel="noopener noreferrer">IG 官方帳號</a>
                         <a href="#song" id="nav-song">主題曲</a>
@@ -436,6 +485,7 @@
             </ul>
         </nav>
     </header>
+    </div>
 
     <div id="page-home" class="page active-page">
         <section class="hero">
@@ -468,27 +518,28 @@
 
         <section class="filter-section">
             <h2 style="color: var(--primary-color); margin-bottom: 5px;" class="naikai-text">🔍 資源百寶箱</h2>
+            <p class="section-helper">想自己找也可以：用關鍵字、身分或議題來縮小範圍。</p>
             <div class="search-wrapper">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="global-search" class="search-input" placeholder="輸入關鍵字搜尋資源卡片... (例如：電台、IG、家長)" oninput="handleSearch()">
+                <input type="text" id="global-search" class="search-input" placeholder="輸入關鍵字搜尋資源卡片...（可搜尋標題、內容、身分與議題）" oninput="handleSearch()">
             </div>
 
             <div class="filter-group">
                 <span class="filter-label naikai-text">我是誰：</span>
-                <button class="filter-btn active" onclick="filterData('identity', 'all', this)">全部身分</button>
-                <button class="filter-btn" onclick="filterData('identity', 'student', this)">學生專區</button>
-                <button class="filter-btn" onclick="filterData('identity', 'parent', this)">家長專區</button>
-                <button class="filter-btn" onclick="filterData('identity', 'teacher', this)">教師專區</button>
+                <button class="filter-btn active" data-value="all" onclick="filterData('identity', 'all', this)">全部身分</button>
+                <button class="filter-btn" data-value="student" onclick="filterData('identity', 'student', this)">學生專區</button>
+                <button class="filter-btn" data-value="parent" onclick="filterData('identity', 'parent', this)">家長專區</button>
+                <button class="filter-btn" data-value="teacher" onclick="filterData('identity', 'teacher', this)">教師專區</button>
             </div>
             <div class="filter-group">
                 <span class="filter-label naikai-text">我想聊：</span>
-                <button class="filter-btn active" onclick="filterData('topic', 'all', this)">所有議題</button>
-                <button class="filter-btn" onclick="filterData('topic', 'relation', this)">人際</button>
-                <button class="filter-btn" onclick="filterData('topic', 'career', this)">生涯</button>
-                <button class="filter-btn" onclick="filterData('topic', 'emotion', this)">情緒</button>
-                <button class="filter-btn" onclick="filterData('topic', 'family', this)">家庭</button>
-                <button class="filter-btn" onclick="filterData('topic', 'affection', this)">情感</button>
-                <button class="filter-btn" onclick="filterData('topic', 'other', this)">其他</button>
+                <button class="filter-btn active" data-value="all" onclick="filterData('topic', 'all', this)">所有議題</button>
+                <button class="filter-btn" data-value="relation" onclick="filterData('topic', 'relation', this)">人際</button>
+                <button class="filter-btn" data-value="career" onclick="filterData('topic', 'career', this)">生涯</button>
+                <button class="filter-btn" data-value="emotion" onclick="filterData('topic', 'emotion', this)">情緒</button>
+                <button class="filter-btn" data-value="family" onclick="filterData('topic', 'family', this)">家庭</button>
+                <button class="filter-btn" data-value="affection" onclick="filterData('topic', 'affection', this)">情感</button>
+                <button class="filter-btn" data-value="other" onclick="filterData('topic', 'other', this)">其他</button>
             </div>
             
             <div class="view-toggle-container">
@@ -499,9 +550,10 @@
         </section>
 
         <div class="container" style="padding-bottom: 20px;">
-            <div id="loading-spinner" style="text-align: center; color: var(--text-muted); font-size: 1.1rem; padding: 20px;">
-                ⏳ 正在從資料庫魔法提取資源中...
+            <div id="loading-spinner" class="loading-status" role="status" aria-live="polite">
+                ⏳ 正在整理資源，馬上就好……
             </div>
+            <div id="data-error-note" class="error-note" role="status" aria-live="polite"></div>
             <div class="grid" id="card-grid" style="display: none;"></div>
             
             <!-- ✨ 載入與收合卡片按鈕 -->
@@ -515,7 +567,7 @@
 
     <div id="page-article" class="page">
         <div class="team-title-section" style="padding-top: 40px; padding-bottom: 30px;">
-            <button class="filter-btn" onclick="window.history.back()" style="margin-bottom: 25px;">⬅ 返回資源百寶箱</button>
+            <button class="filter-btn" type="button" onclick="backToResourceBox()" style="margin-bottom: 25px;">⬅ 返回資源百寶箱</button>
             <h2 id="article-detail-title" class="article-title naikai-text">文章標題載入中...</h2>
             <div class="article-meta">
                 <span id="article-detail-tags"></span>
@@ -744,16 +796,16 @@
     <div id="page-faq" class="page">
         <div class="team-title-section">
             <h2 class="naikai-text">🔍 輔導室迷思大破解</h2>
-            <p>別擔心！走進輔導室一點也不可怕，讓我們為妳解答心中的疑惑。</p>
+            <p>別擔心！走進輔導室一點也不可怕，讓我們為你解答心中的疑惑。</p>
         </div>
         <div class="faq-container">
             <details class="faq-item" open>
                 <summary class="faq-q naikai-text">Q1. 去輔導室會被同學當成有問題的怪人嗎？</summary>
-                <div class="faq-a">A：完全不會！福科國中輔導室是一個安全、讓人放鬆的溫暖空間。任何生活不順心、感情受挫，都歡迎妳走進來休息。</div>
+                <div class="faq-a">A：完全不會！福科國中輔導室是一個安全、讓人放鬆的溫暖空間。任何生活不順心、感情受挫，都歡迎你走進來休息。</div>
             </details>
             <details class="faq-item">
                 <summary class="faq-q naikai-text">Q2. 我跟輔導老師說的秘密，會被偷偷告訴導師或爸媽嗎？</summary>
-                <div class="faq-a">A：輔導老師嚴格遵守法律與專業的「保密原則」。除非內容涉及「傷害自己、傷害他人或重大違規法律事件」，為了守護生命安全，才會啟動保密例外保護妳。</div>
+                <div class="faq-a">A：輔導老師嚴格遵守法律與專業的「保密原則」。除非內容涉及「傷害自己、傷害他人或重大違規法律事件」，為了守護生命安全，才會啟動保密例外保護你。</div>
             </details>
         </div>
     </div>
@@ -823,14 +875,14 @@
         </div>
     </div>
 
-    <div class="yuma-container" onclick="interactWithYuma()">
-        <div class="yuma-bubble" id="yuma-bubble">
+    <button class="yuma-container" type="button" onclick="interactWithYuma()" aria-label="和 YUMA 互動">
+        <span class="yuma-bubble" id="yuma-bubble" aria-live="polite">
             <span id="yuma-text">汪！點擊我可以跟我互動喔🐾</span>
-        </div>
-        <div class="yuma-avatar">
+        </span>
+        <span class="yuma-avatar">
             <img src="https://drive.google.com/thumbnail?id=1UvZJJr192Zn5F23M1CWVMpHEUIXAPBmk&sz=w80" alt="YUMA">
-        </div>
-    </div>
+        </span>
+    </button>
 
     <footer>
         <p>© 2026 福科國中輔導室 版權所有</p>
@@ -839,45 +891,10 @@
 
     <script>
         const GAS_URL = "https://script.google.com/macros/s/AKfycbz4uZma1CfxCKsoQQqgGYTE8Sw4nTDZnfNI2n5aKU80Z6WySup62TFy2j_aA_uYWLZWIw/exec";
+        const DATA_TIMEOUT_MS = 8000;
 
-        function handleHashChange() {
-            let hash = window.location.hash.replace('#', '') || 'home';
-            const validPages = ['home', 'resource', 'faq', 'song', 'about', 'article'];
-            if (!validPages.includes(hash)) hash = 'home';
-
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => page.classList.remove('active-page'));
-            
-            const navLinks = document.querySelectorAll('nav a');
-            navLinks.forEach(link => link.classList.remove('active-nav'));
-
-            document.getElementById(`page-${hash}`).classList.add('active-page');
-            const activeNavLink = document.getElementById(`nav-${hash}`);
-            if (activeNavLink) activeNavLink.classList.add('active-nav');
-
-            document.getElementById("nav-menu").classList.remove("active");
-            window.scrollTo(0, 0);
-            
-            checkScrollPrompt();
-        }
-
-        window.addEventListener('hashchange', handleHashChange);
-        window.addEventListener('DOMContentLoaded', handleHashChange);
-
-        function toggleMenu() {
-            document.getElementById("nav-menu").classList.toggle("active");
-        }
-
-        function toggleDropdown(element) {
-            if (window.innerWidth <= 950) {
-                element.classList.toggle('mobile-open');
-            }
-        }
-
-        function toggleEmergencyMobile() {
-            const linksContainer = document.getElementById('emergencyLinks');
-            linksContainer.classList.toggle('show');
-        }
+        const identityMap = { '學生專區': 'student', '家長專區': 'parent', '教師專區': 'teacher' };
+        const topicMap = { '人際': 'relation', '生涯': 'career', '情緒': 'emotion', '家庭': 'family', '情感': 'affection', '其他': 'other' };
 
         const initialPostsData = [
             {
@@ -930,256 +947,392 @@
             }
         ];
 
-        let allPostsData = [...initialPostsData]; 
+        let allPostsData = [...initialPostsData];
         let filteredCache = [...allPostsData];
         let currentFilters = { identity: 'all', topic: 'all' };
         let searchQuery = '';
-        
-        let defaultLimit = window.innerWidth <= 950 ? 8 : 9;
-        let currentLimit = defaultLimit;
+        let currentLimit = getDefaultLimit();
+        let yumaTimer = null;
+        let yumaScrollTimer = null;
+        let searchTimeout = null;
+        let currentLyricIndex = -1;
+        let lastModalTrigger = null;
 
-        const identityMap = { '學生專區': 'student', '家長專區': 'parent', '教師專區': 'teacher' };
-        const topicMap = { '人際': 'relation', '生涯': 'career', '情緒': 'emotion', '家庭': 'family', '情感': 'affection', '其他': 'other' };
+        function getDefaultLimit() {
+            return window.innerWidth <= 950 ? 8 : 9;
+        }
+
+        function escapeHTML(value) {
+            return String(value ?? '').replace(/[&<>'"]/g, char => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            })[char]);
+        }
+
+        function safeURL(value, fallback = '#') {
+            const raw = String(value ?? '').trim();
+            if (!raw) return fallback;
+            try {
+                const parsed = new URL(raw, window.location.href);
+                if (['http:', 'https:', 'tel:', 'mailto:'].includes(parsed.protocol)) return parsed.href;
+            } catch (_) {}
+            return fallback;
+        }
+
+        function safeImageURL(value, fallback) {
+            const url = safeURL(value, '');
+            return url.startsWith('http://') || url.startsWith('https://') ? url : fallback;
+        }
+
+        function parseRoute() {
+            const rawHash = window.location.hash.replace(/^#/, '');
+            const decoded = rawHash ? decodeURIComponent(rawHash) : 'home';
+            const parts = decoded.split('/');
+            return { page: parts[0] || 'home', id: parts.slice(1).join('/') || null };
+        }
+
+        function handleHashChange(options = {}) {
+            const { page: rawPage, id } = parseRoute();
+            const validPages = ['home', 'resource', 'faq', 'song', 'about', 'article'];
+            const page = validPages.includes(rawPage) ? rawPage : 'home';
+
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+            document.querySelectorAll('nav a, .dropdown-trigger').forEach(link => link.classList.remove('active-nav'));
+
+            const pageElement = document.getElementById(`page-${page}`);
+            if (pageElement) pageElement.classList.add('active-page');
+
+            const activeNavLink = document.getElementById(`nav-${page}`);
+            if (activeNavLink) activeNavLink.classList.add('active-nav');
+
+            closeMenu();
+            closeDropdown();
+            if (!options.skipScroll) window.scrollTo({ top: 0, behavior: 'auto' });
+
+            if (page === 'article') {
+                if (id) renderArticleById(id);
+                else renderArticleMissing();
+            }
+
+            checkScrollPrompt();
+        }
+
+        function setHash(route) {
+            window.location.hash = route;
+        }
+
+        function backToResourceBox() {
+            setHash('home');
+            requestAnimationFrame(() => {
+                const target = document.querySelector('.filter-section');
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('nav-menu');
+            const toggle = document.getElementById('menu-toggle');
+            if (menu) menu.classList.remove('active');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu');
+            const toggle = document.getElementById('menu-toggle');
+            if (!menu || !toggle) return;
+            const open = !menu.classList.contains('active');
+            menu.classList.toggle('active', open);
+            toggle.setAttribute('aria-expanded', String(open));
+            if (open) closeDropdown();
+        }
+
+        function closeDropdown() {
+            const dropdown = document.getElementById('about-dropdown');
+            const trigger = document.querySelector('.dropdown-trigger');
+            if (dropdown) dropdown.classList.remove('mobile-open');
+            if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        }
+
+        function toggleDropdown(element) {
+            if (!element) return;
+            const trigger = element.querySelector('.dropdown-trigger');
+            const open = !element.classList.contains('mobile-open');
+            if (window.innerWidth <= 950) {
+                element.classList.toggle('mobile-open', open);
+                if (trigger) trigger.setAttribute('aria-expanded', String(open));
+            }
+        }
+
+        function toggleEmergencyMobile() {
+            const linksContainer = document.getElementById('emergencyLinks');
+            const trigger = document.getElementById('emergency-toggle');
+            if (!linksContainer || !trigger) return;
+            const open = !linksContainer.classList.contains('show');
+            linksContainer.classList.toggle('show', open);
+            trigger.setAttribute('aria-expanded', String(open));
+            trigger.textContent = open ? '🚨 我想求助 ▴' : '🚨 我想求助 ▾';
+        }
+
+        function renderFilteredAndScroll() {
+            executeCombinedFilter();
+            requestAnimationFrame(() => document.getElementById('card-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+        }
+
+        function syncFilterButtons() {
+            document.querySelectorAll('.filter-btn[data-value]').forEach(btn => btn.classList.remove('active'));
+            const identityButton = document.querySelector(`.filter-group .filter-btn[data-value="${currentFilters.identity}"]`);
+            const topicButtons = [...document.querySelectorAll('.filter-group .filter-btn[data-value]')];
+            const topicButton = topicButtons.find(btn => btn.dataset.value === currentFilters.topic && btn.parentElement?.querySelector('.filter-label')?.textContent?.includes('議題'));
+            if (identityButton && identityButton.parentElement?.querySelector('.filter-label')?.textContent?.includes('身分')) identityButton.classList.add('active');
+            if (topicButton) topicButton.classList.add('active');
+        }
+
+        async function fetchWithTimeout(url, timeout = DATA_TIMEOUT_MS) {
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), timeout);
+            try {
+                return await fetch(url, { signal: controller.signal, cache: 'no-store' });
+            } finally {
+                clearTimeout(timer);
+            }
+        }
 
         async function fetchGoogleSheetData() {
+            const spinner = document.getElementById('loading-spinner');
+            const errorNote = document.getElementById('data-error-note');
             try {
-                const response = await fetch(GAS_URL);
+                const response = await fetchWithTimeout(GAS_URL);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const data = await response.json();
-                
+                if (!Array.isArray(data)) throw new Error('資料格式不是陣列');
+
                 const formPosts = data.map((row, index) => {
-                    const getVal = (keyword) => {
+                    const getVal = keyword => {
                         if (row[keyword] !== undefined && row[keyword] !== null) return String(row[keyword]).trim();
                         const key = Object.keys(row).find(k => k.includes(keyword));
                         return key && row[key] !== null && row[key] !== undefined ? String(row[key]).trim() : '';
                     };
 
-                    let rawIdentitiesStr = getVal('身分');
-                    let rawIdentities = rawIdentitiesStr ? rawIdentitiesStr.split(',').map(t => t.trim()).filter(t => t !== '') : [];
-                    let dataIdentities = rawIdentities.map(t => identityMap[t] || '').join(' ');
-                    let badgesId = rawIdentities.length > 0 ? rawIdentities : ['資源推薦'];
+                    const rawIdentities = getVal('身分').split(',').map(t => t.trim()).filter(Boolean);
+                    const rawTopics = getVal('議題').split(',').map(t => t.trim()).filter(Boolean);
+                    const dataIdentities = rawIdentities.map(t => identityMap[t] || '').filter(Boolean).join(' ');
+                    const dataTopics = rawTopics.map(t => topicMap[t] || '').filter(Boolean).join(' ');
 
-                    let rawTopicsStr = getVal('議題');
-                    let rawTopics = rawTopicsStr ? rawTopicsStr.split(',').map(t => t.trim()).filter(t => t !== '') : [];
-                    let dataTopics = rawTopics.map(t => topicMap[t] || '').join(' ');
-                    let badgesTop = rawTopics.length > 0 ? rawTopics : ['精選文章'];
+                    const defaultImage = 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800';
+                    let imgUrl = defaultImage;
+                    const imgRaw = getVal('圖片');
+                    const match = imgRaw.match(/id=([a-zA-Z0-9_-]+)/);
+                    if (match) imgUrl = `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800`;
 
-                    let imgUrl = 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800'; 
-                    let imgRaw = getVal('圖片');
-                    if (imgRaw) {
-                        const match = imgRaw.match(/id=([a-zA-Z0-9_-]+)/);
-                        if (match) imgUrl = `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800`;
-                    }
-                    
-                    let linkRaw = getVal('連結');
-
+                    const linkRaw = getVal('連結');
                     return {
-                        id: 'form-post-' + index, 
+                        id: 'form-post-' + index,
                         title: getVal('標題'),
                         text: getVal('簡介'),
                         image: imgUrl,
                         identity: dataIdentities,
                         topic: dataTopics,
-                        badgesIdentity: badgesId, 
-                        badgesTopic: badgesTop,   
+                        badgesIdentity: rawIdentities.length ? rawIdentities : ['資源推薦'],
+                        badgesTopic: rawTopics.length ? rawTopics : ['精選文章'],
                         type: getVal('類型'),
                         link: linkRaw,
                         articleContent: getVal('內容'),
-                        isYoutube: linkRaw && linkRaw.includes('youtube.com')
+                        isYoutube: /(^|\.)youtube\.com|youtu\.be/i.test(linkRaw)
                     };
                 });
 
                 allPostsData = [...initialPostsData, ...formPosts.reverse()];
-                
-                document.getElementById('loading-spinner').style.display = 'none';
+                if (spinner) spinner.style.display = 'none';
                 document.getElementById('card-grid').style.display = 'grid';
-                
+                if (errorNote) errorNote.classList.remove('show');
                 executeCombinedFilter();
 
+                // If a user opened an article deep-link before the sheet finished loading.
+                const route = parseRoute();
+                if (route.page === 'article' && route.id) renderArticleById(route.id);
             } catch (error) {
                 console.error('抓取資料失敗：', error);
-                document.getElementById('loading-spinner').textContent = '⚠️ 網路連線出了一點小狀況，目前僅顯示預設資源。';
+                if (spinner) spinner.style.display = 'none';
                 document.getElementById('card-grid').style.display = 'grid';
+                if (errorNote) {
+                    errorNote.textContent = '目前無法連線到最新資源資料，先顯示網站內建的基本資源。稍後再重新整理頁面即可再次嘗試。';
+                    errorNote.classList.add('show');
+                }
                 renderCards(allPostsData);
             }
         }
 
-        // ✨ 展開/收合卡片邏輯
         function renderCards(dataToRender) {
-            filteredCache = dataToRender;
+            filteredCache = Array.isArray(dataToRender) ? dataToRender : [];
             const grid = document.getElementById('card-grid');
             const loadMoreBtn = document.getElementById('load-more-btn-container');
-            grid.innerHTML = ''; 
+            if (!grid) return;
+            grid.innerHTML = '';
 
-            if (dataToRender.length === 0) {
-                if(loadMoreBtn) loadMoreBtn.style.display = 'none';
+            if (!filteredCache.length) {
+                if (loadMoreBtn) loadMoreBtn.style.display = 'none';
                 grid.insertAdjacentHTML('beforeend', `
-                <div style="grid-column: 1 / -1; text-align: center; padding: 50px 20px; background: white; border-radius: 20px; border: 2px dashed #E2877A;">
-                    <div style="font-size: 3.5rem; margin-bottom: 15px;">🥀</div>
-                    <h3 style="color: var(--primary-color); margin-bottom: 12px; font-size: 1.5rem; font-family: 'NaikaiFont', sans-serif;">百寶箱裡暫時找不到相關卡片...</h3>
-                    <p style="color: var(--text-muted); font-size: 1.05rem;">但輔導室的門永遠為你開著。<br>如果心裡覺得悶，隨時歡迎推開門，直接來找我們聊聊喔！</p>
-                </div>`);
+                    <div style="grid-column:1/-1;text-align:center;padding:50px 20px;background:#fff;border-radius:20px;border:2px dashed #E2877A;">
+                        <div style="font-size:3.5rem;margin-bottom:15px;">🥀</div>
+                        <h3 style="color:var(--primary-color);margin-bottom:12px;font-size:1.5rem;font-family:'NaikaiFont',sans-serif;">目前找不到完全符合的資源</h3>
+                        <p style="color:var(--text-muted);font-size:1.05rem;">可以換個關鍵字、取消一個篩選條件，或直接來輔導室找我們聊聊。</p>
+                    </div>`);
                 return;
             }
 
-            const isMore = dataToRender.length > currentLimit;
-            const dataToLoop = dataToRender.slice(0, currentLimit);
+            const isMore = filteredCache.length > currentLimit;
+            filteredCache.slice(0, currentLimit).forEach(post => {
+                const title = escapeHTML(post.title || '');
+                const description = escapeHTML(post.text || '');
+                const safeLink = safeURL(post.link, '#');
+                const imageUrl = safeImageURL(post.image, 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800');
+                const tagsHtml = [
+                    ...(post.badgesIdentity || []).map(tag => `<span class="badge badge-identity">${escapeHTML(tag)}</span>`),
+                    ...(post.badgesTopic || []).map(tag => `<span class="badge badge-topic">${escapeHTML(tag)}</span>`)
+                ].join('');
 
-            dataToLoop.forEach((post) => {
-                let mediaContent = '';
-                const altText = post.title ? post.title : '資源圖片';
-                if(post.isYoutube) {
-                    mediaContent = `<a href="${post.link}" target="_blank" rel="noopener noreferrer" class="video-preview-wrapper"><div class="play-button"></div><img src="${post.image}" alt="${altText}"></a>`;
-                } else {
-                    mediaContent = `<img src="${post.image}" alt="${altText}">`;
-                }
-
-                let cardLinkHtml = '';
-                if (post.type === '站內文章') {
-                    const originalIndex = allPostsData.indexOf(post);
-                    cardLinkHtml = `<a onclick="openArticle(${originalIndex})">閱讀文章 ➔</a>`;
-                } else {
-                    cardLinkHtml = `<a href="${post.link}" target="_blank" rel="noopener noreferrer">${post.linkText || '前往連結 ➔'}</a>`;
+                let mediaContent = `<img src="${escapeHTML(imageUrl)}" alt="${title || '資源圖片'}" loading="lazy" decoding="async">`;
+                if (post.isYoutube && safeLink !== '#') {
+                    mediaContent = `<a href="${escapeHTML(safeLink)}" target="_blank" rel="noopener noreferrer" class="video-preview-wrapper" aria-label="開啟：${title}"><div class="play-button" aria-hidden="true"></div><img src="${escapeHTML(imageUrl)}" alt="${title || '影音資源圖片'}" loading="lazy" decoding="async"></a>`;
                 }
 
-                let tagsHtml = '';
-                if (post.badgesIdentity) {
-                    post.badgesIdentity.forEach(tag => {
-                        tagsHtml += `<span class="badge badge-identity">${tag}</span>\n`;
-                    });
-                }
-                if (post.badgesTopic) {
-                    post.badgesTopic.forEach(tag => {
-                        tagsHtml += `<span class="badge badge-topic">${tag}</span>\n`;
-                    });
-                }
-                
-                const descText = post.text ? post.text.replace(/\n/g, '<br>') : '';
+                const cardAction = post.type === '站內文章'
+                    ? `<button class="card-action" type="button" onclick="openArticle('${escapeHTML(post.id)}')">閱讀文章 ➔</button>`
+                    : safeLink !== '#'
+                        ? `<a href="${escapeHTML(safeLink)}" target="_blank" rel="noopener noreferrer">${escapeHTML(post.linkText || '前往連結 ➔')}</a>`
+                        : `<span style="color:var(--text-muted);font-size:.92rem;">連結尚未提供</span>`;
 
                 const cardHTML = `
-                <div class="card" data-identity="${post.identity}" data-topic="${post.topic}">
-                    <div class="card-media">${mediaContent}</div>
-                    <div class="card-body">
-                        <div class="card-tags">
-                            ${tagsHtml}
+                    <article class="card" data-identity="${escapeHTML(post.identity)}" data-topic="${escapeHTML(post.topic)}">
+                        <div class="card-media">${mediaContent}</div>
+                        <div class="card-body">
+                            <div class="card-tags">${tagsHtml}</div>
+                            <h3 class="card-title">${title}</h3>
+                            <div class="card-text">${description}</div>
+                            <div class="card-link">${cardAction}</div>
                         </div>
-                        <div class="card-title">${post.title || ''}</div>
-                        <div class="card-text">${descText}</div>
-                        <div class="card-link">${cardLinkHtml}</div>
-                    </div>
-                </div>`;
+                    </article>`;
                 grid.insertAdjacentHTML('beforeend', cardHTML);
             });
 
             if (isMore) {
-                if(loadMoreBtn) {
-                    loadMoreBtn.style.display = 'block';
-                    loadMoreBtn.innerHTML = `<button class="filter-btn active naikai-text" onclick="loadMoreCards()" style="padding: 10px 30px; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(91,132,118,0.3);">✨ 展開更多資源 ▾</button>`;
-                }
-            } else if (dataToRender.length > defaultLimit) {
-                if(loadMoreBtn) {
-                    loadMoreBtn.style.display = 'block';
-                    loadMoreBtn.innerHTML = `<button class="filter-btn naikai-text" onclick="collapseCards()" style="padding: 10px 30px; font-size: 1.1rem; border: 1.5px solid var(--primary-color); color: var(--primary-color); background: transparent;">✨ 收合資源 ▴</button>`;
-                }
+                loadMoreBtn.style.display = 'block';
+                loadMoreBtn.innerHTML = `<button class="filter-btn active naikai-text" type="button" onclick="loadMoreCards()" style="padding:10px 30px;font-size:1.1rem;box-shadow:0 4px 15px rgba(91,132,118,0.3);">✨ 展開更多資源 ▾</button>`;
+            } else if (filteredCache.length > getDefaultLimit()) {
+                loadMoreBtn.style.display = 'block';
+                loadMoreBtn.innerHTML = `<button class="filter-btn naikai-text" type="button" onclick="collapseCards()" style="padding:10px 30px;font-size:1.1rem;border:1.5px solid var(--primary-color);color:var(--primary-color);background:transparent;">✨ 收合資源 ▴</button>`;
             } else {
-                if(loadMoreBtn) loadMoreBtn.style.display = 'none';
+                loadMoreBtn.style.display = 'none';
             }
         }
 
         function loadMoreCards() {
-            currentLimit += (window.innerWidth <= 950 ? 8 : 9);
+            currentLimit += window.innerWidth <= 950 ? 8 : 9;
             renderCards(filteredCache);
         }
 
         function collapseCards() {
-            currentLimit = defaultLimit;
+            currentLimit = getDefaultLimit();
             renderCards(filteredCache);
-            document.querySelector('.filter-section').scrollIntoView({ behavior: 'smooth' });
+            document.querySelector('.filter-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function toggleViewMode() {
             const grid = document.getElementById('card-grid');
             const btn = document.getElementById('view-toggle-btn');
-            grid.classList.toggle('compact-view');
-            if(grid.classList.contains('compact-view')) {
-                btn.innerHTML = '⊟ 切換單欄顯示';
-            } else {
-                btn.innerHTML = '⊞ 切換多欄顯示';
-            }
+            if (!grid || !btn) return;
+            const compact = grid.classList.toggle('compact-view');
+            btn.textContent = compact ? '⊟ 切換完整顯示' : '⊞ 切換多欄顯示';
         }
 
-        function openArticle(index) {
-            const post = allPostsData[index];
-            if(!post) return;
-
+        function renderArticleById(id) {
+            const post = allPostsData.find(item => String(item.id) === String(id));
+            if (!post) {
+                renderArticleMissing();
+                return;
+            }
             document.getElementById('article-detail-title').textContent = post.title || '無標題';
-            
-            let articleTagsHtml = '';
-            if (post.badgesIdentity) {
-                post.badgesIdentity.forEach(tag => {
-                    articleTagsHtml += `<span class="badge badge-identity" style="font-size: 0.85rem; padding: 6px 16px;">${tag}</span>\n`;
-                });
-            }
-            if (post.badgesTopic) {
-                post.badgesTopic.forEach(tag => {
-                    articleTagsHtml += `<span class="badge badge-topic" style="font-size: 0.85rem; padding: 6px 16px;">${tag}</span>\n`;
-                });
-            }
-            document.getElementById('article-detail-tags').innerHTML = articleTagsHtml;
+            const tagHost = document.getElementById('article-detail-tags');
+            tagHost.innerHTML = '';
+            [...(post.badgesIdentity || []), ...(post.badgesTopic || [])].forEach((tag, index) => {
+                const span = document.createElement('span');
+                span.className = `badge ${index < (post.badgesIdentity || []).length ? 'badge-identity' : 'badge-topic'}`;
+                span.style.fontSize = '.85rem';
+                span.style.padding = '6px 16px';
+                span.textContent = tag;
+                tagHost.appendChild(span);
+            });
 
             const imgEl = document.getElementById('article-detail-image');
-            if (post.image && !post.image.includes('1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo')) { 
-                imgEl.src = post.image;
+            const defaultImageMarker = '1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo';
+            if (post.image && !String(post.image).includes(defaultImageMarker)) {
+                imgEl.src = safeImageURL(post.image, '');
                 imgEl.alt = post.title || '文章圖片';
-                imgEl.style.display = 'block';
+                imgEl.style.display = imgEl.src ? 'block' : 'none';
             } else {
+                imgEl.removeAttribute('src');
                 imgEl.style.display = 'none';
             }
 
-            const contentFormatted = post.articleContent ? post.articleContent.replace(/\n/g, '<br>') : '沒有提供詳細內容。';
-            document.getElementById('article-detail-content').innerHTML = contentFormatted;
-
-            window.location.hash = 'article';
+            const contentHost = document.getElementById('article-detail-content');
+            contentHost.textContent = post.articleContent || '沒有提供詳細內容。';
+            contentHost.classList.remove('article-empty');
         }
 
-        let searchTimeout;
-        function handleSearch() {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                searchQuery = document.getElementById('global-search').value.toLowerCase().trim();
-                executeCombinedFilter();
-            }, 300);
+        function renderArticleMissing() {
+            document.getElementById('article-detail-title').textContent = '找不到這篇文章';
+            document.getElementById('article-detail-tags').innerHTML = '';
+            const imgEl = document.getElementById('article-detail-image');
+            imgEl.style.display = 'none';
+            document.getElementById('article-detail-content').textContent = '這篇內容可能已經移除，或網址裡沒有帶上文章識別碼。請回到資源百寶箱重新選擇。';
+        }
+
+        function openArticle(id) {
+            if (!id) return;
+            setHash(`article/${encodeURIComponent(id)}`);
+        }
+
+        function executeCombinedFilter() {
+            currentLimit = getDefaultLimit();
+            const filteredData = allPostsData.filter(post => {
+                const cardIdentities = post.identity ? post.identity.split(/\s+/) : [];
+                const cardTopics = post.topic ? post.topic.split(/\s+/) : [];
+                const matchIdentity = currentFilters.identity === 'all' || cardIdentities.includes(currentFilters.identity);
+                const matchTopic = currentFilters.topic === 'all' || cardTopics.includes(currentFilters.topic);
+                const searchTarget = [
+                    post.title,
+                    post.text,
+                    post.articleContent,
+                    post.identity,
+                    post.topic,
+                    ...(post.badgesIdentity || []),
+                    ...(post.badgesTopic || []),
+                    post.type,
+                    post.link
+                ].filter(Boolean).join(' ').toLowerCase();
+                const matchSearch = !searchQuery || searchTarget.includes(searchQuery);
+                return matchIdentity && matchTopic && matchSearch;
+            });
+            renderCards(filteredData);
         }
 
         function filterData(type, value, buttonElement) {
-            const siblings = buttonElement.parentElement.querySelectorAll('.filter-btn');
-            siblings.forEach(btn => btn.classList.remove('active'));
-            buttonElement.classList.add('active');
-
+            if (type !== 'identity' && type !== 'topic') return;
+            buttonElement?.parentElement.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            buttonElement?.classList.add('active');
             currentFilters[type] = value;
             executeCombinedFilter();
         }
 
-        function executeCombinedFilter() {
-            currentLimit = defaultLimit;
-
-            const filteredData = allPostsData.filter(post => {
-                const cardIdentities = post.identity ? post.identity.split(/\s+/) : [];
-                const cardTopics = post.topic ? post.topic.split(/\s+/) : [];
-                
-                const matchIdentity = (currentFilters.identity === 'all' || cardIdentities.includes(currentFilters.identity));
-                const matchTopic = (currentFilters.topic === 'all' || cardTopics.includes(currentFilters.topic));
-                
-                const searchTarget = [post.title, post.text, post.articleContent]
-                    .filter(Boolean)
-                    .join(' ')
-                    .toLowerCase();
-                    
-                const matchSearch = (!searchQuery || searchTarget.includes(searchQuery));
-                
-                return matchIdentity && matchTopic && matchSearch;
-            });
-            
-            renderCards(filteredData);
+        function handleSearch() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                searchQuery = document.getElementById('global-search')?.value.toLowerCase().trim() || '';
+                executeCombinedFilter();
+            }, 250);
         }
 
         const yumaQuotes = [
@@ -1192,109 +1345,35 @@
             "汪！聽說點擊我可以獲得今日隱藏好運，恭喜你，你已經獲得了！🍀"
         ];
 
-        let yumaTimer = null;
         function interactWithYuma() {
             const bubble = document.getElementById('yuma-bubble');
             const textElement = document.getElementById('yuma-text');
             const avatar = document.querySelector('.yuma-avatar img');
-            
+            if (!bubble || !textElement) return;
             const randomIndex = Math.floor(Math.random() * yumaQuotes.length);
             textElement.textContent = yumaQuotes[randomIndex];
-            
             bubble.classList.add('show');
-            avatar.style.transform = 'scale(0.8) translateY(12px)';
-            setTimeout(() => { avatar.style.transform = ''; }, 150);
-
+            if (avatar) {
+                avatar.style.transform = 'scale(0.8) translateY(12px)';
+                setTimeout(() => avatar.style.transform = '', 150);
+            }
             clearTimeout(yumaTimer);
-            yumaTimer = setTimeout(() => { bubble.classList.remove('show'); }, 4500);
+            yumaTimer = setTimeout(() => bubble.classList.remove('show'), 4500);
         }
 
-        let yumaScrollTimer = null;
         function checkScrollPrompt() {
             const prompt = document.getElementById('scroll-prompt-fixed');
-            if (!prompt) return;
-            
-            if (!document.getElementById('page-home').classList.contains('active-page')) {
-                prompt.style.opacity = '0';
-                return;
-            }
-
-            const scrollPos = window.innerHeight + window.scrollY;
-            const threshold = document.body.offsetHeight - 150;
-            if (scrollPos > threshold) {
-                prompt.style.opacity = '0';
-            } else {
-                prompt.style.opacity = '0.8';
-            }
+            const home = document.getElementById('page-home');
+            if (!prompt || !home) return;
+            if (!home.classList.contains('active-page')) { prompt.style.opacity = '0'; return; }
+            const atBottom = window.innerHeight + window.scrollY > document.body.offsetHeight - 180;
+            prompt.style.opacity = atBottom ? '0' : '0.8';
         }
-
-        window.addEventListener('scroll', () => {
-            const yuma = document.querySelector('.yuma-container');
-            if (yuma) {
-                yuma.classList.add('faded');
-                clearTimeout(yumaScrollTimer);
-                yumaScrollTimer = setTimeout(() => {
-                    yuma.classList.remove('faded');
-                }, 500);
-            }
-            checkScrollPrompt();
-        });
-
-        window.addEventListener('DOMContentLoaded', () => {
-            document.getElementById('welcomeModal').style.display = 'flex';
-            fetchGoogleSheetData(); 
-            setTimeout(checkScrollPrompt, 1000); 
-        });
 
         function toggleGlobalMusic() {
             const bgMusic = document.getElementById('bgMusic');
             if (!bgMusic) return;
-            
-            if (bgMusic.paused) {
-                controlPageMusic('play');
-            } else {
-                controlPageMusic('pause');
-            }
-        }
-
-        function closeModalAndPlayMusic() {
-            const bgMusic = document.getElementById('bgMusic');
-            const vinyl = document.getElementById('vinyl-record');
-            const playBtn = document.getElementById('btn-song-play');
-            const pauseBtn = document.getElementById('btn-song-pause');
-            const globalBtn = document.getElementById('global-music-btn');
-
-            bgMusic.currentTime = 0; 
-            bgMusic.volume = 0;        
-
-            bgMusic.play().then(() => {
-                const targetVolume = 0.4;     
-                const fadeDuration = 2000;    
-                const intervalTime = 50;      
-                const step = targetVolume / (fadeDuration / intervalTime);
-                
-                let fadeId = setInterval(() => {
-                    if (bgMusic.volume + step >= targetVolume) {
-                        bgMusic.volume = targetVolume;
-                        clearInterval(fadeId); 
-                    } else {
-                        bgMusic.volume += step;
-                    }
-                }, intervalTime);
-
-                if(vinyl) vinyl.classList.add('spinning');
-                if(playBtn) playBtn.classList.add('active');
-                if(pauseBtn) pauseBtn.classList.remove('active');
-                if(globalBtn) globalBtn.innerHTML = '🔊';
-
-            }).catch(error => {
-                console.log('瀏覽器自動播放阻擋', error);
-            });
-            
-            setTimeout(() => {
-                document.getElementById('welcomeModal').style.display = 'none';
-                checkScrollPrompt(); 
-            }, 600);
+            controlPageMusic(bgMusic.paused ? 'play' : 'pause');
         }
 
         const lyricsData = [
@@ -1340,147 +1419,182 @@
             { time: 173.30, text: "福科輔導室~ 挺你到最後！" }
         ];
 
+        function closeModalAndPlayMusic() {
+            const bgMusic = document.getElementById('bgMusic');
+            const vinyl = document.getElementById('vinyl-record');
+            const playBtn = document.getElementById('btn-song-play');
+            const pauseBtn = document.getElementById('btn-song-pause');
+            const globalBtn = document.getElementById('global-music-btn');
+            const welcomeModal = document.getElementById('welcomeModal');
+
+            if (!welcomeModal) return;
+
+            if (bgMusic) {
+                bgMusic.currentTime = 0;
+                bgMusic.volume = 0;
+                bgMusic.play().then(() => {
+                    const targetVolume = 0.4;
+                    const fadeDuration = 2000;
+                    const intervalTime = 50;
+                    const step = targetVolume / (fadeDuration / intervalTime);
+                    let fadeId = setInterval(() => {
+                        if (bgMusic.volume + step >= targetVolume) {
+                            bgMusic.volume = targetVolume;
+                            clearInterval(fadeId);
+                        } else {
+                            bgMusic.volume += step;
+                        }
+                    }, intervalTime);
+
+                    vinyl?.classList.add('spinning');
+                    playBtn?.classList.add('active');
+                    pauseBtn?.classList.remove('active');
+                    if (globalBtn) globalBtn.textContent = '🔊';
+                }).catch(() => {});
+            }
+
+            welcomeModal.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('modal-open');
+            setTimeout(() => {
+                welcomeModal.style.display = 'none';
+                checkScrollPrompt();
+            }, 600);
+        }
+
         function controlPageMusic(action) {
             const bgMusic = document.getElementById('bgMusic');
             const playBtn = document.getElementById('btn-song-play');
             const pauseBtn = document.getElementById('btn-song-pause');
             const vinyl = document.getElementById('vinyl-record');
             const globalBtn = document.getElementById('global-music-btn');
-            
             if (!bgMusic) return;
 
             if (action === 'play') {
-                bgMusic.play().catch(e=>console.log(e));
-                if (playBtn) playBtn.classList.add('active');
-                if (pauseBtn) pauseBtn.classList.remove('active');
-                if (vinyl) vinyl.classList.add('spinning');
-                if (globalBtn) globalBtn.innerHTML = '🔊';
+                bgMusic.play().then(() => {
+                    playBtn?.classList.add('active'); pauseBtn?.classList.remove('active'); vinyl?.classList.add('spinning');
+                    if (globalBtn) globalBtn.textContent = '🔊';
+                }).catch(() => {});
             } else if (action === 'pause') {
-                bgMusic.pause();
-                if (playBtn) playBtn.classList.remove('active');
-                if (pauseBtn) pauseBtn.classList.add('active');
-                if (vinyl) vinyl.classList.remove('spinning');
-                if (globalBtn) globalBtn.innerHTML = '🔇';
+                bgMusic.pause(); playBtn?.classList.remove('active'); pauseBtn?.classList.add('active'); vinyl?.classList.remove('spinning');
+                if (globalBtn) globalBtn.textContent = '🔇';
             } else if (action === 'restart') {
                 bgMusic.currentTime = 0;
-                bgMusic.play().catch(e=>console.log(e));
-                if (playBtn) playBtn.classList.add('active');
-                if (pauseBtn) pauseBtn.classList.remove('active');
-                if (vinyl) vinyl.classList.add('spinning');
-                if (globalBtn) globalBtn.innerHTML = '🔊';
+                bgMusic.play().then(() => {
+                    playBtn?.classList.add('active'); pauseBtn?.classList.remove('active'); vinyl?.classList.add('spinning');
+                    if (globalBtn) globalBtn.textContent = '🔊';
+                }).catch(() => {});
             }
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
+        function toggleFullLyrics() {
+            const lyricsBox = document.getElementById('full-lyrics-box');
+            const toggleBtn = document.getElementById('btn-toggle-lyrics');
+            if (!lyricsBox || !toggleBtn) return;
+            const open = lyricsBox.style.display === 'none';
+            lyricsBox.style.display = open ? 'block' : 'none';
+            toggleBtn.textContent = open ? '📄 收合完整歌詞' : '📄 展開完整歌詞';
+            toggleBtn.classList.toggle('active', open);
+        }
+
+        async function toggleFullscreen() {
+            const wrapper = document.getElementById('lyrics-fullscreen-wrapper');
+            if (!wrapper) return;
+            try {
+                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                    if (wrapper.requestFullscreen) await wrapper.requestFullscreen();
+                    else if (wrapper.webkitRequestFullscreen) await wrapper.webkitRequestFullscreen();
+                } else {
+                    if (document.exitFullscreen) await document.exitFullscreen();
+                    else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
+                }
+            } catch (_) {}
+            updateFullscreenButton();
+        }
+
+        function updateFullscreenButton() {
+            const btn = document.getElementById('btn-fullscreen');
+            if (!btn) return;
+            btn.textContent = (!document.fullscreenElement && !document.webkitFullscreenElement) ? '⛶ 沉浸全螢幕' : '✖ 退出全螢幕';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
             const wrapper = document.getElementById('lyrics-wrapper');
-            if (wrapper) {
-                lyricsData.forEach((lyric, index) => {
-                    const p = document.createElement('p');
-                    p.className = 'lyric-line';
-                    p.id = 'lyric-' + index;
-                    p.textContent = lyric.text;
-                    wrapper.appendChild(p);
-                });
+            lyricsData.forEach((lyric, index) => {
+                const p = document.createElement('p');
+                p.className = 'lyric-line';
+                p.id = 'lyric-' + index;
+                p.textContent = lyric.text;
+                wrapper?.appendChild(p);
+            });
+
+            document.querySelector('.dropdown-trigger')?.addEventListener('click', event => toggleDropdown(event.currentTarget.closest('.dropdown')));
+            document.querySelectorAll('#nav-menu a').forEach(link => link.addEventListener('click', closeMenu));
+            document.addEventListener('keydown', event => {
+                if (event.key === 'Escape') {
+                    closeMenu(); closeDropdown();
+                }
+            });
+
+            const welcomeModal = document.getElementById('welcomeModal');
+            if (welcomeModal) {
+                welcomeModal.style.display = 'flex';
+                welcomeModal.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('modal-open');
             }
+
+            handleHashChange({ skipScroll: true });
+            fetchGoogleSheetData();
+            setTimeout(checkScrollPrompt, 800);
         });
 
-        const audioEl = document.getElementById('bgMusic');
-        let currentLyricIndex = -1;
+        window.addEventListener('hashchange', () => handleHashChange());
+        window.addEventListener('resize', () => { currentLimit = getDefaultLimit(); if (filteredCache.length) renderCards(filteredCache); });
+        window.addEventListener('scroll', () => {
+            const yuma = document.querySelector('.yuma-container');
+            if (yuma) {
+                yuma.classList.add('faded');
+                clearTimeout(yumaScrollTimer);
+                yumaScrollTimer = setTimeout(() => yuma.classList.remove('faded'), 500);
+            }
+            checkScrollPrompt();
+        }, { passive: true });
 
+        const audioEl = document.getElementById('bgMusic');
         if (audioEl) {
             audioEl.addEventListener('timeupdate', () => {
                 const time = audioEl.currentTime;
                 let activeIndex = -1;
-
                 if (currentLyricIndex >= 0 && currentLyricIndex < lyricsData.length) {
                     const currentT = lyricsData[currentLyricIndex].time - 0.3;
                     const nextT = (currentLyricIndex + 1 < lyricsData.length) ? lyricsData[currentLyricIndex + 1].time - 0.3 : Infinity;
-                    if (time >= currentT && time < nextT) return; 
+                    if (time >= currentT && time < nextT) return;
                 }
-
                 for (let i = 0; i < lyricsData.length; i++) {
-                    if (time >= lyricsData[i].time - 0.3) {
-                        activeIndex = i;
-                    } else {
-                        break;
-                    }
+                    if (time >= lyricsData[i].time - 0.3) activeIndex = i;
+                    else break;
                 }
-
                 if (activeIndex !== currentLyricIndex && activeIndex !== -1) {
-                    if (currentLyricIndex !== -1) {
-                        const oldEl = document.getElementById('lyric-' + currentLyricIndex);
-                        if(oldEl) oldEl.classList.remove('active');
-                    }
-                    
+                    if (currentLyricIndex !== -1) document.getElementById('lyric-' + currentLyricIndex)?.classList.remove('active');
                     const newEl = document.getElementById('lyric-' + activeIndex);
                     const container = document.getElementById('lyrics-container');
-                    if(newEl && container) {
+                    if (newEl && container) {
                         newEl.classList.add('active');
-                        const containerCenter = container.clientHeight / 2;
-                        const scrollPos = newEl.offsetTop - containerCenter + (newEl.clientHeight / 2);
+                        const scrollPos = newEl.offsetTop - (container.clientHeight / 2) + (newEl.clientHeight / 2);
                         container.scrollTo({ top: scrollPos, behavior: 'smooth' });
                     }
                     currentLyricIndex = activeIndex;
                 }
             });
-
             audioEl.addEventListener('ended', () => {
-                const vinyl = document.getElementById('vinyl-record');
-                const playBtn = document.getElementById('btn-song-play');
-                const pauseBtn = document.getElementById('btn-song-pause');
-                const globalBtn = document.getElementById('global-music-btn');
-                if (vinyl) vinyl.classList.remove('spinning');
-                if (playBtn) playBtn.classList.remove('active');
-                if (pauseBtn) pauseBtn.classList.remove('active');
-                if (globalBtn) globalBtn.innerHTML = '🔇';
+                document.getElementById('vinyl-record')?.classList.remove('spinning');
+                document.getElementById('btn-song-play')?.classList.remove('active');
+                document.getElementById('btn-song-pause')?.classList.remove('active');
+                const btn = document.getElementById('global-music-btn'); if (btn) btn.textContent = '🔇';
             });
-        }
-        
-        function toggleFullLyrics() {
-            const lyricsBox = document.getElementById('full-lyrics-box');
-            const toggleBtn = document.getElementById('btn-toggle-lyrics');
-            
-            if (lyricsBox.style.display === 'none') {
-                lyricsBox.style.display = 'block';
-                toggleBtn.innerHTML = '📄 收合完整歌詞';
-                toggleBtn.classList.add('active'); 
-                
-                setTimeout(() => {
-                    toggleBtn.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
-            } else {
-                lyricsBox.style.display = 'none';
-                toggleBtn.innerHTML = '📄 展開完整歌詞';
-                toggleBtn.classList.remove('active'); 
-            }
-        }
-        
-        function toggleFullscreen() {
-            const wrapper = document.getElementById('lyrics-fullscreen-wrapper');
-            const btn = document.getElementById('btn-fullscreen');
-            
-            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                if (wrapper.requestFullscreen) wrapper.requestFullscreen();
-                else if (wrapper.webkitRequestFullscreen) wrapper.webkitRequestFullscreen();
-                btn.innerHTML = '✖ 退出全螢幕';
-            } else {
-                if (document.exitFullscreen) document.exitFullscreen();
-                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                btn.innerHTML = '⛶ 沉浸全螢幕';
-            }
         }
 
         document.addEventListener('fullscreenchange', updateFullscreenButton);
         document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
-
-        function updateFullscreenButton() {
-            const btn = document.getElementById('btn-fullscreen');
-            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                btn.innerHTML = '⛶ 沉浸全螢幕';
-            } else {
-                btn.innerHTML = '✖ 退出全螢幕';
-            }
-        }
     </script>
 </body>
 </html>
