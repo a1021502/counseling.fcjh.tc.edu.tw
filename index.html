@@ -21,527 +21,867 @@
     <meta name="twitter:image" content="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800">
 
     <style>
+        /* =========================================================
+           福導 V5 — Design System / Accessibility / Responsive CSS
+           ========================================================= */
         @font-face {
             font-family: 'NaikaiFont';
-            src: url('NaikaiFont-Regular.woff2') format('woff2'); 
-            font-display: swap; 
+            src: url('NaikaiFont-Regular.woff2') format('woff2');
+            font-display: swap;
         }
 
         :root {
-            --primary-color: #5B8476;    
-            --secondary-color: #E2877A;  
-            --accent-color: #EEB875;     
-            --bg-color: #FAF8F5;         
-            --text-color: #3D3D3D;       
-            --text-muted: #727272;       
-            --danger-color: #CD5334;     
-            --border-warm: 1px solid rgba(230, 224, 212, 0.7); 
-            --card-shadow: 0 12px 35px rgba(108, 154, 139, 0.04), 0 4px 12px rgba(0, 0, 0, 0.01); 
-            --hover-shadow: 0 22px 45px rgba(91, 132, 118, 0.12); 
+            --primary-color: #5B8476;
+            --primary-dark: #3F6C5F;
+            --secondary-color: #E2877A;
+            --accent-color: #EEB875;
+            --bg-color: #FAF8F5;
+            --surface-color: #FFFFFF;
+            --surface-soft: #FFFDF9;
+            --text-color: #3D3D3D;
+            --text-muted: #727272;
+            --text-soft: #8C867A;
+            --danger-color: #CD5334;
+            --danger-dark: #9A3E1C;
+            --border-color: rgba(230, 224, 212, 0.7);
+            --border-solid: #E6E2D8;
+            --border-soft: #EFECE4;
+            --focus-ring: #2F6B5B;
+            --focus-ring-offset: 3px;
+            --card-shadow: 0 12px 35px rgba(108, 154, 139, 0.04), 0 4px 12px rgba(0, 0, 0, 0.01);
+            --hover-shadow: 0 22px 45px rgba(91, 132, 118, 0.12);
+            --chrome-shadow: 0 6px 24px rgba(62, 65, 58, 0.06);
+            --radius-card: 20px;
+            --radius-control: 14px;
+            --content-max: 1240px;
         }
 
-        * {
+        *, *::before, *::after {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'PingFang TC', 'Noto Sans TC', '微軟正黑體', sans-serif;
+        }
+
+        html {
             scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            background: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.8; 
-            letter-spacing: 0.04em; 
-            font-size: 1.05rem; 
+            font-family: 'PingFang TC', 'Noto Sans TC', '微軟正黑體', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            letter-spacing: 0.04em;
             overflow-wrap: break-word;
             word-wrap: break-word;
         }
 
-        h1, h2, h3, .logo, .project-name, .modal-title, .modal-slogan, 
+        body.modal-open { overflow: hidden; }
+
+        button, input, summary {
+            font: inherit;
+        }
+
+        button {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button:focus-visible,
+        a:focus-visible,
+        input:focus-visible,
+        summary:focus-visible {
+            outline: 3px solid var(--focus-ring);
+            outline-offset: var(--focus-ring-offset);
+        }
+
+        h1, h2, h3, .logo, .project-name, .modal-title, .modal-slogan,
         .door-indicator, .resource-category h3, .card-title, .filter-label,
-        .naikai-text, .faq-q, .article-title {
+        .naikai-text, .faq-q, .article-title, .mobile-filter-toggle,
+        .load-more-action, .song-title, .vinyl-label-text, .about-title,
+        .about-brand-title, .designer-title {
             font-family: 'NaikaiFont', 'PingFang TC', '微軟正黑體', sans-serif !important;
-            letter-spacing: normal; 
-            font-weight: normal !important; 
+            letter-spacing: normal;
+            font-weight: normal !important;
         }
 
         .hero-subtitle, .hero-bullet, .modal-slogan {
             font-family: 'PingFang TC', 'Noto Sans TC', '微軟正黑體', sans-serif !important;
         }
 
-        .map-link {
-            color: var(--secondary-color);
-            text-decoration: underline;
-            font-weight: bold;
-            transition: opacity 0.2s, color 0.2s;
-        }
-        .map-link:hover {
-            opacity: 0.7;
-            color: var(--primary-color);
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
         }
 
         .mobile-break { display: none; }
         .desktop-space { display: inline; }
-
         .text-center { text-align: center; }
-        .hero-subtitle-box { margin: 25px 20px 35px 20px; }
-        .hero-subtitle { color: #BA8553; font-size: 1.6rem; margin-bottom: 25px; line-height: 1.5; }
-        .hero-bullet { font-size: 1.05rem; color: #726D64; margin-bottom: 8px; }
         .flex-center { display: flex; justify-content: center; align-items: center; }
         .flex-wrap { flex-wrap: wrap; }
-        
-        .lyrics-header-title { font-size: 2.2rem; color: var(--secondary-color); margin-bottom: 10px; }
-        .lyrics-header-sub { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px; border-bottom: 2px dashed #EFECE4; padding-bottom: 25px; }
-        
-        .chorus-highlight {
-            background-color: rgba(238, 184, 117, 0.15); border-radius: 16px; 
-            padding: 25px; margin: 25px auto; max-width: 520px; 
-            border: 1px dashed var(--accent-color);
+
+        /* =========================================================
+           Site chrome / urgent help
+           ========================================================= */
+        .site-chrome {
+            position: sticky;
+            top: 0;
+            z-index: 1100;
+            box-shadow: var(--chrome-shadow);
         }
-        .chorus-title { font-size: 1.25rem; color: var(--danger-color); margin-bottom: 8px; }
-        .chorus-text { font-weight: bold; font-size: 1.1rem; color: var(--text-color); }
-        .chorus-accent { color: var(--primary-color); font-size: 1.3rem; margin: 5px 0; }
 
         .emergency-bar {
-            background-color: var(--danger-color); text-align: center;
-            font-weight: 500; font-size: 0.95rem; position: sticky;
-            top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(205, 83, 52, 0.2);
+            background: var(--danger-color);
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(205, 83, 52, 0.2);
         }
-        .emergency-toggle { 
-            display: block; width: 100%; background: none; border: none; color: white; 
-            font-size: 0.95rem; font-weight: bold; cursor: pointer; padding: 12px 0; letter-spacing: 0.05em;
+
+        .emergency-toggle {
+            display: block;
+            width: 100%;
+            padding: 12px 16px;
+            border: 0;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: bold;
+            letter-spacing: 0.05em;
         }
-        .emergency-links { display: none; padding: 0 5% 15px 5%; color: white; }
-        .emergency-links.show { display: flex; flex-direction: row; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px; }
+
+        .emergency-toggle[aria-expanded="true"] {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .emergency-links {
+            display: none;
+            padding: 0 5% 15px;
+            color: white;
+        }
+
+        .emergency-links.show {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
         .emergency-links a {
-            color: #FFF2E6; text-decoration: none; border: 1px dashed rgba(255,255,255,0.4);
-            padding: 8px 20px; border-radius: 8px; display: inline-block; transition: all 0.2s; font-weight: bold; background: rgba(255,255,255,0.1);
+            color: #FFF2E6;
+            text-decoration: none;
+            border: 1px dashed rgba(255, 255, 255, 0.4);
+            padding: 8px 20px;
+            border-radius: 8px;
+            display: inline-block;
+            transition: all 0.2s;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.1);
         }
-        .emergency-links a:hover { opacity: 0.9; transform: translateY(-2px); background: rgba(255,255,255,0.2); }
+
+        .emergency-links a:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .emergency-link-primary {
+            background: rgba(255, 255, 255, 0.18) !important;
+        }
 
         header {
-            background-color: rgba(250, 248, 245, 0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            padding: 18px 5%; display: flex; justify-content: space-between;
-            align-items: center; position: sticky; top: 45px; z-index: 999; border-bottom: var(--border-warm); transition: top 0.3s;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 18px 5%;
+            background: rgba(250, 248, 245, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
-        .logo { font-size: 1.5rem; color: var(--primary-color); display: flex; align-items: center; gap: 10px; text-decoration: none; transition: transform 0.2s; }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: transform 0.2s;
+            flex: 0 0 auto;
+        }
+
         .logo:hover { transform: scale(1.02); }
+        .logo img { height: 46px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.1)); }
 
-        nav ul { list-style: none; display: flex; gap: 20px; align-items: center; }
+        nav ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
         nav a {
-            text-decoration: none; color: var(--text-color); font-weight: 600; 
-            font-size: 1.05rem; letter-spacing: 0.03em; transition: all 0.3s ease; position: relative; padding: 6px 0; cursor: pointer;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            padding: 6px 0;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s ease;
         }
-        nav a:hover, nav a.active-nav { color: var(--primary-color); }
-        nav a::after {
-            content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 2px;
-            background-color: var(--primary-color); transition: all 0.3s ease; transform: translateX(-50%);
-        }
-        nav a:hover::after, nav a.active-nav::after { width: 100%; }
 
-        .menu-toggle { display: none; }
+        nav a:hover,
+        nav a.active-nav {
+            color: var(--primary-color);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active-nav::after { width: 100%; }
+
+        .menu-toggle {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            position: absolute;
+            right: 4%;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 0;
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(91, 132, 118, 0.2);
+            transition: all 0.2s;
+        }
+
+        .menu-toggle:active {
+            background: var(--secondary-color);
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .menu-icon { font-size: 1.2rem; font-family: sans-serif; }
 
         .dropdown { position: relative; }
-        .dropdown-trigger { color: var(--text-color); background: transparent; border: 0; padding: 6px 0; font-weight: 600; font-size: 1.05rem; letter-spacing: .03em; cursor: pointer; }
-        .dropdown-trigger:hover { color: var(--primary-color); }
-        .dropdown::after { content: ''; position: absolute; width: 100%; height: 15px; bottom: -15px; left: 0; }
-        .dropdown-content {
-            display: none; position: absolute; background-color: white;
-            min-width: 200px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); z-index: 1001; 
-            border-radius: 14px; overflow: hidden; top: calc(100% + 10px); left: 50%; 
-            transform: translateX(-50%); border: var(--border-warm); padding: 6px 0;
+
+        .dropdown-trigger {
+            color: var(--text-color);
+            background: transparent;
+            border: 0;
+            padding: 6px 0;
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            cursor: pointer;
         }
-        @media (hover: hover) { .dropdown:hover .dropdown-content { display: block; animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); } }
+
+        .dropdown-trigger:hover { color: var(--primary-color); }
+
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 15px;
+            bottom: -15px;
+            left: 0;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: calc(100% + 10px);
+            min-width: 200px;
+            padding: 6px 0;
+            overflow: hidden;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            transform: translateX(-50%);
+            z-index: 1001;
+        }
+
+        @media (hover: hover) {
+            .dropdown:hover .dropdown-content {
+                display: block;
+                animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+        }
+
         .dropdown.mobile-open .dropdown-content { display: block; }
         .dropdown.mobile-open .dropdown-trigger { color: var(--primary-color); }
-        .dropdown-content a { color: var(--text-color); padding: 12px 22px; font-size: 0.95rem; display: block; font-weight: 500;}
+
+        .dropdown-content a {
+            display: block;
+            padding: 12px 22px;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
         .dropdown-content a::after { display: none; }
-        .dropdown-content a:hover { background-color: #FAF8F5; color: var(--primary-color); padding-left: 26px; }
+        .dropdown-content a:hover { background: var(--bg-color); color: var(--primary-color); }
 
-        .page { display: none; animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        /* =========================================================
+           Page / hero / resource cards
+           ========================================================= */
+        .page {
+            display: none;
+            animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
         .page.active-page { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        .hero { 
-            background-color: #FAF8F5;
-            background-image: linear-gradient(rgba(250, 248, 245, 0.88), rgba(250, 248, 245, 0.95)), url('https://drive.google.com/thumbnail?id=1BGNIabOD8poTw3e6qwX1ZCn_Jh_ctdim&sz=w1920');
-            background-position: center; background-size: cover; background-repeat: no-repeat;
-            padding: 85px 5% 65px 5%; text-align: center; border-bottom: var(--border-warm); 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .hero h1 { font-size: 2.8rem; color: var(--primary-color); margin-bottom: 20px; text-shadow: 1px 1px 0px rgba(255,255,255,0.8); line-height: 1.4; }
 
-        .project-showcase { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 15px; }
+        .hero {
+            padding: 85px 5% 65px;
+            text-align: center;
+            background-color: var(--bg-color);
+            background-image: linear-gradient(rgba(250, 248, 245, 0.88), rgba(250, 248, 245, 0.95)), url('https://drive.google.com/thumbnail?id=1BGNIabOD8poTw3e6qwX1ZCn_Jh_ctdim&sz=w1920');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero h1 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-size: 2.8rem;
+            line-height: 1.4;
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        .hero-subtitle-box { margin: 25px 20px 35px; }
+        .hero-subtitle { margin-bottom: 25px; color: #BA8553; font-size: 1.6rem; line-height: 1.5; }
+        .hero-bullet { margin-bottom: 8px; color: #726D64; font-size: 1.05rem; }
+
+        .project-showcase {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
         .project-card {
-            background: white; border-radius: 20px; padding: 18px 20px; display: flex; align-items: center; justify-content: center; gap: 15px;
-            text-decoration: none; box-shadow: var(--card-shadow); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); border: var(--border-warm); 
-            width: 320px; max-width: 100%;
+            width: 320px;
+            max-width: 100%;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            box-shadow: var(--card-shadow);
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .project-card:hover { transform: translateY(-5px); border-color: var(--primary-color); box-shadow: var(--hover-shadow); }
-        .project-logo { width: 58px; height: 58px; border-radius: 50%; object-fit: cover; border: 2px solid white; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+
+        .project-card:hover { transform: translateY(-5px); box-shadow: var(--hover-shadow); border-color: var(--primary-color); }
+        .project-logo { width: 58px; height: 58px; border-radius: 50%; object-fit: cover; border: 2px solid white; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); }
         .project-text { text-align: left; }
-        .project-name { display: block; color: var(--primary-color); font-size: 1.25rem; margin-bottom: 3px; }
-        .project-desc { display: block; font-size: 0.85rem; color: var(--text-muted); }
+        .project-name { display: block; margin-bottom: 3px; color: var(--primary-color); font-size: 1.25rem; }
+        .project-desc { display: block; color: var(--text-muted); font-size: 0.85rem; }
 
-        .filter-section { padding: 25px 5% 15px 5%; text-align: center; }
-        .search-wrapper { max-width: 550px; margin: 25px auto 15px auto; position: relative; }
-        .search-input { width: 100%; padding: 14px 25px 14px 52px; border: 2px solid #E6E2D8; border-radius: 50px; font-size: 0.95rem; outline: none; background-color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.01); color: var(--text-color); }
-        .search-input:focus { border-color: var(--primary-color); box-shadow: 0 6px 20px rgba(91, 132, 118, 0.12); }
-        .search-icon { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); font-size: 1.1rem; color: #A39E93; }
-        .filter-group { margin: 12px 0; display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
-        .filter-label { color: #8C867A; font-size: 1.1rem; margin-right: 4px; }
-        .filter-btn { background: #EFECE4; border: none; padding: 7px 18px; border-radius: 30px; cursor: pointer; font-size: 0.9rem; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text-color); font-weight: 500; }
-        .filter-btn:hover { background: #E5E1D7; }
-        .filter-btn.active { background-color: var(--primary-color); color: white; box-shadow: 0 4px 12px rgba(91, 132, 118, 0.25); }
+        .filter-section { padding: 25px 5% 15px; text-align: center; }
+        .filter-heading { margin-bottom: 5px; color: var(--primary-color); font-size: 2rem; }
+        .section-helper { max-width: 900px; margin: 0 auto 18px; color: var(--text-muted); font-size: 0.95rem; }
 
-        .container { padding: 0 5% 60px 5%; max-width: 1240px; margin: 0 auto; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 35px; transition: all 0.4s ease;}
-        
-        .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: var(--card-shadow); display: flex; flex-direction: column; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); border: var(--border-warm); }
-        .card:hover { transform: translateY(-8px); box-shadow: var(--hover-shadow); border-color: rgba(91, 132, 118, 0.3); }
-        .card-media { width: 100%; height: 190px; position: relative; background-color: #EFECE4; overflow: hidden; }
-        .card-media img { width: 100%; height: 100%; object-fit: cover; }
-        .card-body { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
-        .card-tags { margin-bottom: 12px; }
-        .badge { display: inline-block; font-size: 0.75rem; padding: 4px 12px; border-radius: 30px; color: white; font-weight: bold; margin-right: 6px; margin-bottom: 6px; letter-spacing: 0.02em; }
-        .badge-identity { background-color: var(--secondary-color); }
-        .badge-topic { background-color: #A3908F; }
-        .card-title { font-size: 1.35rem; margin-bottom: 12px; color: #2D2D2D; line-height: 1.4; }
-        .card-text { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; flex-grow: 1; line-height: 1.7; }
-        .card-link { text-align: right; margin-top: auto;}
-        .card-link a { color: var(--primary-color); text-decoration: none; font-weight: bold; font-size: 0.95rem; transition: color 0.2s; cursor: pointer; }
-        .card-link a:hover { color: var(--secondary-color); }
+        .search-wrapper { max-width: 550px; margin: 25px auto 15px; position: relative; }
 
-        .team-title-section { 
-            text-align: center; padding: 65px 5% 40px 5%; background-color: #FAF8F5;
-            background-image: linear-gradient(rgba(250, 248, 245, 0.88), rgba(250, 248, 245, 0.95)), url('https://drive.google.com/thumbnail?id=1BGNIabOD8poTw3e6qwX1ZCn_Jh_ctdim&sz=w1920');
-            background-position: center; background-size: cover; background-repeat: no-repeat; border-bottom: var(--border-warm); 
+        .search-input {
+            width: 100%;
+            padding: 14px 25px 14px 52px;
+            border: 2px solid var(--border-solid);
+            border-radius: 50px;
+            outline: none;
+            background: white;
+            color: var(--text-color);
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.01);
+            transition: all 0.3s ease;
         }
-        .team-title-section h2 { color: var(--primary-color); font-size: 2.3rem; margin-bottom: 12px; line-height: 1.4; }
-        .team-title-section p { color: var(--text-muted); max-width: 700px; margin: 0 auto; font-size: 1.05rem; }
-        
-        .info-block { background: white; border-radius: 20px; padding: 40px 30px; box-shadow: var(--card-shadow); border: var(--border-warm); margin-bottom: 35px; transition: transform 0.3s; }
-        .info-block:hover { transform: translateY(-2px); }
 
-        .article-title { color: var(--primary-color); font-size: 2.5rem; margin-bottom: 20px; text-align: center; line-height: 1.4; }
-        .article-meta { text-align: center; margin-bottom: 35px; border-bottom: 2px dashed #EFECE4; padding-bottom: 20px; }
-        .article-content-body { font-size: 1.1rem; line-height: 2; color: #4A4A4A; letter-spacing: 0.05em; padding: 0 15px; }
+        .search-input:focus { border-color: var(--primary-color); box-shadow: 0 6px 20px rgba(91, 132, 118, 0.12); }
+        .search-icon { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); color: #A39E93; font-size: 1.1rem; pointer-events: none; }
 
-        .resource-list { max-width: 1000px; margin: 0 auto; padding: 30px 5% 60px 5%; }
-        .resource-category { background: white; border-radius: 20px; padding: 35px; margin-bottom: 35px; box-shadow: var(--card-shadow); border: var(--border-warm); border-top: 6px solid var(--primary-color); }
-        .resource-category h3 { color: var(--primary-color); margin-bottom: 25px; font-size: 1.5rem; border-bottom: 2px dashed #EFECE4; padding-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .filter-group { margin: 12px 0; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .filter-label { margin-right: 4px; color: var(--text-soft); font-size: 1.1rem; }
+        .filter-options { display: contents; }
+
+        .filter-btn {
+            padding: 8px 18px;
+            border: 0;
+            border-radius: 30px;
+            background: #EFECE4;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .filter-btn:hover { background: #E5E1D7; }
+        .filter-btn.active { background: var(--primary-color); color: white; box-shadow: 0 4px 12px rgba(91, 132, 118, 0.25); }
+        .view-toggle-btn { background: transparent; border: 1.5px solid var(--primary-color); color: var(--primary-color); font-weight: bold; }
+
+        .resource-status {
+            max-width: 900px;
+            margin: 18px auto 4px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            min-height: 1.8em;
+        }
+
+        .data-sync-note {
+            max-width: 900px;
+            margin: 0 auto;
+            color: var(--text-soft);
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+
+        .view-toggle-container { display: none; text-align: right; margin: 10px 5% 0; }
+        .container { width: 100%; max-width: var(--content-max); margin: 0 auto; padding: 0 5% 60px; }
+        .container-home { padding-bottom: 20px; }
+
+        .resource-grid { display: none; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 35px;
+            transition: all 0.4s ease;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card:hover { transform: translateY(-8px); box-shadow: var(--hover-shadow); border-color: rgba(91, 132, 118, 0.3); }
+        .card-media { width: 100%; height: 190px; position: relative; overflow: hidden; background: #EFECE4; }
+        .card-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+        .card-body { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-tags { margin-bottom: 12px; }
+
+        .badge {
+            display: inline-block;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            padding: 4px 12px;
+            border-radius: 30px;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 0.02em;
+        }
+
+        .badge-identity { background: var(--secondary-color); }
+        .article-tag { font-size: .85rem; padding: 6px 16px; }
+        .badge-topic { background: #A3908F; }
+        .card-title { margin-bottom: 12px; color: #2D2D2D; font-size: 1.35rem; line-height: 1.4; }
+        .card-text { flex-grow: 1; margin-bottom: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; white-space: pre-line; }
+        .card-link { margin-top: auto; text-align: right; }
+        .video-preview-wrapper { width: 100%; height: 100%; position: relative; display: block; overflow: hidden; }
+        .video-preview-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+        .video-preview-wrapper::after { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,.12); transition: background .3s; }
+        .video-preview-wrapper:hover img { transform: scale(1.04); }
+        .video-preview-wrapper:hover::after { background: rgba(0,0,0,.25); }
+        .play-button { position: absolute; top: 50%; left: 50%; z-index: 2; width: 65px; height: 45px; display: flex; align-items: center; justify-content: center; background: rgba(224,43,36,.9); border-radius: 14px; transform: translate(-50%,-50%); box-shadow: 0 4px 15px rgba(0,0,0,.2); transition: all .3s; }
+        .play-button::after { content: ''; width: 0; height: 0; display: block; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent #fff; margin-left: 4px; }
+        .video-preview-wrapper:hover .play-button { background: #F00000; transform: translate(-50%,-50%) scale(1.08); }
+
+        .card-link a, .card-link button.card-action { color: var(--primary-color); text-decoration: none; font-size: 0.95rem; font-weight: bold; transition: color 0.2s; }
+        .card-link a:hover, .card-link button.card-action:hover { color: var(--secondary-color); }
+        .card-link button.card-action { appearance: none; padding: 0; border: 0; background: transparent; cursor: pointer; }
+        .card-link .link-missing { color: var(--text-muted); font-size: 0.92rem; }
+
+        .loading-status { padding: 22px 20px; color: var(--text-muted); font-size: 1rem; text-align: center; }
+
+        .error-note {
+            display: none;
+            max-width: 760px;
+            margin: 0 auto 20px;
+            padding: 14px 16px;
+            background: #FFF3E5;
+            border-left: 5px solid var(--danger-color);
+            border-radius: 12px;
+            color: #7D4026;
+            font-size: 0.92rem;
+        }
+
+        .error-note.show { display: block; }
+
+        .resource-empty {
+            grid-column: 1 / -1;
+            padding: 48px 24px;
+            text-align: center;
+            background: white;
+            border: 1px dashed var(--border-solid);
+            border-radius: var(--radius-card);
+        }
+
+        .resource-empty-icon { font-size: 2.1rem; margin-bottom: 10px; }
+        .resource-empty-title { margin-bottom: 8px; color: var(--primary-color); font-size: 1.45rem; }
+        .resource-empty-text { color: var(--text-muted); font-size: 0.95rem; }
+
+        .load-more-container { display: none; text-align: center; margin-top: 35px; padding-bottom: 40px; }
+        .load-more-action { padding: 10px 30px; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(91, 132, 118, 0.3); }
+        .collapse-action { border: 1.5px solid var(--primary-color); color: var(--primary-color); background: transparent; }
+
+        /* =========================================================
+           Shared page headers / content
+           ========================================================= */
+        .team-title-section {
+            padding: 65px 5% 40px;
+            text-align: center;
+            background-color: var(--bg-color);
+            background-image: linear-gradient(rgba(250, 248, 245, 0.88), rgba(250, 248, 245, 0.95)), url('https://drive.google.com/thumbnail?id=1BGNIabOD8poTw3e6qwX1ZCn_Jh_ctdim&sz=w1920');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .team-title-section h2 { margin-bottom: 12px; color: var(--primary-color); font-size: 2.3rem; line-height: 1.4; }
+        .team-title-section p { max-width: 700px; margin: 0 auto; color: var(--text-muted); font-size: 1.05rem; }
+
+        .info-block {
+            margin-bottom: 35px;
+            padding: 40px 30px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            box-shadow: var(--card-shadow);
+        }
+
+        .article-tag { font-size: .85rem; padding: 6px 16px; }
+        .article-title { margin-bottom: 20px; color: var(--primary-color); font-size: 2.5rem; text-align: center; line-height: 1.4; }
+        .article-title-section { padding-top: 40px; padding-bottom: 30px; }
+        .article-meta { margin-bottom: 35px; padding-bottom: 20px; text-align: center; border-bottom: 2px dashed var(--border-soft); }
+        .article-content-body { padding: 0 15px; color: #4A4A4A; font-size: 1.1rem; line-height: 2; letter-spacing: 0.05em; white-space: pre-line; }
+        .article-image { width: 100%; max-height: 450px; margin-bottom: 30px; display: none; border: 1px solid var(--border-color); border-radius: 15px; object-fit: cover; }
+        .article-container { max-width: 850px; padding-top: 30px; }
+        .article-info { padding: 35px; }
+        .back-resource-btn { margin-bottom: 25px; }
+
+        .resource-list { max-width: 1000px; margin: 0 auto; padding: 30px 5% 60px; }
+
+        .resource-category {
+            margin-bottom: 35px;
+            padding: 35px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-top: 6px solid var(--primary-color);
+            border-radius: var(--radius-card);
+            box-shadow: var(--card-shadow);
+        }
+
+        .resource-category h3 { display: flex; align-items: center; gap: 10px; margin-bottom: 25px; padding-bottom: 12px; color: var(--primary-color); font-size: 1.5rem; border-bottom: 2px dashed var(--border-soft); }
         .resource-item { margin-bottom: 25px; padding-bottom: 20px; }
-        .resource-item:not(:last-child) { border-bottom: 1px solid #FAF8F5; }
-        .resource-name { font-weight: bold; font-size: 1.2rem; color: #2D2D2D; margin-bottom: 8px;}
-        .resource-info { font-size: 0.95rem; color: var(--text-color); margin-bottom: 12px; line-height: 1.75;}
-        .resource-link { color: var(--secondary-color); text-decoration: none; font-weight: bold; font-size: 0.95rem; display: inline-block; transition: all 0.2s; }
+        .resource-item:not(:last-child) { border-bottom: 1px solid var(--bg-color); }
+        .resource-name { margin-bottom: 8px; color: #2D2D2D; font-size: 1.2rem; font-weight: bold; }
+        .resource-info { margin-bottom: 12px; color: var(--text-color); font-size: 0.95rem; line-height: 1.75; }
+        .resource-info a, .resource-link { overflow-wrap: anywhere; }
+        .resource-link { display: inline-block; color: var(--secondary-color); text-decoration: none; font-size: 0.95rem; font-weight: bold; transition: all 0.2s; }
         .resource-link:hover { transform: translateX(3px); color: var(--primary-color); }
+        .map-link { color: var(--secondary-color); text-decoration: underline; font-weight: bold; transition: opacity 0.2s, color 0.2s; }
+        .map-link:hover { color: var(--primary-color); opacity: 0.7; }
+
+        .resource-warning {
+            padding: 18px;
+            background: #FFF3E5;
+            border-left: 5px solid var(--danger-color);
+            border-radius: 12px;
+            color: #9A3E1C;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .external-resource-note {
+            margin-top: 12px;
+            padding: 14px 16px;
+            background: var(--surface-soft);
+            border: 1px solid var(--border-solid);
+            border-radius: 12px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.75;
+        }
 
         .faq-container { max-width: 850px; margin: 0 auto; padding: 40px 5%; }
-        .faq-item { margin-bottom: 25px; background: white; border-radius: 20px; box-shadow: var(--card-shadow); border: var(--border-warm); border-left: 5px solid var(--accent-color); transition: all 0.3s; overflow: hidden; }
+        .faq-item { overflow: hidden; margin-bottom: 25px; background: white; border: 1px solid var(--border-color); border-left: 5px solid var(--accent-color); border-radius: var(--radius-card); box-shadow: var(--card-shadow); }
         .faq-item:nth-child(even) { border-left-color: var(--secondary-color); }
-        .faq-item:hover { transform: translateX(4px); box-shadow: var(--hover-shadow); }
-        .faq-q { padding: 25px 30px; font-size: 1.25rem; color: var(--primary-color); cursor: pointer; display: flex; align-items: center; justify-content: space-between; outline: none; }
+        .faq-q { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 25px 30px; color: var(--primary-color); font-size: 1.25rem; cursor: pointer; outline: none; }
         .faq-q::-webkit-details-marker { display: none; }
-        .faq-q::after { content: '+'; font-size: 1.8rem; color: var(--accent-color); transition: transform 0.3s; font-weight: normal; }
-        .faq-item[open] .faq-q::after { transform: rotate(45deg); color: var(--secondary-color); }
-        .faq-a { padding: 0 30px 30px 30px; font-size: 1rem; color: var(--text-color); line-height: 1.8; animation: fadeIn 0.4s ease; border-top: 1px dashed #FAF8F5; margin-top: 5px; padding-top: 15px; }
+        .faq-q::after { content: '+'; color: var(--accent-color); font-size: 1.8rem; transition: transform 0.3s; }
+        .faq-item[open] .faq-q::after { color: var(--secondary-color); transform: rotate(45deg); }
+        .faq-a { margin-top: 5px; padding: 15px 30px 30px; color: var(--text-color); font-size: 1rem; line-height: 1.8; border-top: 1px dashed var(--bg-color); }
+        .faq-maintenance-note { max-width: 850px; margin: -10px auto 30px; padding: 0 5%; color: var(--text-muted); font-size: 0.88rem; text-align: center; }
 
-        footer { background-color: var(--primary-color); color: white; text-align: center; padding: 40px 5%; margin-top: 80px; font-size: 0.9rem; border-top: 4px solid var(--accent-color); }
-        footer p { opacity: 0.9; }
-
-        .global-music-btn {
-            position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; border-radius: 50%;
-            background-color: var(--primary-color); color: white; display: flex; justify-content: center;
-            align-items: center; font-size: 1.4rem; cursor: pointer; z-index: 9999;
-            box-shadow: 0 6px 15px rgba(91, 132, 118, 0.3); border: 2px solid white; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .global-music-btn:hover { transform: scale(1.1); background-color: var(--secondary-color); box-shadow: 0 8px 20px rgba(226, 135, 122, 0.4); }
-
-        .view-toggle-container { display: none; }
-        .footer-break { display: none; }
-        .footer-divider { display: inline; }
-
-        /* ✨ 升級版智慧滾動提示 (毛玻璃質感) */
-        #scroll-prompt-fixed {
-            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
-            display: flex; flex-direction: column; align-items: center;
-            background: rgba(250, 248, 245, 0.85); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-            padding: 10px 25px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border: var(--border-warm);
-            opacity: 0.8; transition: opacity 0.4s ease; z-index: 900; pointer-events: none;
-        }
-        .scroll-prompt-text { font-size: 0.85rem; color: var(--primary-color); font-weight: bold; margin-bottom: 3px; letter-spacing: 0.05em;}
-        .scroll-arrow-icon {
-            width: 12px; height: 12px; border-right: 3px solid var(--primary-color); border-bottom: 3px solid var(--primary-color);
-            transform: rotate(45deg); animation: bounceUpDown 2s infinite;
-        }
-        @keyframes bounceUpDown {
-            0%, 100% { transform: translate(0, 0) rotate(45deg); }
-            50% { transform: translate(0, 8px) rotate(45deg); }
-        }
-
-        @media (max-width: 950px) {
-            header { top: 38px; padding: 15px 4%; }
-            nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background-color: white; padding: 25px; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-bottom: var(--border-warm); gap: 15px; }
-            nav ul.active { display: flex; }
-            .dropdown-trigger { width: 100%; text-align: center; font-size: 1.05rem; }
-            .dropdown.mobile-open .dropdown-content { position: static; transform: none; box-shadow: none; border: 0; min-width: 0; padding-top: 4px; }
-            .dropdown-content a { text-align: center; }
-
-            
-            /* ✨ 解決卡住的黏滯感，使用 active 狀態提供按壓回饋 */
-            .menu-toggle { 
-                display: flex; align-items: center; gap: 8px; position: absolute; right: 4%; top: 50%; transform: translateY(-50%); 
-                background-color: var(--primary-color); color: white; padding: 6px 16px; border-radius: 30px; font-size: 1rem;
-                box-shadow: 0 4px 10px rgba(91, 132, 118, 0.2); transition: all 0.2s;
-            }
-            .menu-toggle:active { background-color: var(--secondary-color); transform: translateY(-50%) scale(0.95); }
-            
-            .mobile-break { display: block; }
-            .desktop-space { display: none; }
-
-            .hero h1 { font-size: 2rem; }
-            .hero-subtitle { font-size: 1.25rem; }
-            .hero-bullet { font-size: 0.95rem; }
-            .modal-title { font-size: 2rem !important; }
-            .modal-slogan { font-size: 1.15rem; }
-            .door-indicator { font-size: 1.15rem; padding: 6px 15px; }
-            .team-title-section h2 { font-size: 1.8rem; }
-            .lyrics-header-title { font-size: 1.6rem !important; }
-            .faq-q { font-size: 1.1rem; padding: 20px; }
-            .faq-a { padding: 0 20px 20px 20px; }
-            .article-title { font-size: 1.8rem; }
-            
-            .emergency-links.show { flex-direction: column; }
-            .emergency-links a { width: 100%; max-width: 300px; margin: 5px auto; }
-
-            .global-music-btn { bottom: 20px; left: 20px; width: 45px; height: 45px; font-size: 1.2rem; }
-
-            .footer-break { display: block; }
-            .footer-divider { display: none; }
-
-            .view-toggle-container { display: block; text-align: right; margin: 10px 5% 0 5%; }
-            .grid.compact-view { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .grid.compact-view .card-media { height: 110px; }
-            .grid.compact-view .card-body { padding: 12px; }
-            .grid.compact-view .card-title { font-size: 1.05rem; margin-bottom: 6px; line-height: 1.3; }
-            .grid.compact-view .card-text { display: none; }
-            .grid.compact-view .badge { font-size: 0.65rem; padding: 2px 8px; margin-right: 3px; margin-bottom: 3px;}
-            .grid.compact-view .card-link a { font-size: 0.85rem; }
-        }
-
-        .video-preview-wrapper { width: 100%; height: 100%; position: relative; display: block; overflow: hidden; }
-        .video-preview-wrapper:hover img { transform: scale(1.04); }
-        .video-preview-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-        .video-preview-wrapper::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.12); transition: background 0.3s; }
-        .video-preview-wrapper:hover::after { background: rgba(0, 0, 0, 0.25); }
-        .play-button { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 65px; height: 45px; background-color: rgba(224, 43, 36, 0.9); border-radius: 14px; z-index: 10; display: flex; justify-content: center; align-items: center; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .play-button::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 10px 0 10px 18px; border-color: transparent transparent transparent #ffffff; margin-left: 4px; }
-        .video-preview-wrapper:hover .play-button { background-color: #ff0000; transform: translate(-50%, -50%) scale(1.08); }
-
-
-        .yuma-container { position: fixed; bottom: 30px; right: 30px; z-index: 9999; display: flex; flex-direction: column; align-items: center; cursor: pointer; user-select: none; transition: all 0.4s ease; }
-        .yuma-container.faded { opacity: 0.3; transform: scale(0.85); pointer-events: none; }
-        .yuma-avatar { display:block; }
-        .yuma-avatar img { width: 85px; height: 85px; object-fit: cover; border-radius: 50%; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15)); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .yuma-container:hover:not(.faded) .yuma-avatar img { transform: scale(1.12) rotate(4deg); }
-        .yuma-bubble { position: absolute; bottom: 95px; right: 5px; background: white; border: 2px solid var(--primary-color); padding: 14px 20px; border-radius: 18px; font-size: 0.95rem; font-weight: bold; color: var(--text-color); width: 220px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); opacity: 0; pointer-events: none; transition: all 0.3s ease; transform: translateY(10px); }
-        .yuma-bubble.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
-        .yuma-bubble::after { content: ''; position: absolute; bottom: -10px; right: 35px; border-width: 10px 10px 0; border-style: solid; border-color: white transparent; display: block; width: 0; }
-        .yuma-bubble::before { content: ''; position: absolute; bottom: -13px; right: 34px; border-width: 11px 11px 0; border-style: solid; border-color: var(--primary-color) transparent; display: block; width: 0; }
-        
+        /* =========================================================
+           Music / lyrics
+           ========================================================= */
+        .song-container { max-width: 800px; margin: 0 auto; padding-top: 25px; }
+        .song-control-block { text-align: center; border-left: 6px solid var(--primary-color); }
+        .song-control-buttons { gap: 15px; }
+        .song-control-btn { padding: 10px 25px; font-size: 1rem; }
+        .song-title { margin-bottom: 12px; color: var(--primary-color); font-size: 1.4rem; }
+        .song-description { margin-bottom: 20px; color: var(--text-muted); font-size: 0.95rem; }
+        .lyrics-info { padding: 45px 20px; text-align: center; background: white; border-radius: var(--radius-card); box-shadow: var(--card-shadow); }
+        .lyrics-header-title { margin-bottom: 10px; color: var(--secondary-color); font-size: 2.2rem; }
+        .lyrics-header-sub { margin-bottom: 15px; padding-bottom: 25px; color: var(--text-muted); font-size: 0.95rem; border-bottom: 2px dashed var(--border-soft); }
         .vinyl-wrapper { display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; }
-        .vinyl-record { width: 170px; height: 170px; border-radius: 50%; background: #111; border: 4px solid #2b2b2b; position: relative; display: flex; justify-content: center; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.25), inset 0 0 15px rgba(255,255,255,0.15); margin-bottom: 25px; background-image: radial-gradient(transparent 30%, rgba(255,255,255,0.06) 32%, transparent 34%), radial-gradient(transparent 45%, rgba(255,255,255,0.06) 47%, transparent 49%), radial-gradient(transparent 60%, rgba(255,255,255,0.06) 62%, transparent 64%); transition: transform 0.3s ease; }
+        .vinyl-record { width: 170px; height: 170px; margin-bottom: 25px; position: relative; display: flex; justify-content: center; align-items: center; border: 4px solid #2B2B2B; border-radius: 50%; background: #111; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), inset 0 0 15px rgba(255, 255, 255, 0.15); background-image: radial-gradient(transparent 30%, rgba(255,255,255,0.06) 32%, transparent 34%), radial-gradient(transparent 45%, rgba(255,255,255,0.06) 47%, transparent 49%), radial-gradient(transparent 60%, rgba(255,255,255,0.06) 62%, transparent 64%); transition: transform 0.3s ease; }
         .vinyl-record.spinning { animation: spin 3.5s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        .vinyl-label { width: 55px; height: 55px; border-radius: 50%; background: var(--secondary-color); display: flex; justify-content: center; align-items: center; text-align: center; color: white; box-shadow: 0 0 6px rgba(0,0,0,0.6); border: 2px solid #dfdfdf; }
-        .vinyl-hole { width: 12px; height: 12px; border-radius: 50%; background: #FAF8F5; position: absolute; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5); }
-
+        .vinyl-label { width: 55px; height: 55px; display: flex; align-items: center; justify-content: center; text-align: center; color: white; background: var(--secondary-color); border: 2px solid #DFDFDF; border-radius: 50%; box-shadow: 0 0 6px rgba(0, 0, 0, 0.6); }
+        .vinyl-label-text { font-size: 0.9rem; letter-spacing: 2px !important; }
+        .vinyl-hole { width: 12px; height: 12px; position: absolute; border-radius: 50%; background: var(--bg-color); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5); }
         .lyrics-container { height: 400px; overflow-y: auto; padding: 0 10px; position: relative; mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%); scrollbar-width: none; }
         .lyrics-container::-webkit-scrollbar { display: none; }
-        .lyric-line { font-family: 'NaikaiFont', 'PingFang TC', sans-serif; font-size: 1.35rem; color: var(--text-muted); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); margin-bottom: 20px; opacity: 0.35; transform: scale(0.95); }
-        .lyric-line.active { color: var(--primary-color); font-size: 2.1rem; opacity: 1; transform: scale(1.05); text-shadow: 0 4px 15px rgba(91, 132, 118, 0.25); letter-spacing: 0.05em; }
-        
-        #lyrics-fullscreen-wrapper { position: relative; background-color: transparent; border-radius: 20px; }
-        #btn-fullscreen { position: absolute; top: 5px; right: 5px; z-index: 10; padding: 8px 16px; font-size: 0.9rem; background: #FAF8F5; border: 1px solid #EFECE4; border-radius: 30px; cursor: pointer; color: var(--primary-color); font-weight: bold; transition: all 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        #btn-fullscreen:hover { background: var(--primary-color); color: white; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(91, 132, 118, 0.25); }
-        #lyrics-fullscreen-wrapper:fullscreen, #lyrics-fullscreen-wrapper:-webkit-full-screen { background-color: var(--bg-color); border-radius: 0; display: flex; align-items: center; justify-content: center; }
-        #lyrics-fullscreen-wrapper:fullscreen .lyrics-container, #lyrics-fullscreen-wrapper:-webkit-full-screen .lyrics-container { height: 100vh; width: 100vw; padding-top: 50px; }
+        .lyric-line { margin-bottom: 20px; color: var(--text-muted); opacity: 0.35; transform: scale(0.95); font-family: 'NaikaiFont', 'PingFang TC', sans-serif; font-size: 1.35rem; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .lyric-line.active { color: var(--primary-color); opacity: 1; transform: scale(1.05); font-size: 2.1rem; text-shadow: 0 4px 15px rgba(91, 132, 118, 0.25); letter-spacing: 0.05em; }
+        #lyrics-fullscreen-wrapper { position: relative; background: transparent; border-radius: 20px; }
+        #btn-fullscreen { position: absolute; top: 5px; right: 5px; z-index: 10; padding: 8px 16px; background: var(--bg-color); color: var(--primary-color); border: 1px solid var(--border-soft); border-radius: 30px; font-size: 0.9rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); transition: all 0.3s; }
+        #btn-fullscreen:hover { background: var(--primary-color); color: white; transform: translateY(-2px); }
+        #lyrics-fullscreen-wrapper:fullscreen, #lyrics-fullscreen-wrapper:-webkit-full-screen { display: flex; align-items: center; justify-content: center; background: var(--bg-color); border-radius: 0; }
+        #lyrics-fullscreen-wrapper:fullscreen .lyrics-container, #lyrics-fullscreen-wrapper:-webkit-full-screen .lyrics-container { width: 100vw; height: 100vh; padding-top: 50px; }
         #lyrics-fullscreen-wrapper:fullscreen #lyrics-wrapper, #lyrics-fullscreen-wrapper:-webkit-full-screen #lyrics-wrapper { padding: 45vh 0; }
-        #lyrics-fullscreen-wrapper:fullscreen #btn-fullscreen, #lyrics-fullscreen-wrapper:-webkit-full-screen #btn-fullscreen { top: 30px; right: 40px; font-size: 1.1rem; padding: 12px 24px; background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
-   
-        .welcome-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background-color: #FAF8F5; background-image: url('https://drive.google.com/thumbnail?id=1LlQD0tUC8vdhycH3Zkl_mAFVN3AY5njo&sz=w1920'); background-size: cover; background-position: center; background-repeat: no-repeat; justify-content: center; align-items: center; }
-        .modal-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(253, 251, 247, 0.65); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
-        .modal-content { position: relative; z-index: 10; text-align: center; padding: 25px; max-width: 600px; width: 90%; }
-        .modal-title { color: #724820; font-size: 3rem; margin-bottom: 15px; line-height: 1.3; }
-        .modal-slogan { font-size: 1.4rem; color: #514247; margin: 15px 0; line-height: 1.6; }
-        .door-btn-wrapper { margin-top: 40px; display: flex; flex-direction: column; align-items: center; }
-        .door-indicator { color: #C68E57; font-size: 1.4rem; margin-bottom: 18px; animation: bounce 1.6s infinite; background: white; padding: 6px 20px; border-radius: 30px; border: 2px dashed #C68E57; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-        @keyframes modalPop { from { opacity: 0; transform: scale(0.96) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-        .welcome-modal.is-opening .modal-content { animation: modalExit 0.75s ease-in forwards; }
-        @keyframes modalExit { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.98); } }
+        #lyrics-fullscreen-wrapper:fullscreen #btn-fullscreen, #lyrics-fullscreen-wrapper:-webkit-full-screen #btn-fullscreen { top: 30px; right: 40px; padding: 12px 24px; background: rgba(255,255,255,0.8); font-size: 1.1rem; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+        .lyrics-toggle-wrap { margin-top: 25px; }
+        .lyrics-toggle-btn { padding: 8px 25px; font-size: 1rem; border: 1px solid var(--border-solid); }
+        .full-lyrics-box { display: none; margin-top: 30px; padding-top: 35px; text-align: center; border-top: 2px dashed var(--border-soft); animation: fadeIn 0.5s; }
+        .full-lyrics-text { color: var(--text-color); font-size: 1.05rem; line-height: 2.3; letter-spacing: 0.05em; }
+        .lyric-emphasis { color: var(--secondary-color); font-size: 1.1rem; font-weight: bold; }
+        .chorus-highlight { max-width: 520px; margin: 25px auto; padding: 25px; background: rgba(238, 184, 117, 0.15); border: 1px dashed var(--accent-color); border-radius: 16px; }
+        .chorus-title { margin-bottom: 8px; color: var(--danger-color); font-size: 1.25rem; }
+        .chorus-text { color: var(--text-color); font-size: 1.1rem; font-weight: bold; }
+        .chorus-accent { margin: 5px 0; color: var(--primary-color); font-size: 1.3rem; }
+        .song-ending { margin-bottom: 8px; color: var(--primary-color); font-size: 1.4rem; letter-spacing: 0.08em; }
+        .song-ending-strong { color: var(--secondary-color); font-size: 1.6rem; letter-spacing: 0.08em; }
 
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-
-        .door-btn { display: inline-block; width: 115px; height: 155px; background: #8B5A2B; border: 5px solid #5C3A21; border-radius: 6px 6px 0 0; position: relative; cursor: pointer; transition: transform 0.8s ease-in-out, background 0.3s; transform-origin: left; box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.25); animation: pulse-glow 2.5s infinite alternate; outline: none; padding: 0; }
-        @keyframes pulse-glow { from { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 15px rgba(238, 184, 117, 0.4); } to { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 35px rgba(238, 184, 117, 0.9); } }
+        /* =========================================================
+           Welcome overlay
+           ========================================================= */
+        .welcome-modal { display: none; position: fixed; inset: 0; z-index: 9999; align-items: center; justify-content: center; padding: 24px; background: var(--bg-color); background-image: url('https://drive.google.com/thumbnail?id=1LlQD0tUC8vdhycH3Zkl_mAFVN3AY5njo&sz=w1920'); background-size: cover; background-position: center; background-repeat: no-repeat; }
+        .modal-overlay { position: absolute; inset: 0; background: rgba(253, 251, 247, 0.7); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); }
+        .modal-content { position: relative; z-index: 10; width: min(600px, 100%); max-height: 90vh; overflow-y: auto; padding: 25px; text-align: center; outline: none; }
+        .modal-close-btn { position: absolute; top: 12px; right: 12px; min-width: 44px; min-height: 44px; padding: 6px 12px; border: 1px solid var(--border-solid); border-radius: 50%; background: rgba(255,255,255,0.92); color: var(--text-color); cursor: pointer; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.06); }
+        .modal-title { margin-bottom: 15px; color: #724820; font-size: 3rem; line-height: 1.3; }
+        .modal-slogan { margin: 15px 0; color: #514247; font-size: 1.4rem; line-height: 1.6; }
+        .door-btn-wrapper { display: flex; flex-direction: column; align-items: center; margin-top: 40px; }
+        .door-indicator { margin-bottom: 18px; padding: 6px 20px; color: #C68E57; background: white; border: 2px dashed #C68E57; border-radius: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); font-size: 1.4rem; animation: bounce 1.6s infinite; }
+        .door-btn { display: inline-block; width: 115px; height: 155px; padding: 0; position: relative; border: 5px solid #5C3A21; border-radius: 6px 6px 0 0; background: #8B5A2B; cursor: pointer; transform-origin: left; box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.25); transition: transform 0.8s ease-in-out, background 0.3s; animation: pulse-glow 2.5s infinite alternate; }
         .door-btn::after { content: ''; position: absolute; top: 50%; right: 12px; width: 14px; height: 14px; background: #D4AF37; border-radius: 50%; box-shadow: 1px 1px 3px rgba(0,0,0,0.4); }
         .door-btn:hover { background: #9C6833; }
         .door-btn.is-opening { transform: perspective(600px) rotateY(-40deg); background: #9C6833; animation: none; }
+        .modal-actions { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+        .modal-secondary-btn { padding: 10px 18px; background: rgba(255,255,255,0.92); border: 1px solid var(--border-solid); color: var(--primary-color); }
+        .modal-help { margin-top: 20px; padding: 14px 16px; text-align: left; background: rgba(255,255,255,0.88); border: 1px solid rgba(205,83,52,0.2); border-radius: 14px; }
+        .modal-help-title { margin-bottom: 6px; color: var(--danger-dark); font-weight: bold; }
+        .modal-help-links { display: flex; flex-wrap: wrap; gap: 10px; }
+        .modal-help-links a { color: var(--danger-dark); font-weight: bold; }
+        .welcome-modal.is-opening { pointer-events: none; }
+        .welcome-modal.is-opening .modal-content { animation: modalExit 0.75s ease-in forwards; }
+        @keyframes modalExit { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.98); } }
+        @keyframes pulse-glow { from { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 15px rgba(238,184,117,0.4); } to { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 35px rgba(238,184,117,0.9); } }
+        @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-        /* V2 interaction + accessibility layer */
-        :root { --chrome-shadow: 0 6px 24px rgba(62,65,58,.06); }
-        html { scroll-behavior:smooth; }
-        body.modal-open { overflow:hidden; }
-        button, input, summary { font:inherit; }
-        button { -webkit-tap-highlight-color:transparent; }
-        button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visible { outline:3px solid var(--focus-ring); outline-offset:3px; }
-        .site-chrome { position:sticky; top:0; z-index:1100; box-shadow:var(--chrome-shadow); }
-        .emergency-bar { position:relative; top:auto; }
-        header { position:relative; top:auto; z-index:1; box-shadow:none; }
-        .emergency-toggle[aria-expanded="true"] { background:rgba(255,255,255,.06); }
-        .emergency-link-primary { background:rgba(255,255,255,.18) !important; }
-        .dropdown-trigger { color:var(--text-color); background:transparent; border:0; padding:6px 0; font-weight:600; font-size:1.05rem; letter-spacing:.03em; cursor:pointer; }
-        .dropdown-trigger:hover { color:var(--primary-color); }
-        .section-helper { max-width:900px; margin:0 auto 18px; text-align:center; color:var(--text-muted); font-size:.95rem; }
-        .loading-status { text-align:center; color:var(--text-muted); font-size:1rem; padding:22px 20px; }
-        .error-note { display:none; max-width:760px; margin:0 auto 20px; background:#FFF3E5; border-left:5px solid var(--danger-color); border-radius:12px; padding:14px 16px; color:#7D4026; font-size:.92rem; }
-        .error-note.show { display:block; }
-        .card-text,.article-content-body { white-space:pre-line; }
-        .article-content-body a,.resource-info a,.resource-link { overflow-wrap:anywhere; }
-        .card-link button.card-action { appearance:none; border:0; background:transparent; color:var(--primary-color); font-weight:bold; font-size:.95rem; padding:0; cursor:pointer; }
-        .card-link button.card-action:hover { color:var(--secondary-color); }
-        .yuma-container { appearance:none; border:none; background:transparent; padding:0; }
-        @media (max-width:950px) {
-            .site-chrome { box-shadow:0 4px 18px rgba(62,65,58,.08); }
-            .dropdown-trigger { width:100%; text-align:center; font-size:1.05rem; }
-            .dropdown.mobile-open .dropdown-content { position:static; transform:none; box-shadow:none; border:0; min-width:0; padding-top:4px; }
-            .dropdown-content a { text-align:center; }
-        }
+        /* =========================================================
+           YUMA / scroll prompt / footer
+           ========================================================= */
+        .global-music-btn { position: fixed; left: 30px; bottom: 30px; z-index: 9999; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border: 2px solid white; border-radius: 50%; background: var(--primary-color); color: white; font-size: 1.4rem; cursor: pointer; box-shadow: 0 6px 15px rgba(91,132,118,0.3); transition: all 0.3s cubic-bezier(0.16,1,0.3,1); }
+        .global-music-btn:hover { background: var(--secondary-color); transform: scale(1.1); }
+
+        #scroll-prompt-fixed { position: fixed; left: 50%; bottom: 25px; z-index: 900; display: flex; flex-direction: column; align-items: center; padding: 10px 25px; background: rgba(250,248,245,0.85); border: 1px solid var(--border-color); border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transform: translateX(-50%); opacity: 0.8; pointer-events: none; transition: opacity 0.4s ease; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+        .scroll-prompt-text { margin-bottom: 3px; color: var(--primary-color); font-size: 0.85rem; font-weight: bold; letter-spacing: 0.05em; }
+        .scroll-arrow-icon { width: 12px; height: 12px; border-right: 3px solid var(--primary-color); border-bottom: 3px solid var(--primary-color); transform: rotate(45deg); animation: bounceUpDown 2s infinite; }
+        @keyframes bounceUpDown { 0%,100% { transform: translate(0,0) rotate(45deg); } 50% { transform: translate(0,8px) rotate(45deg); } }
+
+        .yuma-container { position: fixed; right: 30px; bottom: 30px; z-index: 9999; display: flex; flex-direction: column; align-items: center; padding: 0; border: 0; background: transparent; cursor: pointer; user-select: none; appearance: none; transition: all 0.4s ease; }
+        .yuma-container.faded { opacity: 0.3; transform: scale(0.85); pointer-events: none; }
+        .yuma-container.critical-hidden { opacity: 0; pointer-events: none; transform: scale(.85); }
+        .yuma-avatar { display: block; }
+        .yuma-avatar img { width: 85px; height: 85px; display: block; object-fit: cover; border-radius: 50%; filter: drop-shadow(0 6px 12px rgba(0,0,0,0.15)); transition: transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275); }
+        .yuma-container:hover:not(.faded) .yuma-avatar img { transform: scale(1.12) rotate(4deg); }
+        .yuma-bubble { width: 220px; position: absolute; right: 5px; bottom: 95px; padding: 14px 20px; background: white; border: 2px solid var(--primary-color); border-radius: 18px; color: var(--text-color); font-size: 0.95rem; font-weight: bold; box-shadow: 0 8px 25px rgba(0,0,0,0.1); opacity: 0; pointer-events: none; transform: translateY(10px); transition: all 0.3s ease; }
+        .yuma-bubble.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        .yuma-bubble::after { content: ''; position: absolute; right: 35px; bottom: -10px; border-width: 10px 10px 0; border-style: solid; border-color: white transparent; }
+        .yuma-bubble::before { content: ''; position: absolute; right: 34px; bottom: -13px; border-width: 11px 11px 0; border-style: solid; border-color: var(--primary-color) transparent; }
+
+        footer { margin-top: 80px; padding: 40px 5%; background: var(--primary-color); color: white; text-align: center; font-size: 0.9rem; border-top: 4px solid var(--accent-color); }
+        footer p { opacity: 0.9; }
+        .contact-text { margin-top: 7px; color: #DFE8E5; font-size: 0.8rem; }
+        .footer-break { display: none; }
+        .footer-divider { display: inline; }
+
+        /* =========================================================
+           About / brand
+           ========================================================= */
+        .about-container { max-width: 900px; padding-top: 20px; }
+        .about-title { margin-bottom: 15px; color: var(--primary-color); font-size: 1.4rem; }
+        .about-lead { color: var(--text-color); line-height: 1.85; font-size: 1.05rem; }
+        .about-brand-block { flex-direction: column; text-align: center; }
+        .about-brand-title { margin-bottom: 25px; color: var(--primary-color); font-size: 1.5rem; }
+        .brand-image { width: 100%; max-width: 380px; margin-bottom: 35px; border: 1px solid var(--border-color); border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        .brand-copy { width: 100%; max-width: 800px; color: var(--text-color); text-align: left; line-height: 1.9; font-size: 1.05rem; }
+        .brand-lead { margin-bottom: 15px; color: #2D2D2D; font-size: 1.2rem; font-weight: bold; }
+        .brand-copy p.spaced-sm { margin-bottom: 10px; }
+        .brand-copy p.spaced-lg { margin-bottom: 25px; }
+        .brand-copy .section-mini-title { margin-bottom: 12px; color: #2D2D2D; font-size: 1.15rem; font-weight: bold; }
+        .brand-copy ul { margin: 0; padding: 0; list-style: none; }
+        .brand-copy li { position: relative; margin-bottom: 15px; padding-left: 22px; }
+        .brand-copy li:last-child { margin-bottom: 10px; }
+        .brand-copy li::before { content: '•'; position: absolute; left: 0; top: 0; color: var(--secondary-color); font-size: 1.2rem; font-weight: bold; }
+        .brand-keyword { color: var(--primary-color); }
+        .brand-symbol-title { color: #2D2D2D; }
+        .designer-block { display: flex; align-items: center; flex-wrap: wrap; gap: 30px; }
+        .designer-photo-wrap { flex: 0 0 160px; margin: 0 auto; text-align: center; }
+        .designer-photo { width: 100%; border: 4px solid var(--bg-color); border-radius: 50%; box-shadow: 0 8px 25px rgba(0,0,0,0.12); }
+        .designer-copy { flex: 1; min-width: 250px; }
+        .designer-title { margin-bottom: 15px; color: var(--primary-color); font-size: 1.3rem; }
+        .designer-text { color: var(--text-color); line-height: 1.85; font-size: 1.05rem; }
+
+        /* =========================================================
+           Mobile / tablet
+           ========================================================= */
         .mobile-filter-toggle { display: none; }
-        .filter-options { display: contents; }
+        .filter-heading { color: var(--primary-color); }
 
-        @media (max-width:580px) {
-            /* 手機版：篩選器採「可折疊」設計，讓資源卡片更早進入視線 */
-            .filter-section { padding-left: 4%; padding-right: 4%; }
-            .filter-group {
-                width: 100%;
-                margin: 12px auto;
-                display: block;
-            }
-            .mobile-filter-toggle {
-                display: flex;
-                width: 100%;
-                align-items: center;
-                justify-content: space-between;
-                gap: 10px;
-                padding: 12px 14px;
-                border: 1px solid #E6E2D8;
-                border-radius: 16px;
-                background: #FFFDF9;
-                color: var(--text-color);
-                font-family: 'NaikaiFont', 'PingFang TC', '微軟正黑體', sans-serif;
-                font-size: 1.12rem;
-                cursor: pointer;
-                box-shadow: 0 3px 10px rgba(0,0,0,0.03);
-                text-align: left;
-            }
+        @media (max-width: 950px) {
+            .site-chrome { box-shadow: 0 4px 18px rgba(62,65,58,0.08); }
+            header { padding: 15px 4%; }
+            nav ul { display: none; position: absolute; top: 100%; left: 0; width: 100%; flex-direction: column; gap: 15px; padding: 25px; background: white; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border-bottom: 1px solid var(--border-color); }
+            nav ul.active { display: flex; }
+            .menu-toggle { display: flex; }
+            .dropdown-trigger { width: 100%; text-align: center; font-size: 1.05rem; }
+            .dropdown.mobile-open .dropdown-content { position: static; min-width: 0; padding-top: 4px; border: 0; box-shadow: none; transform: none; }
+            .dropdown-content a { text-align: center; }
+            .mobile-break { display: block; }
+            .desktop-space { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .hero-subtitle { font-size: 1.25rem; }
+            .hero-bullet { font-size: 0.95rem; }
+            .modal-title { font-size: 2rem; }
+            .modal-slogan { font-size: 1.15rem; }
+            .door-indicator { padding: 6px 15px; font-size: 1.15rem; }
+            .team-title-section h2 { font-size: 1.8rem; }
+            .lyrics-header-title { font-size: 1.6rem; }
+            .faq-q { padding: 20px; font-size: 1.1rem; }
+            .faq-a { padding: 0 20px 20px; padding-top: 15px; }
+            .article-title { font-size: 1.8rem; }
+            .emergency-links.show { flex-direction: column; }
+            .emergency-links a { width: 100%; max-width: 300px; margin: 5px auto; }
+            .global-music-btn { left: 20px; bottom: 20px; width: 45px; height: 45px; font-size: 1.2rem; }
+            .yuma-container { right: 20px; bottom: 20px; }
+            .yuma-avatar img { width: 72px; height: 72px; }
+            .footer-break { display: block; }
+            .footer-divider { display: none; }
+            .view-toggle-container { display: block; margin: 10px 0 0; }
+            .grid.compact-view { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .grid.compact-view .card-media { height: 110px; }
+            .grid.compact-view .card-body { padding: 12px; }
+            .grid.compact-view .card-title { margin-bottom: 6px; font-size: 1.05rem; line-height: 1.3; }
+            .grid.compact-view .card-text { display: none; }
+            .grid.compact-view .badge { margin-right: 3px; margin-bottom: 3px; padding: 2px 8px; font-size: 0.65rem; }
+            .grid.compact-view .card-link a, .grid.compact-view .card-link button { font-size: 0.85rem; }
+        }
+
+        @media (max-width: 580px) {
+            body { font-size: 1rem; }
+            .filter-section { padding-right: 4%; padding-left: 4%; }
+            .filter-group { width: 100%; margin: 12px auto; display: block; }
+            .mobile-filter-toggle { width: 100%; min-height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; background: var(--surface-soft); border: 1px solid var(--border-solid); border-radius: 16px; color: var(--text-color); cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,0.03); text-align: left; }
             .mobile-filter-toggle:active { transform: scale(0.99); }
-            .mobile-filter-toggle .toggle-title { color: #8C867A; }
-            .mobile-filter-toggle .toggle-current {
-                flex: 1;
-                text-align: right;
-                color: var(--primary-color);
-                font-family: 'PingFang TC', 'Noto Sans TC', '微軟正黑體', sans-serif;
-                font-size: 0.95rem;
-                font-weight: 600;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            .mobile-filter-toggle .toggle-icon {
-                flex: 0 0 auto;
-                color: var(--primary-color);
-                font-size: 1rem;
-                transition: transform 0.25s ease;
-            }
+            .mobile-filter-toggle .toggle-title { color: var(--text-soft); }
+            .mobile-filter-toggle .toggle-current { flex: 1; overflow: hidden; color: var(--primary-color); font-family: 'PingFang TC','Noto Sans TC','微軟正黑體',sans-serif; font-size: 0.95rem; font-weight: 600; text-align: right; text-overflow: ellipsis; white-space: nowrap; }
+            .mobile-filter-toggle .toggle-icon { flex: 0 0 auto; color: var(--primary-color); font-size: 1rem; transition: transform 0.25s ease; }
             .filter-group.is-open .toggle-icon { transform: rotate(180deg); }
-            .filter-options {
-                display: none;
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 10px;
-                margin-top: 10px;
-            }
+            .filter-options { display: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
             .filter-group.is-open .filter-options { display: grid; }
             .filter-group .filter-label { display: none; }
-            .filter-group .filter-btn {
-                width: 100%;
-                min-width: 0;
-                padding: 10px 8px;
-                font-size: 0.98rem;
-                line-height: 1.35;
-                white-space: nowrap;
-            }
+            .filter-group .filter-btn { width: 100%; min-width: 0; padding: 10px 8px; font-size: 0.98rem; line-height: 1.35; white-space: nowrap; }
             .filter-group + .filter-group { margin-top: 12px; }
-            .view-toggle-container { margin: 8px 0 0; }
+            .search-input { padding-left: 48px; }
+            .grid { grid-template-columns: 1fr; gap: 20px; }
+            .card-media { height: 180px; }
+            .project-card { width: 100%; justify-content: flex-start; }
+            .modal-content { padding: 36px 18px 22px; }
+            .modal-title { font-size: 1.75rem; }
+            .modal-slogan { font-size: 1.05rem; }
+            .modal-actions { flex-direction: column; }
+            .modal-actions .filter-btn { width: 100%; max-width: 300px; }
+            .modal-help-links { flex-direction: column; }
+            .resource-category { padding: 25px 20px; }
+            .resource-category h3 { font-size: 1.3rem; }
+            .faq-container { padding-right: 4%; padding-left: 4%; }
+            .article-content-body { padding: 0; font-size: 1rem; }
+            .resource-empty { padding: 40px 18px; }
+            #scroll-prompt-fixed { bottom: 18px; padding: 8px 18px; }
+            .yuma-bubble { width: min(220px, calc(100vw - 48px)); right: 0; }
         }
-        /* V4 P1 architecture helpers */
-        .logo img { height:46px; width:auto; object-fit:contain; filter:drop-shadow(0 2px 6px rgba(0,0,0,.1)); }
-        .menu-icon { font-size:1.2rem; font-family:sans-serif; }
-        .filter-heading { color:var(--primary-color); margin-bottom:5px; }
-        .view-toggle-btn { background:transparent; border:1.5px solid var(--primary-color); color:var(--primary-color); font-weight:bold; padding:6px 14px; }
-        .container-home { padding-bottom:20px; }
-        .load-more-container { display:none; text-align:center; margin-top:35px; padding-bottom:40px; }
-        .load-more-action { padding:10px 30px; font-size:1.1rem; box-shadow:0 4px 15px rgba(91,132,118,.3); }
-        .collapse-action { border:1.5px solid var(--primary-color); color:var(--primary-color); background:transparent; }
-        .back-resource-btn { margin-bottom:25px; }
-        .article-container { max-width:850px; padding-top:30px; }
-        .article-info { padding:35px; }
-        .article-image { width:100%; max-height:450px; object-fit:cover; border-radius:15px; margin-bottom:30px; display:none; border:var(--border-warm); }
-        .song-container { max-width:800px; margin:0 auto; padding-top:25px; }
-        .song-control-block { text-align:center; border-left:6px solid var(--primary-color); }
-        .song-control-buttons { gap:15px; }
-        .song-control-btn { padding:10px 25px; font-size:1rem; }
-        .lyrics-info { background-color:white; border-radius:20px; padding:45px 20px; box-shadow:var(--card-shadow); text-align:center; }
-        .fullscreen-btn { top:5px; right:5px; }
-        .lyrics-wrapper { padding:150px 0; }
-        .lyrics-toggle-wrap { margin-top:25px; }
-        .lyrics-toggle-btn { padding:8px 25px; font-size:1rem; border:1px solid #E6E2D8; }
-        .full-lyrics-box { display:none; margin-top:30px; text-align:center; border-top:2px dashed #EFECE4; padding-top:35px; animation:fadeIn .5s; }
-        .full-lyrics-text { line-height:2.3; font-size:1.05rem; color:var(--text-color); letter-spacing:.05em; }
-        .lyric-emphasis { color:var(--secondary-color); font-weight:bold; font-size:1.1rem; }
-        .song-ending { font-size:1.4rem; color:var(--primary-color); letter-spacing:.08em; margin-bottom:8px; }
-        .song-ending-strong { font-size:1.6rem; color:var(--secondary-color); letter-spacing:.08em; }
-        .resource-warning { background-color:#FFF3E5; border-left:5px solid var(--danger-color); padding:18px; border-radius:12px; font-weight:500; color:#9A3E1C; font-size:.95rem; }
-        .about-container { max-width:900px; padding-top:20px; }
-        .about-title { color:var(--primary-color); margin-bottom:15px; font-size:1.4rem; }
-        .about-lead { color:var(--text-color); line-height:1.85; font-size:1.05rem; }
-        .about-brand-block { flex-direction:column; text-align:center; }
-        .about-brand-title { color:var(--primary-color); margin-bottom:25px; font-size:1.5rem; }
-        .brand-image { width:100%; max-width:380px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,.08); margin-bottom:35px; border:var(--border-warm); }
-        .brand-copy { text-align:left; max-width:800px; width:100%; color:var(--text-color); line-height:1.9; font-size:1.05rem; }
-        .brand-lead { margin-bottom:15px; font-size:1.2rem; color:#2D2D2D; font-weight:bold; }
-        .brand-copy p.spaced-sm { margin-bottom:10px; }
-        .brand-copy p.spaced-lg { margin-bottom:25px; }
-        .brand-copy .section-mini-title { margin-bottom:12px; font-size:1.15rem; color:#2D2D2D; font-weight:bold; }
-        .brand-copy ul { padding-left:0; list-style:none; }
-        .brand-copy li { margin-bottom:15px; position:relative; padding-left:22px; }
-        .brand-copy li:last-child { margin-bottom:10px; }
-        .brand-copy li::before { content:'•'; position:absolute; left:0; top:0; color:var(--secondary-color); font-weight:bold; font-size:1.2rem; }
-        .designer-block { display:flex; gap:30px; align-items:center; flex-wrap:wrap; }
-        .designer-photo-wrap { flex:0 0 160px; text-align:center; margin:0 auto; }
-        .designer-photo { width:100%; border-radius:50%; border:4px solid var(--bg-color); box-shadow:0 8px 25px rgba(0,0,0,.12); }
-        .designer-copy { flex:1; min-width:250px; }
-        .designer-title { color:var(--primary-color); margin-bottom:15px; font-size:1.3rem; }
-        .designer-text { color:var(--text-color); line-height:1.85; font-size:1.05rem; }
-        .contact-text { font-size:.8rem; margin-top:7px; color:#DFE8E5; }
-        .modal-content { outline:none; }
-        .welcome-modal.is-opening { pointer-events:none; }
-        @media (prefers-reduced-motion:reduce) {
-            html { scroll-behavior:auto; }
-            *,*::before,*::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+
+        @media (max-width: 400px) {
+            .grid.compact-view { grid-template-columns: 1fr; }
+            .project-logo { width: 52px; height: 52px; }
+            .hero { padding-top: 65px; }
         }
-</style>
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <audio id="bgMusic" loop>
@@ -551,6 +891,7 @@
     <div id="welcomeModal" class="welcome-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="welcomeModalTitle">
         <div class="modal-overlay"></div>
         <div class="modal-content" tabindex="-1">
+            <button class="modal-close-btn" type="button" data-action="close-welcome" aria-label="關閉歡迎視窗">×</button>
             <div id="welcomeModalTitle" class="modal-title naikai-text">歡迎來到「福導」<br>－福科輔導 ✨</div>
             
             <div class="modal-slogan">🌿 讓輔導走進日常<br class="mobile-break">－深耕校園環境陶冶</div>
@@ -560,6 +901,18 @@
             <div class="door-btn-wrapper">
                 <div class="door-indicator naikai-text">👉 點擊大門進入網頁 👈</div>
                 <button class="door-btn" id="door-entry-btn" data-action="enter-site" aria-label="推開大門進入網站"></button>
+            </div>
+            <div class="modal-actions" aria-label="快速進入選項">
+                <button class="filter-btn modal-secondary-btn" type="button" data-action="skip-welcome">直接進入網站</button>
+                <button class="filter-btn modal-secondary-btn" type="button" data-action="close-welcome">先看看首頁，不播放音樂</button>
+            </div>
+            <div class="modal-help">
+                <div class="modal-help-title">🚨 如果你現在很需要幫助</div>
+                <div class="modal-help-links">
+                    <a href="tel:1925" rel="noopener noreferrer">安心專線 1925</a>
+                    <a href="tel:1995" rel="noopener noreferrer">生命線 1995</a>
+                    <a href="tel:1980" rel="noopener noreferrer">張老師 1980</a>
+                </div>
             </div>
         </div>
     </div>
@@ -684,6 +1037,7 @@
             </div>
             
             <div id="resource-result-status" class="resource-status" role="status" aria-live="polite">正在準備資源資料……</div>
+            <div id="resource-sync-note" class="data-sync-note" role="status" aria-live="polite"></div>
 
             <div class="view-toggle-container">
                 <button id="view-toggle-btn" class="filter-btn naikai-text" data-action="toggle-view" aria-pressed="false">
@@ -697,7 +1051,7 @@
                 ⏳ 正在整理資源，馬上就好……
             </div>
             <div id="data-error-note" class="error-note" role="status" aria-live="polite"></div>
-            <div class="grid" id="card-grid" style="display: none;"></div>
+            <div class="grid resource-grid" id="card-grid"></div>
             
             <!-- ✨ 載入與收合卡片按鈕 -->
             <div id="load-more-btn-container" class="load-more-container">
@@ -709,7 +1063,7 @@
     </div>
 
     <div id="page-article" class="page">
-        <div class="team-title-section" style="padding-top: 40px; padding-bottom: 30px;">
+        <div class="team-title-section article-title-section">
             <button class="filter-btn" type="button" data-action="back-resource" >⬅ 返回資源百寶箱</button>
             <h2 id="article-detail-title" class="article-title naikai-text">文章標題載入中...</h2>
             <div class="article-meta">
@@ -737,15 +1091,15 @@
             <div class="info-block song-control-block">
                 <div class="vinyl-wrapper">
                     <div class="vinyl-record spinning" id="vinyl-record">
-                        <div class="vinyl-label"><span style="font-size: 0.9rem; font-family: 'NaikaiFont', sans-serif; letter-spacing: 2px;">歇會<br>ㄦ！</span></div>
+                        <div class="vinyl-label"><span class="vinyl-label-text">歇會<br>ㄦ！</span></div>
                         <div class="vinyl-hole"></div>
                     </div>
-                    <h3 style="color: var(--primary-color); margin-bottom: 12px; font-size: 1.4rem;" class="naikai-text">🎧 專屬音樂控制台</h3>
-                    <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">點擊推開大門時背景音樂已悄悄流淌，跟著下方的歌詞一起唱吧！</p>
+                    <h3 class="naikai-text song-title">🎧 專屬音樂控制台</h3>
+                    <p class="song-description">點擊推開大門後可選擇播放主題曲；也可以保持安靜，跟著下方的歌詞一起看看。</p>
                     <div class="flex-center flex-wrap song-control-buttons">
-                        <button class="filter-btn active song-control-btn" id="btn-song-play" data-music-action="play" style="padding: 10px 25px; font-size: 1rem;">▶️ 播放</button>
-                        <button class="filter-btn song-control-btn" id="btn-song-pause" data-music-action="pause" style="padding: 10px 25px; font-size: 1rem;">⏸️ 暫停</button>
-                        <button class="filter-btn song-control-btn" data-music-action="restart" style="padding: 10px 25px; font-size: 1rem;">🔄 重播</button>
+                        <button class="filter-btn active song-control-btn" id="btn-song-play" data-music-action="play">▶️ 播放</button>
+                        <button class="filter-btn song-control-btn" id="btn-song-pause" data-music-action="pause">⏸️ 暫停</button>
+                        <button class="filter-btn song-control-btn" data-music-action="restart">🔄 重播</button>
                     </div>
                 </div>
             </div>
@@ -942,6 +1296,7 @@
             <p>別擔心！走進輔導室一點也不可怕，讓我們為你解答心中的疑惑。</p>
         </div>
         <div class="faq-container">
+            <p class="faq-maintenance-note">目前保留原始 FAQ 內容；後續新增題目時建議以學生最常問的真實問題為來源，避免讓網站自行推測專業規範。</p>
             <details class="faq-item" open>
                 <summary class="faq-q naikai-text">Q1. 去輔導室會被同學當成有問題的怪人嗎？</summary>
                 <div class="faq-a">A：完全不會！福科國中輔導室是一個安全、讓人放鬆的溫暖空間。任何生活不順心、感情受挫，都歡迎你走進來休息。</div>
@@ -961,7 +1316,7 @@
         
         <div class="container about-container">
             <div class="info-block">
-                <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.4rem;" class="naikai-text">📖 網站設計緣起</h3>
+                <h3 class="naikai-text about-title">📖 網站設計緣起</h3>
                 <p class="designer-text">
                     為了讓福科國中的師生、家長能在遇到困擾時，第一時間找到支持的力量，我們決定打造這個充滿溫度與療癒感的線上網站。透過將實體的輔導資源、心理衛生知識與求助管道數位化，我們期望能打破時空的限制，全方位建構校園心理防護網，讓每一顆受傷或迷惘的心都能在這裡找到出口。
                 </p>
@@ -976,29 +1331,29 @@
                     <p class="brand-lead">FU等於福科的福和輔導的輔</p>
                     
                     <p class="spaced-sm">
-                        <strong style="color: var(--primary-color);">F (Feeling )：</strong>代表「感受」。輔導的第一步，是允許每一種真實的情緒在這裡被溫柔地看見與感受。
+                        <strong class="brand-keyword">F (Feeling )：</strong>代表「感受」。輔導的第一步，是允許每一種真實的情緒在這裡被溫柔地看見與感受。
                     </p>
                     <p >
-                        <strong style="color: var(--primary-color);">U (Understanding )：</strong>代表「理解」。畫面中巨大的「U」型藤蔓，象徵著輔導室是一個充滿理解與涵容的空間。
+                        <strong class="brand-keyword">U (Understanding )：</strong>代表「理解」。畫面中巨大的「U」型藤蔓，象徵著輔導室是一個充滿理解與涵容的空間。
                     </p>
                     
                     <p class="section-mini-title">【 視覺符號分析 】</p>
                     <ul>
                         <li>
                             
-                            <strong style="color: #2D2D2D;">U型花圈（安全的結界）：</strong>藤蔓交織成一個開口向上的「U」字，就像一個安全的保護罩或心靈的避風港。它沒有封閉，代表著輔導室提供保護，但也隨時歡迎孩子自由進出，給予喘息與成長的空間。
+                            <strong class="brand-symbol-title">U型花圈（安全的結界）：</strong>藤蔓交織成一個開口向上的「U」字，就像一個安全的保護罩或心靈的避風港。它沒有封閉，代表著輔導室提供保護，但也隨時歡迎孩子自由進出，給予喘息與成長的空間。
                         </li>
                         <li>
                             
-                            <strong style="color: #2D2D2D;">溫柔捧起的雙手（接納與陪伴）：</strong>雙手沒有去「拉扯」植物強迫它長大，而是輕輕地捧著底下的土壤。這隱喻著輔導老師的角色——我們不強迫孩子立刻改變，而是提供穩定的土壤（支持系統），穩穩地「接住」每一個受傷或迷惘的心靈，陪伴他們長出自己的力量。
+                            <strong class="brand-symbol-title">溫柔捧起的雙手（接納與陪伴）：</strong>雙手沒有去「拉扯」植物強迫它長大，而是輕輕地捧著底下的土壤。這隱喻著輔導老師的角色——我們不強迫孩子立刻改變，而是提供穩定的土壤（支持系統），穩穩地「接住」每一個受傷或迷惘的心靈，陪伴他們長出自己的力量。
                         </li>
                         <li>
                             
-                            <strong style="color: #2D2D2D;">破土而出的小芽（內在的生命力）：</strong>小芽代表著每一位來到輔導室的學生，或是他們心中那個需要被照顧的「內在小孩」。即使一開始很脆弱，但在愛與理解的滋養下，終究能綻放出屬於自己的綠葉。
+                            <strong class="brand-symbol-title">破土而出的小芽（內在的生命力）：</strong>小芽代表著每一位來到輔導室的學生，或是他們心中那個需要被照顧的「內在小孩」。即使一開始很脆弱，但在愛與理解的滋養下，終究能綻放出屬於自己的綠葉。
                         </li>
                         <li>
                             
-                            <strong style="color: #2D2D2D;">點綴的鵝黃色小花（希望的光芒）：</strong>在綠色藤蔓中開出的小花，象徵著在諮商與陪伴的過程中，那些微小卻珍貴的「頓悟」、「喜悅」與「希望」。
+                            <strong class="brand-symbol-title">點綴的鵝黃色小花（希望的光芒）：</strong>在綠色藤蔓中開出的小花，象徵著在諮商與陪伴的過程中，那些微小卻珍貴的「頓悟」、「喜悅」與「希望」。
                         </li>
                     </ul>
                 </div>
@@ -1030,11 +1385,24 @@
     <footer>
         <p>© 2026 福科國中輔導室 版權所有</p>
         <p class="footer-contact contact-text">校址：407臺中市西屯區福林里福林路333號 <span class="footer-divider">|</span><br class="footer-break"> 聯絡電話：04-24618112</p>
+        <p class="contact-text">本站外部資源資訊可能調整，請以各單位官方資訊為準。</p>
     </footer>
 
     <script>
-        const GAS_URL = "https://script.google.com/macros/s/AKfycbz4uZma1CfxCKsoQQqgGYTE8Sw4nTDZnfNI2n5aKU80Z6WySup62TFy2j_aA_uYWLZWIw/exec";
-        const DATA_TIMEOUT_MS = 8000;
+        /* =========================================================
+           福導 V5 — Front-end architecture
+           Keep single-file deployment, but separate responsibilities
+           into config / utils / state / router / data / views / media.
+           ========================================================= */
+        const AppConfig = Object.freeze({
+            GAS_URL: "https://script.google.com/macros/s/AKfycbz4uZma1CfxCKsoQQqgGYTE8Sw4nTDZnfNI2n5aKU80Z6WySup62TFy2j_aA_uYWLZWIw/exec",
+            DATA_TIMEOUT_MS: 8000,
+            DATA_RETRY_LIMIT: 2,
+            DEFAULT_IMAGE: 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800',
+            MUSIC_STORAGE_KEY: 'fudaoguide.musicEnabled',
+            WELCOME_SEEN_STORAGE_KEY: 'fudaoguide.welcomeSeen',
+            RESOURCE_SYNC_STORAGE_KEY: 'fudaoguide.resourceLastSync',
+        });
 
         const identityMap = { '學生專區': 'student', '家長專區': 'parent', '教師專區': 'teacher' };
         const topicMap = { '人際': 'relation', '生涯': 'career', '情緒': 'emotion', '家庭': 'family', '情感': 'affection', '其他': 'other' };
@@ -1093,582 +1461,6 @@
                 type: '外部連結'
             }
         ];
-
-        let allPostsData = [...initialPostsData];
-        let filteredCache = [...allPostsData];
-        const appState = {
-            filters: { identity: 'all', topic: 'all' },
-            searchQuery: '',
-            currentLimit: 0,
-            currentView: 'full',
-        };
-        let yumaTimer = null;
-        let yumaScrollTimer = null;
-        let searchTimeout = null;
-        let resizeTimer = null;
-        let currentLyricIndex = -1;
-        let modalClosing = false;
-
-        const DEFAULT_IMAGE = 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800';
-        const MUSIC_STORAGE_KEY = 'fudaoguide.musicEnabled';
-        const DATA_RETRY_LIMIT = 2;
-        let dataRetryCount = 0;
-        appState.currentLimit = getDefaultLimit();
-
-        function getDefaultLimit() {
-            return window.innerWidth <= 950 ? 8 : 9;
-        }
-
-        function makeStableId(value) {
-            const source = String(value ?? '').trim();
-            let hash = 2166136261;
-            for (let i = 0; i < source.length; i++) {
-                hash ^= source.charCodeAt(i);
-                hash = Math.imul(hash, 16777619);
-            }
-            return (hash >>> 0).toString(36);
-        }
-
-        function slugifyResourceId(value) {
-            const slug = String(value ?? '')
-                .trim()
-                .toLowerCase()
-                .replace(/[^\p{L}\p{N}]+/gu, '-')
-                .replace(/^-+|-+$/g, '')
-                .slice(0, 50);
-            return slug || 'resource';
-        }
-
-        function getRowValue(row, aliases = []) {
-            for (const alias of aliases) {
-                if (row[alias] !== undefined && row[alias] !== null) {
-                    const value = String(row[alias]).trim();
-                    if (value) return value;
-                }
-            }
-            const keys = Object.keys(row);
-            for (const alias of aliases) {
-                const matchedKey = keys.find(key => key.includes(alias));
-                if (matchedKey && row[matchedKey] !== undefined && row[matchedKey] !== null) {
-                    const value = String(row[matchedKey]).trim();
-                    if (value) return value;
-                }
-            }
-            return '';
-        }
-
-        function getFormTimestamp(row) {
-            return getRowValue(row, ['Timestamp', '時間戳記', '時間戳', '提交時間', '回覆時間', '時間']);
-        }
-
-        function normalizeTimestampId(timestamp) {
-            const raw = String(timestamp ?? '').trim();
-            if (!raw) return '';
-            const parsed = new Date(raw);
-            if (!Number.isNaN(parsed.getTime())) {
-                const pad = value => String(value).padStart(2, '0');
-                return `${parsed.getFullYear()}${pad(parsed.getMonth() + 1)}${pad(parsed.getDate())}-${pad(parsed.getHours())}${pad(parsed.getMinutes())}${pad(parsed.getSeconds())}${String(parsed.getMilliseconds()).padStart(3, '0')}`;
-            }
-            return raw.replace(/[^0-9A-Za-z]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
-        }
-
-        function getResourceId(row, index) {
-            const explicit = getRowValue(row, ['ID', 'id', '唯一ID']);
-            if (explicit) return explicit;
-
-            // Google Forms-linked Sheets automatically record a submission timestamp.
-            // We use that timestamp as the primary resource identifier for form-created rows.
-            const timestamp = getFormTimestamp(row);
-            const timestampId = normalizeTimestampId(timestamp);
-            if (timestampId) return `res-ts-${timestampId}`;
-
-            // Legacy/manual rows without a timestamp still receive a stable deterministic ID.
-            const title = String(row['標題'] ?? '').trim();
-            const link = String(row['連結'] ?? '').trim();
-            return `res-${slugifyResourceId(title)}-${makeStableId((title + '|' + link) || String(index))}`;
-        }
-
-        function updateResourceStatus(extra = '') {
-            const el = document.getElementById('resource-result-status');
-            if (!el) return;
-            const total = filteredCache.length;
-            const query = appState.searchQuery ? `，搜尋「${escapeHTML(appState.searchQuery)}」` : '';
-            const filters = [];
-            if (appState.filters.identity !== 'all') filters.push(filterDisplayNames.identity[appState.filters.identity]);
-            if (appState.filters.topic !== 'all') filters.push(filterDisplayNames.topic[appState.filters.topic]);
-            const filterText = filters.length ? `，篩選：${filters.join('＋')}` : '';
-            el.innerHTML = `<strong>${total}</strong> 筆符合目前條件的資源${query}${filterText}${extra ? `｜${escapeHTML(extra)}` : ''}`;
-        }
-
-        function escapeHTML(value) {
-            return String(value ?? '').replace(/[&<>'"]/g, char => ({
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                "'": '&#39;',
-                '"': '&quot;'
-            })[char]);
-        }
-
-        function safeURL(value, fallback = '#') {
-            const raw = String(value ?? '').trim();
-            if (!raw) return fallback;
-            try {
-                const parsed = new URL(raw, window.location.href);
-                if (['http:', 'https:', 'tel:', 'mailto:'].includes(parsed.protocol)) return parsed.href;
-            } catch (_) {}
-            return fallback;
-        }
-
-        function safeImageURL(value, fallback) {
-            const url = safeURL(value, '');
-            return url.startsWith('http://') || url.startsWith('https://') ? url : fallback;
-        }
-
-        function parseRoute() {
-            const rawHash = window.location.hash.replace(/^#/, '');
-            let decoded = 'home';
-            try { decoded = rawHash ? decodeURIComponent(rawHash) : 'home'; } catch (_) { decoded = rawHash || 'home'; }
-            const parts = decoded.split('/');
-            return { page: parts[0] || 'home', id: parts.slice(1).join('/') || null };
-        }
-
-        function handleHashChange(options = {}) {
-            const { page: rawPage, id } = parseRoute();
-            const validPages = ['home', 'resource', 'faq', 'song', 'about', 'article'];
-            const page = validPages.includes(rawPage) ? rawPage : 'home';
-
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
-            document.querySelectorAll('nav a, .dropdown-trigger').forEach(link => link.classList.remove('active-nav'));
-
-            const pageElement = document.getElementById(`page-${page}`);
-            if (pageElement) pageElement.classList.add('active-page');
-
-            const activeNavLink = document.getElementById(`nav-${page}`);
-            if (activeNavLink) activeNavLink.classList.add('active-nav');
-            if (page === 'about' || page === 'song') document.querySelector('.dropdown-trigger')?.classList.add('active-nav');
-
-            closeMenu();
-            closeDropdown();
-            if (!options.skipScroll) window.scrollTo({ top: 0, behavior: 'auto' });
-
-            if (page === 'article') {
-                if (id) renderArticleById(id);
-                else renderArticleMissing();
-            }
-
-            checkScrollPrompt();
-        }
-
-        function setHash(route) {
-            window.location.hash = route;
-        }
-
-        function backToResourceBox() {
-            setHash('home');
-            requestAnimationFrame(() => {
-                const target = document.querySelector('.filter-section');
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        }
-
-        function closeMenu() {
-            const menu = document.getElementById('nav-menu');
-            const toggle = document.getElementById('menu-toggle');
-            if (menu) menu.classList.remove('active');
-            if (toggle) toggle.setAttribute('aria-expanded', 'false');
-        }
-
-        function toggleMenu() {
-            const menu = document.getElementById('nav-menu');
-            const toggle = document.getElementById('menu-toggle');
-            if (!menu || !toggle) return;
-            const open = !menu.classList.contains('active');
-            menu.classList.toggle('active', open);
-            toggle.setAttribute('aria-expanded', String(open));
-            if (open) closeDropdown();
-        }
-
-        function closeDropdown() {
-            const dropdown = document.getElementById('about-dropdown');
-            const trigger = document.querySelector('.dropdown-trigger');
-            if (dropdown) dropdown.classList.remove('mobile-open');
-            if (trigger) trigger.setAttribute('aria-expanded', 'false');
-        }
-
-        function toggleDropdown(element) {
-            if (!element) return;
-            const trigger = element.querySelector('.dropdown-trigger');
-            const open = !element.classList.contains('mobile-open');
-            element.classList.toggle('mobile-open', open);
-            if (trigger) trigger.setAttribute('aria-expanded', String(open));
-        }
-
-        function toggleEmergencyMobile() {
-            const linksContainer = document.getElementById('emergencyLinks');
-            const trigger = document.getElementById('emergency-toggle');
-            if (!linksContainer || !trigger) return;
-            const open = !linksContainer.classList.contains('show');
-            linksContainer.classList.toggle('show', open);
-            trigger.setAttribute('aria-expanded', String(open));
-            trigger.textContent = open ? '🚨 我想求助 ▴' : '🚨 我想求助 ▾';
-        }
-
-        function toggleMobileFilter(type) {
-            const group = document.querySelector(`.filter-group[data-filter-group="${type}"]`);
-            const toggle = group?.querySelector('.mobile-filter-toggle');
-            if (!group || !toggle) return;
-            const open = !group.classList.contains('is-open');
-            group.classList.toggle('is-open', open);
-            toggle.setAttribute('aria-expanded', String(open));
-        }
-
-        const filterDisplayNames = {
-            identity: { all: '全部身分', student: '學生專區', parent: '家長專區', teacher: '教師專區' },
-            topic: { all: '所有議題', relation: '人際', career: '生涯', emotion: '情緒', family: '家庭', affection: '情感', other: '其他' }
-        };
-
-        function syncMobileFilterLabels() {
-            Object.entries(filterDisplayNames).forEach(([type, names]) => {
-                const current = document.getElementById(`${type}-filter-current`);
-                if (current) current.textContent = names[appState.filters[type]] || names.all;
-            });
-        }
-
-        async function fetchWithTimeout(url, timeout = DATA_TIMEOUT_MS) {
-            const controller = new AbortController();
-            const timer = setTimeout(() => controller.abort(), timeout);
-            try {
-                return await fetch(url, { signal: controller.signal, cache: 'no-store' });
-            } finally {
-                clearTimeout(timer);
-            }
-        }
-
-        async function fetchGoogleSheetData(options = {}) {
-            const spinner = document.getElementById('loading-spinner');
-            const errorNote = document.getElementById('data-error-note');
-            const cardGrid = document.getElementById('card-grid');
-            const retry = Boolean(options.retry);
-
-            try {
-                const response = await fetchWithTimeout(GAS_URL);
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
-                const data = await response.json();
-                if (!Array.isArray(data)) throw new Error('資料格式不是陣列');
-
-                const usedIds = new Set(initialPostsData.map(post => String(post.id)));
-                const formPosts = data.map((row, index) => {
-                    const getVal = keyword => {
-                        if (row[keyword] !== undefined && row[keyword] !== null) return String(row[keyword]).trim();
-                        const key = Object.keys(row).find(k => k.includes(keyword));
-                        return key && row[key] !== null && row[key] !== undefined ? String(row[key]).trim() : '';
-                    };
-
-                    const rawIdentities = getVal('身分').split(',').map(t => t.trim()).filter(Boolean);
-                    const rawTopics = getVal('議題').split(',').map(t => t.trim()).filter(Boolean);
-                    const dataIdentities = rawIdentities.map(t => identityMap[t] || '').filter(Boolean).join(' ');
-                    const dataTopics = rawTopics.map(t => topicMap[t] || '').filter(Boolean).join(' ');
-                    const imgRaw = getVal('圖片');
-                    const match = imgRaw.match(/id=([a-zA-Z0-9_-]+)/);
-                    const imgUrl = match ? `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800` : DEFAULT_IMAGE;
-                    const linkRaw = getVal('連結');
-
-                    let id = getResourceId(row, index);
-                    const baseId = id;
-                    let serial = 2;
-                    while (usedIds.has(id)) id = `${baseId}-${serial++}`;
-                    usedIds.add(id);
-
-                    const timestamp = getFormTimestamp(row);
-
-                    return {
-                        id,
-                        submittedAt: timestamp,
-                        identity: dataIdentities,
-                        topic: dataTopics,
-                        isYoutube: /(^|\.)youtube\.com|youtu\.be/i.test(linkRaw),
-                        image: imgUrl,
-                        link: linkRaw,
-                        badgesIdentity: rawIdentities.length ? rawIdentities : ['資源推薦'],
-                        badgesTopic: rawTopics.length ? rawTopics : ['精選文章'],
-                        title: getVal('標題'),
-                        text: getVal('簡介'),
-                        type: getVal('類型'),
-                        linkText: getVal('連結文字') || getVal('按鈕文字'),
-                        articleContent: getVal('內容')
-                    };
-                });
-
-                formPosts.forEach(post => {
-                    post.searchText = [post.title, post.text, post.articleContent, post.identity, post.topic, ...(post.badgesIdentity || []), ...(post.badgesTopic || []), post.type, post.link, post.linkText].filter(Boolean).join(' ').toLowerCase();
-                });
-
-                allPostsData = [...initialPostsData, ...formPosts.reverse()];
-                dataRetryCount = 0;
-                if (spinner) spinner.style.display = 'none';
-                if (cardGrid) cardGrid.style.display = 'grid';
-                if (errorNote) errorNote.classList.remove('show');
-                updateResourceStatus();
-                executeCombinedFilter();
-
-                const route = parseRoute();
-                if (route.page === 'article' && route.id) renderArticleById(route.id);
-            } catch (error) {
-                console.error('抓取資料失敗：', error);
-                if (spinner) spinner.style.display = 'none';
-                if (cardGrid) cardGrid.style.display = 'grid';
-                dataRetryCount += 1;
-
-                if (dataRetryCount < DATA_RETRY_LIMIT) {
-                    setTimeout(() => fetchGoogleSheetData({ retry: true }), 700 * dataRetryCount);
-                    updateResourceStatus(`連線重試中（第 ${dataRetryCount}/${DATA_RETRY_LIMIT} 次）`);
-                    return;
-                }
-
-                updateResourceStatus('目前使用網站內建基本資源');
-                if (errorNote) {
-                    errorNote.innerHTML = `目前無法連線到最新資源資料，先顯示網站內建的基本資源。<br><button class="filter-btn data-retry-btn" type="button" id="retry-data-btn" data-action="retry-data">↻ 重新取得最新資源</button>`;
-                    errorNote.classList.add('show');
-                }
-                renderCards(allPostsData);
-            }
-        }
-
-        function renderCards(dataToRender) {
-            filteredCache = Array.isArray(dataToRender) ? dataToRender : [];
-            const grid = document.getElementById('card-grid');
-            const loadMoreBtn = document.getElementById('load-more-btn-container');
-            if (!grid) return;
-            grid.innerHTML = '';
-
-            if (!filteredCache.length) {
-                if (loadMoreBtn) loadMoreBtn.style.display = 'none';
-                grid.insertAdjacentHTML('beforeend', `
-                    <div class="resource-empty">
-                        <div class="resource-empty-icon">🥀</div>
-                        <h3 class="resource-empty-title naikai-text">目前找不到完全符合的資源</h3>
-                        <p class="resource-empty-text">可以換個關鍵字、取消一個篩選條件，或直接來輔導室找我們聊聊。</p>
-                    </div>`);
-                updateResourceStatus();
-                return;
-            }
-
-            const isMore = filteredCache.length > appState.currentLimit;
-            filteredCache.slice(0, appState.currentLimit).forEach(post => {
-                const title = escapeHTML(post.title || '');
-                const description = escapeHTML(post.text || '');
-                const safeLink = safeURL(post.link, '#');
-                const imageUrl = safeImageURL(post.image, DEFAULT_IMAGE);
-                const tagsHtml = [
-                    ...(post.badgesIdentity || []).map(tag => `<span class="badge badge-identity">${escapeHTML(tag)}</span>`),
-                    ...(post.badgesTopic || []).map(tag => `<span class="badge badge-topic">${escapeHTML(tag)}</span>`)
-                ].join('');
-
-                let mediaContent = `<img src="${escapeHTML(imageUrl)}" alt="${title || '資源圖片'}" loading="lazy" decoding="async">`;
-                if (post.isYoutube && safeLink !== '#') {
-                    mediaContent = `<a href="${escapeHTML(safeLink)}" target="_blank" rel="noopener noreferrer" class="video-preview-wrapper" aria-label="開啟：${title}"><div class="play-button" aria-hidden="true"></div><img src="${escapeHTML(imageUrl)}" alt="${title || '影音資源圖片'}" loading="lazy" decoding="async"></a>`;
-                }
-
-                const cardAction = post.type === '站內文章'
-                    ? `<button class="card-action" type="button" data-card-action="article" data-id="${escapeHTML(post.id)}">閱讀文章 ➔</button>`
-                    : safeLink !== '#'
-                        ? `<a href="${escapeHTML(safeLink)}" target="_blank" rel="noopener noreferrer">${escapeHTML(post.linkText || '前往連結 ➔')}</a>`
-                        : `<span style="color:var(--text-muted);font-size:.92rem;">連結尚未提供</span>`;
-
-                const cardHTML = `
-                    <article class="card" data-identity="${escapeHTML(post.identity)}" data-topic="${escapeHTML(post.topic)}">
-                        <div class="card-media">${mediaContent}</div>
-                        <div class="card-body">
-                            <div class="card-tags">${tagsHtml}</div>
-                            <h3 class="card-title">${title}</h3>
-                            <div class="card-text">${description}</div>
-                            <div class="card-link">${cardAction}</div>
-                        </div>
-                    </article>`;
-                grid.insertAdjacentHTML('beforeend', cardHTML);
-            });
-
-            if (isMore) {
-                loadMoreBtn.style.display = 'block';
-                loadMoreBtn.innerHTML = `<button class="filter-btn active naikai-text" type="button" id="load-more-action">✨ 展開更多資源 ▾</button>`;
-                document.getElementById('load-more-action')?.addEventListener('click', loadMoreCards, { once: true });
-            } else if (filteredCache.length > getDefaultLimit()) {
-                loadMoreBtn.style.display = 'block';
-                loadMoreBtn.innerHTML = `<button class="filter-btn naikai-text" type="button" id="collapse-action" >✨ 收合資源 ▴</button>`;
-                document.getElementById('collapse-action')?.addEventListener('click', collapseCards, { once: true });
-            } else {
-                loadMoreBtn.style.display = 'none';
-            }
-            updateResourceStatus();
-        }
-
-        function loadMoreCards() {
-            appState.currentLimit += window.innerWidth <= 950 ? 8 : 9;
-            renderCards(filteredCache);
-        }
-
-        function collapseCards() {
-            appState.currentLimit = getDefaultLimit();
-            renderCards(filteredCache);
-            document.querySelector('.filter-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        function toggleViewMode() {
-            const grid = document.getElementById('card-grid');
-            const btn = document.getElementById('view-toggle-btn');
-            if (!grid || !btn) return;
-            const compact = grid.classList.toggle('compact-view');
-            appState.currentView = compact ? 'compact' : 'full';
-            btn.setAttribute('aria-pressed', String(compact));
-            btn.textContent = compact ? '⊟ 切換完整顯示' : '⊞ 切換多欄顯示';
-        }
-
-        function renderArticleById(id) {
-            const post = allPostsData.find(item => String(item.id) === String(id));
-            if (!post) {
-                renderArticleMissing();
-                return;
-            }
-            document.getElementById('article-detail-title').textContent = post.title || '無標題';
-            const tagHost = document.getElementById('article-detail-tags');
-            tagHost.innerHTML = '';
-            [...(post.badgesIdentity || []), ...(post.badgesTopic || [])].forEach((tag, index) => {
-                const span = document.createElement('span');
-                span.className = `badge ${index < (post.badgesIdentity || []).length ? 'badge-identity' : 'badge-topic'}`;
-                span.style.fontSize = '.85rem';
-                span.style.padding = '6px 16px';
-                span.textContent = tag;
-                tagHost.appendChild(span);
-            });
-
-            const imgEl = document.getElementById('article-detail-image');
-            const defaultImageMarker = '1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo';
-            if (post.image && !String(post.image).includes(defaultImageMarker)) {
-                imgEl.src = safeImageURL(post.image, '');
-                imgEl.alt = post.title || '文章圖片';
-                imgEl.style.display = imgEl.src ? 'block' : 'none';
-            } else {
-                imgEl.removeAttribute('src');
-                imgEl.style.display = 'none';
-            }
-
-            const contentHost = document.getElementById('article-detail-content');
-            contentHost.textContent = post.articleContent || '沒有提供詳細內容。';
-            contentHost.classList.remove('article-empty');
-        }
-
-        function renderArticleMissing() {
-            document.getElementById('article-detail-title').textContent = '找不到這篇文章';
-            document.getElementById('article-detail-tags').innerHTML = '';
-            const imgEl = document.getElementById('article-detail-image');
-            imgEl.style.display = 'none';
-            document.getElementById('article-detail-content').textContent = '這篇內容可能已經移除，或網址裡沒有帶上文章識別碼。請回到資源百寶箱重新選擇。';
-        }
-
-        function openArticle(id) {
-            if (!id) return;
-            setHash(`article/${encodeURIComponent(id)}`);
-        }
-
-        function executeCombinedFilter() {
-            appState.currentLimit = getDefaultLimit();
-            const filteredData = allPostsData.filter(post => {
-                const cardIdentities = post.identity ? post.identity.split(/\s+/) : [];
-                const cardTopics = post.topic ? post.topic.split(/\s+/) : [];
-                const matchIdentity = appState.filters.identity === 'all' || cardIdentities.includes(appState.filters.identity);
-                const matchTopic = appState.filters.topic === 'all' || cardTopics.includes(appState.filters.topic);
-                const searchTarget = post.searchText || [
-                    post.title,
-                    post.text,
-                    post.articleContent,
-                    post.identity,
-                    post.topic,
-                    ...(post.badgesIdentity || []),
-                    ...(post.badgesTopic || []),
-                    post.type,
-                    post.link
-                ].filter(Boolean).join(' ').toLowerCase();
-                const matchSearch = !appState.searchQuery || searchTarget.includes(appState.searchQuery);
-                return matchIdentity && matchTopic && matchSearch;
-            });
-            filteredData.forEach(post => {
-                if (!post.searchText) {
-                    post.searchText = [post.title, post.text, post.articleContent, post.identity, post.topic, ...(post.badgesIdentity || []), ...(post.badgesTopic || []), post.type, post.link].filter(Boolean).join(' ').toLowerCase();
-                }
-            });
-            renderCards(filteredData);
-        }
-
-        function filterData(type, value, buttonElement) {
-            if (type !== 'identity' && type !== 'topic') return;
-
-            // 再次點擊目前已選擇的「非全部」標籤，即取消該篩選。
-            const currentValue = appState.filters[type];
-            const nextValue = (value !== 'all' && value === currentValue) ? 'all' : value;
-
-            buttonElement?.parentElement.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            const activeButton = buttonElement?.parentElement.querySelector(`.filter-btn[data-value="${nextValue}"]`);
-            activeButton?.classList.add('active');
-
-            appState.filters[type] = nextValue;
-            syncMobileFilterLabels();
-            executeCombinedFilter();
-        }
-
-        function handleSearch() {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(() => {
-                appState.searchQuery = document.getElementById('global-search')?.value.toLowerCase().trim() || '';
-                executeCombinedFilter();
-            }, 250);
-        }
-
-        allPostsData.forEach(post => {
-            post.searchText = [post.title, post.text, post.articleContent, post.identity, post.topic, ...(post.badgesIdentity || []), ...(post.badgesTopic || []), post.type, post.link].filter(Boolean).join(' ').toLowerCase();
-        });
-
-        const yumaQuotes = [
-            "汪！今天過得好嗎？累了或心情不好，都歡迎來輔導室找我摸摸哦！🐾",
-            "（搖尾巴）不管今天發生什麼事，YUMA 都會一直在這裡默默陪著你！",
-            "汪汪！聞到了沉重壓力的味道，要不要去上方的「心靈樹洞」吐吐苦水呢？",
-            "今天也是非常努力的一天呢！來，蓋一個 YUMA 專屬優秀認證戳章！✨",
-            "智平老師的「掛電話理論」聽聽就好～不開心來摸我才是正解，汪！🐶",
-            "伸個大懶腰～吸一口氣！我們一起對著天空大喊：『今天也會順利的！』🐕",
-            "汪！聽說點擊我可以獲得今日隱藏好運，恭喜你，你已經獲得了！🍀"
-        ];
-
-        function interactWithYuma() {
-            const bubble = document.getElementById('yuma-bubble');
-            const textElement = document.getElementById('yuma-text');
-            const avatar = document.querySelector('.yuma-avatar img');
-            if (!bubble || !textElement) return;
-            const randomIndex = Math.floor(Math.random() * yumaQuotes.length);
-            textElement.textContent = yumaQuotes[randomIndex];
-            bubble.classList.add('show');
-            if (avatar) {
-                avatar.style.transform = 'scale(0.8) translateY(12px)';
-                setTimeout(() => avatar.style.transform = '', 150);
-            }
-            clearTimeout(yumaTimer);
-            yumaTimer = setTimeout(() => bubble.classList.remove('show'), 4500);
-        }
-
-        function checkScrollPrompt() {
-            const prompt = document.getElementById('scroll-prompt-fixed');
-            const home = document.getElementById('page-home');
-            if (!prompt || !home) return;
-            if (!home.classList.contains('active-page')) { prompt.style.opacity = '0'; return; }
-            const atBottom = window.innerHeight + window.scrollY > document.body.offsetHeight - 180;
-            prompt.style.opacity = atBottom ? '0' : '0.8';
-        }
-
-        function toggleGlobalMusic() {
-            const bgMusic = document.getElementById('bgMusic');
-            if (!bgMusic) return;
-            controlPageMusic(bgMusic.paused ? 'play' : 'pause');
-        }
-
         const lyricsData = [
             { time: 9.98, text: "早八的鐘聲 敲醒一堆靈魂" },
             { time: 15.02, text: "昨晚的限動 到底誰看了沒出聲" },
@@ -1712,309 +1504,706 @@
             { time: 173.30, text: "福科輔導室~ 挺你到最後！" }
         ];
 
-        function closeModalAndPlayMusic() {
-            const bgMusic = document.getElementById('bgMusic');
-            const vinyl = document.getElementById('vinyl-record');
-            const playBtn = document.getElementById('btn-song-play');
-            const pauseBtn = document.getElementById('btn-song-pause');
-            const globalBtn = document.getElementById('global-music-btn');
-            const welcomeModal = document.getElementById('welcomeModal');
-            const door = document.getElementById('door-entry-btn');
+        const AppState = {
+            data: {
+                allPosts: [...initialPostsData],
+                filtered: [...initialPostsData],
+                retryCount: 0,
+                lastSyncAt: null,
+            },
+            ui: {
+                filters: { identity: 'all', topic: 'all' },
+                searchQuery: '',
+                currentLimit: 0,
+                currentView: 'full',
+                modalClosing: false,
+                currentLyricIndex: -1,
+            },
+            timers: { yuma: null, yumaScroll: null, search: null, resize: null, musicFade: null },
+        };
 
-            if (!welcomeModal || welcomeModal.classList.contains('is-opening')) return;
+        const Names = Object.freeze({
+            identity: { all: '全部身分', student: '學生專區', parent: '家長專區', teacher: '教師專區' },
+            topic: { all: '所有議題', relation: '人際', career: '生涯', emotion: '情緒', family: '家庭', affection: '情感', other: '其他' },
+        });
 
-            // 只有使用者真正啟動進站時，才觸發「推門」動畫。
-            door?.classList.add('is-opening');
-            welcomeModal.classList.add('is-opening');
+        const Utils = {
+            getDefaultLimit() {
+                return window.innerWidth <= 950 ? 8 : 9;
+            },
+            escapeHTML(value) {
+                return String(value ?? '').replace(/[&<>'"]/g, char => ({
+                    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+                })[char]);
+            },
+            safeURL(value, fallback = '#') {
+                const raw = String(value ?? '').trim();
+                if (!raw) return fallback;
+                try {
+                    const parsed = new URL(raw, window.location.href);
+                    return ['http:', 'https:', 'tel:', 'mailto:'].includes(parsed.protocol) ? parsed.href : fallback;
+                } catch (_) {
+                    return fallback;
+                }
+            },
+            safeImageURL(value, fallback = AppConfig.DEFAULT_IMAGE) {
+                const url = this.safeURL(value, '');
+                return url.startsWith('http://') || url.startsWith('https://') ? url : fallback;
+            },
+            makeStableId(value) {
+                const source = String(value ?? '').trim();
+                let hash = 2166136261;
+                for (let i = 0; i < source.length; i++) {
+                    hash ^= source.charCodeAt(i);
+                    hash = Math.imul(hash, 16777619);
+                }
+                return (hash >>> 0).toString(36);
+            },
+            slugifyResourceId(value) {
+                const slug = String(value ?? '')
+                    .trim().toLowerCase()
+                    .replace(/[^\p{L}\p{N}]+/gu, '-')
+                    .replace(/^-+|-+$/g, '').slice(0, 50);
+                return slug || 'resource';
+            },
+            getRowValue(row, aliases = []) {
+                for (const alias of aliases) {
+                    if (row[alias] !== undefined && row[alias] !== null) {
+                        const value = String(row[alias]).trim();
+                        if (value) return value;
+                    }
+                }
+                const keys = Object.keys(row);
+                for (const alias of aliases) {
+                    const matchedKey = keys.find(key => key.includes(alias));
+                    if (matchedKey && row[matchedKey] !== undefined && row[matchedKey] !== null) {
+                        const value = String(row[matchedKey]).trim();
+                        if (value) return value;
+                    }
+                }
+                return '';
+            },
+            getFormTimestamp(row) {
+                return this.getRowValue(row, ['Timestamp', '時間戳記', '時間戳', '提交時間', '回覆時間', '時間']);
+            },
+            normalizeTimestampId(timestamp) {
+                const raw = String(timestamp ?? '').trim();
+                if (!raw) return '';
+                const parsed = new Date(raw);
+                if (!Number.isNaN(parsed.getTime())) {
+                    const pad = value => String(value).padStart(2, '0');
+                    return `${parsed.getFullYear()}${pad(parsed.getMonth()+1)}${pad(parsed.getDate())}-${pad(parsed.getHours())}${pad(parsed.getMinutes())}${pad(parsed.getSeconds())}${String(parsed.getMilliseconds()).padStart(3,'0')}`;
+                }
+                return raw.replace(/[^0-9A-Za-z]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+            },
+            getResourceId(row, index) {
+                const explicit = this.getRowValue(row, ['ID', 'id', '唯一ID']);
+                if (explicit) return explicit;
+                const timestampId = this.normalizeTimestampId(this.getFormTimestamp(row));
+                if (timestampId) return `res-ts-${timestampId}`;
+                const title = String(row['標題'] ?? '').trim();
+                const link = String(row['連結'] ?? '').trim();
+                return `res-${this.slugifyResourceId(title)}-${this.makeStableId((title + '|' + link) || String(index))}`;
+            },
+            buildSearchText(post) {
+                return [post.title, post.text, post.articleContent, post.identity, post.topic, ...(post.badgesIdentity || []), ...(post.badgesTopic || []), post.type, post.link, post.linkText]
+                    .filter(Boolean).join(' ').toLowerCase();
+            },
+            formatSyncTime(value) {
+                if (!value) return '';
+                try {
+                    const date = new Date(value);
+                    if (Number.isNaN(date.getTime())) return '';
+                    return new Intl.DateTimeFormat('zh-TW', { dateStyle: 'medium', timeStyle: 'short' }).format(date);
+                } catch (_) { return ''; }
+            },
+            setText(id, text) {
+                const el = document.getElementById(id);
+                if (el) el.textContent = text;
+            },
+        };
 
-            if (bgMusic && getMusicPreference()) {
+        const Dom = {
+            get(id) { return document.getElementById(id); },
+            qs(selector, root = document) { return root.querySelector(selector); },
+            qsa(selector, root = document) { return Array.from(root.querySelectorAll(selector)); },
+        };
+
+        const Router = {
+            validPages: ['home', 'resource', 'faq', 'song', 'about', 'article'],
+            parse() {
+                const rawHash = window.location.hash.replace(/^#/, '');
+                let decoded = 'home';
+                try { decoded = rawHash ? decodeURIComponent(rawHash) : 'home'; }
+                catch (_) { decoded = rawHash || 'home'; }
+                const parts = decoded.split('/');
+                return { page: parts[0] || 'home', id: parts.slice(1).join('/') || null };
+            },
+            set(route) { window.location.hash = route; },
+            handle(options = {}) {
+                const { page: rawPage, id } = this.parse();
+                const page = this.validPages.includes(rawPage) ? rawPage : 'home';
+                Dom.qsa('.page').forEach(p => p.classList.toggle('active-page', p.id === `page-${page}`));
+                Dom.qsa('nav a, .dropdown-trigger').forEach(link => link.classList.remove('active-nav'));
+                Dom.get(`nav-${page}`)?.classList.add('active-nav');
+                if (page === 'about' || page === 'song') Dom.qs('.dropdown-trigger')?.classList.add('active-nav');
+                SiteUI.closeMenu();
+                SiteUI.closeDropdown();
+                if (!options.skipScroll) window.scrollTo({ top: 0, behavior: 'auto' });
+                if (page === 'article') id ? ResourceView.renderArticleById(id) : ResourceView.renderArticleMissing();
+                SiteUI.checkScrollPrompt();
+            },
+        };
+
+        const ResourceData = {
+            async fetchWithTimeout(url, timeout = AppConfig.DATA_TIMEOUT_MS) {
+                const controller = new AbortController();
+                const timer = setTimeout(() => controller.abort(), timeout);
+                try { return await fetch(url, { signal: controller.signal, cache: 'no-store' }); }
+                finally { clearTimeout(timer); }
+            },
+            normalizeRows(data) {
+                const usedIds = new Set(initialPostsData.map(post => String(post.id)));
+                const posts = data.map((row, index) => {
+                    const getVal = keyword => Utils.getRowValue(row, [keyword]);
+                    const rawIdentities = getVal('身分').split(',').map(t => t.trim()).filter(Boolean);
+                    const rawTopics = getVal('議題').split(',').map(t => t.trim()).filter(Boolean);
+                    const dataIdentities = rawIdentities.map(t => identityMap[t] || '').filter(Boolean).join(' ');
+                    const dataTopics = rawTopics.map(t => topicMap[t] || '').filter(Boolean).join(' ');
+                    const imgRaw = getVal('圖片');
+                    const match = imgRaw.match(/id=([a-zA-Z0-9_-]+)/);
+                    const image = match ? `https://drive.google.com/thumbnail?id=${match[1]}&sz=w800` : AppConfig.DEFAULT_IMAGE;
+                    const link = getVal('連結');
+                    let id = Utils.getResourceId(row, index);
+                    const baseId = id;
+                    let serial = 2;
+                    while (usedIds.has(id)) id = `${baseId}-${serial++}`;
+                    usedIds.add(id);
+                    const timestamp = Utils.getFormTimestamp(row);
+                    const post = {
+                        id, submittedAt: timestamp, identity: dataIdentities, topic: dataTopics,
+                        isYoutube: /(^|\.)youtube\.com|youtu\.be/i.test(link),
+                        image, link, badgesIdentity: rawIdentities.length ? rawIdentities : ['資源推薦'],
+                        badgesTopic: rawTopics.length ? rawTopics : ['精選文章'], title: getVal('標題'),
+                        text: getVal('簡介'), type: getVal('類型'), linkText: getVal('連結文字') || getVal('按鈕文字'),
+                        articleContent: getVal('內容'),
+                    };
+                    post.searchText = Utils.buildSearchText(post);
+                    return post;
+                });
+                return posts;
+            },
+            setSyncStatus(timestamp, fallback = false) {
+                AppState.data.lastSyncAt = timestamp || null;
+                if (timestamp) {
+                    try { localStorage.setItem(AppConfig.RESOURCE_SYNC_STORAGE_KEY, String(timestamp)); } catch (_) {}
+                }
+                const note = Dom.get('resource-sync-note');
+                if (!note) return;
+                const formatted = Utils.formatSyncTime(timestamp);
+                note.textContent = formatted
+                    ? `${fallback ? '目前顯示內建基本資源；最後一次成功同步：' : '資源資料最後成功同步：'}${formatted}`
+                    : (fallback ? '目前顯示網站內建基本資源；請稍後重新取得最新資料。' : '');
+            },
+            loadStoredSyncStatus() {
+                let stored = null;
+                try { stored = localStorage.getItem(AppConfig.RESOURCE_SYNC_STORAGE_KEY); } catch (_) {}
+                if (stored) this.setSyncStatus(stored);
+            },
+            async load(options = {}) {
+                const spinner = Dom.get('loading-spinner');
+                const errorNote = Dom.get('data-error-note');
+                const grid = Dom.get('card-grid');
+                try {
+                    const response = await this.fetchWithTimeout(AppConfig.GAS_URL);
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    const data = await response.json();
+                    if (!Array.isArray(data)) throw new Error('資料格式不是陣列');
+                    const formPosts = this.normalizeRows(data);
+                    AppState.data.allPosts = [...initialPostsData, ...formPosts.reverse()];
+                    AppState.data.retryCount = 0;
+                    const now = new Date().toISOString();
+                    this.setSyncStatus(now, false);
+                    spinner && (spinner.style.display = 'none');
+                    grid && (grid.style.display = 'grid');
+                    errorNote?.classList.remove('show');
+                    ResourceView.executeCombinedFilter();
+                    const route = Router.parse();
+                    if (route.page === 'article' && route.id) ResourceView.renderArticleById(route.id);
+                } catch (error) {
+                    console.error('抓取資料失敗：', error);
+                    spinner && (spinner.style.display = 'none');
+                    grid && (grid.style.display = 'grid');
+                    AppState.data.retryCount += 1;
+                    if (AppState.data.retryCount < AppConfig.DATA_RETRY_LIMIT) {
+                        SiteUI.updateResourceStatus(`連線重試中（第 ${AppState.data.retryCount}/${AppConfig.DATA_RETRY_LIMIT} 次）`);
+                        setTimeout(() => this.load({ retry: true }), 700 * AppState.data.retryCount);
+                        return;
+                    }
+                    this.loadStoredSyncStatus();
+                    this.setSyncStatus(AppState.data.lastSyncAt, true);
+                    if (errorNote) {
+                        errorNote.innerHTML = `目前無法連線到最新資源資料，先顯示網站內建的基本資源。<br><button class="filter-btn data-retry-btn" type="button" data-action="retry-data">↻ 重新取得最新資源</button>`;
+                        errorNote.classList.add('show');
+                    }
+                    ResourceView.executeCombinedFilter();
+                }
+            },
+        };
+
+        const ResourceView = {
+            updateResultStatus(extra = '') {
+                const el = Dom.get('resource-result-status');
+                if (!el) return;
+                const total = AppState.data.filtered.length;
+                const query = AppState.ui.searchQuery ? `，搜尋「${AppState.ui.searchQuery}」` : '';
+                const filters = [];
+                if (AppState.ui.filters.identity !== 'all') filters.push(Names.identity[AppState.ui.filters.identity]);
+                if (AppState.ui.filters.topic !== 'all') filters.push(Names.topic[AppState.ui.filters.topic]);
+                const filterText = filters.length ? `，篩選：${filters.join('＋')}` : '';
+                el.innerHTML = `<strong>${total}</strong> 筆符合目前條件的資源${Utils.escapeHTML(query + filterText)}${extra ? `｜${Utils.escapeHTML(extra)}` : ''}`;
+            },
+            renderCards(dataToRender) {
+                AppState.data.filtered = Array.isArray(dataToRender) ? dataToRender : [];
+                const grid = Dom.get('card-grid');
+                const loadMore = Dom.get('load-more-btn-container');
+                if (!grid) return;
+                grid.innerHTML = '';
+                if (!AppState.data.filtered.length) {
+                    if (loadMore) loadMore.style.display = 'none';
+                    grid.innerHTML = `<div class="resource-empty"><div class="resource-empty-icon">🥀</div><h3 class="resource-empty-title naikai-text">目前找不到完全符合的資源</h3><p class="resource-empty-text">可以換個關鍵字、取消一個篩選條件，或直接來輔導室找我們聊聊。</p></div>`;
+                    this.updateResultStatus();
+                    return;
+                }
+                const limit = AppState.ui.currentLimit;
+                AppState.data.filtered.slice(0, limit).forEach(post => {
+                    const title = Utils.escapeHTML(post.title || '');
+                    const description = Utils.escapeHTML(post.text || '');
+                    const safeLink = Utils.safeURL(post.link, '#');
+                    const imageUrl = Utils.safeImageURL(post.image);
+                    const tagsHtml = [...(post.badgesIdentity || []).map(tag => `<span class="badge badge-identity">${Utils.escapeHTML(tag)}</span>`), ...(post.badgesTopic || []).map(tag => `<span class="badge badge-topic">${Utils.escapeHTML(tag)}</span>`)].join('');
+                    let mediaContent = `<img src="${Utils.escapeHTML(imageUrl)}" alt="${title || '資源圖片'}" loading="lazy" decoding="async">`;
+                    if (post.isYoutube && safeLink !== '#') mediaContent = `<a href="${Utils.escapeHTML(safeLink)}" target="_blank" rel="noopener noreferrer" class="video-preview-wrapper" aria-label="開啟：${title}"><div class="play-button" aria-hidden="true"></div><img src="${Utils.escapeHTML(imageUrl)}" alt="${title || '影音資源圖片'}" loading="lazy" decoding="async"></a>`;
+                    const cardAction = post.type === '站內文章'
+                        ? `<button class="card-action" type="button" data-card-action="article" data-id="${Utils.escapeHTML(post.id)}">閱讀文章 ➔</button>`
+                        : safeLink !== '#'
+                            ? `<a href="${Utils.escapeHTML(safeLink)}" target="_blank" rel="noopener noreferrer">${Utils.escapeHTML(post.linkText || '前往連結 ➔')}</a>`
+                            : `<span class="link-missing">連結尚未提供</span>`;
+                    grid.insertAdjacentHTML('beforeend', `<article class="card" data-identity="${Utils.escapeHTML(post.identity)}" data-topic="${Utils.escapeHTML(post.topic)}"><div class="card-media">${mediaContent}</div><div class="card-body"><div class="card-tags">${tagsHtml}</div><h3 class="card-title">${title}</h3><div class="card-text">${description}</div><div class="card-link">${cardAction}</div></div></article>`);
+                });
+                const isMore = AppState.data.filtered.length > limit;
+                const needsCollapse = !isMore && AppState.data.filtered.length > Utils.getDefaultLimit();
+                if (loadMore && (isMore || needsCollapse)) {
+                    loadMore.style.display = 'block';
+                    loadMore.innerHTML = isMore ? `<button class="filter-btn active naikai-text load-more-action" type="button" data-action="load-more">✨ 展開更多資源 ▾</button>` : `<button class="filter-btn naikai-text collapse-action" type="button" data-action="collapse-resources">✨ 收合資源 ▴</button>`;
+                } else if (loadMore) loadMore.style.display = 'none';
+                this.updateResultStatus();
+            },
+            executeCombinedFilter() {
+                AppState.ui.currentLimit = Utils.getDefaultLimit();
+                const filtered = AppState.data.allPosts.filter(post => {
+                    const identities = post.identity ? post.identity.split(/\s+/) : [];
+                    const topics = post.topic ? post.topic.split(/\s+/) : [];
+                    const identityOk = AppState.ui.filters.identity === 'all' || identities.includes(AppState.ui.filters.identity);
+                    const topicOk = AppState.ui.filters.topic === 'all' || topics.includes(AppState.ui.filters.topic);
+                    const searchTarget = post.searchText || Utils.buildSearchText(post);
+                    post.searchText = searchTarget;
+                    const query = AppState.ui.searchQuery;
+                    const searchOk = !query || searchTarget.includes(query);
+                    return identityOk && topicOk && searchOk;
+                });
+                this.renderCards(filtered);
+                SiteUI.syncMobileFilterLabels();
+            },
+            loadMore() {
+                AppState.ui.currentLimit += window.innerWidth <= 950 ? 8 : 9;
+                this.renderCards(AppState.data.filtered);
+            },
+            collapse() {
+                AppState.ui.currentLimit = Utils.getDefaultLimit();
+                this.renderCards(AppState.data.filtered);
+                Dom.qs('.filter-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            },
+            toggleView() {
+                const grid = Dom.get('card-grid');
+                const btn = Dom.get('view-toggle-btn');
+                if (!grid || !btn) return;
+                const compact = grid.classList.toggle('compact-view');
+                AppState.ui.currentView = compact ? 'compact' : 'full';
+                btn.setAttribute('aria-pressed', String(compact));
+                btn.textContent = compact ? '⊟ 切換完整顯示' : '⊞ 切換多欄顯示';
+            },
+            renderArticleById(id) {
+                const post = AppState.data.allPosts.find(item => String(item.id) === String(id));
+                if (!post) return this.renderArticleMissing();
+                Utils.setText('article-detail-title', post.title || '無標題');
+                const tagHost = Dom.get('article-detail-tags');
+                if (tagHost) {
+                    tagHost.innerHTML = '';
+                    [...(post.badgesIdentity || []), ...(post.badgesTopic || [])].forEach((tag, index) => {
+                        const span = document.createElement('span');
+                        span.className = `badge ${index < (post.badgesIdentity || []).length ? 'badge-identity' : 'badge-topic'}`;
+                        span.textContent = tag;
+                        span.classList.add('article-tag');
+                        tagHost.appendChild(span);
+                    });
+                }
+                const img = Dom.get('article-detail-image');
+                const defaultMarker = '1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo';
+                if (img && post.image && !String(post.image).includes(defaultMarker)) {
+                    img.src = Utils.safeImageURL(post.image, '');
+                    img.alt = post.title || '文章圖片';
+                    img.style.display = img.src ? 'block' : 'none';
+                } else if (img) {
+                    img.removeAttribute('src');
+                    img.style.display = 'none';
+                }
+                Utils.setText('article-detail-content', post.articleContent || '沒有提供詳細內容。');
+            },
+            renderArticleMissing() {
+                Utils.setText('article-detail-title', '找不到這篇文章');
+                const tags = Dom.get('article-detail-tags');
+                if (tags) tags.innerHTML = '';
+                const img = Dom.get('article-detail-image');
+                if (img) img.style.display = 'none';
+                Utils.setText('article-detail-content', '這篇內容可能已經移除，或網址裡沒有帶上文章識別碼。請回到資源百寶箱重新選擇。');
+            },
+            openArticle(id) { if (id) Router.set(`article/${encodeURIComponent(id)}`); },
+        };
+
+        const SiteUI = {
+            syncMobileFilterLabels() {
+                Object.entries(Names).forEach(([type, names]) => Utils.setText(`${type}-filter-current`, names[AppState.ui.filters[type]] || names.all));
+            },
+            updateResourceStatus(extra = '') { ResourceView.updateResultStatus(extra); },
+            closeMenu() {
+                Dom.get('nav-menu')?.classList.remove('active');
+                Dom.get('menu-toggle')?.setAttribute('aria-expanded', 'false');
+            },
+            toggleMenu() {
+                const menu = Dom.get('nav-menu');
+                const toggle = Dom.get('menu-toggle');
+                if (!menu || !toggle) return;
+                const open = !menu.classList.contains('active');
+                menu.classList.toggle('active', open);
+                toggle.setAttribute('aria-expanded', String(open));
+                if (open) this.closeDropdown();
+            },
+            closeDropdown() {
+                Dom.get('about-dropdown')?.classList.remove('mobile-open');
+                Dom.qs('.dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+            },
+            toggleDropdown(element) {
+                if (!element) return;
+                const trigger = element.querySelector('.dropdown-trigger');
+                const open = !element.classList.contains('mobile-open');
+                element.classList.toggle('mobile-open', open);
+                trigger?.setAttribute('aria-expanded', String(open));
+            },
+            toggleEmergency() {
+                const links = Dom.get('emergencyLinks');
+                const trigger = Dom.get('emergency-toggle');
+                if (!links || !trigger) return;
+                const open = !links.classList.contains('show');
+                links.classList.toggle('show', open);
+                trigger.setAttribute('aria-expanded', String(open));
+                trigger.textContent = open ? '🚨 我想求助 ▴' : '🚨 我想求助 ▾';
+            },
+            toggleMobileFilter(type) {
+                const group = Dom.qs(`.filter-group[data-filter-group="${type}"]`);
+                const toggle = group?.querySelector('.mobile-filter-toggle');
+                if (!group || !toggle) return;
+                const open = !group.classList.contains('is-open');
+                group.classList.toggle('is-open', open);
+                toggle.setAttribute('aria-expanded', String(open));
+            },
+            setFilter(type, value, button) {
+                if (!['identity','topic'].includes(type)) return;
+                const current = AppState.ui.filters[type];
+                const next = value !== 'all' && value === current ? 'all' : value;
+                button?.parentElement.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                button?.parentElement.querySelector(`.filter-btn[data-value="${next}"]`)?.classList.add('active');
+                AppState.ui.filters[type] = next;
+                ResourceView.executeCombinedFilter();
+            },
+            handleSearch() {
+                clearTimeout(AppState.timers.search);
+                AppState.timers.search = setTimeout(() => {
+                    AppState.ui.searchQuery = Dom.get('global-search')?.value.toLowerCase().trim() || '';
+                    ResourceView.executeCombinedFilter();
+                }, 250);
+            },
+            closeWelcome(playMusic = false) {
+                const modal = Dom.get('welcomeModal');
+                if (!modal || AppState.ui.modalClosing) return;
+                if (playMusic) Music.playFromWelcome();
+                this.markWelcomeSeen();
+                modal.classList.add('is-opening');
+                AppState.ui.modalClosing = true;
+                document.body.classList.remove('modal-open');
+                setTimeout(() => {
+                    modal.setAttribute('aria-hidden', 'true');
+                    modal.style.display = 'none';
+                    modal.classList.remove('is-opening');
+                    AppState.ui.modalClosing = false;
+                    this.restoreLastFocus();
+                    this.checkScrollPrompt();
+                }, 850);
+            },
+            focusModal() { Dom.get('door-entry-btn')?.focus(); },
+            restoreLastFocus() {
+                const el = window.__lastModalFocus;
+                if (el && typeof el.focus === 'function') requestAnimationFrame(() => el.focus());
+                window.__lastModalFocus = null;
+            },
+            hasSeenWelcome() {
+                try { return sessionStorage.getItem(AppConfig.WELCOME_SEEN_STORAGE_KEY) === '1'; } catch (_) { return false; }
+            },
+            markWelcomeSeen() {
+                try { sessionStorage.setItem(AppConfig.WELCOME_SEEN_STORAGE_KEY, '1'); } catch (_) {}
+            },
+            openWelcome() {
+                const modal = Dom.get('welcomeModal');
+                const route = Router.parse();
+                if (!modal || route.page !== 'home' || this.hasSeenWelcome()) return;
+                window.__lastModalFocus = document.activeElement;
+                modal.style.display = 'flex';
+                modal.setAttribute('aria-hidden', 'false');
+                modal.classList.remove('is-opening');
+                document.body.classList.add('modal-open');
+                requestAnimationFrame(() => this.focusModal());
+            },
+            checkScrollPrompt() {
+                const prompt = Dom.get('scroll-prompt-fixed');
+                const home = Dom.get('page-home');
+                if (!prompt || !home) return;
+                if (!home.classList.contains('active-page')) { prompt.style.opacity = '0'; return; }
+                const atBottom = window.innerHeight + window.scrollY > document.body.offsetHeight - 180;
+                prompt.style.opacity = atBottom ? '0' : '0.8';
+            },
+            backToResourceBox() {
+                Router.set('home');
+                requestAnimationFrame(() => Dom.qs('.filter-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+            },
+        };
+
+        const Yuma = {
+            quotes: [
+                "汪！今天過得好嗎？累了或心情不好，都歡迎來輔導室找我摸摸哦！🐾",
+                "（搖尾巴）不管今天發生什麼事，YUMA 都會一直在這裡默默陪著你！",
+                "汪汪！聞到了沉重壓力的味道，要不要去上方的「心靈樹洞」吐吐苦水呢？",
+                "今天也是非常努力的一天呢！來，蓋一個 YUMA 專屬優秀認證戳章！✨",
+                "智平老師的「掛電話理論」聽聽就好～不開心來摸我才是正解，汪！🐶",
+                "伸個大懶腰～吸一口氣！我們一起對著天空大喊：『今天也會順利的！』🐕",
+                "汪！聽說點擊我可以獲得今日隱藏好運，恭喜你，你已經獲得了！🍀"
+            ],
+            interact() {
+                const bubble = Dom.get('yuma-bubble');
+                const text = Dom.get('yuma-text');
+                const avatar = Dom.qs('.yuma-avatar img');
+                if (!bubble || !text) return;
+                text.textContent = this.quotes[Math.floor(Math.random() * this.quotes.length)];
+                bubble.classList.add('show');
+                if (avatar) { avatar.style.transform = 'scale(0.8) translateY(12px)'; setTimeout(() => avatar.style.transform = '', 150); }
+                clearTimeout(AppState.timers.yuma);
+                AppState.timers.yuma = setTimeout(() => bubble.classList.remove('show'), 4500);
+            },
+            hideForCriticalContext() {
+                const yuma = Dom.qs('.yuma-container');
+                const page = Router.parse().page;
+                yuma?.classList.toggle('critical-hidden', page === 'resource');
+            },
+        };
+
+        const Music = {
+            playFromWelcome() {
+                const bgMusic = Dom.get('bgMusic');
+                if (!bgMusic || !this.getPreference()) return;
                 bgMusic.currentTime = 0;
                 bgMusic.volume = 0;
-                bgMusic.play().then(() => {
-                    setMusicPreference(true);
-                    const targetVolume = 0.4;
-                    const fadeDuration = 2000;
-                    const intervalTime = 50;
-                    const step = targetVolume / (fadeDuration / intervalTime);
-                    let fadeId = setInterval(() => {
-                        if (bgMusic.paused) {
-                            clearInterval(fadeId);
-                            return;
-                        }
-                        if (bgMusic.volume + step >= targetVolume) {
-                            bgMusic.volume = targetVolume;
-                            clearInterval(fadeId);
-                        } else {
-                            bgMusic.volume += step;
-                        }
-                    }, intervalTime);
-
-                    vinyl?.classList.add('spinning');
-                    playBtn?.classList.add('active');
-                    pauseBtn?.classList.remove('active');
-                    if (globalBtn) globalBtn.textContent = '🔊';
-                    if (globalBtn) globalBtn.setAttribute('aria-label', '暫停背景音樂');
-                }).catch(() => {
-                    if (globalBtn) globalBtn.textContent = '🔇';
-                });
-            } else {
-                bgMusic?.pause();
-                vinyl?.classList.remove('spinning');
-                playBtn?.classList.remove('active');
-                pauseBtn?.classList.add('active');
-                if (globalBtn) globalBtn.textContent = '🔇';
-                if (globalBtn) globalBtn.setAttribute('aria-label', '播放背景音樂');
-            }
-
-            modalClosing = true;
-            document.body.classList.remove('modal-open');
-            setTimeout(() => {
-                welcomeModal.setAttribute('aria-hidden', 'true');
-                welcomeModal.style.display = 'none';
-                door?.classList.remove('is-opening');
-                welcomeModal.classList.remove('is-opening');
-                modalClosing = false;
-                restoreLastFocus();
-                checkScrollPrompt();
-            }, 850);
-        }
-
-        function controlPageMusic(action) {
-            const bgMusic = document.getElementById('bgMusic');
-            const playBtn = document.getElementById('btn-song-play');
-            const pauseBtn = document.getElementById('btn-song-pause');
-            const vinyl = document.getElementById('vinyl-record');
-            const globalBtn = document.getElementById('global-music-btn');
-            if (!bgMusic) return;
-
-            if (action === 'play') {
-                bgMusic.play().then(() => {
-                    setMusicPreference(true);
-                    playBtn?.classList.add('active'); pauseBtn?.classList.remove('active'); vinyl?.classList.add('spinning');
-                    if (globalBtn) globalBtn.textContent = '🔊';
-                    globalBtn?.setAttribute('aria-label', '暫停背景音樂');
-                }).catch(() => {});
-            } else if (action === 'pause') {
-                bgMusic.pause();
-                setMusicPreference(false);
-                playBtn?.classList.remove('active'); pauseBtn?.classList.add('active'); vinyl?.classList.remove('spinning');
-                if (globalBtn) globalBtn.textContent = '🔇';
-                globalBtn?.setAttribute('aria-label', '播放背景音樂');
-            } else if (action === 'restart') {
-                bgMusic.currentTime = 0;
-                bgMusic.play().then(() => {
-                    setMusicPreference(true);
-                    playBtn?.classList.add('active'); pauseBtn?.classList.remove('active'); vinyl?.classList.add('spinning');
-                    if (globalBtn) globalBtn.textContent = '🔊';
-                    globalBtn?.setAttribute('aria-label', '暫停背景音樂');
-                }).catch(() => {});
-            }
-        }
-
-        function toggleFullLyrics() {
-            const lyricsBox = document.getElementById('full-lyrics-box');
-            const toggleBtn = document.getElementById('btn-toggle-lyrics');
-            if (!lyricsBox || !toggleBtn) return;
-            const open = lyricsBox.style.display === 'none';
-            lyricsBox.style.display = open ? 'block' : 'none';
-            toggleBtn.textContent = open ? '📄 收合完整歌詞' : '📄 展開完整歌詞';
-            toggleBtn.classList.toggle('active', open);
-        }
-
-        async function toggleFullscreen() {
-            const wrapper = document.getElementById('lyrics-fullscreen-wrapper');
-            if (!wrapper) return;
-            try {
-                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                    if (wrapper.requestFullscreen) await wrapper.requestFullscreen();
-                    else if (wrapper.webkitRequestFullscreen) await wrapper.webkitRequestFullscreen();
-                } else {
-                    if (document.exitFullscreen) await document.exitFullscreen();
+                bgMusic.play().then(() => this.syncUI(true, true)).catch(() => this.syncUI(false, false));
+            },
+            control(action) {
+                const audio = Dom.get('bgMusic');
+                if (!audio) return;
+                if (action === 'pause') { audio.pause(); this.setPreference(false); this.syncUI(false, false); return; }
+                if (action === 'restart') audio.currentTime = 0;
+                audio.play().then(() => { this.setPreference(true); this.syncUI(true, false); }).catch(() => {});
+            },
+            toggleGlobal() {
+                const audio = Dom.get('bgMusic');
+                if (!audio) return;
+                this.control(audio.paused ? 'play' : 'pause');
+            },
+            syncUI(playing, fromWelcome) {
+                const play = Dom.get('btn-song-play');
+                const pause = Dom.get('btn-song-pause');
+                const vinyl = Dom.get('vinyl-record');
+                const global = Dom.get('global-music-btn');
+                play?.classList.toggle('active', playing);
+                pause?.classList.toggle('active', !playing);
+                vinyl?.classList.toggle('spinning', playing);
+                if (global) { global.textContent = playing ? '🔊' : '🔇'; global.setAttribute('aria-label', playing ? '暫停背景音樂' : '播放背景音樂'); }
+            },
+            setPreference(enabled) { try { localStorage.setItem(AppConfig.MUSIC_STORAGE_KEY, enabled ? '1' : '0'); } catch (_) {} },
+            getPreference() {
+                try { const stored = localStorage.getItem(AppConfig.MUSIC_STORAGE_KEY); return stored === null ? false : stored === '1'; }
+                catch (_) { return false; }
+            },
+            toggleFullLyrics() {
+                const box = Dom.get('full-lyrics-box');
+                const btn = Dom.get('btn-toggle-lyrics');
+                if (!box || !btn) return;
+                const open = box.style.display !== 'block';
+                box.style.display = open ? 'block' : 'none';
+                btn.textContent = open ? '📄 收合完整歌詞' : '📄 展開完整歌詞';
+                btn.classList.toggle('active', open);
+            },
+            async toggleFullscreen() {
+                const wrapper = Dom.get('lyrics-fullscreen-wrapper');
+                if (!wrapper) return;
+                try {
+                    if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                        if (wrapper.requestFullscreen) await wrapper.requestFullscreen();
+                        else if (wrapper.webkitRequestFullscreen) await wrapper.webkitRequestFullscreen();
+                    } else if (document.exitFullscreen) await document.exitFullscreen();
                     else if (document.webkitExitFullscreen) await document.webkitExitFullscreen();
+                } catch (_) {}
+                this.updateFullscreenButton();
+            },
+            updateFullscreenButton() {
+                const btn = Dom.get('btn-fullscreen');
+                if (btn) btn.textContent = (!document.fullscreenElement && !document.webkitFullscreenElement) ? '⛶ 沉浸全螢幕' : '✖ 退出全螢幕';
+            },
+            syncLyrics(currentTime) {
+                let activeIndex = -1;
+                const currentIndex = AppState.ui.currentLyricIndex;
+                if (currentIndex >= 0 && currentIndex < lyricsData.length) {
+                    const currentT = lyricsData[currentIndex].time - 0.3;
+                    const nextT = currentIndex + 1 < lyricsData.length ? lyricsData[currentIndex + 1].time - 0.3 : Infinity;
+                    if (currentTime >= currentT && currentTime < nextT) return;
                 }
-            } catch (_) {}
-            updateFullscreenButton();
-        }
+                for (let i = 0; i < lyricsData.length; i++) {
+                    if (currentTime >= lyricsData[i].time - 0.3) activeIndex = i; else break;
+                }
+                if (activeIndex === -1 || activeIndex === currentIndex) return;
+                if (currentIndex !== -1) Dom.get('lyric-' + currentIndex)?.classList.remove('active');
+                const newEl = Dom.get('lyric-' + activeIndex);
+                const container = Dom.get('lyrics-container');
+                newEl?.classList.add('active');
+                if (newEl && container) container.scrollTo({ top: newEl.offsetTop - container.clientHeight / 2 + newEl.clientHeight / 2, behavior: 'smooth' });
+                AppState.ui.currentLyricIndex = activeIndex;
+            },
+        };
 
-        function updateFullscreenButton() {
-            const btn = document.getElementById('btn-fullscreen');
-            if (!btn) return;
-            btn.textContent = (!document.fullscreenElement && !document.webkitFullscreenElement) ? '⛶ 沉浸全螢幕' : '✖ 退出全螢幕';
-        }
-
-        function setMusicPreference(enabled) {
-            try { localStorage.setItem(MUSIC_STORAGE_KEY, enabled ? '1' : '0'); } catch (_) {}
-        }
-
-        function getMusicPreference() {
-            try {
-                const stored = localStorage.getItem(MUSIC_STORAGE_KEY);
-                return stored === null ? true : stored === '1';
-            } catch (_) {
-                return true;
-            }
-        }
-
-        function focusFirstModalControl() {
-            document.getElementById('door-entry-btn')?.focus();
-        }
-
-        function restoreLastFocus() {
-            const el = window.__lastModalFocus;
-            if (el && typeof el.focus === 'function') {
-                requestAnimationFrame(() => el.focus());
-            }
-            window.__lastModalFocus = null;
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const wrapper = document.getElementById('lyrics-wrapper');
+        function initializeLyrics() {
+            const wrapper = Dom.get('lyrics-wrapper');
+            if (!wrapper) return;
+            const fragment = document.createDocumentFragment();
             lyricsData.forEach((lyric, index) => {
                 const p = document.createElement('p');
                 p.className = 'lyric-line';
                 p.id = 'lyric-' + index;
                 p.textContent = lyric.text;
-                wrapper?.appendChild(p);
+                fragment.appendChild(p);
             });
+            wrapper.appendChild(fragment);
+        }
 
-            // Centralized event binding: HTML declares intent with data-*; JS owns behavior.
+        function bindEvents() {
             document.addEventListener('click', event => {
                 const target = event.target.closest('[data-action], [data-filter-toggle], [data-filter-type], [data-music-action]');
                 if (!target) return;
-                if (target.matches('[data-filter-toggle]')) return toggleMobileFilter(target.dataset.filterToggle);
-                if (target.matches('[data-filter-type]')) return filterData(target.dataset.filterType, target.dataset.value, target);
+                if (target.matches('[data-filter-toggle]')) return SiteUI.toggleMobileFilter(target.dataset.filterToggle);
+                if (target.matches('[data-filter-type]')) return SiteUI.setFilter(target.dataset.filterType, target.dataset.value, target);
                 const action = target.dataset.action;
-                if (action === 'enter-site') return closeModalAndPlayMusic();
-                if (action === 'toggle-music') return toggleGlobalMusic();
-                if (action === 'toggle-emergency') return toggleEmergencyMobile();
-                if (action === 'toggle-menu') return toggleMenu();
-                if (action === 'toggle-dropdown') return toggleDropdown(document.getElementById('about-dropdown'));
-                if (action === 'toggle-view') return toggleViewMode();
-                if (action === 'load-more') return loadMoreCards();
-                if (action === 'back-resource') return backToResourceBox();
-                if (action === 'fullscreen') return toggleFullscreen();
-                if (action === 'toggle-lyrics') return toggleFullLyrics();
-                if (action === 'retry-data') {
-                    dataRetryCount = 0;
-                    document.getElementById('data-error-note')?.classList.remove('show');
-                    const retrySpinner = document.getElementById('loading-spinner');
-                    if (retrySpinner) retrySpinner.style.display = 'block';
-                    return fetchGoogleSheetData();
-                }
-                if (action === 'yuma') return interactWithYuma();
+                if (action === 'enter-site') return SiteUI.closeWelcome(true);
+                if (action === 'skip-welcome') return SiteUI.closeWelcome(false);
+                if (action === 'close-welcome') return SiteUI.closeWelcome(false);
+                if (action === 'toggle-music') return Music.toggleGlobal();
+                if (action === 'toggle-emergency') return SiteUI.toggleEmergency();
+                if (action === 'toggle-menu') return SiteUI.toggleMenu();
+                if (action === 'toggle-dropdown') return SiteUI.toggleDropdown(Dom.get('about-dropdown'));
+                if (action === 'toggle-view') return ResourceView.toggleView();
+                if (action === 'load-more') return ResourceView.loadMore();
+                if (action === 'collapse-resources') return ResourceView.collapse();
+                if (action === 'back-resource') return SiteUI.backToResourceBox();
+                if (action === 'fullscreen') return Music.toggleFullscreen();
+                if (action === 'toggle-lyrics') return Music.toggleFullLyrics();
+                if (action === 'retry-data') { AppState.data.retryCount = 0; Dom.get('data-error-note')?.classList.remove('show'); Dom.get('loading-spinner') && (Dom.get('loading-spinner').style.display = 'block'); return ResourceData.load(); }
+                if (action === 'yuma') return Yuma.interact();
                 const musicAction = target.dataset.musicAction;
-                if (musicAction) return controlPageMusic(musicAction);
+                if (musicAction) return Music.control(musicAction);
             });
 
-            const searchInput = document.getElementById('global-search');
-            searchInput?.addEventListener('input', handleSearch);
-            document.querySelectorAll('#nav-menu a').forEach(link => link.addEventListener('click', closeMenu));
-
-            const grid = document.getElementById('card-grid');
-            grid?.addEventListener('click', event => {
+            Dom.get('global-search')?.addEventListener('input', () => SiteUI.handleSearch());
+            Dom.qsa('#nav-menu a').forEach(link => link.addEventListener('click', () => SiteUI.closeMenu()));
+            Dom.get('card-grid')?.addEventListener('click', event => {
                 const action = event.target.closest('[data-card-action="article"]');
-                if (!action) return;
-                openArticle(action.dataset.id);
+                if (action) ResourceView.openArticle(action.dataset.id);
             });
-
             document.addEventListener('click', event => {
-                const dropdown = document.getElementById('about-dropdown');
-                if (dropdown && !dropdown.contains(event.target)) closeDropdown();
+                const dropdown = Dom.get('about-dropdown');
+                if (dropdown && !dropdown.contains(event.target)) SiteUI.closeDropdown();
             });
 
             document.addEventListener('keydown', event => {
-                const modal = document.getElementById('welcomeModal');
-                const modalOpen = modal && modal.getAttribute('aria-hidden') === 'false' && !modalClosing;
+                const modal = Dom.get('welcomeModal');
+                const modalOpen = modal && modal.getAttribute('aria-hidden') === 'false' && !AppState.ui.modalClosing;
                 if (modalOpen) {
-                    const door = document.getElementById('door-entry-btn');
-                    if ((event.key === 'Enter' || event.key === ' ') && document.activeElement === door) {
-                        event.preventDefault();
-                        closeModalAndPlayMusic();
-                    }
+                    if (event.key === 'Escape') { event.preventDefault(); return SiteUI.closeWelcome(false); }
                     if (event.key === 'Tab') {
-                        event.preventDefault();
-                        door?.focus();
+                        const focusable = Dom.qsa('button, a[href], input, [tabindex]:not([tabindex="-1"])', modal);
+                        if (!focusable.length) return;
+                        const first = focusable[0];
+                        const last = focusable[focusable.length - 1];
+                        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+                        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
                     }
                     return;
                 }
-                if (event.key === 'Escape') {
-                    closeMenu(); closeDropdown();
-                }
+                if (event.key === 'Escape') { SiteUI.closeMenu(); SiteUI.closeDropdown(); }
             });
 
-            const welcomeModal = document.getElementById('welcomeModal');
-            if (welcomeModal) {
-                window.__lastModalFocus = document.activeElement;
-                welcomeModal.style.display = 'flex';
-                welcomeModal.setAttribute('aria-hidden', 'false');
-                document.body.classList.add('modal-open');
-                requestAnimationFrame(focusFirstModalControl);
-            }
+            const audio = Dom.get('bgMusic');
+            audio?.addEventListener('timeupdate', () => Music.syncLyrics(audio.currentTime));
+            audio?.addEventListener('play', () => Music.syncUI(true, false));
+            audio?.addEventListener('pause', () => Music.syncUI(false, false));
+            audio?.addEventListener('ended', () => { AppState.ui.currentLyricIndex = -1; Music.syncUI(false, false); });
+            document.addEventListener('fullscreenchange', () => Music.updateFullscreenButton());
+            document.addEventListener('webkitfullscreenchange', () => Music.updateFullscreenButton());
+        }
 
-            const viewToggleBtn = document.getElementById('view-toggle-btn');
-            viewToggleBtn?.setAttribute('aria-pressed', 'false');
-
-            syncMobileFilterLabels();
-            updateResourceStatus();
-            handleHashChange({ skipScroll: true });
-            fetchGoogleSheetData();
-            setTimeout(checkScrollPrompt, 800);
+        document.addEventListener('DOMContentLoaded', () => {
+            AppState.ui.currentLimit = Utils.getDefaultLimit();
+            initializeLyrics();
+            bindEvents();
+            SiteUI.syncMobileFilterLabels();
+            ResourceView.updateResultStatus();
+            ResourceData.loadStoredSyncStatus();
+            Router.handle({ skipScroll: true });
+            ResourceData.load();
+            setTimeout(() => SiteUI.checkScrollPrompt(), 800);
+            SiteUI.openWelcome();
         });
 
-        window.addEventListener('hashchange', () => handleHashChange());
+        window.addEventListener('hashchange', () => { Router.handle(); Yuma.hideForCriticalContext(); });
         window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                appState.currentLimit = getDefaultLimit();
-                if (filteredCache.length) renderCards(filteredCache);
+            clearTimeout(AppState.timers.resize);
+            AppState.timers.resize = setTimeout(() => {
+                AppState.ui.currentLimit = Utils.getDefaultLimit();
+                if (AppState.data.filtered.length) ResourceView.renderCards(AppState.data.filtered);
             }, 120);
         });
         window.addEventListener('scroll', () => {
-            const yuma = document.querySelector('.yuma-container');
+            const yuma = Dom.qs('.yuma-container');
             if (yuma) {
                 yuma.classList.add('faded');
-                clearTimeout(yumaScrollTimer);
-                yumaScrollTimer = setTimeout(() => yuma.classList.remove('faded'), 500);
+                clearTimeout(AppState.timers.yumaScroll);
+                AppState.timers.yumaScroll = setTimeout(() => yuma.classList.remove('faded'), 500);
             }
-            checkScrollPrompt();
+            SiteUI.checkScrollPrompt();
         }, { passive: true });
-
-        const audioEl = document.getElementById('bgMusic');
-        if (audioEl) {
-            audioEl.addEventListener('timeupdate', () => {
-                const time = audioEl.currentTime;
-                let activeIndex = -1;
-                if (currentLyricIndex >= 0 && currentLyricIndex < lyricsData.length) {
-                    const currentT = lyricsData[currentLyricIndex].time - 0.3;
-                    const nextT = (currentLyricIndex + 1 < lyricsData.length) ? lyricsData[currentLyricIndex + 1].time - 0.3 : Infinity;
-                    if (time >= currentT && time < nextT) return;
-                }
-                for (let i = 0; i < lyricsData.length; i++) {
-                    if (time >= lyricsData[i].time - 0.3) activeIndex = i;
-                    else break;
-                }
-                if (activeIndex !== currentLyricIndex && activeIndex !== -1) {
-                    if (currentLyricIndex !== -1) document.getElementById('lyric-' + currentLyricIndex)?.classList.remove('active');
-                    const newEl = document.getElementById('lyric-' + activeIndex);
-                    const container = document.getElementById('lyrics-container');
-                    if (newEl && container) {
-                        newEl.classList.add('active');
-                        const scrollPos = newEl.offsetTop - (container.clientHeight / 2) + (newEl.clientHeight / 2);
-                        container.scrollTo({ top: scrollPos, behavior: 'smooth' });
-                    }
-                    currentLyricIndex = activeIndex;
-                }
-            });
-            audioEl.addEventListener('ended', () => {
-                document.getElementById('vinyl-record')?.classList.remove('spinning');
-                document.getElementById('btn-song-play')?.classList.remove('active');
-                document.getElementById('btn-song-pause')?.classList.remove('active');
-                const btn = document.getElementById('global-music-btn'); if (btn) btn.textContent = '🔇';
-            });
-        }
-
-        document.addEventListener('fullscreenchange', updateFullscreenButton);
-        document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
     </script>
 </body>
 </html>
