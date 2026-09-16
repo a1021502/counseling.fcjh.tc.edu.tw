@@ -597,7 +597,24 @@
         .article-title-section { padding-top: 40px; padding-bottom: 30px; }
         .article-meta { margin-bottom: 35px; padding-bottom: 20px; text-align: center; border-bottom: 2px dashed var(--border-soft); }
         .article-content-body { padding: 0 15px; color: #4A4A4A; font-size: 1.1rem; line-height: 2; letter-spacing: 0.05em; white-space: pre-line; }
-        .article-image { width: 100%; max-height: 450px; margin-bottom: 30px; display: none; border: 1px solid var(--border-color); border-radius: 15px; object-fit: cover; }
+        .article-info {
+            min-width: 0;
+            overflow: hidden;
+        }
+        .article-image {
+            display: none;
+            width: 100%;
+            max-width: 100%;
+            min-width: 0;
+            height: auto;
+            max-height: 450px;
+            object-fit: contain;
+            object-position: center;
+            border-radius: 15px;
+            margin: 0 auto 30px;
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+        }
         .article-container { max-width: 850px; padding-top: 30px; }
         .article-info { padding: 35px; }
         .back-resource-btn { margin-bottom: 25px; }
@@ -714,6 +731,28 @@
         .door-btn.is-opening { transform: perspective(600px) rotateY(-40deg); background: #9C6833; animation: none; }
         .welcome-modal.is-opening { pointer-events: none; }
         .welcome-modal.is-opening .modal-content { animation: modalExit 0.75s ease-in forwards; }
+
+        /* 大門頁面開啟時：先隱藏站內漂浮控制，完成進站後才顯示 */
+        /* 大門頁／歡迎層可見時，不顯示站內漂浮控制。
+           同時用 aria-hidden 狀態判斷，確保關門動畫尚未結束時也不會提早出現。 */
+        body.modal-open .global-music-btn,
+        body.modal-open .yuma-container,
+        #welcomeModal[aria-hidden="false"] ~ .global-music-btn,
+        #welcomeModal[aria-hidden="false"] ~ .yuma-container {
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        body.modal-open .global-music-btn,
+        #welcomeModal[aria-hidden="false"] ~ .global-music-btn {
+            transform: scale(0.9);
+        }
+
+        body.modal-open .yuma-container,
+        #welcomeModal[aria-hidden="false"] ~ .yuma-container {
+            transform: scale(0.85);
+        }
         @keyframes modalExit { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.98); } }
         @keyframes pulse-glow { from { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 15px rgba(238,184,117,0.4); } to { box-shadow: inset -5px 0 10px rgba(0,0,0,0.2), 5px 5px 15px rgba(0,0,0,0.2), 0 0 35px rgba(238,184,117,0.9); } }
         @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
@@ -1041,7 +1080,7 @@
         
         <div class="container" >
             <div class="info-block" >
-                <img id="article-detail-image" src="" alt="文章圖片" >
+                <img id="article-detail-image" class="article-image" src="" alt="文章圖片" loading="eager" decoding="async">
                 <div id="article-detail-content" class="article-content-body">
                     內文載入中...
                 </div>
@@ -1264,7 +1303,6 @@
             <p>別擔心！走進輔導室一點也不可怕，讓我們為你解答心中的疑惑。</p>
         </div>
         <div class="faq-container">
-            <p class="faq-maintenance-note">目前保留原始 FAQ 內容；後續新增題目時建議以學生最常問的真實問題為來源，避免讓網站自行推測專業規範。</p>
             <details class="faq-item" open>
                 <summary class="faq-q naikai-text">Q1. 去輔導室會被同學當成有問題的怪人嗎？</summary>
                 <div class="faq-a">A：完全不會！福科國中輔導室是一個安全、讓人放鬆的溫暖空間。任何生活不順心、感情受挫，都歡迎你走進來休息。</div>
@@ -1789,6 +1827,16 @@
                     img.src = Utils.safeImageURL(post.image, '');
                     img.alt = post.title || '文章圖片';
                     img.style.display = img.src ? 'block' : 'none';
+                    img.onerror = () => {
+                        const fallback = Utils.safeImageURL(AppConfig.DEFAULT_IMAGE, '');
+                        if (fallback && img.src !== fallback) {
+                            img.src = fallback;
+                            img.alt = '文章預設圖片';
+                            return;
+                        }
+                        img.removeAttribute('src');
+                        img.style.display = 'none';
+                    };
                 } else if (img) {
                     img.removeAttribute('src');
                     img.style.display = 'none';
