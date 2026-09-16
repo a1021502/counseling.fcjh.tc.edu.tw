@@ -410,6 +410,35 @@
             .dropdown-content a { text-align:center; }
         }
         @media (max-width:580px) {
+            /* 手機版篩選器：標題獨立成一列，選項採兩欄等寬排列 */
+            .filter-section { padding-left: 4%; padding-right: 4%; }
+            .filter-group {
+                width: 100%;
+                margin: 16px auto;
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+                align-items: stretch;
+                justify-content: stretch;
+            }
+            .filter-label {
+                grid-column: 1 / -1;
+                display: block;
+                margin: 0 0 2px;
+                text-align: left;
+                padding-left: 4px;
+                font-size: 1.12rem;
+            }
+            .filter-group .filter-btn {
+                width: 100%;
+                min-width: 0;
+                padding: 10px 8px;
+                font-size: 0.98rem;
+                line-height: 1.35;
+                white-space: nowrap;
+            }
+            .filter-group + .filter-group { margin-top: 20px; }
+            .view-toggle-container { margin: 8px 0 0; }
         }
         @media (prefers-reduced-motion:reduce) {
             html { scroll-behavior:auto; }
