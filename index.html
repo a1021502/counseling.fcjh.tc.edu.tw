@@ -485,6 +485,58 @@
             .filter-group + .filter-group { margin-top: 12px; }
             .view-toggle-container { margin: 8px 0 0; }
         }
+        /* V4 P1 architecture helpers */
+        .logo img { height:46px; width:auto; object-fit:contain; filter:drop-shadow(0 2px 6px rgba(0,0,0,.1)); }
+        .menu-icon { font-size:1.2rem; font-family:sans-serif; }
+        .filter-heading { color:var(--primary-color); margin-bottom:5px; }
+        .view-toggle-btn { background:transparent; border:1.5px solid var(--primary-color); color:var(--primary-color); font-weight:bold; padding:6px 14px; }
+        .container-home { padding-bottom:20px; }
+        .load-more-container { display:none; text-align:center; margin-top:35px; padding-bottom:40px; }
+        .load-more-action { padding:10px 30px; font-size:1.1rem; box-shadow:0 4px 15px rgba(91,132,118,.3); }
+        .collapse-action { border:1.5px solid var(--primary-color); color:var(--primary-color); background:transparent; }
+        .back-resource-btn { margin-bottom:25px; }
+        .article-container { max-width:850px; padding-top:30px; }
+        .article-info { padding:35px; }
+        .article-image { width:100%; max-height:450px; object-fit:cover; border-radius:15px; margin-bottom:30px; display:none; border:var(--border-warm); }
+        .song-container { max-width:800px; margin:0 auto; padding-top:25px; }
+        .song-control-block { text-align:center; border-left:6px solid var(--primary-color); }
+        .song-control-buttons { gap:15px; }
+        .song-control-btn { padding:10px 25px; font-size:1rem; }
+        .lyrics-info { background-color:white; border-radius:20px; padding:45px 20px; box-shadow:var(--card-shadow); text-align:center; }
+        .fullscreen-btn { top:5px; right:5px; }
+        .lyrics-wrapper { padding:150px 0; }
+        .lyrics-toggle-wrap { margin-top:25px; }
+        .lyrics-toggle-btn { padding:8px 25px; font-size:1rem; border:1px solid #E6E2D8; }
+        .full-lyrics-box { display:none; margin-top:30px; text-align:center; border-top:2px dashed #EFECE4; padding-top:35px; animation:fadeIn .5s; }
+        .full-lyrics-text { line-height:2.3; font-size:1.05rem; color:var(--text-color); letter-spacing:.05em; }
+        .lyric-emphasis { color:var(--secondary-color); font-weight:bold; font-size:1.1rem; }
+        .song-ending { font-size:1.4rem; color:var(--primary-color); letter-spacing:.08em; margin-bottom:8px; }
+        .song-ending-strong { font-size:1.6rem; color:var(--secondary-color); letter-spacing:.08em; }
+        .resource-warning { background-color:#FFF3E5; border-left:5px solid var(--danger-color); padding:18px; border-radius:12px; font-weight:500; color:#9A3E1C; font-size:.95rem; }
+        .about-container { max-width:900px; padding-top:20px; }
+        .about-title { color:var(--primary-color); margin-bottom:15px; font-size:1.4rem; }
+        .about-lead { color:var(--text-color); line-height:1.85; font-size:1.05rem; }
+        .about-brand-block { flex-direction:column; text-align:center; }
+        .about-brand-title { color:var(--primary-color); margin-bottom:25px; font-size:1.5rem; }
+        .brand-image { width:100%; max-width:380px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,.08); margin-bottom:35px; border:var(--border-warm); }
+        .brand-copy { text-align:left; max-width:800px; width:100%; color:var(--text-color); line-height:1.9; font-size:1.05rem; }
+        .brand-lead { margin-bottom:15px; font-size:1.2rem; color:#2D2D2D; font-weight:bold; }
+        .brand-copy p.spaced-sm { margin-bottom:10px; }
+        .brand-copy p.spaced-lg { margin-bottom:25px; }
+        .brand-copy .section-mini-title { margin-bottom:12px; font-size:1.15rem; color:#2D2D2D; font-weight:bold; }
+        .brand-copy ul { padding-left:0; list-style:none; }
+        .brand-copy li { margin-bottom:15px; position:relative; padding-left:22px; }
+        .brand-copy li:last-child { margin-bottom:10px; }
+        .brand-copy li::before { content:'•'; position:absolute; left:0; top:0; color:var(--secondary-color); font-weight:bold; font-size:1.2rem; }
+        .designer-block { display:flex; gap:30px; align-items:center; flex-wrap:wrap; }
+        .designer-photo-wrap { flex:0 0 160px; text-align:center; margin:0 auto; }
+        .designer-photo { width:100%; border-radius:50%; border:4px solid var(--bg-color); box-shadow:0 8px 25px rgba(0,0,0,.12); }
+        .designer-copy { flex:1; min-width:250px; }
+        .designer-title { color:var(--primary-color); margin-bottom:15px; font-size:1.3rem; }
+        .designer-text { color:var(--text-color); line-height:1.85; font-size:1.05rem; }
+        .contact-text { font-size:.8rem; margin-top:7px; color:#DFE8E5; }
+        .modal-content { outline:none; }
+        .welcome-modal.is-opening { pointer-events:none; }
         @media (prefers-reduced-motion:reduce) {
             html { scroll-behavior:auto; }
             *,*::before,*::after { animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
@@ -507,12 +559,12 @@
             
             <div class="door-btn-wrapper">
                 <div class="door-indicator naikai-text">👉 點擊大門進入網頁 👈</div>
-                <button class="door-btn" id="door-entry-btn" onclick="closeModalAndPlayMusic()" aria-label="推開大門進入網站"></button>
+                <button class="door-btn" id="door-entry-btn" data-action="enter-site" aria-label="推開大門進入網站"></button>
             </div>
         </div>
     </div>
 
-    <button class="global-music-btn" id="global-music-btn" onclick="toggleGlobalMusic()" aria-label="播放/暫停背景音樂" title="開/關主題曲">
+    <button class="global-music-btn" id="global-music-btn" data-action="toggle-music" aria-label="播放/暫停背景音樂" title="開/關主題曲">
         🔇
     </button>
 
@@ -524,7 +576,7 @@
 
     <div class="site-chrome">
         <div class="emergency-bar">
-            <button class="emergency-toggle" id="emergency-toggle" type="button" onclick="toggleEmergencyMobile()" aria-expanded="false" aria-controls="emergencyLinks">🚨 我想求助 ▾</button>
+            <button class="emergency-toggle" id="emergency-toggle" type="button" data-action="toggle-emergency" aria-expanded="false" aria-controls="emergencyLinks">🚨 我想求助 ▾</button>
             <div class="emergency-links" id="emergencyLinks">
                 <a class="emergency-link-primary" href="tel:1925" rel="noopener noreferrer">安心專線 1925</a>
                 <a href="tel:1995" rel="noopener noreferrer">生命線 1995</a>
@@ -534,10 +586,10 @@
 
         <header id="main-header">
         <a href="#home" class="logo">
-            <img src="https://drive.google.com/thumbnail?id=1RAwhwlKJ8azK4cg6PH852pjUkrNO1O4Q&sz=w800" alt="福科輔導商標" style="height: 46px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));">
+            <img src="https://drive.google.com/thumbnail?id=1RAwhwlKJ8azK4cg6PH852pjUkrNO1O4Q&sz=w800" alt="福科輔導商標" >
         </a>
-        <button class="menu-toggle naikai-text" id="menu-toggle" type="button" onclick="toggleMenu()" aria-expanded="false" aria-controls="nav-menu">
-            <span>選單</span> <span style="font-size: 1.2rem; font-family: sans-serif;">☰</span>
+        <button class="menu-toggle naikai-text" id="menu-toggle" type="button" data-action="toggle-menu" aria-expanded="false" aria-controls="nav-menu">
+            <span>選單</span> <span class="menu-icon">☰</span>
         </button>
         <nav>
             <ul id="nav-menu">
@@ -547,7 +599,7 @@
                 <li><a href="#resource" id="nav-resource">資源與支持網絡</a></li>
                 <li><a href="#faq" id="nav-faq">迷思破解 Q&A</a></li>
                 <li class="dropdown" id="about-dropdown">
-                    <button class="dropdown-trigger" type="button" aria-expanded="false" aria-controls="about-dropdown-menu">關於我們 ▾</button>
+                    <button class="dropdown-trigger" type="button" data-action="toggle-dropdown" aria-expanded="false" aria-controls="about-dropdown-menu">關於我們 ▾</button>
                     <div class="dropdown-content" id="about-dropdown-menu">
                         <a href="https://www.facebook.com/fcjhguidance" target="_blank" rel="noopener noreferrer">FB 粉絲專頁</a>
                         <a href="https://www.instagram.com/fcjhguidance/" target="_blank" rel="noopener noreferrer">IG 官方帳號</a>
@@ -591,56 +643,56 @@
         </section>
 
         <section class="filter-section">
-            <h2 style="color: var(--primary-color); margin-bottom: 5px;" class="naikai-text">🔍 資源百寶箱</h2>
+            <h2 class="filter-heading naikai-text">🔍 資源百寶箱</h2>
             <p class="section-helper">想自己找也可以：用關鍵字、身分或議題來縮小範圍。</p>
             <div class="search-wrapper">
                 <span class="search-icon">🔍</span>
                 <label class="visually-hidden" for="global-search">搜尋資源</label>
-                <input type="search" id="global-search" class="search-input" autocomplete="off" enterkeyhint="search" aria-describedby="resource-result-status" placeholder="輸入關鍵字搜尋資源卡片...（可搜尋標題、內容、身分與議題）" oninput="handleSearch()">
+                <input type="search" id="global-search" class="search-input" autocomplete="off" enterkeyhint="search" aria-describedby="resource-result-status" placeholder="輸入關鍵字搜尋資源卡片...（可搜尋標題、內容、身分與議題）">
             </div>
 
             <div class="filter-group" data-filter-group="identity">
-                <button class="mobile-filter-toggle" type="button" aria-expanded="false" aria-controls="identity-filter-options" onclick="toggleMobileFilter('identity')">
+                <button class="mobile-filter-toggle" type="button" aria-expanded="false" aria-controls="identity-filter-options" data-filter-toggle="identity">
                     <span class="toggle-title">我是誰</span>
                     <span class="toggle-current" id="identity-filter-current">全部身分</span>
                     <span class="toggle-icon" aria-hidden="true">▾</span>
                 </button>
                 <span class="filter-label naikai-text">我是誰：</span>
                 <div class="filter-options" id="identity-filter-options">
-                    <button class="filter-btn active" data-value="all" onclick="filterData('identity', 'all', this)">全部身分</button>
-                    <button class="filter-btn" data-value="student" onclick="filterData('identity', 'student', this)">學生專區</button>
-                    <button class="filter-btn" data-value="parent" onclick="filterData('identity', 'parent', this)">家長專區</button>
-                    <button class="filter-btn" data-value="teacher" onclick="filterData('identity', 'teacher', this)">教師專區</button>
+                    <button class="filter-btn active" data-filter-type="identity" data-value="all">全部身分</button>
+                    <button class="filter-btn" data-filter-type="identity" data-value="student">學生專區</button>
+                    <button class="filter-btn" data-filter-type="identity" data-value="parent">家長專區</button>
+                    <button class="filter-btn" data-filter-type="identity" data-value="teacher">教師專區</button>
                 </div>
             </div>
             <div class="filter-group" data-filter-group="topic">
-                <button class="mobile-filter-toggle" type="button" aria-expanded="false" aria-controls="topic-filter-options" onclick="toggleMobileFilter('topic')">
+                <button class="mobile-filter-toggle" type="button" aria-expanded="false" aria-controls="topic-filter-options" data-filter-toggle="topic">
                     <span class="toggle-title">我想聊</span>
                     <span class="toggle-current" id="topic-filter-current">所有議題</span>
                     <span class="toggle-icon" aria-hidden="true">▾</span>
                 </button>
                 <span class="filter-label naikai-text">我想聊：</span>
                 <div class="filter-options" id="topic-filter-options">
-                    <button class="filter-btn active" data-value="all" onclick="filterData('topic', 'all', this)">所有議題</button>
-                    <button class="filter-btn" data-value="relation" onclick="filterData('topic', 'relation', this)">人際</button>
-                    <button class="filter-btn" data-value="career" onclick="filterData('topic', 'career', this)">生涯</button>
-                    <button class="filter-btn" data-value="emotion" onclick="filterData('topic', 'emotion', this)">情緒</button>
-                    <button class="filter-btn" data-value="family" onclick="filterData('topic', 'family', this)">家庭</button>
-                    <button class="filter-btn" data-value="affection" onclick="filterData('topic', 'affection', this)">情感</button>
-                    <button class="filter-btn" data-value="other" onclick="filterData('topic', 'other', this)">其他</button>
+                    <button class="filter-btn active" data-filter-type="topic" data-value="all">所有議題</button>
+                    <button class="filter-btn" data-filter-type="topic" data-value="relation">人際</button>
+                    <button class="filter-btn" data-filter-type="topic" data-value="career">生涯</button>
+                    <button class="filter-btn" data-filter-type="topic" data-value="emotion">情緒</button>
+                    <button class="filter-btn" data-filter-type="topic" data-value="family">家庭</button>
+                    <button class="filter-btn" data-filter-type="topic" data-value="affection">情感</button>
+                    <button class="filter-btn" data-filter-type="topic" data-value="other">其他</button>
                 </div>
             </div>
             
             <div id="resource-result-status" class="resource-status" role="status" aria-live="polite">正在準備資源資料……</div>
 
             <div class="view-toggle-container">
-                <button id="view-toggle-btn" class="filter-btn naikai-text" onclick="toggleViewMode()" aria-pressed="false" style="background: transparent; border: 1.5px solid var(--primary-color); color: var(--primary-color); font-weight: bold; padding: 6px 14px;">
+                <button id="view-toggle-btn" class="filter-btn naikai-text" data-action="toggle-view" aria-pressed="false">
                     ⊞ 切換多欄顯示
                 </button>
             </div>
         </section>
 
-        <div class="container" style="padding-bottom: 20px;">
+        <div class="container" >
             <div id="loading-spinner" class="loading-status" role="status" aria-live="polite">
                 ⏳ 正在整理資源，馬上就好……
             </div>
@@ -648,8 +700,8 @@
             <div class="grid" id="card-grid" style="display: none;"></div>
             
             <!-- ✨ 載入與收合卡片按鈕 -->
-            <div id="load-more-btn-container" style="display: none; text-align: center; margin-top: 35px; padding-bottom: 40px;">
-                <button class="filter-btn active naikai-text" onclick="loadMoreCards()" style="padding: 10px 30px; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(91,132,118,0.3);">
+            <div id="load-more-btn-container" class="load-more-container">
+                <button class="filter-btn active naikai-text load-more-action" data-action="load-more">
                     ✨ 展開更多資源 ▾
                 </button>
             </div>
@@ -658,16 +710,16 @@
 
     <div id="page-article" class="page">
         <div class="team-title-section" style="padding-top: 40px; padding-bottom: 30px;">
-            <button class="filter-btn" type="button" onclick="backToResourceBox()" style="margin-bottom: 25px;">⬅ 返回資源百寶箱</button>
+            <button class="filter-btn" type="button" data-action="back-resource" >⬅ 返回資源百寶箱</button>
             <h2 id="article-detail-title" class="article-title naikai-text">文章標題載入中...</h2>
             <div class="article-meta">
                 <span id="article-detail-tags"></span>
             </div>
         </div>
         
-        <div class="container" style="max-width: 850px; padding-top: 30px;">
-            <div class="info-block" style="padding: 35px;">
-                <img id="article-detail-image" src="" alt="文章圖片" style="width: 100%; max-height: 450px; object-fit: cover; border-radius: 15px; margin-bottom: 30px; display: none; border: var(--border-warm);">
+        <div class="container" >
+            <div class="info-block" >
+                <img id="article-detail-image" src="" alt="文章圖片" >
                 <div id="article-detail-content" class="article-content-body">
                     內文載入中...
                 </div>
@@ -681,8 +733,8 @@
             <p>這是一首為福科國中同學們創作的療癒之歌。當你覺得累了、壓力大到快破防，或是人際關係讓你疲憊，記得來輔導室歇會ㄦ，這裡永遠為你開機、為你充電！</p>
         </div>
 
-        <div class="container" style="max-width: 800px; margin: 0 auto; padding-top: 25px;">
-            <div class="info-block" style="text-align: center; border-left: 6px solid var(--primary-color);">
+        <div class="container song-container">
+            <div class="info-block song-control-block">
                 <div class="vinyl-wrapper">
                     <div class="vinyl-record spinning" id="vinyl-record">
                         <div class="vinyl-label"><span style="font-size: 0.9rem; font-family: 'NaikaiFont', sans-serif; letter-spacing: 2px;">歇會<br>ㄦ！</span></div>
@@ -690,28 +742,28 @@
                     </div>
                     <h3 style="color: var(--primary-color); margin-bottom: 12px; font-size: 1.4rem;" class="naikai-text">🎧 專屬音樂控制台</h3>
                     <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">點擊推開大門時背景音樂已悄悄流淌，跟著下方的歌詞一起唱吧！</p>
-                    <div class="flex-center flex-wrap" style="gap: 15px;">
-                        <button class="filter-btn active" id="btn-song-play" onclick="controlPageMusic('play')" style="padding: 10px 25px; font-size: 1rem;">▶️ 播放</button>
-                        <button class="filter-btn" id="btn-song-pause" onclick="controlPageMusic('pause')" style="padding: 10px 25px; font-size: 1rem;">⏸️ 暫停</button>
-                        <button class="filter-btn" onclick="controlPageMusic('restart')" style="padding: 10px 25px; font-size: 1rem;">🔄 重播</button>
+                    <div class="flex-center flex-wrap song-control-buttons">
+                        <button class="filter-btn active song-control-btn" id="btn-song-play" data-music-action="play" style="padding: 10px 25px; font-size: 1rem;">▶️ 播放</button>
+                        <button class="filter-btn song-control-btn" id="btn-song-pause" data-music-action="pause" style="padding: 10px 25px; font-size: 1rem;">⏸️ 暫停</button>
+                        <button class="filter-btn song-control-btn" data-music-action="restart" style="padding: 10px 25px; font-size: 1rem;">🔄 重播</button>
                     </div>
                 </div>
             </div>
 
-            <div class="info-block" style="background-color: white; border-radius: 20px; padding: 45px 20px; box-shadow: var(--card-shadow); text-align: center;">
+            <div class="info-block lyrics-info">
                 <div class="lyrics-header-title naikai-text">《輔導室，歇會ㄦ！》</div>
                 <div class="lyrics-header-sub">福科國中輔導室 專屬校園療癒主題曲</div>
                 <div id="lyrics-fullscreen-wrapper">
-                    <button id="btn-fullscreen" onclick="toggleFullscreen()">⛶ 沉浸全螢幕</button>
+                    <button id="btn-fullscreen" class="fullscreen-btn" data-action="fullscreen">⛶ 沉浸全螢幕</button>
                     <div class="lyrics-container" id="lyrics-container">
-                        <div id="lyrics-wrapper" style="padding: 150px 0;"></div>
+                        <div id="lyrics-wrapper" class="lyrics-wrapper"></div>
                     </div>
                 </div>
-                <div style="margin-top: 25px;">
-                    <button class="filter-btn" id="btn-toggle-lyrics" onclick="toggleFullLyrics()" style="padding: 8px 25px; font-size: 1rem; border: 1px solid #E6E2D8;">📄 展開完整歌詞</button>
+                <div class="lyrics-toggle-wrap">
+                    <button class="filter-btn lyrics-toggle-btn" id="btn-toggle-lyrics" data-action="toggle-lyrics">📄 展開完整歌詞</button>
                 </div>
-                <div id="full-lyrics-box" style="display: none; margin-top: 30px; text-align: center; border-top: 2px dashed #EFECE4; padding-top: 35px; animation: fadeIn 0.5s;">
-                    <div style="line-height: 2.3; font-size: 1.05rem; color: var(--text-color); letter-spacing: 0.05em;">
+                <div id="full-lyrics-box" class="full-lyrics-box">
+                    <div class="full-lyrics-text">
                         <p>早八的鐘聲 敲醒一堆靈魂</p>
                         <p>昨晚的限動 到底誰看了沒出聲</p>
                         <p>段考的成績 像是一場大災難</p>
@@ -734,7 +786,7 @@
                         <p>對話框打了又刪 怕被已讀不回</p>
                         <p>人際關係這學分 到底要修幾回</p>
                         <p>有時覺得自己 像個路人NPC</p>
-                        <p style="color: var(--secondary-color); font-weight: bold; font-size: 1.1rem;">但在這裡 你是唯一的主題曲</p><br>
+                        <p class="lyric-emphasis">但在這裡 你是唯一的主題曲</p><br>
                         <p>沒人懂的EMO 沒關係我們全懂</p>
                         <p>坐上這沙發 卸下沉重的裝甲</p><br>
                         <div class="chorus-highlight">
@@ -759,8 +811,8 @@
                             <p class="chorus-text">輔導室 歇會兒！</p>
                             <p class="chorus-text">輔導室 歇會兒！</p>
                         </div><br>
-                        <p class="naikai-text" style="font-size: 1.4rem; color: var(--primary-color); letter-spacing: 0.08em; margin-bottom: 8px;">歇會兒！充個電再走！</p>
-                        <p class="naikai-text" style="font-size: 1.6rem; color: var(--secondary-color); letter-spacing: 0.08em;">福科輔導室~ 挺你到最後！</p>
+                        <p class="naikai-text song-ending">歇會兒！充個電再走！</p>
+                        <p class="naikai-text song-ending-strong">福科輔導室~ 挺你到最後！</p>
                     </div>
                 </div>
             </div>
@@ -878,7 +930,7 @@
                     <div class="resource-info"><strong>📌 核心功能與特色：</strong>親師生出現急性心理危機、自殺意念時，隨時可撥打之國家級心理危機干預窗口。<strong>📞 專線：</strong>1925</div>
                 </div>
             </div>
-            <div style="background-color: #FFF3E5; border-left: 5px solid var(--danger-color); padding: 18px; border-radius: 12px; font-weight: 500; color: #9A3E1C; font-size: 0.95rem;">
+            <div class="resource-warning">
                 💡 提醒：轉介三級或外部資源前，請務必確認已完成一二級輔導評估並留存紀錄。如有立即性人身安全危機，請優先啟動校安通報並報警/送醫。
             </div>
         </div>
@@ -907,58 +959,58 @@
             <p>了解網站的誕生故事、輔導專屬商標，以及背後的設計者。</p>
         </div>
         
-        <div class="container" style="max-width: 900px; padding-top: 20px;">
+        <div class="container about-container">
             <div class="info-block">
                 <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.4rem;" class="naikai-text">📖 網站設計緣起</h3>
-                <p style="color: var(--text-color); line-height: 1.85; font-size: 1.05rem;">
+                <p class="designer-text">
                     為了讓福科國中的師生、家長能在遇到困擾時，第一時間找到支持的力量，我們決定打造這個充滿溫度與療癒感的線上網站。透過將實體的輔導資源、心理衛生知識與求助管道數位化，我們期望能打破時空的限制，全方位建構校園心理防護網，讓每一顆受傷或迷惘的心都能在這裡找到出口。
                 </p>
             </div>
             
-            <div class="info-block flex-center" style="flex-direction: column; text-align: center;">
-                <h3 style="color: var(--primary-color); margin-bottom: 25px; font-size: 1.5rem;" class="naikai-text">🌻 輔導專屬商標與設計意義</h3>
+            <div class="info-block flex-center about-brand-block">
+                <h3 class="naikai-text about-brand-title">🌻 輔導專屬商標與設計意義</h3>
                 
-                <img src="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800" alt="福科國中輔導室專屬商標" loading="lazy" decoding="async" style="width: 100%; max-width: 380px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-bottom: 35px; border: var(--border-warm);">
+                <img src="https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800" alt="福科國中輔導室專屬商標" loading="lazy" decoding="async" class="brand-image">
                 
-                <div style="text-align: left; max-width: 800px; width: 100%; color: var(--text-color); line-height: 1.9; font-size: 1.05rem;">
-                    <p style="margin-bottom: 15px; font-size: 1.2rem; color: #2D2D2D; font-weight: bold;">FU等於福科的福和輔導的輔</p>
+                <div class="brand-copy">
+                    <p class="brand-lead">FU等於福科的福和輔導的輔</p>
                     
-                    <p style="margin-bottom: 10px;">
+                    <p class="spaced-sm">
                         <strong style="color: var(--primary-color);">F (Feeling )：</strong>代表「感受」。輔導的第一步，是允許每一種真實的情緒在這裡被溫柔地看見與感受。
                     </p>
-                    <p style="margin-bottom: 25px;">
+                    <p >
                         <strong style="color: var(--primary-color);">U (Understanding )：</strong>代表「理解」。畫面中巨大的「U」型藤蔓，象徵著輔導室是一個充滿理解與涵容的空間。
                     </p>
                     
-                    <p style="margin-bottom: 12px; font-size: 1.15rem; color: #2D2D2D; font-weight: bold;">【 視覺符號分析 】</p>
-                    <ul style="padding-left: 0; list-style: none;">
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 22px;">
-                            <span style="position: absolute; left: 0; top: 0; color: var(--secondary-color); font-weight: bold; font-size: 1.2rem;">•</span>
+                    <p class="section-mini-title">【 視覺符號分析 】</p>
+                    <ul>
+                        <li>
+                            
                             <strong style="color: #2D2D2D;">U型花圈（安全的結界）：</strong>藤蔓交織成一個開口向上的「U」字，就像一個安全的保護罩或心靈的避風港。它沒有封閉，代表著輔導室提供保護，但也隨時歡迎孩子自由進出，給予喘息與成長的空間。
                         </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 22px;">
-                            <span style="position: absolute; left: 0; top: 0; color: var(--secondary-color); font-weight: bold; font-size: 1.2rem;">•</span>
+                        <li>
+                            
                             <strong style="color: #2D2D2D;">溫柔捧起的雙手（接納與陪伴）：</strong>雙手沒有去「拉扯」植物強迫它長大，而是輕輕地捧著底下的土壤。這隱喻著輔導老師的角色——我們不強迫孩子立刻改變，而是提供穩定的土壤（支持系統），穩穩地「接住」每一個受傷或迷惘的心靈，陪伴他們長出自己的力量。
                         </li>
-                        <li style="margin-bottom: 15px; position: relative; padding-left: 22px;">
-                            <span style="position: absolute; left: 0; top: 0; color: var(--secondary-color); font-weight: bold; font-size: 1.2rem;">•</span>
+                        <li>
+                            
                             <strong style="color: #2D2D2D;">破土而出的小芽（內在的生命力）：</strong>小芽代表著每一位來到輔導室的學生，或是他們心中那個需要被照顧的「內在小孩」。即使一開始很脆弱，但在愛與理解的滋養下，終究能綻放出屬於自己的綠葉。
                         </li>
-                        <li style="margin-bottom: 10px; position: relative; padding-left: 22px;">
-                            <span style="position: absolute; left: 0; top: 0; color: var(--secondary-color); font-weight: bold; font-size: 1.2rem;">•</span>
+                        <li>
+                            
                             <strong style="color: #2D2D2D;">點綴的鵝黃色小花（希望的光芒）：</strong>在綠色藤蔓中開出的小花，象徵著在諮商與陪伴的過程中，那些微小卻珍貴的「頓悟」、「喜悅」與「希望」。
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="info-block" style="display: flex; gap: 30px; align-items: center; flex-wrap: wrap;">
-                <div style="flex: 0 0 160px; text-align: center; margin: 0 auto;">
-                    <img src="https://drive.google.com/thumbnail?id=1IqswNZjTqgD7jxzuRTWEqsxgvmABIsYQ&sz=w800" alt="福科國中輔導教師網站設計者照片" loading="lazy" decoding="async" style="width: 100%; border-radius: 50%; border: 4px solid var(--bg-color); box-shadow: 0 8px 25px rgba(0,0,0,0.12);">
+            <div class="info-block designer-block">
+                <div class="designer-photo-wrap">
+                    <img src="https://drive.google.com/thumbnail?id=1IqswNZjTqgD7jxzuRTWEqsxgvmABIsYQ&sz=w800" alt="福科國中輔導教師網站設計者照片" loading="lazy" decoding="async" class="designer-photo">
                 </div>
-                <div style="flex: 1; min-width: 250px;">
-                    <h3 style="color: var(--primary-color); margin-bottom: 15px; font-size: 1.3rem;" class="naikai-text">👨‍💻 網站設計者：杜智平</h3>
-                    <p style="color: var(--text-color); line-height: 1.85; font-size: 1.05rem;">
+                <div class="designer-copy">
+                    <h3 class="naikai-text designer-title">👨‍💻 網站設計者：杜智平</h3>
+                    <p class="designer-text">
                         專任輔導教師杜智平，致力於將輔導專業與資訊科技結合，透過程式開發與溫暖的視覺設計，打造了包含「福科心靈樹洞」與「SAFE SPACE」等多個數位平台。<br><br>褪下教師與開發者的外衣後，他的真實身份其實是一個興趣點滿的超狂斜槓野心家！他熱愛在籃球場上用速度過人、在健身房裡揮灑汗水，並用嚴格的科學營養學打理體態。他的大腦長年處於閱讀與程式創作的高速運轉狀態，而唯一的冷卻機制，就是吃下爆量濃郁的重乳酪蛋糕，以及走遍大街小巷瘋狂尋找各種類型的極品冰品。<br><br>他相信人生就像一杯加了重乳酪與冰淇淋的特調——雖然成分看似衝突，但只要調配得當，就能品嚐出最獨特且豐富的滋味！ (σ`∀´)σ 
                     </p>
                 </div>
@@ -966,7 +1018,7 @@
         </div>
     </div>
 
-    <button class="yuma-container" type="button" onclick="interactWithYuma()" aria-label="和 YUMA 互動">
+    <button class="yuma-container" type="button" data-action="yuma" aria-label="和 YUMA 互動">
         <span class="yuma-bubble" id="yuma-bubble" aria-live="polite">
             <span id="yuma-text">汪！點擊我可以跟我互動喔🐾</span>
         </span>
@@ -977,7 +1029,7 @@
 
     <footer>
         <p>© 2026 福科國中輔導室 版權所有</p>
-        <p class="footer-contact" style="font-size: 0.8rem; margin-top: 7px; color: #DFE8E5;">校址：407臺中市西屯區福林里福林路333號 <span class="footer-divider">|</span><br class="footer-break"> 聯絡電話：04-24618112</p>
+        <p class="footer-contact contact-text">校址：407臺中市西屯區福林里福林路333號 <span class="footer-divider">|</span><br class="footer-break"> 聯絡電話：04-24618112</p>
     </footer>
 
     <script>
@@ -1055,6 +1107,7 @@
         let searchTimeout = null;
         let resizeTimer = null;
         let currentLyricIndex = -1;
+        let modalClosing = false;
 
         const DEFAULT_IMAGE = 'https://drive.google.com/thumbnail?id=1mLT6Swi2aCfWNJZV8wKXuri1Nym8aAxo&sz=w800';
         const MUSIC_STORAGE_KEY = 'fudaoguide.musicEnabled';
@@ -1282,20 +1335,6 @@
             });
         }
 
-        function renderFilteredAndScroll() {
-            executeCombinedFilter();
-            requestAnimationFrame(() => document.getElementById('card-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-        }
-
-        function syncFilterButtons() {
-            document.querySelectorAll('.filter-btn[data-value]').forEach(btn => btn.classList.remove('active'));
-            const identityButton = document.querySelector(`.filter-group[data-filter-group="identity"] .filter-btn[data-value="${appState.filters.identity}"]`);
-            const topicButton = document.querySelector(`.filter-group[data-filter-group="topic"] .filter-btn[data-value="${appState.filters.topic}"]`);
-            if (identityButton) identityButton.classList.add('active');
-            if (topicButton) topicButton.classList.add('active');
-            syncMobileFilterLabels();
-        }
-
         async function fetchWithTimeout(url, timeout = DATA_TIMEOUT_MS) {
             const controller = new AbortController();
             const timer = setTimeout(() => controller.abort(), timeout);
@@ -1381,7 +1420,7 @@
                 if (cardGrid) cardGrid.style.display = 'grid';
                 dataRetryCount += 1;
 
-                if (dataRetryCount <= DATA_RETRY_LIMIT && !retry) {
+                if (dataRetryCount < DATA_RETRY_LIMIT) {
                     setTimeout(() => fetchGoogleSheetData({ retry: true }), 700 * dataRetryCount);
                     updateResourceStatus(`連線重試中（第 ${dataRetryCount}/${DATA_RETRY_LIMIT} 次）`);
                     return;
@@ -1389,14 +1428,8 @@
 
                 updateResourceStatus('目前使用網站內建基本資源');
                 if (errorNote) {
-                    errorNote.innerHTML = `目前無法連線到最新資源資料，先顯示網站內建的基本資源。<br><button class="filter-btn data-retry-btn" type="button" id="retry-data-btn">↻ 重新取得最新資源</button>`;
+                    errorNote.innerHTML = `目前無法連線到最新資源資料，先顯示網站內建的基本資源。<br><button class="filter-btn data-retry-btn" type="button" id="retry-data-btn" data-action="retry-data">↻ 重新取得最新資源</button>`;
                     errorNote.classList.add('show');
-                    document.getElementById('retry-data-btn')?.addEventListener('click', () => {
-                        dataRetryCount = 0;
-                        errorNote.classList.remove('show');
-                        if (spinner) spinner.style.display = 'block';
-                        fetchGoogleSheetData({ retry: true });
-                    }, { once: true });
                 }
                 renderCards(allPostsData);
             }
@@ -1462,7 +1495,7 @@
                 document.getElementById('load-more-action')?.addEventListener('click', loadMoreCards, { once: true });
             } else if (filteredCache.length > getDefaultLimit()) {
                 loadMoreBtn.style.display = 'block';
-                loadMoreBtn.innerHTML = `<button class="filter-btn naikai-text" type="button" id="collapse-action" style="border:1.5px solid var(--primary-color);color:var(--primary-color);background:transparent;">✨ 收合資源 ▴</button>`;
+                loadMoreBtn.innerHTML = `<button class="filter-btn naikai-text" type="button" id="collapse-action" >✨ 收合資源 ▴</button>`;
                 document.getElementById('collapse-action')?.addEventListener('click', collapseCards, { once: true });
             } else {
                 loadMoreBtn.style.display = 'none';
@@ -1733,12 +1766,14 @@
                 if (globalBtn) globalBtn.setAttribute('aria-label', '播放背景音樂');
             }
 
-            welcomeModal.setAttribute('aria-hidden', 'true');
+            modalClosing = true;
             document.body.classList.remove('modal-open');
             setTimeout(() => {
+                welcomeModal.setAttribute('aria-hidden', 'true');
                 welcomeModal.style.display = 'none';
                 door?.classList.remove('is-opening');
                 welcomeModal.classList.remove('is-opening');
+                modalClosing = false;
                 restoreLastFocus();
                 checkScrollPrompt();
             }, 850);
@@ -1842,8 +1877,37 @@
                 wrapper?.appendChild(p);
             });
 
-            const dropdownTrigger = document.querySelector('.dropdown-trigger');
-            dropdownTrigger?.addEventListener('click', event => toggleDropdown(event.currentTarget.closest('.dropdown')));
+            // Centralized event binding: HTML declares intent with data-*; JS owns behavior.
+            document.addEventListener('click', event => {
+                const target = event.target.closest('[data-action], [data-filter-toggle], [data-filter-type], [data-music-action]');
+                if (!target) return;
+                if (target.matches('[data-filter-toggle]')) return toggleMobileFilter(target.dataset.filterToggle);
+                if (target.matches('[data-filter-type]')) return filterData(target.dataset.filterType, target.dataset.value, target);
+                const action = target.dataset.action;
+                if (action === 'enter-site') return closeModalAndPlayMusic();
+                if (action === 'toggle-music') return toggleGlobalMusic();
+                if (action === 'toggle-emergency') return toggleEmergencyMobile();
+                if (action === 'toggle-menu') return toggleMenu();
+                if (action === 'toggle-dropdown') return toggleDropdown(document.getElementById('about-dropdown'));
+                if (action === 'toggle-view') return toggleViewMode();
+                if (action === 'load-more') return loadMoreCards();
+                if (action === 'back-resource') return backToResourceBox();
+                if (action === 'fullscreen') return toggleFullscreen();
+                if (action === 'toggle-lyrics') return toggleFullLyrics();
+                if (action === 'retry-data') {
+                    dataRetryCount = 0;
+                    document.getElementById('data-error-note')?.classList.remove('show');
+                    const retrySpinner = document.getElementById('loading-spinner');
+                    if (retrySpinner) retrySpinner.style.display = 'block';
+                    return fetchGoogleSheetData();
+                }
+                if (action === 'yuma') return interactWithYuma();
+                const musicAction = target.dataset.musicAction;
+                if (musicAction) return controlPageMusic(musicAction);
+            });
+
+            const searchInput = document.getElementById('global-search');
+            searchInput?.addEventListener('input', handleSearch);
             document.querySelectorAll('#nav-menu a').forEach(link => link.addEventListener('click', closeMenu));
 
             const grid = document.getElementById('card-grid');
@@ -1860,7 +1924,7 @@
 
             document.addEventListener('keydown', event => {
                 const modal = document.getElementById('welcomeModal');
-                const modalOpen = modal && modal.getAttribute('aria-hidden') === 'false';
+                const modalOpen = modal && modal.getAttribute('aria-hidden') === 'false' && !modalClosing;
                 if (modalOpen) {
                     const door = document.getElementById('door-entry-btn');
                     if ((event.key === 'Enter' || event.key === ' ') && document.activeElement === door) {
